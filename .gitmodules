@@ -1,0 +1,207 @@
+[submodule "deps/cmake"]
+	path = deps/cmake
+	url = https://github.com/staticlibs/cmake.git
+[submodule "deps/external_asio"]
+	path = deps/external_asio
+	url = https://github.com/staticlibs/external_asio.git
+[submodule "deps/external_zlib"]
+	path = deps/external_zlib
+	url = https://github.com/staticlibs/external_zlib.git
+[submodule "deps/external_jansson"]
+	path = deps/external_jansson
+	url = https://github.com/staticlibs/external_jansson.git
+[submodule "deps/external_log4cplus"]
+	path = deps/external_log4cplus
+	url = https://github.com/staticlibs/external_log4cplus.git
+[submodule "deps/external_openssl"]
+	path = deps/external_openssl
+	url = https://github.com/staticlibs/external_openssl.git
+[submodule "deps/external_curl"]
+	path = deps/external_curl
+	url = https://github.com/staticlibs/external_curl.git
+[submodule "deps/external_popt"]
+	path = deps/external_popt
+	url = https://github.com/staticlibs/external_popt.git
+[submodule "deps/external_duktape"]
+	path = deps/external_duktape
+	url = https://github.com/staticlibs/external_duktape.git
+[submodule "deps/staticlib_config"]
+	path = deps/staticlib_config
+	url = https://github.com/staticlibs/staticlib_config.git
+[submodule "deps/staticlib_support"]
+	path = deps/staticlib_support
+	url = https://github.com/staticlibs/staticlib_support.git
+[submodule "deps/staticlib_concurrent"]
+	path = deps/staticlib_concurrent
+	url = https://github.com/staticlibs/staticlib_concurrent.git
+[submodule "deps/staticlib_jni"]
+	path = deps/staticlib_jni
+	url = https://github.com/staticlibs/staticlib_jni.git
+[submodule "deps/staticlib_io"]
+	path = deps/staticlib_io
+	url = https://github.com/staticlibs/staticlib_io.git
+[submodule "deps/staticlib_crypto"]
+	path = deps/staticlib_crypto
+	url = https://github.com/staticlibs/staticlib_crypto.git
+[submodule "deps/staticlib_ranges"]
+	path = deps/staticlib_ranges
+	url = https://github.com/staticlibs/staticlib_ranges.git
+[submodule "deps/staticlib_endian"]
+	path = deps/staticlib_endian
+	url = https://github.com/staticlibs/staticlib_endian.git
+[submodule "deps/staticlib_utils"]
+	path = deps/staticlib_utils
+	url = https://github.com/staticlibs/staticlib_utils.git
+[submodule "deps/staticlib_pion"]
+	path = deps/staticlib_pion
+	url = https://github.com/staticlibs/staticlib_pion.git
+[submodule "deps/staticlib_json"]
+	path = deps/staticlib_json
+	url = https://github.com/staticlibs/staticlib_json.git
+[submodule "deps/staticlib_pimpl"]
+	path = deps/staticlib_pimpl
+	url = https://github.com/staticlibs/staticlib_pimpl.git
+[submodule "deps/staticlib_tinydir"]
+	path = deps/staticlib_tinydir
+	url = https://github.com/staticlibs/staticlib_tinydir.git
+[submodule "deps/staticlib_unzip"]
+	path = deps/staticlib_unzip
+	url = https://github.com/staticlibs/staticlib_unzip.git
+[submodule "deps/staticlib_http"]
+	path = deps/staticlib_http
+	url = https://github.com/staticlibs/staticlib_http.git
+[submodule "deps/staticlib_cron"]
+	path = deps/staticlib_cron
+	url = https://github.com/staticlibs/staticlib_cron.git
+[submodule "deps/staticlib_mustache"]
+	path = deps/staticlib_mustache
+	url = https://github.com/staticlibs/staticlib_mustache.git
+[submodule "deps/staticlib_winservice"]
+	path = deps/staticlib_winservice
+	url = https://github.com/staticlibs/staticlib_winservice.git
+[submodule "js/argparse"]
+	path = js/argparse
+	url = https://github.com/wilton-iot/argparse.git
+[submodule "js/assert"]
+	path = js/assert
+	url = https://github.com/wilton-iot/commonjs-assert.git
+[submodule "js/base64-js"]
+	path = js/base64-js
+	url = https://github.com/wilton-iot/base64-js.git
+[submodule "js/bluebird"]
+	path = js/bluebird
+	url = https://github.com/wilton-iot/bluebird.git
+[submodule "js/boolbase"]
+	path = js/boolbase
+	url = https://github.com/wilton-iot/boolbase.git
+[submodule "js/buffer"]
+	path = js/buffer
+	url = https://github.com/wilton-iot/buffer.git
+[submodule "js/cheerio"]
+	path = js/cheerio
+	url = https://github.com/wilton-iot/cheerio.git
+[submodule "js/css-select"]
+	path = js/css-select
+	url = https://github.com/wilton-iot/css-select.git
+[submodule "js/css-what"]
+	path = js/css-what
+	url = https://github.com/wilton-iot/css-what.git
+[submodule "js/dom-serializer"]
+	path = js/dom-serializer
+	url = https://github.com/wilton-iot/dom-serializer.git
+[submodule "js/domelementtype"]
+	path = js/domelementtype
+	url = https://github.com/wilton-iot/domelementtype.git
+[submodule "js/domhandler"]
+	path = js/domhandler
+	url = https://github.com/wilton-iot/domhandler.git
+[submodule "js/domutils"]
+	path = js/domutils
+	url = https://github.com/wilton-iot/domutils.git
+[submodule "js/entities"]
+	path = js/entities
+	url = https://github.com/wilton-iot/entities.git
+[submodule "js/events"]
+	path = js/events
+	url = https://github.com/wilton-iot/events.git
+[submodule "js/extend"]
+	path = js/extend
+	url = https://github.com/wilton-iot/node-extend.git
+[submodule "js/htmlparser2"]
+	path = js/htmlparser2
+	url = https://github.com/wilton-iot/htmlparser2.git
+[submodule "js/iconv-lite"]
+	path = js/iconv-lite
+	url = https://github.com/wilton-iot/iconv-lite.git
+[submodule "js/ieee754"]
+	path = js/ieee754
+	url = https://github.com/wilton-iot/ieee754.git
+[submodule "js/inherits"]
+	path = js/inherits
+	url = https://github.com/wilton-iot/inherits.git
+[submodule "js/is-buffer"]
+	path = js/is-buffer
+	url = https://github.com/wilton-iot/is-buffer.git
+[submodule "js/json-stringify-safe"]
+	path = js/json-stringify-safe
+	url = https://github.com/wilton-iot/json-stringify-safe.git
+[submodule "js/lodash"]
+	path = js/lodash
+	url = https://github.com/wilton-iot/lodash.git
+[submodule "js/minimist"]
+	path = js/minimist
+	url = https://github.com/wilton-iot/minimist.git
+[submodule "js/moment"]
+	path = js/moment
+	url = https://github.com/wilton-iot/moment.git
+[submodule "js/node-url"]
+	path = js/node-url
+	url = https://github.com/wilton-iot/node-url.git
+[submodule "js/nth-check"]
+	path = js/nth-check
+	url = https://github.com/wilton-iot/nth-check.git
+[submodule "js/punycode"]
+	path = js/punycode
+	url = https://github.com/wilton-iot/punycode.js.git
+[submodule "js/qs"]
+	path = js/qs
+	url = https://github.com/wilton-iot/qs.git
+[submodule "js/readable-stream"]
+	path = js/readable-stream
+	url = https://github.com/wilton-iot/readable-stream.git
+[submodule "js/sprintf-js"]
+	path = js/sprintf-js
+	url = https://github.com/wilton-iot/sprintf.js.git
+[submodule "js/string_decoder"]
+	path = js/string_decoder
+	url = https://github.com/wilton-iot/string_decoder.git
+[submodule "js/tape-compat"]
+	path = js/tape-compat
+	url = https://github.com/wilton-iot/tape-compat.git
+[submodule "js/underscore"]
+	path = js/underscore
+	url = https://github.com/wilton-iot/underscore.git
+[submodule "js/unicode-escape"]
+	path = js/unicode-escape
+	url = https://github.com/wilton-iot/unicode-escape.js.git
+[submodule "js/util"]
+	path = js/util
+	url = https://github.com/wilton-iot/node-util.git
+[submodule "js/validator"]
+	path = js/validator
+	url = https://github.com/wilton-iot/validator.js.git
+[submodule "js/wilton"]
+	path = js/wilton
+	url = https://github.com/wilton-iot/wilton.js.git
+[submodule "js/wilton-requirejs"]
+	path = js/wilton-requirejs
+	url = https://github.com/wilton-iot/wilton-requirejs.git
+[submodule "tools/closure-compiler"]
+	path = tools/closure-compiler
+	url = https://github.com/wilton-iot/tools_closure-compiler.git
+[submodule "core"]
+	path = core
+	url = https://github.com/wilton-iot/wilton_core.git
+[submodule "tools/convertion-scripts"]
+	path = tools/convertion-scripts
+	url = https://github.com/wilton-iot/tools_convertion-scripts.git
