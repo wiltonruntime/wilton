@@ -2,10 +2,24 @@
 cmake_minimum_required ( VERSION 2.8.12 )
 
 # toolchain setup
+if ( NOT DEFINED STATICLIB_TOOLCHAIN )
+    if ( WIN32 )
+        if ( CMAKE_SIZEOF_VOID_P EQUAL 8 )
+            set ( STATICLIB_TOOLCHAIN "windows_amd64_msvc" CACHE STRING "" )
+        else ( )
+            set ( STATICLIB_TOOLCHAIN "windows_i386_msvc" CACHE STRING "" )
+        endif ( )
+    elseif ( APPLE )
+        set ( STATICLIB_TOOLCHAIN "macosx_amd64_clang" CACHE STRING "" )
+    elseif ( UNIX )
+        set ( STATICLIB_TOOLCHAIN "linux_amd64_gcc" CACHE STRING "" )
+    else ( )
+        message ( FATAL_ERROR "Cannot find out toolchain to use, please specify [STATICLIB_TOOLCHAIN]" )
+    endif ( )
+endif ( )
 set ( STATICLIB_DEPS ${CMAKE_CURRENT_LIST_DIR}/deps CACHE INTERNAL "" )    
-set ( STATICLIB_TOOLCHAIN linux_amd64_gcc CACHE STRING "toolchain triplet" )
 set ( STATICLIB_CMAKE ${STATICLIB_DEPS}/cmake CACHE INTERNAL "" )    
-set ( CMAKE_TOOLCHAIN_FILE ${STATICLIB_CMAKE}/toolchains/${STATICLIB_TOOLCHAIN}.cmake CACHE INTERNAL "" )
+set ( CMAKE_TOOLCHAIN_FILE ${CMAKE_CURRENT_LIST_DIR}/resources/toolchains/${STATICLIB_TOOLCHAIN}.cmake CACHE INTERNAL "" )
 
 # master project
 project ( wilton_master CXX C )

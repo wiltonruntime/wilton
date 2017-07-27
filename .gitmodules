@@ -205,3 +205,24 @@
 [submodule "tools/convertion-scripts"]
 	path = tools/convertion-scripts
 	url = https://github.com/wilton-iot/tools_convertion-scripts.git
+[submodule "tools/windows/vs2013e"]
+	path = tools/windows/vs2013e
+	url = https://github.com/wilton-iot/tools_windows_vs2013e.git
+[submodule "tools/windows/perl"]
+	path = tools/windows/perl
+	url = https://github.com/wilton-iot/tools_windows_perl.git
+[submodule "tools/windows/jdk8"]
+	path = tools/windows/jdk8
+	url = https://github.com/wilton-iot/tools_windows_jdk8.git
+[submodule "tools/windows/nasm"]
+	path = tools/windows/nasm
+	url = https://github.com/wilton-iot/tools_windows_nasm.git
+[submodule "tools/windows/pkgconfig"]
+	path = tools/windows/pkgconfig
+	url = https://github.com/wilton-iot/tools_windows_pkgconfig.git
+[submodule "tools/windows/zip"]
+	path = tools/windows/zip
+	url = https://github.com/wilton-iot/tools_windows_zip.git
+[submodule "tools/windows/cmake"]
+	path = tools/windows/cmake
+	url = https://github.com/wilton-iot/tools_windows_cmake.git
