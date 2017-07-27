@@ -28,6 +28,21 @@ include ( ${STATICLIB_CMAKE}/staticlibs_common.cmake )
 # add core
 add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/core )
 
+add_custom_target ( dist
+        COMMAND ${CMAKE_COMMAND} -E make_directory dist
+        COMMAND ${CMAKE_COMMAND} -E make_directory dist/bin
+        COMMAND ${CMAKE_COMMAND} -E copy
+                bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_core${CMAKE_SHARED_LIBRARY_SUFFIX}
+                dist/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_core${CMAKE_SHARED_LIBRARY_SUFFIX}
+        COMMAND ${CMAKE_COMMAND} -E copy
+                bin/wilton${CMAKE_EXECUTABLE_SUFFIX}
+                dist/bin/wilton${CMAKE_EXECUTABLE_SUFFIX}
+        COMMAND ${CMAKE_COMMAND} -E copy
+                bin/winservice${CMAKE_EXECUTABLE_SUFFIX}
+                dist/bin/winservice${CMAKE_EXECUTABLE_SUFFIX}                
+        WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+        COMMENT "Creating distribution at [${CMAKE_CURRENT_BINARY_DIR}/dist] ..." )
+add_dependencies ( dist wilton winservice )
 
 # todo
 

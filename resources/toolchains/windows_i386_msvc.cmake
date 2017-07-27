@@ -18,8 +18,8 @@ cmake_minimum_required ( VERSION 2.8.12 )
 set ( CMAKE_BUILD_TYPE "Release" CACHE STRING "Default build type" )
 
 set ( CMAKE_SYSTEM_NAME Windows CACHE INTERNAL "" )
-set ( CMAKE_C_COMPILER cl.exe CACHE INTERNAL "" )
-set ( CMAKE_CXX_COMPILER cl.exe CACHE INTERNAL "" )
+set ( CMAKE_C_COMPILER cl.exe )
+set ( CMAKE_CXX_COMPILER cl.exe )
 # see https://blogs.msdn.microsoft.com/vcblog/2012/10/08/windows-xp-targeting-with-c-in-visual-studio-2012/
 set ( CMAKE_C_FLAGS "/D_USING_V110_SDK71_" CACHE INTERNAL "" )
 set ( CMAKE_C_FLAGS_DEBUG "/D_DEBUG /MTd /Zi /Ob0 /Od" CACHE INTERNAL "" )
