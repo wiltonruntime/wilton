@@ -55,12 +55,12 @@ add_custom_target ( js
                 -cp ${CMAKE_CURRENT_LIST_DIR}/tools/closure-compiler/closure-compiler.jar
                 ${CMAKE_CURRENT_LIST_DIR}/tools/convertion-scripts/minify-modules.js
                 -- ${CMAKE_CURRENT_LIST_DIR}/js js
-        COMMAND pushd js && ${TOOLS_ZIP} -qr9 js.zip *
+        COMMAND cd js && ${TOOLS_ZIP} -qr9 js.zip *
         COMMAND ${CMAKE_COMMAND} -E rename js/js.zip js.zip
         WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
         COMMENT "Preparing JavaScript modules bundle ..." )
 
-add_custom_target ( bundle
+add_custom_target ( dist_common
         COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}
         COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}/bin
         COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}/conf
@@ -71,9 +71,6 @@ add_custom_target ( bundle
         COMMAND ${CMAKE_COMMAND} -E copy
                 bin/wilton${CMAKE_EXECUTABLE_SUFFIX}
                 wilton_${WILTON_VERSION}/bin/wilton${CMAKE_EXECUTABLE_SUFFIX}
-        COMMAND ${CMAKE_COMMAND} -E copy
-                bin/wilton_winservice${CMAKE_EXECUTABLE_SUFFIX}
-                wilton_${WILTON_VERSION}/bin/wilton_winservice${CMAKE_EXECUTABLE_SUFFIX}
         COMMAND ${CMAKE_COMMAND} -E copy
                 js.zip
                 wilton_${WILTON_VERSION}/js.zip
@@ -87,28 +84,42 @@ add_custom_target ( bundle
                 core/wilton.version
                 wilton_${WILTON_VERSION}/wilton.version  
         WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-        COMMENT "Creating bundle at [${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION}] ..." )
-add_dependencies ( bundle wilton wilton_winservice js )
+        COMMENT "Creating distribution at [${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION}] ..." )
 
-configure_file ( 
-        ${CMAKE_CURRENT_LIST_DIR}/resources/installer/installer.json
-        ${CMAKE_CURRENT_BINARY_DIR}/installer.json )
+add_dependencies ( dist_common wilton js )
 
-add_custom_target ( installer
-        COMMAND ${CMAKE_COMMAND} -E remove wilton_${WILTON_VERSION}.wxs
-        COMMAND ${TOOLS_JAVA}
-                -XX:+UseSerialGC -XX:+TieredCompilation -XX:TieredStopAtLevel=1
-                -jar ${CMAKE_CURRENT_LIST_DIR}/tools/windows/wixgen/wixgen.jar
-                wilton_${WILTON_VERSION}
-                -c installer.json
-                -o wilton_${WILTON_VERSION}.wxs
-        COMMAND ${CMAKE_CURRENT_LIST_DIR}/tools/windows/wix/bin/candle -v -nologo wilton_${WILTON_VERSION}.wxs
-        COMMAND ${CMAKE_CURRENT_LIST_DIR}/tools/windows/wix/bin/light 
-                -v -nologo -sw1076 -sval -ext WixUIExtension -ext WixUtilExtension                
-                wilton_${WILTON_VERSION}.wixobj
-        WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-        COMMENT "Creating MSI at [${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION}.msi] ..." )
-add_dependencies ( installer bundle )
+add_custom_target ( dist_winservice
+        COMMAND ${CMAKE_COMMAND} -E copy
+        bin/wilton_winservice${CMAKE_EXECUTABLE_SUFFIX}
+        wilton_${WILTON_VERSION}/bin/wilton_winservice${CMAKE_EXECUTABLE_SUFFIX}
+        WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR} )
+
+add_custom_target ( dist )
+add_dependencies ( dist dist_common )
+
+if ( ${CMAKE_SYSTEM_NAME} STREQUAL "Windows" )
+    add_dependencies ( dist dist_winservice )
+
+    configure_file ( 
+            ${CMAKE_CURRENT_LIST_DIR}/resources/installer/installer.json
+            ${CMAKE_CURRENT_BINARY_DIR}/installer.json )
+
+    add_custom_target ( installer
+            COMMAND ${CMAKE_COMMAND} -E remove wilton_${WILTON_VERSION}.wxs
+            COMMAND ${TOOLS_JAVA}
+                    -XX:+UseSerialGC -XX:+TieredCompilation -XX:TieredStopAtLevel=1
+                    -jar ${CMAKE_CURRENT_LIST_DIR}/tools/windows/wixgen/wixgen.jar
+                    wilton_${WILTON_VERSION}
+                    -c installer.json
+                    -o wilton_${WILTON_VERSION}.wxs
+            COMMAND ${CMAKE_CURRENT_LIST_DIR}/tools/windows/wix/bin/candle -v -nologo wilton_${WILTON_VERSION}.wxs
+            COMMAND ${CMAKE_CURRENT_LIST_DIR}/tools/windows/wix/bin/light 
+                    -v -nologo -sw1076 -sval -ext WixUIExtension -ext WixUtilExtension                
+                    wilton_${WILTON_VERSION}.wixobj
+            WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+            COMMENT "Creating MSI at [${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION}.msi] ..." )
+    add_dependencies ( installer dist )
+endif ( )
         
 # todo
 
