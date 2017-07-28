@@ -64,6 +64,7 @@ add_custom_target ( dist_common
         COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}
         COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}/bin
         COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}/conf
+        COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}/devel
         COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}/log
         COMMAND ${CMAKE_COMMAND} -E copy
                 bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_core${CMAKE_SHARED_LIBRARY_SUFFIX}
@@ -80,6 +81,9 @@ add_custom_target ( dist_common
         COMMAND ${CMAKE_COMMAND} -E copy
                 ${CMAKE_CURRENT_LIST_DIR}/js/examples/winservice/config.json
                 wilton_${WILTON_VERSION}/conf/config.json
+        COMMAND ${CMAKE_COMMAND} -E copy_directory
+                ${CMAKE_CURRENT_LIST_DIR}/core/include
+                wilton_${WILTON_VERSION}/devel/include                
         COMMAND ${CMAKE_COMMAND} -E copy
                 core/wilton.version
                 wilton_${WILTON_VERSION}/wilton.version  
@@ -88,17 +92,20 @@ add_custom_target ( dist_common
 
 add_dependencies ( dist_common wilton js )
 
-add_custom_target ( dist_winservice
-        COMMAND ${CMAKE_COMMAND} -E copy
-        bin/wilton_winservice${CMAKE_EXECUTABLE_SUFFIX}
-        wilton_${WILTON_VERSION}/bin/wilton_winservice${CMAKE_EXECUTABLE_SUFFIX}
-        WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR} )
-
 add_custom_target ( dist )
 add_dependencies ( dist dist_common )
 
 if ( ${CMAKE_SYSTEM_NAME} STREQUAL "Windows" )
-    add_dependencies ( dist dist_winservice )
+    add_custom_target ( dist_windows
+            COMMAND ${CMAKE_COMMAND} -E copy
+                bin/wilton_winservice.exe
+                wilton_${WILTON_VERSION}/bin/wilton_winservice.exe
+            COMMAND ${CMAKE_COMMAND} -E copy
+                bin/wilton_core.lib
+                wilton_${WILTON_VERSION}/devel/wilton_core.lib
+            WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR} )
+    add_dependencies ( dist_windows wilton_winservice dist_common )      
+    add_dependencies ( dist dist_windows )
 
     configure_file ( 
             ${CMAKE_CURRENT_LIST_DIR}/resources/installer/installer.json

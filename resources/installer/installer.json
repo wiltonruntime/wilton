@@ -25,6 +25,12 @@
       "action": "set",
       "part": "last",
       "value": "[INSTALLDIR]bin"
+    },
+    {
+      "name": "WILTON_HOME",
+      "action": "create",
+      "part": "all",
+      "value": "[INSTALLDIR]"
     }
   ]
 }
