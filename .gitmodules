@@ -226,3 +226,6 @@
 [submodule "tools/windows/cmake"]
 	path = tools/windows/cmake
 	url = https://github.com/wilton-iot/tools_windows_cmake.git
+[submodule "js/examples"]
+	path = js/examples
+	url = https://github.com/wilton-iot/examples.git

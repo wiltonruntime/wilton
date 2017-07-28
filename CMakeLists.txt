@@ -1,6 +1,15 @@
 
 cmake_minimum_required ( VERSION 2.8.12 )
 
+# versioning
+string ( TIMESTAMP WILTON_VERSION_YEAR "%Y" )
+string ( TIMESTAMP WILTON_VERSION_MONTH "%m" )
+string ( TIMESTAMP WILTON_VERSION_DAY "%d" )
+set ( WILTON_VERSION_BUILD "0" )
+set ( WILTON_VERSION ${WILTON_VERSION_YEAR}${WILTON_VERSION_MONTH}${WILTON_VERSION_DAY}${WILTON_VERSION_BUILD}  CACHE STRING "" )
+set ( WILTON_VERSION_WIN ${WILTON_VERSION_YEAR}.${WILTON_VERSION_MONTH}.${WILTON_VERSION_DAY}.${WILTON_VERSION_BUILD} CACHE STRING "" )
+set ( WILTON_VERSION_EXE ${WILTON_VERSION_YEAR},${WILTON_VERSION_MONTH},${WILTON_VERSION_DAY},${WILTON_VERSION_BUILD} CACHE STRING "" )
+
 # toolchain setup
 if ( NOT DEFINED STATICLIB_TOOLCHAIN )
     if ( WIN32 )
@@ -28,20 +37,56 @@ include ( ${STATICLIB_CMAKE}/staticlibs_common.cmake )
 # add core
 add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/core )
 
+# platform tools
+set ( TOOLS_JAVA java )
+set ( TOOLS_JJS jjs )
+set ( TOOLS_ZIP zip )
+if ( ${CMAKE_SYSTEM_NAME} STREQUAL "Windows" )
+    set ( TOOLS_JAVA ${CMAKE_CURRENT_LIST_DIR}/tools/windows/jdk8/bin/java.exe )
+    set ( TOOLS_JJS ${CMAKE_CURRENT_LIST_DIR}/tools/windows/jdk8/bin/jjs.exe )
+    set ( TOOLS_ZIP ${CMAKE_CURRENT_LIST_DIR}/tools/windows/zip/zip.exe )
+endif ( )
+
+add_custom_target ( js
+        COMMAND ${CMAKE_COMMAND} -E remove_directory js
+        COMMAND ${TOOLS_JJS}
+                -J-XX:+UseSerialGC -J-XX:+TieredCompilation -J-XX:TieredStopAtLevel=1
+                -cp ${CMAKE_CURRENT_LIST_DIR}/tools/closure-compiler/closure-compiler.jar
+                ${CMAKE_CURRENT_LIST_DIR}/tools/convertion-scripts/minify-modules.js
+                -- ${CMAKE_CURRENT_LIST_DIR}/js js
+        COMMAND pushd js && ${TOOLS_ZIP} -qr9 js.zip *
+        COMMAND ${CMAKE_COMMAND} -E rename js/js.zip js.zip
+        WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+        COMMENT "Preparing JavaScript modules bundle ..." )
+
 add_custom_target ( dist
-        COMMAND ${CMAKE_COMMAND} -E make_directory dist
-        COMMAND ${CMAKE_COMMAND} -E make_directory dist/bin
+        COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}
+        COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}/bin
+        COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}/conf
+        COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}/log
         COMMAND ${CMAKE_COMMAND} -E copy
                 bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_core${CMAKE_SHARED_LIBRARY_SUFFIX}
-                dist/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_core${CMAKE_SHARED_LIBRARY_SUFFIX}
+                wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_core${CMAKE_SHARED_LIBRARY_SUFFIX}
         COMMAND ${CMAKE_COMMAND} -E copy
                 bin/wilton${CMAKE_EXECUTABLE_SUFFIX}
-                dist/bin/wilton${CMAKE_EXECUTABLE_SUFFIX}
+                wilton_${WILTON_VERSION}/bin/wilton${CMAKE_EXECUTABLE_SUFFIX}
         COMMAND ${CMAKE_COMMAND} -E copy
                 bin/winservice${CMAKE_EXECUTABLE_SUFFIX}
-                dist/bin/winservice${CMAKE_EXECUTABLE_SUFFIX}                
+                wilton_${WILTON_VERSION}/bin/winservice${CMAKE_EXECUTABLE_SUFFIX}
+        COMMAND ${CMAKE_COMMAND} -E copy
+                js.zip
+                wilton_${WILTON_VERSION}/js.zip
+        COMMAND ${CMAKE_COMMAND} -E copy_directory
+                ${CMAKE_CURRENT_LIST_DIR}/js/examples
+                wilton_${WILTON_VERSION}/examples
+        COMMAND ${CMAKE_COMMAND} -E copy
+                ${CMAKE_CURRENT_LIST_DIR}/js/examples/winservice/config.json
+                wilton_${WILTON_VERSION}/conf/config.json
+        COMMAND ${CMAKE_COMMAND} -E copy
+                core/wilton.version
+                wilton_${WILTON_VERSION}/wilton.version  
         WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-        COMMENT "Creating distribution at [${CMAKE_CURRENT_BINARY_DIR}/dist] ..." )
+        COMMENT "Creating distribution at [${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION}] ..." )
 add_dependencies ( dist wilton winservice )
 
 # todo
