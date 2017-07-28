@@ -229,3 +229,9 @@
 [submodule "js/examples"]
 	path = js/examples
 	url = https://github.com/wilton-iot/examples.git
+[submodule "tools/windows/wixgen"]
+	path = tools/windows/wixgen
+	url = https://github.com/wilton-iot/tools_windows_wixgen.git
+[submodule "tools/windows/wix"]
+	path = tools/windows/wix
+	url = https://github.com/wilton-iot/tools_windows_wix.git

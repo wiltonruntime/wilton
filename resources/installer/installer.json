@@ -1,0 +1,31 @@
+{
+  "appName": "Wilton v${WILTON_VERSION}",
+  "versionMajor": "${WILTON_VERSION_YEAR_SHORT}",
+  "versionMinor": "${WILTON_VERSION_MONTH}",
+  "versionMicro": "${WILTON_VERSION_DAY}",
+  "versionPatch": "${WILTON_VERSION_BUILD}",
+  "vendor": "Wilton Open-Source Project",
+  "installDirName": "wilton_${WILTON_VERSION}",
+  "helpLink": "https://github.com/wilton-iot/wilton",
+  "productUuid": "f3a87fdf-6e16-4de3-a559-6865b8b9a2f0",
+  "updateUuid": "faf5c889-48c0-4c32-a270-a0cb7eb670cb",
+  "vendorDirName": "WiltonIOT",
+  "licenseFilePath": "${CMAKE_CURRENT_LIST_DIR}/resources/installer/LICENSE.rtf",
+  "iconPath": "${CMAKE_CURRENT_LIST_DIR}/core/resources/icon.ico",
+  "topBannerBmpPath": "${CMAKE_CURRENT_LIST_DIR}/resources/installer/top_banner.bmp",
+  "greetingsBannerBmpPath": "${CMAKE_CURRENT_LIST_DIR}/resources/installer/greetings_banner.bmp",
+  "useFeatureTree": false,
+  "featureId": "wilton",
+  "featureTitle": "Wilton",
+  "featureDescription": "Wilton Runtime",
+
+  "environmentVariables": [
+    {
+      "name": "PATH",
+      "action": "set",
+      "part": "last",
+      "value": "[INSTALLDIR]bin"
+    }
+  ]
+}
+

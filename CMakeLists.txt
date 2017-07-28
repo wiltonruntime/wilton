@@ -3,12 +3,13 @@ cmake_minimum_required ( VERSION 2.8.12 )
 
 # versioning
 string ( TIMESTAMP WILTON_VERSION_YEAR "%Y" )
+string ( TIMESTAMP WILTON_VERSION_YEAR_SHORT "%y" )
 string ( TIMESTAMP WILTON_VERSION_MONTH "%m" )
 string ( TIMESTAMP WILTON_VERSION_DAY "%d" )
 set ( WILTON_VERSION_BUILD "0" )
 set ( WILTON_VERSION ${WILTON_VERSION_YEAR}${WILTON_VERSION_MONTH}${WILTON_VERSION_DAY}${WILTON_VERSION_BUILD}  CACHE STRING "" )
-set ( WILTON_VERSION_WIN ${WILTON_VERSION_YEAR}.${WILTON_VERSION_MONTH}.${WILTON_VERSION_DAY}.${WILTON_VERSION_BUILD} CACHE STRING "" )
-set ( WILTON_VERSION_EXE ${WILTON_VERSION_YEAR},${WILTON_VERSION_MONTH},${WILTON_VERSION_DAY},${WILTON_VERSION_BUILD} CACHE STRING "" )
+set ( WILTON_VERSION_WIN ${WILTON_VERSION_YEAR_SHORT}.${WILTON_VERSION_MONTH}.${WILTON_VERSION_DAY}.${WILTON_VERSION_BUILD} CACHE STRING "" )
+set ( WILTON_VERSION_EXE ${WILTON_VERSION_YEAR_SHORT},${WILTON_VERSION_MONTH},${WILTON_VERSION_DAY},${WILTON_VERSION_BUILD} CACHE STRING "" )
 
 # toolchain setup
 if ( NOT DEFINED STATICLIB_TOOLCHAIN )
@@ -59,7 +60,7 @@ add_custom_target ( js
         WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
         COMMENT "Preparing JavaScript modules bundle ..." )
 
-add_custom_target ( dist
+add_custom_target ( bundle
         COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}
         COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}/bin
         COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}/conf
@@ -71,8 +72,8 @@ add_custom_target ( dist
                 bin/wilton${CMAKE_EXECUTABLE_SUFFIX}
                 wilton_${WILTON_VERSION}/bin/wilton${CMAKE_EXECUTABLE_SUFFIX}
         COMMAND ${CMAKE_COMMAND} -E copy
-                bin/winservice${CMAKE_EXECUTABLE_SUFFIX}
-                wilton_${WILTON_VERSION}/bin/winservice${CMAKE_EXECUTABLE_SUFFIX}
+                bin/wilton_winservice${CMAKE_EXECUTABLE_SUFFIX}
+                wilton_${WILTON_VERSION}/bin/wilton_winservice${CMAKE_EXECUTABLE_SUFFIX}
         COMMAND ${CMAKE_COMMAND} -E copy
                 js.zip
                 wilton_${WILTON_VERSION}/js.zip
@@ -86,9 +87,29 @@ add_custom_target ( dist
                 core/wilton.version
                 wilton_${WILTON_VERSION}/wilton.version  
         WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-        COMMENT "Creating distribution at [${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION}] ..." )
-add_dependencies ( dist wilton winservice )
+        COMMENT "Creating bundle at [${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION}] ..." )
+add_dependencies ( bundle wilton wilton_winservice js )
 
+configure_file ( 
+        ${CMAKE_CURRENT_LIST_DIR}/resources/installer/installer.json
+        ${CMAKE_CURRENT_BINARY_DIR}/installer.json )
+
+add_custom_target ( installer
+        COMMAND ${CMAKE_COMMAND} -E remove wilton_${WILTON_VERSION}.wxs
+        COMMAND ${TOOLS_JAVA}
+                -XX:+UseSerialGC -XX:+TieredCompilation -XX:TieredStopAtLevel=1
+                -jar ${CMAKE_CURRENT_LIST_DIR}/tools/windows/wixgen/wixgen.jar
+                wilton_${WILTON_VERSION}
+                -c installer.json
+                -o wilton_${WILTON_VERSION}.wxs
+        COMMAND ${CMAKE_CURRENT_LIST_DIR}/tools/windows/wix/bin/candle -v -nologo wilton_${WILTON_VERSION}.wxs
+        COMMAND ${CMAKE_CURRENT_LIST_DIR}/tools/windows/wix/bin/light 
+                -v -nologo -sw1076 -sval -ext WixUIExtension -ext WixUtilExtension                
+                wilton_${WILTON_VERSION}.wixobj
+        WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+        COMMENT "Creating MSI at [${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION}.msi] ..." )
+add_dependencies ( installer bundle )
+        
 # todo
 
 # maven install

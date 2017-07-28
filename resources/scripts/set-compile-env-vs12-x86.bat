@@ -31,6 +31,5 @@ set PATH=%PATH%;%WILTON_DIR%/tools/windows/jdk8/bin
 set PATH=%PATH%;%WILTON_DIR%/tools/windows/nasm
 set PATH=%PATH%;%WILTON_DIR%/tools/windows/pkgconfig/bin
 set PATH=%PATH%;%WILTON_DIR%/tools/windows/perl/perl/bin
-set PATH=%PATH%;%WILTON_DIR%/tools/windows/zip
 set PATH=%PATH%;%WILTON_DIR%/deps/cmake/resources/creset
 
