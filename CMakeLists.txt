@@ -35,15 +35,17 @@ set ( CMAKE_TOOLCHAIN_FILE ${CMAKE_CURRENT_LIST_DIR}/resources/toolchains/${STAT
 project ( wilton CXX C )
 include ( ${STATICLIB_CMAKE}/staticlibs_common.cmake )
 
-# add core
+# core
 add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/core )
-# add modules
-add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_cli )
+
+# modules
+staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_cli )
 if ( ${CMAKE_SYSTEM_NAME} STREQUAL "Windows" )
-    add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_winservice )
+    staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_winservice )
 else ( )
     add_custom_target ( wilton_winservice )
 endif ( )
+staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_db )
 
 # platform tools
 set ( TOOLS_JAVA java )

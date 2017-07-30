@@ -241,3 +241,18 @@
 [submodule "modules/wilton_winservice"]
 	path = modules/wilton_winservice
 	url = https://github.com/wilton-iot/wilton_winservice.git
+[submodule "modules/wilton_db"]
+	path = modules/wilton_db
+	url = https://github.com/wilton-iot/wilton_db.git
+[submodule "deps/external_sqlite"]
+	path = deps/external_sqlite
+	url = https://github.com/staticlibs/external_sqlite.git
+[submodule "deps/external_libpq"]
+	path = deps/external_libpq
+	url = https://github.com/staticlibs/external_libpq.git
+[submodule "deps/external_soci"]
+	path = deps/external_soci
+	url = https://github.com/staticlibs/external_soci.git
+[submodule "deps/staticlib_orm"]
+	path = deps/staticlib_orm
+	url = https://github.com/staticlibs/staticlib_orm.git
