@@ -32,11 +32,18 @@ set ( STATICLIB_CMAKE ${STATICLIB_DEPS}/cmake CACHE INTERNAL "" )
 set ( CMAKE_TOOLCHAIN_FILE ${CMAKE_CURRENT_LIST_DIR}/resources/toolchains/${STATICLIB_TOOLCHAIN}.cmake CACHE INTERNAL "" )
 
 # master project
-project ( wilton_master CXX C )
+project ( wilton CXX C )
 include ( ${STATICLIB_CMAKE}/staticlibs_common.cmake )
 
 # add core
 add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/core )
+# add modules
+add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_cli )
+if ( ${CMAKE_SYSTEM_NAME} STREQUAL "Windows" )
+    add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_winservice )
+else ( )
+    add_custom_target ( wilton_winservice )
+endif ( )
 
 # platform tools
 set ( TOOLS_JAVA java )
@@ -48,7 +55,7 @@ if ( ${CMAKE_SYSTEM_NAME} STREQUAL "Windows" )
     set ( TOOLS_ZIP ${CMAKE_CURRENT_LIST_DIR}/tools/windows/zip/zip.exe )
 endif ( )
 
-add_custom_target ( js
+add_custom_command ( OUTPUT js.zip
         COMMAND ${CMAKE_COMMAND} -E remove_directory js
         COMMAND ${TOOLS_JJS}
                 -J-XX:+UseSerialGC -J-XX:+TieredCompilation -J-XX:TieredStopAtLevel=1
@@ -60,17 +67,20 @@ add_custom_target ( js
         WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
         COMMENT "Preparing JavaScript modules bundle ..." )
 
-add_custom_target ( dist_common
+add_custom_target( js DEPENDS js.zip )        
+
+add_custom_target ( dist
         COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}
         COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}/bin
         COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}/conf
         COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}/devel
         COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}/log
+        COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}/work
         COMMAND ${CMAKE_COMMAND} -E copy
                 bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_core${CMAKE_SHARED_LIBRARY_SUFFIX}
                 wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_core${CMAKE_SHARED_LIBRARY_SUFFIX}
         COMMAND ${CMAKE_COMMAND} -E copy
-                bin/wilton${CMAKE_EXECUTABLE_SUFFIX}
+                bin/wilton_cli${CMAKE_EXECUTABLE_SUFFIX}
                 wilton_${WILTON_VERSION}/bin/wilton${CMAKE_EXECUTABLE_SUFFIX}
         COMMAND ${CMAKE_COMMAND} -E copy
                 js.zip
@@ -83,20 +93,25 @@ add_custom_target ( dist_common
                 wilton_${WILTON_VERSION}/conf/config.json
         COMMAND ${CMAKE_COMMAND} -E copy_directory
                 ${CMAKE_CURRENT_LIST_DIR}/core/include
-                wilton_${WILTON_VERSION}/devel/include                
+                wilton_${WILTON_VERSION}/devel/include    
+        COMMAND ${CMAKE_COMMAND} -E copy
+                ${CMAKE_CURRENT_LIST_DIR}/resources/installer/.keep
+                wilton_${WILTON_VERSION}/log/.keep
+        COMMAND ${CMAKE_COMMAND} -E copy
+                ${CMAKE_CURRENT_LIST_DIR}/resources/installer/.keep
+                wilton_${WILTON_VERSION}/work/.keep
         COMMAND ${CMAKE_COMMAND} -E copy
                 core/wilton.version
                 wilton_${WILTON_VERSION}/wilton.version  
         WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
         COMMENT "Creating distribution at [${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION}] ..." )
 
-add_dependencies ( dist_common wilton js )
-
-add_custom_target ( dist )
-add_dependencies ( dist dist_common )
+add_dependencies ( dist wilton_cli js )
 
 if ( ${CMAKE_SYSTEM_NAME} STREQUAL "Windows" )
     add_custom_target ( dist_windows
+            COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}
+            COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}/bin
             COMMAND ${CMAKE_COMMAND} -E copy
                 bin/wilton_winservice.exe
                 wilton_${WILTON_VERSION}/bin/wilton_winservice.exe
@@ -104,7 +119,7 @@ if ( ${CMAKE_SYSTEM_NAME} STREQUAL "Windows" )
                 bin/wilton_core.lib
                 wilton_${WILTON_VERSION}/devel/wilton_core.lib
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR} )
-    add_dependencies ( dist_windows wilton_winservice dist_common )      
+    add_dependencies ( dist_windows wilton_winservice )      
     add_dependencies ( dist dist_windows )
 
     configure_file ( 

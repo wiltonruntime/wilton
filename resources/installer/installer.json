@@ -11,7 +11,7 @@
   "updateUuid": "faf5c889-48c0-4c32-a270-a0cb7eb670cb",
   "vendorDirName": "WiltonIOT",
   "licenseFilePath": "${CMAKE_CURRENT_LIST_DIR}/resources/installer/LICENSE.rtf",
-  "iconPath": "${CMAKE_CURRENT_LIST_DIR}/core/resources/icon.ico",
+  "iconPath": "${CMAKE_CURRENT_LIST_DIR}/resources/installer/icon.ico",
   "topBannerBmpPath": "${CMAKE_CURRENT_LIST_DIR}/resources/installer/top_banner.bmp",
   "greetingsBannerBmpPath": "${CMAKE_CURRENT_LIST_DIR}/resources/installer/greetings_banner.bmp",
   "useFeatureTree": false,
