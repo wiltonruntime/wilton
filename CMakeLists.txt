@@ -95,7 +95,10 @@ add_custom_target ( dist
                 wilton_${WILTON_VERSION}/conf/config.json
         COMMAND ${CMAKE_COMMAND} -E copy_directory
                 ${CMAKE_CURRENT_LIST_DIR}/core/include
-                wilton_${WILTON_VERSION}/devel/include    
+                wilton_${WILTON_VERSION}/devel/include
+        COMMAND ${CMAKE_COMMAND} -E copy
+                ${CMAKE_CURRENT_LIST_DIR}/resources/toolchains/${STATICLIB_TOOLCHAIN}.cmake
+                wilton_${WILTON_VERSION}/devel/${STATICLIB_TOOLCHAIN}.cmake
         COMMAND ${CMAKE_COMMAND} -E copy
                 ${CMAKE_CURRENT_LIST_DIR}/resources/installer/.keep
                 wilton_${WILTON_VERSION}/log/.keep
@@ -137,8 +140,8 @@ if ( ${CMAKE_SYSTEM_NAME} STREQUAL "Windows" )
                     -c installer.json
                     -o wilton_${WILTON_VERSION}.wxs
             COMMAND ${CMAKE_CURRENT_LIST_DIR}/tools/windows/wix/bin/candle -v -nologo wilton_${WILTON_VERSION}.wxs
-            COMMAND ${CMAKE_CURRENT_LIST_DIR}/tools/windows/wix/bin/light 
-                    -v -nologo -sw1076 -sval -ext WixUIExtension -ext WixUtilExtension                
+            COMMAND ${CMAKE_CURRENT_LIST_DIR}/tools/windows/wix/bin/light
+                    -v -nologo -sw1076 -sval -ext WixUIExtension -ext WixUtilExtension
                     wilton_${WILTON_VERSION}.wixobj
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
             COMMENT "Creating MSI at [${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION}.msi] ..." )
