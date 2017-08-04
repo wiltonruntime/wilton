@@ -33,3 +33,6 @@ set PATH=%PATH%;%WILTON_DIR%/tools/windows/pkgconfig/bin
 set PATH=%PATH%;%WILTON_DIR%/tools/windows/perl/perl/bin
 set PATH=%PATH%;%WILTON_DIR%/deps/cmake/resources/creset
 
+rem set vars for maven
+set JAVA_HOME=%WILTON_DIR%/tools/windows/jdk8
+set M2_HOME=%WILTON_DIR%/tools/maven

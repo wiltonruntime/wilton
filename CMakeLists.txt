@@ -69,7 +69,7 @@ add_custom_command ( OUTPUT js.zip
         WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
         COMMENT "Preparing JavaScript modules bundle ..." )
 
-add_custom_target( js DEPENDS js.zip )        
+add_custom_target( js DEPENDS js.zip )
 
 add_custom_target ( dist
         COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}
@@ -146,6 +146,31 @@ if ( ${CMAKE_SYSTEM_NAME} STREQUAL "Windows" )
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
             COMMENT "Creating MSI at [${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION}.msi] ..." )
     add_dependencies ( installer dist )
+endif ( )
+
+add_custom_target ( test
+        COMMAND bin/wilton ${CMAKE_CURRENT_LIST_DIR}/core/test/scripts/runWiltonTests.js -m ${CMAKE_CURRENT_LIST_DIR}/js
+        COMMAND bin/wilton ${CMAKE_CURRENT_LIST_DIR}/core/test/scripts/runSanityTests.js
+        COMMAND bin/wilton ${CMAKE_CURRENT_LIST_DIR}/core/test/scripts/runNodeTests.js -m ${CMAKE_CURRENT_LIST_DIR}/js
+        COMMAND cd ${CMAKE_CURRENT_LIST_DIR}/jni && ${CMAKE_CURRENT_LIST_DIR}/tools/maven/bin/mvn clean test
+        WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION} 
+        COMMENT "Running tests ..." )
+add_dependencies ( test dist )
+
+if ( NOT ${CMAKE_SYSTEM_NAME} STREQUAL "Windows" )
+    set ( ${PROJECT_NAME}_VGOPTS 
+            --leak-check=yes --show-reachable=yes --track-origins=yes --error-exitcode=42 --track-fds=yes
+            --suppressions=${CMAKE_CURRENT_LIST_DIR}/deps/cmake/resources/valgrind/openssl_malloc.supp
+            --suppressions=${CMAKE_CURRENT_LIST_DIR}/deps/cmake/resources/valgrind/popt_poptGetNextOpt.supp 
+        CACHE INTERNAL "" )
+    add_custom_target ( valgrind
+            COMMAND valgrind ${${PROJECT_NAME}_VGOPTS}
+                    ./bin/wilton ${CMAKE_CURRENT_LIST_DIR}/core/test/scripts/runZipLoadTests.js
+            COMMAND valgrind ${${PROJECT_NAME}_VGOPTS}
+                    ./bin/wilton ${CMAKE_CURRENT_LIST_DIR}/core/test/scripts/runWiltonTests.js -m ../../js
+            WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION} 
+            COMMENT "Running valgrind ..." )
+    add_dependencies ( valgrind dist )
 endif ( )
         
 # todo

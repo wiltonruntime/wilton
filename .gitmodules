@@ -256,3 +256,9 @@
 [submodule "deps/staticlib_orm"]
 	path = deps/staticlib_orm
 	url = https://github.com/staticlibs/staticlib_orm.git
+[submodule "jni"]
+	path = jni
+	url = https://github.com/wilton-iot/wilton_jni.git
+[submodule "tools/maven"]
+	path = tools/maven
+	url = https://github.com/wilton-iot/tools_maven.git
