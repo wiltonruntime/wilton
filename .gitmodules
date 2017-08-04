@@ -211,9 +211,6 @@
 [submodule "tools/windows/perl"]
 	path = tools/windows/perl
 	url = https://github.com/wilton-iot/tools_windows_perl.git
-[submodule "tools/windows/jdk8"]
-	path = tools/windows/jdk8
-	url = https://github.com/wilton-iot/tools_windows_jdk8.git
 [submodule "tools/windows/nasm"]
 	path = tools/windows/nasm
 	url = https://github.com/wilton-iot/tools_windows_nasm.git
@@ -262,3 +259,6 @@
 [submodule "tools/maven"]
 	path = tools/maven
 	url = https://github.com/wilton-iot/tools_maven.git
+[submodule "tools/windows/jdk8"]
+	path = tools/windows/jdk8
+	url = https://github.com/wilton-iot/tools_windows_jdk8.git
