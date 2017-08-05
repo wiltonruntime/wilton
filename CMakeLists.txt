@@ -165,6 +165,7 @@ if ( NOT ${CMAKE_SYSTEM_NAME} STREQUAL "Windows" )
             --leak-check=yes --show-reachable=yes --track-origins=yes --error-exitcode=42 --track-fds=yes
             --suppressions=${CMAKE_CURRENT_LIST_DIR}/deps/cmake/resources/valgrind/openssl_malloc.supp
             --suppressions=${CMAKE_CURRENT_LIST_DIR}/deps/cmake/resources/valgrind/popt_poptGetNextOpt.supp 
+            --suppressions=${CMAKE_CURRENT_LIST_DIR}/deps/cmake/resources/valgrind/wilton_dyload.supp 
         CACHE INTERNAL "" )
     add_custom_target ( valgrind
             COMMAND valgrind ${${PROJECT_NAME}_VGOPTS}
