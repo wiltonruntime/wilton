@@ -262,3 +262,9 @@
 [submodule "tools/windows/jdk8"]
 	path = tools/windows/jdk8
 	url = https://github.com/wilton-iot/tools_windows_jdk8.git
+[submodule "tools/linux/cmake"]
+	path = tools/linux/cmake
+	url = https://github.com/wilton-iot/tools_linux_cmake.git
+[submodule "tools/linux/jdk8"]
+	path = tools/linux/jdk8
+	url = https://github.com/wilton-iot/tools_linux_jdk8.git
