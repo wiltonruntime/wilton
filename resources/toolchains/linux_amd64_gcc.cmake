@@ -27,6 +27,10 @@ set ( CMAKE_CXX_FLAGS "--std=c++11 -fPIC -Wall -Werror -Wextra -fno-strict-overf
 set ( CMAKE_CXX_FLAGS_DEBUG "-g -O0" CACHE INTERNAL "" )
 set ( CMAKE_CXX_FLAGS_RELEASE "-Os -DNDEBUG" CACHE INTERNAL "" )
 
+# https://stackoverflow.com/a/6331749/314015
+set ( CMAKE_EXE_LINKER_FLAGS "-Wl,-rpath -Wl,$ORIGIN -Wl,-z -Wl,origin" CACHE INTERNAL "" )
+set ( CMAKE_SKIP_RPATH TRUE CACHE INTERNAL "" )
+
 if ( EXISTS "/usr/bin/valgrind" )
     set ( CMAKE_MEMORYCHECK_COMMAND "/usr/bin/valgrind" CACHE INTERNAL "" ) 
     set ( CMAKE_MEMORYCHECK_COMMAND_OPTIONS
