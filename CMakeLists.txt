@@ -94,6 +94,9 @@ add_custom_target ( dist
                 ${CMAKE_CURRENT_LIST_DIR}/js/examples
                 wilton_${WILTON_VERSION}/examples
         COMMAND ${CMAKE_COMMAND} -E copy
+                ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_cli/resources/one-liner-template.js
+                wilton_${WILTON_VERSION}/conf/one-liner-template.js
+        COMMAND ${CMAKE_COMMAND} -E copy
                 ${CMAKE_CURRENT_LIST_DIR}/js/examples/winservice/config.json
                 wilton_${WILTON_VERSION}/conf/config.json
         COMMAND ${CMAKE_COMMAND} -E copy_directory
