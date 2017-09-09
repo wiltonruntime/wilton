@@ -9,6 +9,7 @@ set WILTON_DIR=%SCRIPT_DIR%/../..
 rem tools dirs
 set VS=%WILTON_DIR%/tools/windows/vs2013e
 set WINSDK=%VS%/7.1A
+set WINDDK=%WILTON_DIR%/tools/windows/ddk71
 
 rem set compiler environment manually
 set VCINSTALLDIR=%VS%\VC\
@@ -17,9 +18,9 @@ set VS120COMNTOOLS=
 set VSINSTALLDIR=%VS%
 set WindowsSdkDir=%WINSDK%
 
-set LIB=%WINSDK%/Lib;%VS%/VC/Lib
+set LIB=%WINSDK%/Lib;%VS%/VC/Lib;%WINDDK%/lib/wxp/i386
 set LIBPATH=%VS%/VC/Lib
-set INCLUDE=%WINSDK%/Include;%VS%/VC/INCLUDE
+set INCLUDE=%WINSDK%/Include;%VS%/VC/INCLUDE;%WINDDK%/inc
 
 rem set path
 set PATH=%VS%/VC/Bin
