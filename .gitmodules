@@ -268,3 +268,6 @@
 [submodule "tools/linux/jdk8"]
 	path = tools/linux/jdk8
 	url = https://github.com/wilton-iot/tools_linux_jdk8.git
+[submodule "modules/wilton_serial"]
+	path = modules/wilton_serial
+	url = https://github.com/wilton-iot/wilton_serial.git
