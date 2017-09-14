@@ -271,3 +271,6 @@
 [submodule "modules/wilton_serial"]
 	path = modules/wilton_serial
 	url = https://github.com/wilton-iot/wilton_serial.git
+[submodule "js/utf8"]
+	path = js/utf8
+	url = https://github.com/wilton-iot/utf8.js.git
