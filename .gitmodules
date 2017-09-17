@@ -274,3 +274,6 @@
 [submodule "js/utf8"]
 	path = js/utf8
 	url = https://github.com/wilton-iot/utf8.js.git
+[submodule "modules/wilton_usb"]
+	path = modules/wilton_usb
+	url = https://github.com/wilton-iot/wilton_usb.git
