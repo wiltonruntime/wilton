@@ -46,8 +46,13 @@ else ( )
     add_custom_target ( wilton_winservice )
 endif ( )
 staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_db )
-staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_serial )
-staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_usb )
+if ( ${CMAKE_SYSTEM_NAME} STREQUAL "Windows" )
+    add_custom_target ( wilton_serial )
+    add_custom_target ( wilton_usb )
+else ( )
+    staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_serial )
+    staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_usb )
+endif ( )
 
 # platform tools
 set ( TOOLS_JAVA java )
@@ -87,12 +92,6 @@ add_custom_target ( dist
                 bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_db${CMAKE_SHARED_LIBRARY_SUFFIX}
                 wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_db${CMAKE_SHARED_LIBRARY_SUFFIX}
         COMMAND ${CMAKE_COMMAND} -E copy
-                bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_serial${CMAKE_SHARED_LIBRARY_SUFFIX}
-                wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_serial${CMAKE_SHARED_LIBRARY_SUFFIX}
-        COMMAND ${CMAKE_COMMAND} -E copy
-                bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_usb${CMAKE_SHARED_LIBRARY_SUFFIX}
-                wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_usb${CMAKE_SHARED_LIBRARY_SUFFIX}
-        COMMAND ${CMAKE_COMMAND} -E copy
                 bin/wilton_cli${CMAKE_EXECUTABLE_SUFFIX}
                 wilton_${WILTON_VERSION}/bin/wilton${CMAKE_EXECUTABLE_SUFFIX}
         COMMAND ${CMAKE_COMMAND} -E copy
@@ -125,7 +124,7 @@ add_custom_target ( dist
         WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
         COMMENT "Creating distribution at [${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION}] ..." )
 
-add_dependencies ( dist wilton_core wilton_cli wilton_db wilton_serial wilton_usb js )
+add_dependencies ( dist wilton_core wilton_cli wilton_db js )
 
 if ( ${CMAKE_SYSTEM_NAME} STREQUAL "Windows" )
     add_custom_target ( dist_windows
@@ -160,6 +159,19 @@ if ( ${CMAKE_SYSTEM_NAME} STREQUAL "Windows" )
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
             COMMENT "Creating MSI at [${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION}.msi] ..." )
     add_dependencies ( installer dist )
+else ( )
+    add_custom_target ( dist_linux
+            COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}
+            COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}/bin
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_serial${CMAKE_SHARED_LIBRARY_SUFFIX}
+                    wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_serial${CMAKE_SHARED_LIBRARY_SUFFIX}
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_usb${CMAKE_SHARED_LIBRARY_SUFFIX}
+                    wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_usb${CMAKE_SHARED_LIBRARY_SUFFIX}
+            WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR} )
+    add_dependencies ( dist_linux wilton_serial wilton_usb )      
+    add_dependencies ( dist dist_linux )
 endif ( )
 
 add_custom_target ( test
