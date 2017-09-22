@@ -1,0 +1,29 @@
+#define UNICODE
+#define _UNICODE
+#define _USING_V110_SDK71_
+#include <windows.h>
+
+1 VERSIONINFO
+FILEVERSION     ${WILTON_VERSION_EXE}
+PRODUCTVERSION  ${WILTON_VERSION_EXE}
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904E4"
+        BEGIN
+            VALUE "CompanyName", "Wilton Open-Source Project"
+            VALUE "FileDescription", "Wilton Library"
+            VALUE "FileVersion", "${WILTON_VERSION_WIN}"
+            VALUE "InternalName", "wilton_serial"
+            VALUE "LegalCopyright", "Wilton Open-Source Project"
+            VALUE "OriginalFilename", "${PROJECT_NAME}.dll"
+            VALUE "ProductName", "${PROJECT_NAME}"
+            VALUE "ProductVersion", "${WILTON_VERSION_WIN}"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x0409, 0x04E4
+    END
+END
+2   RT_MANIFEST "${WILTON_DIR}/resources/buildres/wilton.manifest"

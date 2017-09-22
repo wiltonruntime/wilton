@@ -33,25 +33,31 @@ set ( CMAKE_TOOLCHAIN_FILE ${CMAKE_CURRENT_LIST_DIR}/resources/toolchains/${STAT
 
 # master project
 project ( wilton CXX C )
+set ( WILTON_DIR ${CMAKE_CURRENT_LIST_DIR} CACHE INTERNAL "" )
 include ( ${STATICLIB_CMAKE}/staticlibs_common.cmake )
+
+# version file
+configure_file ( ${WILTON_DIR}/resources/buildres/wilton.version
+        ${CMAKE_CURRENT_BINARY_DIR}/wilton.version )
 
 # core
 add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/core )
 
 # modules
 staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_cli )
-if ( ${CMAKE_SYSTEM_NAME} STREQUAL "Windows" )
-    staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_winservice )
-else ( )
-    add_custom_target ( wilton_winservice )
-endif ( )
+staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_cron )
 staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_db )
+staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_fs )
+staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_shared )
+staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_thread )
 if ( ${CMAKE_SYSTEM_NAME} STREQUAL "Windows" )
     add_custom_target ( wilton_serial )
     add_custom_target ( wilton_usb )
+    staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_winservice )
 else ( )
     staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_serial )
     staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_usb )
+    add_custom_target ( wilton_winservice )
 endif ( )
 
 # platform tools
@@ -89,8 +95,20 @@ add_custom_target ( dist
                 bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_core${CMAKE_SHARED_LIBRARY_SUFFIX}
                 wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_core${CMAKE_SHARED_LIBRARY_SUFFIX}
         COMMAND ${CMAKE_COMMAND} -E copy
+                bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_cron${CMAKE_SHARED_LIBRARY_SUFFIX}
+                wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_cron${CMAKE_SHARED_LIBRARY_SUFFIX}
+        COMMAND ${CMAKE_COMMAND} -E copy
                 bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_db${CMAKE_SHARED_LIBRARY_SUFFIX}
                 wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_db${CMAKE_SHARED_LIBRARY_SUFFIX}
+        COMMAND ${CMAKE_COMMAND} -E copy
+                bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_fs${CMAKE_SHARED_LIBRARY_SUFFIX}
+                wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_fs${CMAKE_SHARED_LIBRARY_SUFFIX}
+        COMMAND ${CMAKE_COMMAND} -E copy
+                bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_shared${CMAKE_SHARED_LIBRARY_SUFFIX}
+                wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_shared${CMAKE_SHARED_LIBRARY_SUFFIX}
+        COMMAND ${CMAKE_COMMAND} -E copy
+                bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_thread${CMAKE_SHARED_LIBRARY_SUFFIX}
+                wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_thread${CMAKE_SHARED_LIBRARY_SUFFIX}
         COMMAND ${CMAKE_COMMAND} -E copy
                 bin/wilton_cli${CMAKE_EXECUTABLE_SUFFIX}
                 wilton_${WILTON_VERSION}/bin/wilton${CMAKE_EXECUTABLE_SUFFIX}
@@ -119,12 +137,20 @@ add_custom_target ( dist
                 ${CMAKE_CURRENT_LIST_DIR}/resources/installer/.keep
                 wilton_${WILTON_VERSION}/work/.keep
         COMMAND ${CMAKE_COMMAND} -E copy
-                core/wilton.version
+                wilton.version
                 wilton_${WILTON_VERSION}/wilton.version  
         WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
         COMMENT "Creating distribution at [${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION}] ..." )
 
-add_dependencies ( dist wilton_core wilton_cli wilton_db js )
+add_dependencies ( dist
+        wilton_core
+        wilton_cli
+        wilton_cron
+        wilton_db
+        wilton_fs
+        wilton_shared
+        wilton_thread
+        js )
 
 if ( ${CMAKE_SYSTEM_NAME} STREQUAL "Windows" )
     add_custom_target ( dist_windows
@@ -175,7 +201,7 @@ else ( )
 endif ( )
 
 add_custom_target ( test
-        COMMAND bin/wilton ${CMAKE_CURRENT_LIST_DIR}/core/test/scripts/runWiltonTests.js -m ${CMAKE_CURRENT_LIST_DIR}/js
+        COMMAND bin/wilton ${CMAKE_CURRENT_LIST_DIR}/js/wilton/test/ -m ${CMAKE_CURRENT_LIST_DIR}/js
         COMMAND bin/wilton ${CMAKE_CURRENT_LIST_DIR}/core/test/scripts/runSanityTests.js
         COMMAND bin/wilton ${CMAKE_CURRENT_LIST_DIR}/core/test/scripts/runNodeTests.js -m ${CMAKE_CURRENT_LIST_DIR}/js
         COMMAND cd ${CMAKE_CURRENT_LIST_DIR}/jni && ${CMAKE_CURRENT_LIST_DIR}/tools/maven/bin/mvn clean test
@@ -194,7 +220,7 @@ if ( NOT ${CMAKE_SYSTEM_NAME} STREQUAL "Windows" )
             COMMAND valgrind ${${PROJECT_NAME}_VGOPTS}
                     ./bin/wilton ${CMAKE_CURRENT_LIST_DIR}/core/test/scripts/runZipLoadTests.js
             COMMAND valgrind ${${PROJECT_NAME}_VGOPTS}
-                    ./bin/wilton ${CMAKE_CURRENT_LIST_DIR}/core/test/scripts/runWiltonTests.js -m ../../js
+                    ./bin/wilton ${CMAKE_CURRENT_LIST_DIR}/js/wilton/test/ -m ../../js
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION} 
             COMMENT "Running valgrind ..." )
     add_dependencies ( valgrind dist )

@@ -277,3 +277,15 @@
 [submodule "modules/wilton_usb"]
 	path = modules/wilton_usb
 	url = https://github.com/wilton-iot/wilton_usb.git
+[submodule "modules/wilton_cron"]
+	path = modules/wilton_cron
+	url = https://github.com/wilton-iot/wilton_cron.git
+[submodule "modules/wilton_fs"]
+	path = modules/wilton_fs
+	url = https://github.com/wilton-iot/wilton_fs.git
+[submodule "modules/wilton_shared"]
+	path = modules/wilton_shared
+	url = https://github.com/wilton-iot/wilton_shared.git
+[submodule "modules/wilton_thread"]
+	path = modules/wilton_thread
+	url = https://github.com/wilton-iot/wilton_thread.git
