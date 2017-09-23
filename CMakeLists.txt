@@ -155,10 +155,16 @@ add_dependencies ( dist
 if ( ${CMAKE_SYSTEM_NAME} STREQUAL "Windows" )
     add_custom_target ( dist_windows
             COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}
-            COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}/bin
+            COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}/bin            
             COMMAND ${CMAKE_COMMAND} -E copy
                 bin/wilton_winservice.exe
                 wilton_${WILTON_VERSION}/bin/wilton_winservice.exe
+            COMMAND ${CMAKE_COMMAND} -E copy
+                ${WILTON_DIR}/tools/windows/vs2013e/VC/redist/x86/Microsoft.VC120.CRT/msvcr120.dll
+                wilton_${WILTON_VERSION}/bin/msvcr120.dll
+            COMMAND ${CMAKE_COMMAND} -E copy
+                ${WILTON_DIR}/tools/windows/vs2013e/VC/redist/x86/Microsoft.VC120.CRT/msvcp120.dll
+                wilton_${WILTON_VERSION}/bin/msvcp120.dll
             COMMAND ${CMAKE_COMMAND} -E copy
                 bin/wilton_core.lib
                 wilton_${WILTON_VERSION}/devel/wilton_core.lib
