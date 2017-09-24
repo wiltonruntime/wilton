@@ -289,3 +289,6 @@
 [submodule "modules/wilton_thread"]
 	path = modules/wilton_thread
 	url = https://github.com/wilton-iot/wilton_thread.git
+[submodule "modules/wilton_channel"]
+	path = modules/wilton_channel
+	url = https://github.com/wilton-iot/wilton_channel.git
