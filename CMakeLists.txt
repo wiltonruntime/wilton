@@ -39,6 +39,9 @@ include ( ${STATICLIB_CMAKE}/staticlibs_common.cmake )
 # version file
 configure_file ( ${WILTON_DIR}/resources/buildres/wilton.version
         ${CMAKE_CURRENT_BINARY_DIR}/wilton.version )
+# doxygen file
+configure_file ( ${WILTON_DIR}/resources/doxygen/Doxyfile
+        ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile )
 
 # core
 add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/core )
@@ -237,6 +240,19 @@ if ( NOT ${CMAKE_SYSTEM_NAME} STREQUAL "Windows" )
     add_dependencies ( valgrind dist )
 endif ( )
         
+add_custom_target ( docs
+        COMMAND ${CMAKE_COMMAND} -E remove_directory doxy
+        COMMAND ${CMAKE_COMMAND} -E remove_directory docs
+        COMMAND ${CMAKE_COMMAND} -E make_directory docs
+        COMMAND ${TOOLS_JJS}
+                -J-XX:+UseSerialGC -J-XX:+TieredCompilation -J-XX:TieredStopAtLevel=1
+                ${CMAKE_CURRENT_LIST_DIR}/resources/doxygen/generate-doxy.js
+                ${CMAKE_CURRENT_LIST_DIR}/js/wilton doxy
+        COMMAND doxygen
+        # poor man's WARN_AS_ERROR
+        COMMAND [ ! -s doxygen_warnings.txt ]
+        WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+        COMMENT "Generating documentation at [${CMAKE_CURRENT_BINARY_DIR}/docs] ..." )
 # todo
 
 # maven install
