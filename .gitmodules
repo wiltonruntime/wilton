@@ -292,3 +292,12 @@
 [submodule "modules/wilton_channel"]
 	path = modules/wilton_channel
 	url = https://github.com/wilton-iot/wilton_channel.git
+[submodule "deps/external_libpng"]
+	path = deps/external_libpng
+	url = https://github.com/staticlibs/external_libpng.git
+[submodule "deps/external_hpdf"]
+	path = deps/external_hpdf
+	url = https://github.com/staticlibs/external_hpdf.git
+[submodule "modules/wilton_pdf"]
+	path = modules/wilton_pdf
+	url = https://github.com/wilton-iot/wilton_pdf.git
