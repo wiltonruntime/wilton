@@ -36,9 +36,10 @@ function generateFile(inFile, outFile) {
                     pending += ("\nnamespace " + nmatch[1] + " {\n");
                     ender += "\n}\n";
                 } else {
-                    var fmatch = /^\s*\*\s*@function\s+([a-zA-z0-9]+)\s*.*$/.exec(line);
-                    if (null !== fmatch && 2 === fmatch.length) {
-                        pending += (fmatch[1] + "(");
+                    var fmatch = /^\s*\*\s*@(static|function)\s+([a-zA-z0-9]+)\s*.*$/.exec(line);
+                    if (null !== fmatch && (3 === fmatch.length)) {
+                        var statmod = "static" === fmatch[1] ? "static" : "";
+                        pending += ( fmatch[2] + "(");
                         line = "";
                     } else {
                         var pmatch = /^\s*\*\s*@param\s+([a-zA-z0-9]+)\s+`([a-zA-z0-9|]+)`.*$/.exec(line);
@@ -47,7 +48,7 @@ function generateFile(inFile, outFile) {
                         } else {
                             var rmatch = /^\s*\*\s*@returns\s+`([a-zA-z0-9]+)`\s*.*$/.exec(line);
                             if (null !== rmatch && 2 === rmatch.length) {
-                                pending  = rmatch[1] + " " + pending;
+                                pending = statmod + " " + rmatch[1] + " " + pending;
                                 if ("," === pending[pending.length - 1]) {
                                     pending = pending.substring(0, pending.length - 1);
                                 }
