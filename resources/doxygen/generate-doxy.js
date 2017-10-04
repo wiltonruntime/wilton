@@ -46,7 +46,7 @@ function generateFile(inFile, outFile) {
                         if (null !== pmatch && 3 === pmatch.length) {
                             pending += pmatch[2] + " " + pmatch[1] + ",";
                         } else {
-                            var rmatch = /^\s*\*\s*@return\s+`([a-zA-z0-9]+)`\s*.*$/.exec(line);
+                            var rmatch = /^\s*\*\s*@return(?:s)?\s+`([a-zA-z0-9]+)`\s*.*$/.exec(line);
                             if (null !== rmatch && 2 === rmatch.length) {
                                 pending = statmod + " " + rmatch[1] + " " + pending;
                                 if ("," === pending[pending.length - 1]) {
