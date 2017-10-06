@@ -23,7 +23,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">wilton.js
-   &#160;<span id="projectnumber">v201710011</span>
+   &#160;<span id="projectnumber">v201710060</span>
    </div>
   </td>
  </tr>
@@ -79,20 +79,264 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 </div><!-- top -->
 <div class="header">
+  <div class="summary">
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">Serial Namespace Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
 <p><b>wilton/Serial</b> <br/>
- Connect to hardware devices using <a class="el" href="namespaceSerial.html" title="wilton/Serial   Connect to hardware devices using Serial protocol.">Serial</a> protocol.  
+ Connect to hardware devices using serial protocol.  
 <a href="#details">More...</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a90ec0cfab6fc7d2bc1af9dc9057d4b99"><td class="memItemLeft" align="right" valign="top">Undefined&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSerial.html#a90ec0cfab6fc7d2bc1af9dc9057d4b99">close</a> (Function|Undefined callback)</td></tr>
+<tr class="memdesc:a90ec0cfab6fc7d2bc1af9dc9057d4b99"><td class="mdescLeft">&#160;</td><td class="mdescRight">Close connection to device.  <a href="#a90ec0cfab6fc7d2bc1af9dc9057d4b99"></a><br/></td></tr>
+<tr class="memitem:afb9be5fb52dabc0b960059974cec8ef2"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSerial.html#afb9be5fb52dabc0b960059974cec8ef2">read</a> (Number length, Function|Undefined callback)</td></tr>
+<tr class="memdesc:afb9be5fb52dabc0b960059974cec8ef2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read data from device.  <a href="#afb9be5fb52dabc0b960059974cec8ef2"></a><br/></td></tr>
+<tr class="memitem:ad2f55e59e85088dcb9b055c33283c38f"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSerial.html#ad2f55e59e85088dcb9b055c33283c38f">readLine</a> (Function|Undefined callback)</td></tr>
+<tr class="memdesc:ad2f55e59e85088dcb9b055c33283c38f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read single line of data from device.  <a href="#ad2f55e59e85088dcb9b055c33283c38f"></a><br/></td></tr>
+<tr class="memitem:acfa0dda40dbc7a1f6254fd9cd2d6f4ab"><td class="memItemLeft" align="right" valign="top">Object&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSerial.html#acfa0dda40dbc7a1f6254fd9cd2d6f4ab">Serial</a> (Object options, Function|Undefined callback)</td></tr>
+<tr class="memdesc:acfa0dda40dbc7a1f6254fd9cd2d6f4ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create <code><a class="el" href="namespaceSerial.html" title="wilton/Serial   Connect to hardware devices using serial protocol.">Serial</a></code> instance.  <a href="#acfa0dda40dbc7a1f6254fd9cd2d6f4ab"></a><br/></td></tr>
+<tr class="memitem:ad66f5e6fbd55e88ca700dacd053899c8"><td class="memItemLeft" align="right" valign="top">Number&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSerial.html#ad66f5e6fbd55e88ca700dacd053899c8">writeHex</a> (String dataHex, Function|Undefined callback)</td></tr>
+<tr class="memdesc:ad66f5e6fbd55e88ca700dacd053899c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write specifed string in hexadecimal encoding to device.  <a href="#ad66f5e6fbd55e88ca700dacd053899c8"></a><br/></td></tr>
+<tr class="memitem:a13abf179e3dfbd83fc7aba3a57786021"><td class="memItemLeft" align="right" valign="top">Number&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSerial.html#a13abf179e3dfbd83fc7aba3a57786021">writePlain</a> (String data, Function|Undefined callback)</td></tr>
+<tr class="memdesc:a13abf179e3dfbd83fc7aba3a57786021"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write specifed string to device.  <a href="#a13abf179e3dfbd83fc7aba3a57786021"></a><br/></td></tr>
+</table>
 <a name="details" id="details"></a><h2>Detailed Description</h2>
-<div class="textblock"><p>TODO </p>
-</div></div><!-- contents -->
+<div class="textblock"><p>This module allows to intract with hardware devices using <code>RS232</code> protocol.</p>
+<p>Responses from device are returned encoded in hexadecimal encoding, use <code>wilton/hex</code> for decoding.</p>
+<p>Underlying serial connection can be closed manually using <code><a class="el" href="namespaceSerial.html#a90ec0cfab6fc7d2bc1af9dc9057d4b99" title="Close connection to device.">close()</a></code> method or it will be closed during the shutdown.</p>
+<p>Usage example:</p>
+<div class="fragment"><div class="line"><span class="comment">// open connection</span></div>
+<div class="line">var ser = <span class="keyword">new</span> <a class="code" href="namespaceSerial.html#acfa0dda40dbc7a1f6254fd9cd2d6f4ab" title="Create Serial instance.">Serial</a>({</div>
+<div class="line">    port: <span class="stringliteral">&quot;/dev/ttyUSB1&quot;</span>,</div>
+<div class="line">    baudRate: 4800,</div>
+<div class="line">    parity: <span class="stringliteral">&quot;NONE&quot;</span>, <span class="comment">// &quot;EVEN&quot;, &quot;ODD&quot;, &quot;MARK&quot;, &quot;SPACE&quot;</span></div>
+<div class="line">    byteSize: 8,</div>
+<div class="line">    stopBitsCount: 1,</div>
+<div class="line">    timeoutMillis: 500</div>
+<div class="line">});</div>
+<div class="line"></div>
+<div class="line"><span class="comment">// write request</span></div>
+<div class="line">var bytes_written1 = ser.writePlain(<span class="stringliteral">&quot;foo\r\n&quot;</span>);</div>
+<div class="line">var bytes_written2 = ser.writeHex(<span class="stringliteral">&quot;66 6f 6f 0d 0a&quot;</span>);</div>
+<div class="line"></div>
+<div class="line"><span class="comment">// read response</span></div>
+<div class="line">var respHex = ser.readLine();</div>
+<div class="line"></div>
+<div class="line"><span class="comment">// close connection</span></div>
+<div class="line">ser.close();</div>
+</div><!-- fragment --> </div><h2>Function Documentation</h2>
+<a class="anchor" id="a90ec0cfab6fc7d2bc1af9dc9057d4b99"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Undefined Serial::close </td>
+          <td>(</td>
+          <td class="paramtype">Function|Undefined&#160;</td>
+          <td class="paramname"><em>callback</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Closes <a class="el" href="namespaceSerial.html" title="wilton/Serial   Connect to hardware devices using serial protocol.">Serial</a> connection releases system resources. Devices not closed manually, will be closed automatically during the shutdown.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">callback</td><td><code>Function|Undefined</code> callback to receive result or error </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><code>Undefined</code> </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="afb9be5fb52dabc0b960059974cec8ef2"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">String Serial::read </td>
+          <td>(</td>
+          <td class="paramtype">Number&#160;</td>
+          <td class="paramname"><em>length</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Function|Undefined&#160;</td>
+          <td class="paramname"><em>callback</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Tries to read a specified amount of data from the device. Returned result can conntains less data than requested. Returns empty result if no data is available and timeout is exceeded.</p>
+<p>Uses <code>timeoutMillis</code> parameter (specified in constructor) as a timeout.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">length</td><td><code>Number</code> amount of the data to read (in bytes) </td></tr>
+    <tr><td class="paramname">callback</td><td><code>Function|Undefined</code> callback to receive result or error </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><code>String</code> device response data in hexadecimal encoding, empty string on timeout </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ad2f55e59e85088dcb9b055c33283c38f"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">String Serial::readLine </td>
+          <td>(</td>
+          <td class="paramtype">Function|Undefined&#160;</td>
+          <td class="paramname"><em>callback</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Tries to read a data from the device until line ending (<code>\n</code> or <code>\r\n</code>) will be read or timeout happens. Line ending is not included into result.</p>
+<p>Returned result can conntains less data than requested. Returns empty result if no data is available and timeout is exceeded.</p>
+<p>Uses <code>timeoutMillis</code> parameter (specified in constructor) as a timeout.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">callback</td><td><code>Function|Undefined</code> callback to receive result or error </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><code>String</code> device response data in hexadecimal encoding, empty string on timeout </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="acfa0dda40dbc7a1f6254fd9cd2d6f4ab"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Object Serial::Serial </td>
+          <td>(</td>
+          <td class="paramtype">Object&#160;</td>
+          <td class="paramname"><em>options</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Function|Undefined&#160;</td>
+          <td class="paramname"><em>callback</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Creates <code><a class="el" href="namespaceSerial.html" title="wilton/Serial   Connect to hardware devices using serial protocol.">Serial</a></code> object instace and opens the underlying <code>RS232</code> connection.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">options</td><td><code>Object</code> configuration object, see possible options below </td></tr>
+    <tr><td class="paramname">callback</td><td><code>Function|Undefined</code> callback to receive result or error </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><code>Object</code> <code><a class="el" href="namespaceSerial.html" title="wilton/Serial   Connect to hardware devices using serial protocol.">Serial</a></code> instance</dd></dl>
+<p><b>Options</b></p>
+<ul>
+<li><b>port</b> <code>String</code> serial port address (OS-dependent), examples: <code>/dev/ttyUSB1</code>, <code>COM4</code></li>
+<li><b>baudRate</b> <code>Number</code> connection baud rate</li>
+<li><b>parity</b> <code>String</code> enables parity checking, supported values: <code>NONE</code>, <code>EVEN</code>, <code>ODD</code>, <code>MARK</code>, <code>SPACE</code></li>
+<li><b>byteSize</b> <code>Number</code> number of data bits</li>
+<li><b>stopBitsCount</b> <code>Number</code> number of stop bits</li>
+<li><b>timeoutMillis</b> <code>Number</code> timeout for read and write operations (in milliseconds) </li>
+</ul>
+
+</div>
+</div>
+<a class="anchor" id="ad66f5e6fbd55e88ca700dacd053899c8"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Number Serial::writeHex </td>
+          <td>(</td>
+          <td class="paramtype">String&#160;</td>
+          <td class="paramname"><em>dataHex</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Function|Undefined&#160;</td>
+          <td class="paramname"><em>callback</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Writes specified hex-string to device, unlike <code><a class="el" href="namespaceSerial.html#a13abf179e3dfbd83fc7aba3a57786021" title="Write specifed string to device.">writePlain()</a></code> this function may be used to write abritrary (possibly binary) data.</p>
+<p>Uses <code>timeoutMillis</code> parameter (specified in constructor) as a timeout.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">dataHex</td><td><code>String</code> string encoded as hexadecimal to write to device </td></tr>
+    <tr><td class="paramname">callback</td><td><code>Function|Undefined</code> callback to receive result or error </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><code>Number</code> number of bytes written to device </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a13abf179e3dfbd83fc7aba3a57786021"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Number Serial::writePlain </td>
+          <td>(</td>
+          <td class="paramtype">String&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Function|Undefined&#160;</td>
+          <td class="paramname"><em>callback</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Writes specified string to device converting the bytes of input string into hexadecimal encoding as-is without changing the UTF-16 encoding. Using this method with non-ASCII symbols may lead to unexpected results.</p>
+<p>To write UTF-8 bytes to device use <code><a class="el" href="namespaceSerial.html#ad66f5e6fbd55e88ca700dacd053899c8" title="Write specifed string in hexadecimal encoding to device.">writeHex()</a></code> in conjunction with <code><a class="el" href="namespacehex.html#a4160f9a929571bdfc9d545978c8cb935" title="Encode Unicode string as UTF-8 hexadecimal.">hex.encodeUTF8()</a></code>.</p>
+<p>Uses <code>timeoutMillis</code> parameter (specified in constructor) as a timeout.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data</td><td><code>String</code> string to write to device </td></tr>
+    <tr><td class="paramname">callback</td><td><code>Function|Undefined</code> callback to receive result or error </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><code>Number</code> number of bytes written to device </dd></dl>
+
+</div>
+</div>
+</div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Oct 1 2017 00:31:51 for wilton.js by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Oct 6 2017 12:08:24 for wilton.js by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>
