@@ -1,0 +1,8 @@
+
+Name: asio
+Version: ${asio_VERSION}
+Description:C++ library for network programming
+Requires:
+Libs:
+Libs.private:
+Cflags: ${WILTON_PKGCONFIG_INCLUDEDIR}

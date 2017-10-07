@@ -1,0 +1,8 @@
+
+Name: soci
+Version: ${soci_VERSION}
+Description: C++ database access library
+Requires:
+Libs: ${WILTON_PKGCONFIG_LIBDIR} -lsoci_core -lsoci_postgresql -lsoci_sqlite3
+Libs.private:
+Cflags: ${WILTON_PKGCONFIG_INCLUDEDIR}

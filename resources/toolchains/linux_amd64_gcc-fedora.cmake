@@ -22,9 +22,15 @@ set ( CMAKE_CXX_COMPILER g++ )
 set ( CMAKE_C_FLAGS "-fPIC" CACHE INTERNAL "" )
 set ( CMAKE_C_FLAGS_DEBUG "-g -O0" CACHE INTERNAL "" )
 set ( CMAKE_C_FLAGS_RELEASE "-Os -DNDEBUG" CACHE INTERNAL "" )
-set ( CMAKE_CXX_FLAGS "--std=c++11 -fPIC -Wall -Werror -Wextra" )
+set ( CMAKE_CXX_FLAGS "--std=c++14 -fPIC -Wall -Werror -Wextra" )
 set ( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-strict-overflow -fno-strict-aliasing -fstack-protector-all" )
-set ( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wlogical-op" )
+set ( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wlogical-op -Wduplicated-cond" )
+# duktape
+set ( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-implicit-fallthrough -Wno-format-truncation" )
+# pion: todo: fixme
+set ( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-noexcept-type -Wno-nonnull-compare" )
+# tinydir
+set ( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-deprecated-declarations" )
 set ( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}" CACHE INTERNAL "" )
 set ( CMAKE_CXX_FLAGS_DEBUG "-g -O0" CACHE INTERNAL "" )
 set ( CMAKE_CXX_FLAGS_RELEASE "-Os -DNDEBUG" CACHE INTERNAL "" )
@@ -34,6 +40,8 @@ set ( CMAKE_EXE_LINKER_FLAGS "-Wl,-rpath -Wl,$ORIGIN -Wl,-z -Wl,origin" CACHE IN
 set ( CMAKE_SKIP_RPATH TRUE CACHE INTERNAL "" )
 
 # variables for packages that are present, but do not have pkg-config support
-set ( WILTON_PKGCONFIG_LIBDIR "-L/usr/lib/x86_64-linux-gnu/" CACHE INTERNAL "" )
-set ( WILTON_PKGCONFIG_INCLUDEDIR "-I/usr/include/" CACHE INTERNAL "" )
-set ( log4cplus_VERSION "1.0.4-1" CACHE INTERNAL "" )
+set ( WILTON_PKGCONFIG_LIBDIR "-L/usr/lib64/" CACHE INTERNAL "" )
+set ( WILTON_PKGCONFIG_INCLUDEDIR "-I/usr/include/ -I/usr/include/soci/" CACHE INTERNAL "" )
+set ( hpdf_VERSION "2.3.0-3" CACHE INTERNAL "" )
+set ( soci_VERSION "3.2.3-14" CACHE INTERNAL "" )
+set ( asio_VERSION "1.10.8-6" CACHE INTERNAL "" )
