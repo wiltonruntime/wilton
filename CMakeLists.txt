@@ -54,14 +54,20 @@ configure_file ( ${WILTON_DIR}/resources/doxygen/Doxyfile
 if ( WILTON_BUILD_FLAVOUR MATCHES "wheezy" )
     configure_file ( ${CMAKE_CURRENT_LIST_DIR}/resources/pkgconfig/log4cplus.pc
             ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/pkgconfig/log4cplus.pc )
-endif ( )
-if ( WILTON_BUILD_FLAVOUR MATCHES "fedora" )
+elseif ( WILTON_BUILD_FLAVOUR MATCHES "fedora" )
     configure_file ( ${CMAKE_CURRENT_LIST_DIR}/resources/pkgconfig/hpdf.pc
             ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/pkgconfig/hpdf.pc )
     configure_file ( ${CMAKE_CURRENT_LIST_DIR}/resources/pkgconfig/soci.pc
             ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/pkgconfig/soci.pc )
     configure_file ( ${CMAKE_CURRENT_LIST_DIR}/resources/pkgconfig/asio.pc
             ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/pkgconfig/asio.pc )
+elseif ( WILTON_BUILD_FLAVOUR MATCHES "xenial" )
+    configure_file ( ${CMAKE_CURRENT_LIST_DIR}/resources/pkgconfig/asio.pc
+            ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/pkgconfig/asio.pc )
+    configure_file ( ${CMAKE_CURRENT_LIST_DIR}/resources/pkgconfig/log4cplus.pc
+            ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/pkgconfig/log4cplus.pc )
+    configure_file ( ${CMAKE_CURRENT_LIST_DIR}/resources/pkgconfig/soci.pc
+            ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/pkgconfig/soci.pc )
 endif ( )
 
 # core
