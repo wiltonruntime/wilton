@@ -14,7 +14,6 @@
 
 cmake_minimum_required ( VERSION 2.8.12 )
 
-# default to Debug
 set ( CMAKE_BUILD_TYPE "Release" CACHE STRING "Default build type" )
 
 set ( CMAKE_SYSTEM_NAME Linux )
@@ -23,7 +22,10 @@ set ( CMAKE_CXX_COMPILER g++ )
 set ( CMAKE_C_FLAGS "-fPIC" CACHE INTERNAL "" )
 set ( CMAKE_C_FLAGS_DEBUG "-g -O0" CACHE INTERNAL "" )
 set ( CMAKE_C_FLAGS_RELEASE "-Os -DNDEBUG" CACHE INTERNAL "" )
-set ( CMAKE_CXX_FLAGS "--std=c++11 -fPIC -Wall -Werror -Wextra -fno-strict-overflow -fno-strict-aliasing -fstack-protector-all" CACHE INTERNAL "" )
+set ( CMAKE_CXX_FLAGS "--std=c++11 -fPIC -Wall -Werror -Wextra" )
+set ( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-strict-overflow -fno-strict-aliasing -fstack-protector-all" )
+set ( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wlogical-op" )
+set ( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}" CACHE INTERNAL "" )
 set ( CMAKE_CXX_FLAGS_DEBUG "-g -O0" CACHE INTERNAL "" )
 set ( CMAKE_CXX_FLAGS_RELEASE "-Os -DNDEBUG" CACHE INTERNAL "" )
 
@@ -31,14 +33,7 @@ set ( CMAKE_CXX_FLAGS_RELEASE "-Os -DNDEBUG" CACHE INTERNAL "" )
 set ( CMAKE_EXE_LINKER_FLAGS "-Wl,-rpath -Wl,$ORIGIN -Wl,-z -Wl,origin" CACHE INTERNAL "" )
 set ( CMAKE_SKIP_RPATH TRUE CACHE INTERNAL "" )
 
-if ( EXISTS "/usr/bin/valgrind" )
-    set ( CMAKE_MEMORYCHECK_COMMAND "/usr/bin/valgrind" CACHE INTERNAL "" ) 
-    set ( CMAKE_MEMORYCHECK_COMMAND_OPTIONS
-            --leak-check=yes
-            --show-reachable=yes
-            --track-origins=yes
-            --error-exitcode=42
-            --track-fds=yes
-            --suppressions=${STATICLIB_CMAKE}/resources/valgrind/openssl_malloc.supp
-            CACHE INTERNAL "" )
-endif ( )
+# variables for packages that are present, but do not have pkg-config support
+set ( WILTON_PKGCONFIG_LIBDIR "/usr/lib/x86_64-linux-gnu/" CACHE INTERNAL "" )
+set ( WILTON_PKGCONFIG_INCLUDEDIR "/usr/include/" CACHE INTERNAL "" )
+set ( log4cplus_VERSION "1.0.4-1" CACHE INTERNAL "" )

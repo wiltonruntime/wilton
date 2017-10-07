@@ -1,0 +1,8 @@
+
+Name: hpdf
+Version: ${hpdf_VERSION}
+Description: C library for generating pdf files 
+Requires:
+Libs: -L${WILTON_PKGCONFIG_LIBDIR} -lhpdf
+Libs.private:
+Cflags: -I${WILTON_PKGCONFIG_INCLUDEDIR}

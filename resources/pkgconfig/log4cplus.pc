@@ -1,0 +1,8 @@
+
+Name: log4cplus
+Version: ${log4cplus_VERSION}
+Description: Simple to use, thread-safe C++ logging API
+Requires:
+Libs: -L${WILTON_PKGCONFIG_LIBDIR} -llog4cplus
+Libs.private: -lrt  
+Cflags: -I${WILTON_PKGCONFIG_INCLUDEDIR}

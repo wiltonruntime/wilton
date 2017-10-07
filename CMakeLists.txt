@@ -16,20 +16,27 @@ if ( NOT DEFINED STATICLIB_TOOLCHAIN )
     if ( WIN32 )
         if ( CMAKE_SIZEOF_VOID_P EQUAL 8 )
             set ( STATICLIB_TOOLCHAIN "windows_amd64_msvc" CACHE STRING "" )
+            if ( NOT DEFINED WILTON_BUILD_FLAVOUR )
+                set ( WILTON_BUILD_FLAVOUR "sdk81" CACHE STRING "" )
+            endif ( )
         else ( )
             set ( STATICLIB_TOOLCHAIN "windows_i386_msvc" CACHE STRING "" )
+            if ( NOT DEFINED WILTON_BUILD_FLAVOUR )
+                set ( WILTON_BUILD_FLAVOUR "sdk71" CACHE STRING "" )
+            endif ( )
         endif ( )
-    elseif ( APPLE )
-        set ( STATICLIB_TOOLCHAIN "macosx_amd64_clang" CACHE STRING "" )
     elseif ( UNIX )
         set ( STATICLIB_TOOLCHAIN "linux_amd64_gcc" CACHE STRING "" )
+        if ( NOT DEFINED WILTON_BUILD_FLAVOUR )
+            set ( WILTON_BUILD_FLAVOUR "wheezy" CACHE STRING "" )
+        endif ( )
     else ( )
         message ( FATAL_ERROR "Cannot find out toolchain to use, please specify [STATICLIB_TOOLCHAIN]" )
     endif ( )
 endif ( )
 set ( STATICLIB_DEPS ${CMAKE_CURRENT_LIST_DIR}/deps CACHE INTERNAL "" )    
 set ( STATICLIB_CMAKE ${STATICLIB_DEPS}/cmake CACHE INTERNAL "" )    
-set ( CMAKE_TOOLCHAIN_FILE ${CMAKE_CURRENT_LIST_DIR}/resources/toolchains/${STATICLIB_TOOLCHAIN}.cmake CACHE INTERNAL "" )
+set ( CMAKE_TOOLCHAIN_FILE ${CMAKE_CURRENT_LIST_DIR}/resources/toolchains/${STATICLIB_TOOLCHAIN}-${WILTON_BUILD_FLAVOUR}.cmake CACHE INTERNAL "" )
 
 # master project
 project ( wilton CXX C )
@@ -43,6 +50,12 @@ configure_file ( ${WILTON_DIR}/resources/buildres/wilton.version
 configure_file ( ${WILTON_DIR}/resources/doxygen/Doxyfile
         ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile )
 
+# supply missed pkg-config descriptor
+if ( WILTON_BUILD_FLAVOUR MATCHES "wheezy" )
+    configure_file ( ${CMAKE_CURRENT_LIST_DIR}/resources/pkgconfig/log4cplus.pc
+            ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/pkgconfig/log4cplus.pc )
+endif ( )
+
 # core
 add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/core )
 
@@ -55,7 +68,7 @@ staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_fs )
 staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_pdf )
 staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_shared )
 staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_thread )
-if ( ${CMAKE_SYSTEM_NAME} STREQUAL "Windows" )
+if ( STATICLIB_TOOLCHAIN MATCHES "windows_[^_]+_[^_]+" )
     add_custom_target ( wilton_serial )
     add_custom_target ( wilton_usb )
     staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_winservice )
@@ -69,7 +82,7 @@ endif ( )
 set ( TOOLS_JAVA java )
 set ( TOOLS_JJS jjs )
 set ( TOOLS_ZIP zip )
-if ( ${CMAKE_SYSTEM_NAME} STREQUAL "Windows" )
+if ( STATICLIB_TOOLCHAIN MATCHES "windows_[^_]+_[^_]+" )
     set ( TOOLS_JAVA ${CMAKE_CURRENT_LIST_DIR}/tools/windows/jdk8/bin/java.exe )
     set ( TOOLS_JJS ${CMAKE_CURRENT_LIST_DIR}/tools/windows/jdk8/bin/jjs.exe )
     set ( TOOLS_ZIP ${CMAKE_CURRENT_LIST_DIR}/tools/windows/zip/zip.exe )
@@ -139,7 +152,7 @@ add_custom_target ( dist
                 ${CMAKE_CURRENT_LIST_DIR}/core/include
                 wilton_${WILTON_VERSION}/devel/include
         COMMAND ${CMAKE_COMMAND} -E copy
-                ${CMAKE_CURRENT_LIST_DIR}/resources/toolchains/${STATICLIB_TOOLCHAIN}.cmake
+                ${CMAKE_CURRENT_LIST_DIR}/resources/toolchains/${STATICLIB_TOOLCHAIN}-${WILTON_BUILD_FLAVOUR}.cmake
                 wilton_${WILTON_VERSION}/devel/${STATICLIB_TOOLCHAIN}.cmake
         COMMAND ${CMAKE_COMMAND} -E copy
                 ${CMAKE_CURRENT_LIST_DIR}/resources/installer/.keep
@@ -165,7 +178,7 @@ add_dependencies ( dist
         wilton_thread
         js )
 
-if ( ${CMAKE_SYSTEM_NAME} STREQUAL "Windows" )
+if ( STATICLIB_TOOLCHAIN MATCHES "windows_[^_]+_[^_]+" )
     add_custom_target ( dist_windows
             COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}
             COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}/bin            
@@ -228,7 +241,7 @@ add_custom_target ( test
         COMMENT "Running tests ..." )
 add_dependencies ( test dist )
 
-if ( NOT ${CMAKE_SYSTEM_NAME} STREQUAL "Windows" )
+if ( STATICLIB_TOOLCHAIN MATCHES "linux_[^_]+_[^_]+" )
     set ( ${PROJECT_NAME}_VGOPTS 
             --leak-check=yes --show-reachable=yes --track-origins=yes --error-exitcode=42 --track-fds=yes
             --suppressions=${CMAKE_CURRENT_LIST_DIR}/deps/cmake/resources/valgrind/openssl_malloc.supp
