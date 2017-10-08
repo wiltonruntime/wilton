@@ -1,0 +1,8 @@
+
+Name: popt
+Version: ${popt_VERSION}
+Description: C library for parsing command line parameters
+Requires:
+Libs: ${WILTON_PKGCONFIG_LIBDIR} -lpopt
+Libs.private:
+Cflags: ${WILTON_PKGCONFIG_INCLUDEDIR}

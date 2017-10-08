@@ -68,6 +68,13 @@ elseif ( WILTON_BUILD_FLAVOUR MATCHES "xenial" )
             ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/pkgconfig/log4cplus.pc )
     configure_file ( ${CMAKE_CURRENT_LIST_DIR}/resources/pkgconfig/soci.pc
             ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/pkgconfig/soci.pc )
+elseif ( WILTON_BUILD_FLAVOUR MATCHES "el7" )
+    configure_file ( ${CMAKE_CURRENT_LIST_DIR}/resources/pkgconfig/asio.pc
+            ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/pkgconfig/asio.pc )
+    configure_file ( ${CMAKE_CURRENT_LIST_DIR}/resources/pkgconfig/popt.pc
+            ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/pkgconfig/popt.pc )
+    configure_file ( ${CMAKE_CURRENT_LIST_DIR}/resources/pkgconfig/soci.pc
+            ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/pkgconfig/soci.pc )
 endif ( )
 
 # core
