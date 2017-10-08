@@ -25,7 +25,7 @@ See platform-specific instructions below.
     mkdir build
     cd build
     cmake ..
-    make installer
+    nmake installer
 
 64-bit build: TODO
 
