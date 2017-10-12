@@ -5,6 +5,7 @@ var searchData=
   ['send',['send',['../namespaceChannel.html#a3300a590b615ef861cfa255da0c8a856',1,'Channel']]],
   ['sendfile',['sendFile',['../namespacehttpClient.html#a5f77a8a2e7d12423cc8a789184a37413',1,'httpClient']]],
   ['sendmustache',['sendMustache',['../namespaceRequest.html#a574fe938e31444d4ddef382c3b471987',1,'Request']]],
+  ['sendredirect',['sendRedirect',['../namespaceRequest.html#a8aff8bb58ae8ac06c1d6c637775718c6',1,'Request']]],
   ['sendrequest',['sendRequest',['../namespacehttpClient.html#a33cb20df4470da7e266e580d082064e8',1,'httpClient']]],
   ['sendresponse',['sendResponse',['../namespaceRequest.html#aa0db4f118c0a3a3ea1c0f3778cca4f06',1,'Request']]],
   ['sendtempfile',['sendTempFile',['../namespaceRequest.html#a9cd52444485fc5e00cc5f0a5faf0b16b',1,'Request']]],

@@ -23,7 +23,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">wilton.js
-   &#160;<span id="projectnumber">v201710060</span>
+   &#160;<span id="projectnumber">v201710121</span>
    </div>
   </td>
  </tr>
@@ -94,6 +94,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 Functions</h2></td></tr>
 <tr class="memitem:a7dd1f129d60f272111535c874fb080d7"><td class="memItemLeft" align="right" valign="top">Undefined&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacefs.html#a7dd1f129d60f272111535c874fb080d7">appendFile</a> (String path, String data, Undefined options, Function|Undefined callback)</td></tr>
 <tr class="memdesc:a7dd1f129d60f272111535c874fb080d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Append data to a file, creating the file if it does not yet exist.  <a href="#a7dd1f129d60f272111535c874fb080d7"></a><br/></td></tr>
+<tr class="memitem:a6148298c50528ad3f51cb88153a8f43a"><td class="memItemLeft" align="right" valign="top">Undefined&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacefs.html#a6148298c50528ad3f51cb88153a8f43a">copyDirectory</a> (String oldPath, String newPath, Function|Undefined callback)</td></tr>
+<tr class="memdesc:a6148298c50528ad3f51cb88153a8f43a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy a directory.  <a href="#a6148298c50528ad3f51cb88153a8f43a"></a><br/></td></tr>
 <tr class="memitem:a1ffff491daba7a970f0b7691ebe4d286"><td class="memItemLeft" align="right" valign="top">Undefined&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacefs.html#a1ffff491daba7a970f0b7691ebe4d286">copyFile</a> (String oldPath, String newPath, Function|Undefined callback)</td></tr>
 <tr class="memdesc:a1ffff491daba7a970f0b7691ebe4d286"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy a file.  <a href="#a1ffff491daba7a970f0b7691ebe4d286"></a><br/></td></tr>
 <tr class="memitem:a0ed8576532a7fcf39e73c94658905809"><td class="memItemLeft" align="right" valign="top">Boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacefs.html#a0ed8576532a7fcf39e73c94658905809">exists</a> (String path, Function|Undefined callback)</td></tr>
@@ -104,6 +106,8 @@ Functions</h2></td></tr>
 <tr class="memdesc:a15afc2e890ad668f9842536e3baafaad"><td class="mdescLeft">&#160;</td><td class="mdescRight">List the contents of a directory.  <a href="#a15afc2e890ad668f9842536e3baafaad"></a><br/></td></tr>
 <tr class="memitem:ac41fbf9b48b4c765ac85b4add28ba72b"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacefs.html#ac41fbf9b48b4c765ac85b4add28ba72b">readFile</a> (String path, Undefined options, Function|Undefined callback)</td></tr>
 <tr class="memdesc:ac41fbf9b48b4c765ac85b4add28ba72b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read the entire contents of a file.  <a href="#ac41fbf9b48b4c765ac85b4add28ba72b"></a><br/></td></tr>
+<tr class="memitem:aaacdf8e24182b67d331788516139bd9b"><td class="memItemLeft" align="right" valign="top">Array&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacefs.html#aaacdf8e24182b67d331788516139bd9b">readLines</a> (String path, Function|Undefined callback)</td></tr>
+<tr class="memdesc:aaacdf8e24182b67d331788516139bd9b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads all lines from a file.  <a href="#aaacdf8e24182b67d331788516139bd9b"></a><br/></td></tr>
 <tr class="memitem:a732ee8601bf54bf7ae7cf75fd96c442c"><td class="memItemLeft" align="right" valign="top">Undefined&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacefs.html#a732ee8601bf54bf7ae7cf75fd96c442c">rename</a> (String oldPath, String newPath, Function|Undefined callback)</td></tr>
 <tr class="memdesc:a732ee8601bf54bf7ae7cf75fd96c442c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rename (move) file or directory.  <a href="#a732ee8601bf54bf7ae7cf75fd96c442c"></a><br/></td></tr>
 <tr class="memitem:a1fda3bed71a4ebad582773d8f9c0830f"><td class="memItemLeft" align="right" valign="top">Undefined&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacefs.html#a1fda3bed71a4ebad582773d8f9c0830f">rmdir</a> (String path, Function|Undefined callback)</td></tr>
@@ -118,6 +122,7 @@ Functions</h2></td></tr>
 <a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>This module implements a synchronous-only subset of <a href="https://nodejs.org/api/fs.html">fs module from Node.js</a>.</p>
 <p>It provides wrappers around standard posix functions.</p>
+<p>Every function in this module has an alias with a <code>Sync</code> postfix (to match Node.js convention), example: <code><a class="el" href="namespacefs.html#ac41fbf9b48b4c765ac85b4add28ba72b" title="Read the entire contents of a file.">readFile()</a></code> is the same as <code>readFileSync</code>.</p>
 <p>Usage example:</p>
 <div class="fragment"><div class="line"><span class="comment">// make directory</span></div>
 <div class="line">fs.mkdir(<span class="stringliteral">&quot;fstest&quot;</span>);</div>
@@ -173,6 +178,48 @@ Functions</h2></td></tr>
     <tr><td class="paramname">path</td><td><code>String</code> path to file </td></tr>
     <tr><td class="paramname">data</td><td><code>String</code> data to append </td></tr>
     <tr><td class="paramname">options</td><td><code>Undefined</code> placeholder parameter, added for compatibility with Node API </td></tr>
+    <tr><td class="paramname">callback</td><td><code>Function|Undefined</code> callback to receive result or error </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><code>Undefined</code> </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a6148298c50528ad3f51cb88153a8f43a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Undefined fs::copyDirectory </td>
+          <td>(</td>
+          <td class="paramtype">String&#160;</td>
+          <td class="paramname"><em>oldPath</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">String&#160;</td>
+          <td class="paramname"><em>newPath</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Function|Undefined&#160;</td>
+          <td class="paramname"><em>callback</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Copies specified directory recursively.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">oldPath</td><td><code>String</code> existing path </td></tr>
+    <tr><td class="paramname">newPath</td><td><code>String</code> desired path </td></tr>
     <tr><td class="paramname">callback</td><td><code>Function|Undefined</code> callback to receive result or error </td></tr>
   </table>
   </dd>
@@ -384,6 +431,42 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="aaacdf8e24182b67d331788516139bd9b"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Array fs::readLines </td>
+          <td>(</td>
+          <td class="paramtype">String&#160;</td>
+          <td class="paramname"><em>path</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Function|Undefined&#160;</td>
+          <td class="paramname"><em>callback</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Reads the entire contents of a text file and return them as an array of lines.</p>
+<p>Empty strings are ignored.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">path</td><td><code>String</code> </td></tr>
+    <tr><td class="paramname">callback</td><td><code>Function|Undefined</code> callback to receive result or error </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><code>Array</code> file contents as an array of lines </dd></dl>
+
+</div>
+</div>
 <a class="anchor" id="a732ee8601bf54bf7ae7cf75fd96c442c"></a>
 <div class="memitem">
 <div class="memproto">
@@ -449,7 +532,7 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Deletes directory that must be empty.</p>
+<p>Deletes directory recursively.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">path</td><td><code>String</code> path to directory </td></tr>
@@ -588,7 +671,7 @@ Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Oct 6 2017 12:08:24 for wilton.js by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Oct 12 2017 17:32:00 for wilton.js by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>

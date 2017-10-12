@@ -4,6 +4,7 @@ var searchData=
   ['readdir',['readdir',['../namespacefs.html#a15afc2e890ad668f9842536e3baafaad',1,'fs']]],
   ['readfile',['readFile',['../namespacefs.html#ac41fbf9b48b4c765ac85b4add28ba72b',1,'fs']]],
   ['readline',['readLine',['../namespaceSerial.html#ad2f55e59e85088dcb9b055c33283c38f',1,'Serial']]],
+  ['readlines',['readLines',['../namespacefs.html#aaacdf8e24182b67d331788516139bd9b',1,'fs']]],
   ['receive',['receive',['../namespaceChannel.html#afa89dcb76ba9cbe3c4c750141f440494',1,'Channel']]],
   ['remove',['remove',['../namespaceshared.html#a7f49c9b96783608110f4cffdb2ff3c5b',1,'shared']]],
   ['rename',['rename',['../namespacefs.html#a732ee8601bf54bf7ae7cf75fd96c442c',1,'fs']]],

@@ -23,7 +23,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">wilton.js
-   &#160;<span id="projectnumber">v201710060</span>
+   &#160;<span id="projectnumber">v201710121</span>
    </div>
   </td>
  </tr>
@@ -98,6 +98,8 @@ Functions</h2></td></tr>
 <tr class="memdesc:a2c2ed2e0d501cae6ab5284552bf15b9e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Log specified message using <code>ERROR</code> logging level.  <a href="#a2c2ed2e0d501cae6ab5284552bf15b9e"></a><br/></td></tr>
 <tr class="memitem:a9977040a727d63dd23e3f40c6d132d33"><td class="memItemLeft" align="right" valign="top">Undefined&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceLogger.html#a9977040a727d63dd23e3f40c6d132d33">info</a> (String|Object|Error message, Function|Undefined callback)</td></tr>
 <tr class="memdesc:a9977040a727d63dd23e3f40c6d132d33"><td class="mdescLeft">&#160;</td><td class="mdescRight">Log specified message using <code>INFO</code> logging level.  <a href="#a9977040a727d63dd23e3f40c6d132d33"></a><br/></td></tr>
+<tr class="memitem:aa3b7ad8bcddaf2a47f83dbc0bbe2deef"><td class="memItemLeft" align="right" valign="top">static Undefined&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceLogger.html#aa3b7ad8bcddaf2a47f83dbc0bbe2deef">initConsole</a> (String threshold, Function|Undefined callback)</td></tr>
+<tr class="memdesc:aa3b7ad8bcddaf2a47f83dbc0bbe2deef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shotcut function for console-only logging initialization.  <a href="#aa3b7ad8bcddaf2a47f83dbc0bbe2deef"></a><br/></td></tr>
 <tr class="memitem:ac0deeb9edff5165bad2f288734f9460a"><td class="memItemLeft" align="right" valign="top">static Undefined&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceLogger.html#ac0deeb9edff5165bad2f288734f9460a">initialize</a> (Object options, Function|Undefined callback)</td></tr>
 <tr class="memdesc:ac0deeb9edff5165bad2f288734f9460a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize process-wide logging.  <a href="#ac0deeb9edff5165bad2f288734f9460a"></a><br/></td></tr>
 <tr class="memitem:a8ce5e4ce702911d4d66dcec8d64e3c02"><td class="memItemLeft" align="right" valign="top">Undefined&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceLogger.html#a8ce5e4ce702911d4d66dcec8d64e3c02">log</a> (String|Object|Error message, Function|Undefined callback)</td></tr>
@@ -259,6 +261,49 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="aa3b7ad8bcddaf2a47f83dbc0bbe2deef"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static Undefined Logger::initConsole </td>
+          <td>(</td>
+          <td class="paramtype">String&#160;</td>
+          <td class="paramname"><em>threshold</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Function|Undefined&#160;</td>
+          <td class="paramname"><em>callback</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Initializes logging subsystem using only <code>CONSOLE</code> appender and without using specific settings for separate logger.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">threshold</td><td><code>String</code> threshold logging level for <code>CONSOLE</code> appender, must be one of <code>TRACE</code>, <code>DEBUG</code>, <code>INFO</code>, <code>WARN</code>, <code>ERROR</code>, <code>FATAL</code> </td></tr>
+    <tr><td class="paramname">callback</td><td><code>Function|Undefined</code> callback to receive result or error </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><code>Undefined</code> </dd></dl>
+
+</div>
+</div>
 <a class="anchor" id="ac0deeb9edff5165bad2f288734f9460a"></a>
 <div class="memitem">
 <div class="memproto">
@@ -304,7 +349,7 @@ Functions</h2></td></tr>
 <ul>
 <li><b>appenders</b> <code>Array</code> list of appenders (log destinations) to configure<ul>
 <li><b>appenderType</b> <code>String</code> type of the appender, supported values: <code>NULL</code>, <code>CONSOLE</code>, <code>FILE</code>, <code>DAILY_ROLLING_FILE</code></li>
-<li><b>filePath</b> <code>String|Undefined</code> path to the log file, relative path is resolved against current executable directory path</li>
+<li><b>filePath</b> <code>String|Undefined</code> path to the log file, relative path is resolved against current application directory path (that is one level above the executable directory path).</li>
 <li><b>layout</b> <code>String|Undefined</code> formatting layout for log messages, see <a href="http://log4cplus.sourceforge.net/docs/html/classlog4cplus_1_1PatternLayout.html#details">log4cplus docs</a> for details, default value: <code>d{Y-m-d H:M:S,q} [%-5p %-5.5t %-20.20c] mn</code></li>
 <li><b>thresholdLevel</b> <code>String|Undefined</code> minimal logging level for this appender, supported values: <code>TRACE</code>, <code>DEBUG</code>, <code>INFO</code>, <code>WARN</code>, <code>ERROR</code>, <code>FATAL</code></li>
 <li><b>useLockFile</b> <code>Boolean|Undefined</code> whether to use lock file for <code>DAILY_ROLLING_FILE</code> appender, default value: <code>false</code></li>
@@ -463,7 +508,7 @@ Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Oct 6 2017 12:08:24 for wilton.js by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Oct 12 2017 17:32:00 for wilton.js by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>

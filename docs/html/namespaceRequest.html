@@ -23,7 +23,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">wilton.js
-   &#160;<span id="projectnumber">v201710060</span>
+   &#160;<span id="projectnumber">v201710121</span>
    </div>
   </td>
  </tr>
@@ -96,12 +96,16 @@ Functions</h2></td></tr>
 <tr class="memdesc:a7d364df39cce65fa893ddc277778945d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access request body.  <a href="#a7d364df39cce65fa893ddc277778945d"></a><br/></td></tr>
 <tr class="memitem:a88366aeed40ad84f623d5fbdf56497d4"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceRequest.html#a88366aeed40ad84f623d5fbdf56497d4">dataFilename</a> (Function|Undefined callback)</td></tr>
 <tr class="memdesc:a88366aeed40ad84f623d5fbdf56497d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the name of the temporary file with request data.  <a href="#a88366aeed40ad84f623d5fbdf56497d4"></a><br/></td></tr>
+<tr class="memitem:a0779eafbd4285cd2c3b1e97922ecf5f9"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceRequest.html#a0779eafbd4285cd2c3b1e97922ecf5f9">form</a> (Function|Undefined callback)</td></tr>
+<tr class="memdesc:a0779eafbd4285cd2c3b1e97922ecf5f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access <code>application/x-www-form-urlencoded</code> request body.  <a href="#a0779eafbd4285cd2c3b1e97922ecf5f9"></a><br/></td></tr>
 <tr class="memitem:a6ef945474f271277e607d0248578dcbd"><td class="memItemLeft" align="right" valign="top">Object&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceRequest.html#a6ef945474f271277e607d0248578dcbd">json</a> (Function|Undefined callback)</td></tr>
 <tr class="memdesc:a6ef945474f271277e607d0248578dcbd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access request body as JSON.  <a href="#a6ef945474f271277e607d0248578dcbd"></a><br/></td></tr>
 <tr class="memitem:a35a013d33feb11c39be7900508b064db"><td class="memItemLeft" align="right" valign="top">Object&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceRequest.html#a35a013d33feb11c39be7900508b064db">meta</a> (Function|Undefined callback)</td></tr>
 <tr class="memdesc:a35a013d33feb11c39be7900508b064db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access request's metadata.  <a href="#a35a013d33feb11c39be7900508b064db"></a><br/></td></tr>
 <tr class="memitem:a574fe938e31444d4ddef382c3b471987"><td class="memItemLeft" align="right" valign="top">Undefined&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceRequest.html#a574fe938e31444d4ddef382c3b471987">sendMustache</a> (String filePath, Object values, Object|Undefined options, Function|Undefined callback)</td></tr>
 <tr class="memdesc:a574fe938e31444d4ddef382c3b471987"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send rendered <a href="https://mustache.github.io/">mustache</a> template to client.  <a href="#a574fe938e31444d4ddef382c3b471987"></a><br/></td></tr>
+<tr class="memitem:a8aff8bb58ae8ac06c1d6c637775718c6"><td class="memItemLeft" align="right" valign="top">Undefined&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceRequest.html#a8aff8bb58ae8ac06c1d6c637775718c6">sendRedirect</a> (String location, Function|Undefined callback)</td></tr>
+<tr class="memdesc:a8aff8bb58ae8ac06c1d6c637775718c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Redirect client to the specified URL.  <a href="#a8aff8bb58ae8ac06c1d6c637775718c6"></a><br/></td></tr>
 <tr class="memitem:aa0db4f118c0a3a3ea1c0f3778cca4f06"><td class="memItemLeft" align="right" valign="top">Undefined&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceRequest.html#aa0db4f118c0a3a3ea1c0f3778cca4f06">sendResponse</a> (String|Object <a class="el" href="namespaceRequest.html#a7d364df39cce65fa893ddc277778945d">data</a>, Object|Undefined options, Function|Undefined callback)</td></tr>
 <tr class="memdesc:aa0db4f118c0a3a3ea1c0f3778cca4f06"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send string or JSON response to client.  <a href="#aa0db4f118c0a3a3ea1c0f3778cca4f06"></a><br/></td></tr>
 <tr class="memitem:a9cd52444485fc5e00cc5f0a5faf0b16b"><td class="memItemLeft" align="right" valign="top">Undefined&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceRequest.html#a9cd52444485fc5e00cc5f0a5faf0b16b">sendTempFile</a> (String <a class="el" href="namespaceRequest.html#a7d364df39cce65fa893ddc277778945d">data</a>, Object|Undefined options, Function|Undefined callback)</td></tr>
@@ -178,6 +182,32 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><code>String</code> path to temporary file with request body </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a0779eafbd4285cd2c3b1e97922ecf5f9"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">String Request::form </td>
+          <td>(</td>
+          <td class="paramtype">Function|Undefined&#160;</td>
+          <td class="paramname"><em>callback</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Returns request body as a JSON object.</p>
+<p>If input request data was saved into temporary file (due to <code>requestPayload.memoryLimitBytes</code> server config parameter exceeded), that file will be read into memory on the first call to this method.</p>
+<p>Form data is fetched once using a native call and is cached locally inside <code><a class="el" href="namespaceRequest.html" title="wilton/Request   HTTP requests handling for wilton/Server.">Request</a></code> object after that.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">callback</td><td><code>Function|Undefined</code> callback to receive result or error </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><code>String</code> request body </dd></dl>
 
 </div>
 </div>
@@ -281,7 +311,7 @@ Functions</h2></td></tr>
 <p>Mustache partials are loaded automatically from directories, specified using <code>mustache.partialDirs</code> <code><a class="el" href="namespaceServer.html" title="wilton/Server   HTTP server.">Server</a></code> configuration parameter.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">filePath</td><td><code>String</code> path to mustache template file </td></tr>
+    <tr><td class="paramname">filePath</td><td><code>String</code> path to mustache template file; if specified file ends with <code>.js</code>, this extension will be stripped and <code>.html</code> extension will be appended </td></tr>
     <tr><td class="paramname">values</td><td><code>Object</code> input values to render the template with </td></tr>
     <tr><td class="paramname">options</td><td><code>Object|Undefined</code> configuration object, see possible options below </td></tr>
     <tr><td class="paramname">callback</td><td><code>Function|Undefined</code> callback to receive result or error </td></tr>
@@ -298,6 +328,41 @@ Functions</h2></td></tr>
 </ul>
 </li>
 </ul>
+
+</div>
+</div>
+<a class="anchor" id="a8aff8bb58ae8ac06c1d6c637775718c6"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Undefined Request::sendRedirect </td>
+          <td>(</td>
+          <td class="paramtype">String&#160;</td>
+          <td class="paramname"><em>location</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Function|Undefined&#160;</td>
+          <td class="paramname"><em>callback</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Sends <code>303 See Other</code> with the specified location</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">location</td><td><code>String</code> URL to redirect clien to </td></tr>
+    <tr><td class="paramname">callback</td><td><code>Function|Undefined</code> callback to receive result or error </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><code>Undefined</code> </dd></dl>
 
 </div>
 </div>
@@ -407,7 +472,7 @@ Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Oct 6 2017 12:08:24 for wilton.js by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Oct 12 2017 17:32:00 for wilton.js by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>
