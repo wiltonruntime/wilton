@@ -23,7 +23,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">wilton.js
-   &#160;<span id="projectnumber">v201710121</span>
+   &#160;<span id="projectnumber">v201710131</span>
    </div>
   </td>
  </tr>
@@ -108,6 +108,8 @@ Functions</h2></td></tr>
 <tr class="memdesc:ac41fbf9b48b4c765ac85b4add28ba72b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read the entire contents of a file.  <a href="#ac41fbf9b48b4c765ac85b4add28ba72b"></a><br/></td></tr>
 <tr class="memitem:aaacdf8e24182b67d331788516139bd9b"><td class="memItemLeft" align="right" valign="top">Array&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacefs.html#aaacdf8e24182b67d331788516139bd9b">readLines</a> (String path, Function|Undefined callback)</td></tr>
 <tr class="memdesc:aaacdf8e24182b67d331788516139bd9b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads all lines from a file.  <a href="#aaacdf8e24182b67d331788516139bd9b"></a><br/></td></tr>
+<tr class="memitem:a82b63dc149c659a439232bc46eaa7c32"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacefs.html#a82b63dc149c659a439232bc46eaa7c32">realpath</a> (String path, Undefined options, Function|Undefined callback)</td></tr>
+<tr class="memdesc:a82b63dc149c659a439232bc46eaa7c32"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert relative path into absolute one.  <a href="#a82b63dc149c659a439232bc46eaa7c32"></a><br/></td></tr>
 <tr class="memitem:a732ee8601bf54bf7ae7cf75fd96c442c"><td class="memItemLeft" align="right" valign="top">Undefined&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacefs.html#a732ee8601bf54bf7ae7cf75fd96c442c">rename</a> (String oldPath, String newPath, Function|Undefined callback)</td></tr>
 <tr class="memdesc:a732ee8601bf54bf7ae7cf75fd96c442c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rename (move) file or directory.  <a href="#a732ee8601bf54bf7ae7cf75fd96c442c"></a><br/></td></tr>
 <tr class="memitem:a1fda3bed71a4ebad582773d8f9c0830f"><td class="memItemLeft" align="right" valign="top">Undefined&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacefs.html#a1fda3bed71a4ebad582773d8f9c0830f">rmdir</a> (String path, Function|Undefined callback)</td></tr>
@@ -421,7 +423,7 @@ Functions</h2></td></tr>
 <p>Reads the entire contents of a file.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">path</td><td><code>String</code> </td></tr>
+    <tr><td class="paramname">path</td><td><code>String</code> path to file </td></tr>
     <tr><td class="paramname">options</td><td><code>Undefined</code> placeholder parameter, added for compatibility with Node API </td></tr>
     <tr><td class="paramname">callback</td><td><code>Function|Undefined</code> callback to receive result or error </td></tr>
   </table>
@@ -458,12 +460,54 @@ Functions</h2></td></tr>
 <p>Empty strings are ignored.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">path</td><td><code>String</code> </td></tr>
+    <tr><td class="paramname">path</td><td><code>String</code> path to file </td></tr>
     <tr><td class="paramname">callback</td><td><code>Function|Undefined</code> callback to receive result or error </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><code>Array</code> file contents as an array of lines </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a82b63dc149c659a439232bc46eaa7c32"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">String fs::realpath </td>
+          <td>(</td>
+          <td class="paramtype">String&#160;</td>
+          <td class="paramname"><em>path</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Undefined&#160;</td>
+          <td class="paramname"><em>options</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Function|Undefined&#160;</td>
+          <td class="paramname"><em>callback</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Converts relative path into absolute one calling FS.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">path</td><td><code>String</code> relative path </td></tr>
+    <tr><td class="paramname">options</td><td><code>Undefined</code> placeholder parameter, added for compatibility with Node API </td></tr>
+    <tr><td class="paramname">callback</td><td><code>Function|Undefined</code> callback to receive result or error </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><code>String</code> absolute path </dd></dl>
 
 </div>
 </div>
@@ -671,7 +715,7 @@ Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Oct 12 2017 17:32:00 for wilton.js by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Oct 13 2017 22:41:39 for wilton.js by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>
