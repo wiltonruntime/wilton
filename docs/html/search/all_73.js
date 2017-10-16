@@ -11,7 +11,6 @@ var searchData=
   ['sendtempfile',['sendTempFile',['../namespaceRequest.html#a9cd52444485fc5e00cc5f0a5faf0b16b',1,'Request']]],
   ['serial',['Serial',['../namespaceSerial.html',1,'Serial'],['../namespaceSerial.html#acfa0dda40dbc7a1f6254fd9cd2d6f4ab',1,'Serial::Serial()']]],
   ['server',['Server',['../namespaceServer.html',1,'Server'],['../namespaceServer.html#a86c9ec71adb138c242dee20c68cb2530',1,'Server::Server()']]],
-  ['shared',['shared',['../namespaceshared.html',1,'']]],
   ['shutdown',['shutdown',['../namespaceLogger.html#a316a5356ad3c47b5d42c2c60c56a2b17',1,'Logger']]],
   ['sleepmillis',['sleepMillis',['../namespacethread.html#a0e89aba0a6d011bbc1f178a29902b78f',1,'thread']]],
   ['spawnprocess',['spawnProcess',['../namespacemisc.html#a77e01b549ed9524638eb707e5a3b3a2d',1,'misc']]],

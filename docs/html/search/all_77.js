@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['waitchange',['waitChange',['../namespaceshared.html#a9a9080232b5e2875c6bff42622d681c7',1,'shared']]],
   ['waitforsignal',['waitForSignal',['../namespacemisc.html#adb7cfdcc68e9a1b6a69943fb18006baf',1,'misc']]],
   ['warn',['warn',['../namespaceLogger.html#a7a8918203e80277b198e9c6d54f5a527',1,'Logger']]],
   ['wiltoncall',['wiltoncall',['../namespacewiltoncall.html',1,'wiltoncall'],['../namespacewiltoncall.html#a80621568403a56f3217f42bd129585e2',1,'wiltoncall::wiltoncall()']]],

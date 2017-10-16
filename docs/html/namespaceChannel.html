@@ -23,7 +23,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">wilton.js
-   &#160;<span id="projectnumber">v201710131</span>
+   &#160;<span id="projectnumber">v201710161</span>
    </div>
   </td>
  </tr>
@@ -92,8 +92,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a50d177265ab55208afea97c21aa15d7a"><td class="memItemLeft" align="right" valign="top">Object&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceChannel.html#a50d177265ab55208afea97c21aa15d7a">Channel</a> (Object options, Function|Undefined callback)</td></tr>
-<tr class="memdesc:a50d177265ab55208afea97c21aa15d7a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create <code><a class="el" href="namespaceChannel.html" title="wilton/Channel   Pipes that connect concurrent threads.">Channel</a></code>instance.  <a href="#a50d177265ab55208afea97c21aa15d7a"></a><br/></td></tr>
+<tr class="memitem:a31e912ae66edd06a075e1fd28d27a943"><td class="memItemLeft" align="right" valign="top">Object&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceChannel.html#a31e912ae66edd06a075e1fd28d27a943">Channel</a> (String name, Number|Undefined size, Function|Undefined callback)</td></tr>
+<tr class="memdesc:a31e912ae66edd06a075e1fd28d27a943"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create <code><a class="el" href="namespaceChannel.html" title="wilton/Channel   Pipes that connect concurrent threads.">Channel</a></code>instance.  <a href="#a31e912ae66edd06a075e1fd28d27a943"></a><br/></td></tr>
 <tr class="memitem:a9122e6f0e60b1141c5de0df33522d8ab"><td class="memItemLeft" align="right" valign="top">Undefined&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceChannel.html#a9122e6f0e60b1141c5de0df33522d8ab">close</a> (Function|Undefined callback)</td></tr>
 <tr class="memdesc:a9122e6f0e60b1141c5de0df33522d8ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Close the channel releasing native resources.  <a href="#a9122e6f0e60b1141c5de0df33522d8ab"></a><br/></td></tr>
 <tr class="memitem:a707dc0e0976f4c44cf250ef58ffbd815"><td class="memItemLeft" align="right" valign="top">static String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceChannel.html#a707dc0e0976f4c44cf250ef58ffbd815">dumpRegistry</a> (Function|Undefined callback)</td></tr>
@@ -102,6 +102,8 @@ Functions</h2></td></tr>
 <tr class="memdesc:a079832a7e54fc437d467301ef40a9677"><td class="mdescLeft">&#160;</td><td class="mdescRight">Look for the existing channel.  <a href="#a079832a7e54fc437d467301ef40a9677"></a><br/></td></tr>
 <tr class="memitem:a8900b15997b9bddfd9f5735b3a49a268"><td class="memItemLeft" align="right" valign="top">Boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceChannel.html#a8900b15997b9bddfd9f5735b3a49a268">offer</a> (Object|String msg, Function|Undefined callback)</td></tr>
 <tr class="memdesc:a8900b15997b9bddfd9f5735b3a49a268"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send a message to the channel, return <code>false</code> if channel is full.  <a href="#a8900b15997b9bddfd9f5735b3a49a268"></a><br/></td></tr>
+<tr class="memitem:a48a32acc60df4ea478ba03fc0659dc63"><td class="memItemLeft" align="right" valign="top">Object&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceChannel.html#a48a32acc60df4ea478ba03fc0659dc63">peek</a> (Function|Undefined callback)</td></tr>
+<tr class="memdesc:a48a32acc60df4ea478ba03fc0659dc63"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy pending message without removing it from channel.  <a href="#a48a32acc60df4ea478ba03fc0659dc63"></a><br/></td></tr>
 <tr class="memitem:af3f31c5cce070639fe7b59e3597869bd"><td class="memItemLeft" align="right" valign="top">Object&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceChannel.html#af3f31c5cce070639fe7b59e3597869bd">poll</a> (Function|Undefined callback)</td></tr>
 <tr class="memdesc:af3f31c5cce070639fe7b59e3597869bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Poll channel for buffered messages.  <a href="#af3f31c5cce070639fe7b59e3597869bd"></a><br/></td></tr>
 <tr class="memitem:afa89dcb76ba9cbe3c4c750141f440494"><td class="memItemLeft" align="right" valign="top">Object&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceChannel.html#afa89dcb76ba9cbe3c4c750141f440494">receive</a> (Function|Undefined callback)</td></tr>
@@ -123,16 +125,10 @@ Functions</h2></td></tr>
 <div class="fragment"><div class="line"><span class="comment">// thread 1</span></div>
 <div class="line"></div>
 <div class="line"><span class="comment">// create buffered channel</span></div>
-<div class="line">var chan = <span class="keyword">new</span> <a class="code" href="namespaceChannel.html#a50d177265ab55208afea97c21aa15d7a" title="Create Channelinstance.">Channel</a>({</div>
-<div class="line">    name: <span class="stringliteral">&quot;channel1&quot;</span>,</div>
-<div class="line">    size: 1024</div>
-<div class="line">});</div>
+<div class="line">var chan = <span class="keyword">new</span> <a class="code" href="namespaceChannel.html#a31e912ae66edd06a075e1fd28d27a943" title="Create Channelinstance.">Channel</a>(<span class="stringliteral">&quot;channel1&quot;</span>, 1024);</div>
 <div class="line"></div>
 <div class="line"><span class="comment">// create sync channel</span></div>
-<div class="line">var sync = <span class="keyword">new</span> <a class="code" href="namespaceChannel.html#a50d177265ab55208afea97c21aa15d7a" title="Create Channelinstance.">Channel</a>({</div>
-<div class="line">    name: <span class="stringliteral">&quot;channel2&quot;</span>,</div>
-<div class="line">    size: 0</div>
-<div class="line">});</div>
+<div class="line">var sync = <span class="keyword">new</span> <a class="code" href="namespaceChannel.html#a31e912ae66edd06a075e1fd28d27a943" title="Create Channelinstance.">Channel</a>(<span class="stringliteral">&quot;channel2&quot;</span>);</div>
 <div class="line"></div>
 <div class="line"><span class="comment">// send message, blocks is channel is full</span></div>
 <div class="line">chan.send({</div>
@@ -148,8 +144,8 @@ Functions</h2></td></tr>
 <div class="line"><span class="comment">// thread 2</span></div>
 <div class="line"></div>
 <div class="line"><span class="comment">// lookup existing channels from other thread</span></div>
-<div class="line">var chan = <a class="code" href="namespaceChannel.html#a50d177265ab55208afea97c21aa15d7a" title="Create Channelinstance.">Channel</a>.lookup(<span class="stringliteral">&quot;channel1&quot;</span>);</div>
-<div class="line">var sync = <a class="code" href="namespaceChannel.html#a50d177265ab55208afea97c21aa15d7a" title="Create Channelinstance.">Channel</a>.lookup(<span class="stringliteral">&quot;channel2&quot;</span>);</div>
+<div class="line">var chan = <a class="code" href="namespaceChannel.html#a31e912ae66edd06a075e1fd28d27a943" title="Create Channelinstance.">Channel</a>.lookup(<span class="stringliteral">&quot;channel1&quot;</span>);</div>
+<div class="line">var sync = <a class="code" href="namespaceChannel.html#a31e912ae66edd06a075e1fd28d27a943" title="Create Channelinstance.">Channel</a>.lookup(<span class="stringliteral">&quot;channel2&quot;</span>);</div>
 <div class="line"></div>
 <div class="line"><span class="comment">// receive message, blocks if channel is empty</span></div>
 <div class="line">var obj1 = chan.receive();</div>
@@ -157,8 +153,11 @@ Functions</h2></td></tr>
 <div class="line"><span class="comment">// poll for message, returns null if channel is empty</span></div>
 <div class="line">var obj2 = chan.poll();</div>
 <div class="line"></div>
+<div class="line"><span class="comment">// copy pending message without removing it from channel</span></div>
+<div class="line">var obj3 = chan.peek();</div>
+<div class="line"></div>
 <div class="line"><span class="comment">// wait on multiple channels, returns the index of channel that has data ready</span></div>
-<div class="line"> var idx = <a class="code" href="namespaceChannel.html#a50d177265ab55208afea97c21aa15d7a" title="Create Channelinstance.">Channel</a>.select({</div>
+<div class="line"> var idx = <a class="code" href="namespaceChannel.html#a31e912ae66edd06a075e1fd28d27a943" title="Create Channelinstance.">Channel</a>.select({</div>
 <div class="line">     channels: [chan, sync],</div>
 <div class="line">     timeoutMillis: 10000</div>
 <div class="line"> });</div>
@@ -167,15 +166,21 @@ Functions</h2></td></tr>
 <div class="line">chan.close();</div>
 <div class="line">sync.close();</div>
 </div><!-- fragment --> </div><h2>Function Documentation</h2>
-<a class="anchor" id="a50d177265ab55208afea97c21aa15d7a"></a>
+<a class="anchor" id="a31e912ae66edd06a075e1fd28d27a943"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">Object Channel::Channel </td>
           <td>(</td>
-          <td class="paramtype">Object&#160;</td>
-          <td class="paramname"><em>options</em>, </td>
+          <td class="paramtype">String&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Number|Undefined&#160;</td>
+          <td class="paramname"><em>size</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -190,21 +195,17 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Creates channel instance allocating resources for intermediate storage.</p>
+<p>Creates channel instance allocating resources for intermediate storage. If <code>size</code> parameter is not specified - created synchronous channel.</p>
 <p>Created channel can be accessed in other threads using <code><a class="el" href="namespaceChannel.html#a079832a7e54fc437d467301ef40a9677" title="Look for the existing channel.">lookup()</a></code> function.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">options</td><td><code>Object</code> configuration object, see possible options below </td></tr>
+    <tr><td class="paramname">name</td><td><code>String</code> unique name to identify this channel </td></tr>
+    <tr><td class="paramname">size</td><td><code>Number|Undefined</code> maximum number of elements allowed for the intermediate storage; storage is not pre-allocated, grows until this number as needed; value <code>0</code> creates synchronous channel, default value: <code>0</code> </td></tr>
     <tr><td class="paramname">callback</td><td><code>Function|Undefined</code> callback to receive result or error </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd><code>Object</code> <code><a class="el" href="namespaceChannel.html" title="wilton/Channel   Pipes that connect concurrent threads.">Channel</a></code> instance</dd></dl>
-<p><b>Options</b></p>
-<ul>
-<li><b>name</b> <code>String</code> unique name to identify this channel</li>
-<li><b>size</b> <code>Number</code> maximum number of elements allowed in the intermediate storage (storage is not pre-allocated, grows until this number as needed); specify <code>size: 0</code> to create a synchronous channel </li>
-</ul>
+<dl class="section return"><dt>Returns</dt><dd><code>Object</code> <code><a class="el" href="namespaceChannel.html" title="wilton/Channel   Pipes that connect concurrent threads.">Channel</a></code> instance </dd></dl>
 
 </div>
 </div>
@@ -332,6 +333,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Sends a message to the channel in non-blocking mode returning immediately.</p>
+<p>Always returns <code>false</code> on synchronous channel.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">msg</td><td><code>Object|String</code> message to send </td></tr>
@@ -340,6 +342,31 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><code>Boolean</code> <code>true</code> if message was sent successfully, <code>false</code> if channel is full or channel was closed (manually with <code><a class="el" href="namespaceChannel.html#a9122e6f0e60b1141c5de0df33522d8ab" title="Close the channel releasing native resources.">close()</a></code> or automatically on shutdown) </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a48a32acc60df4ea478ba03fc0659dc63"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Object Channel::peek </td>
+          <td>(</td>
+          <td class="paramtype">Function|Undefined&#160;</td>
+          <td class="paramname"><em>callback</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Tries to copy a pending buffered message from the channel in a non-blocking mode, returns <code>null</code> if channel is empty.</p>
+<p>Can be used on synchronous channels (producer thread will NOT be unblocked on <code><a class="el" href="namespaceChannel.html#a48a32acc60df4ea478ba03fc0659dc63" title="Copy pending message without removing it from channel.">peek()</a></code>).</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">callback</td><td><code>Function|Undefined</code> callback to receive result or error </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><code>Object</code> pending message parsed from JSON, <code>null</code> if channel is empty or channel was closed (manually with <code><a class="el" href="namespaceChannel.html#a9122e6f0e60b1141c5de0df33522d8ab" title="Close the channel releasing native resources.">close()</a></code> or automatically on shutdown) </dd></dl>
 
 </div>
 </div>
@@ -357,6 +384,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Tries to receive a message from the channel in a non-blocking mode, returns <code>null</code> if channel is empty.</p>
+<p>Always returns <code>null</code> on synchronous channel.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">callback</td><td><code>Function|Undefined</code> callback to receive result or error </td></tr>
@@ -478,7 +506,7 @@ Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Oct 13 2017 22:41:39 for wilton.js by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Oct 16 2017 10:58:09 for wilton.js by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>

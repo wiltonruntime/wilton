@@ -7,7 +7,6 @@ var searchData=
   ['readlines',['readLines',['../namespacefs.html#aaacdf8e24182b67d331788516139bd9b',1,'fs']]],
   ['realpath',['realpath',['../namespacefs.html#a82b63dc149c659a439232bc46eaa7c32',1,'fs']]],
   ['receive',['receive',['../namespaceChannel.html#afa89dcb76ba9cbe3c4c750141f440494',1,'Channel']]],
-  ['remove',['remove',['../namespaceshared.html#a7f49c9b96783608110f4cffdb2ff3c5b',1,'shared']]],
   ['rename',['rename',['../namespacefs.html#a732ee8601bf54bf7ae7cf75fd96c442c',1,'fs']]],
   ['render',['render',['../namespacemustache.html#a12f67126eba5a120014ced171ed5cc1e',1,'mustache']]],
   ['renderfile',['renderFile',['../namespacemustache.html#a4092e44f93b1e730e49ffebbe8e49386',1,'mustache']]],

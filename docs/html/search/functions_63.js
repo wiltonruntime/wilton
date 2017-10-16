@@ -2,7 +2,7 @@ var searchData=
 [
   ['callorignore',['callOrIgnore',['../namespaceutils.html#a83b5b1ddd0f00a7b3aed812d581ad17d',1,'utils']]],
   ['callorthrow',['callOrThrow',['../namespaceutils.html#a855bef575b561837683c853d6f72d25e',1,'utils']]],
-  ['channel',['Channel',['../namespaceChannel.html#a50d177265ab55208afea97c21aa15d7a',1,'Channel']]],
+  ['channel',['Channel',['../namespaceChannel.html#a31e912ae66edd06a075e1fd28d27a943',1,'Channel']]],
   ['checkproperties',['checkProperties',['../namespaceutils.html#a5155c6ca03dee9b918aa3f9820b20d9c',1,'utils']]],
   ['checkpropertytype',['checkPropertyType',['../namespaceutils.html#a0d6147b425118822ef5dfff0ebc91472',1,'utils']]],
   ['cloneobject',['cloneObject',['../namespaceutils.html#aec152927c3a40ebc534e0db1dcfc5cd4',1,'utils']]],

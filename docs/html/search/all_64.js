@@ -13,7 +13,6 @@ var searchData=
   ['dointransaction',['doInTransaction',['../namespaceDBConnection.html#aeb66e8d918794ac8c7ddbed223b3985b',1,'DBConnection']]],
   ['drawline',['drawLine',['../namespacePDFDocument.html#a10dec5f2c3a974ca256a170dadcc71ab',1,'PDFDocument']]],
   ['drawrectangle',['drawRectangle',['../namespacePDFDocument.html#a87a0d16246e819306d076ba5216ab530',1,'PDFDocument']]],
-  ['dump',['dump',['../namespaceshared.html#adb21e7861dc4f98fc5c7a0008eb5413e',1,'shared']]],
   ['dumpregistry',['dumpRegistry',['../namespaceChannel.html#a707dc0e0976f4c44cf250ef58ffbd815',1,'Channel']]],
   ['dyload',['dyload',['../namespacedyload.html',1,'dyload'],['../namespacedyload.html#aaac0bd9b38119c631f2d062d11290722',1,'dyload::dyload()']]]
 ];
