@@ -298,3 +298,9 @@
 [submodule "modules/wilton_pdf"]
 	path = modules/wilton_pdf
 	url = https://github.com/wilton-iot/wilton_pdf.git
+[submodule "modules/wilton_net"]
+	path = modules/wilton_net
+	url = https://github.com/wilton-iot/wilton_net.git
+[submodule "modules/wilton_process"]
+	path = modules/wilton_process
+	url = https://github.com/wilton-iot/wilton_process.git
