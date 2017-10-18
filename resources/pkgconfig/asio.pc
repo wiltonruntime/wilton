@@ -5,4 +5,4 @@ Description:C++ library for network programming
 Requires:
 Libs:
 Libs.private:
-Cflags: ${WILTON_PKGCONFIG_INCLUDEDIR}
+Cflags: ${WILTON_PKGCONFIG_INCLUDEDIR} -DASIO_STANDALONE -DASIO_HAS_STD_CHRONO -DASIO_HAS_STD_SYSTEM_ERROR
