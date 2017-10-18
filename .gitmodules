@@ -310,3 +310,6 @@
 [submodule "modules/wilton_rhino"]
 	path = modules/wilton_rhino
 	url = https://github.com/wilton-iot/wilton_rhino.git
+[submodule "modules/wilton_signal"]
+	path = modules/wilton_signal
+	url = https://github.com/wilton-iot/wilton_signal.git
