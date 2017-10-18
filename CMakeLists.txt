@@ -90,6 +90,7 @@ endif ( )
 add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/core )
 
 # modules
+staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_logging )
 staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_cli )
 staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_channel )
 staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_cron )
@@ -166,6 +167,9 @@ add_custom_target ( dist
                 bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_http${CMAKE_SHARED_LIBRARY_SUFFIX}
                 wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_http${CMAKE_SHARED_LIBRARY_SUFFIX}
         COMMAND ${CMAKE_COMMAND} -E copy
+                bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_logging${CMAKE_SHARED_LIBRARY_SUFFIX}
+                wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_logging${CMAKE_SHARED_LIBRARY_SUFFIX}
+        COMMAND ${CMAKE_COMMAND} -E copy
                 bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_net${CMAKE_SHARED_LIBRARY_SUFFIX}
                 wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_net${CMAKE_SHARED_LIBRARY_SUFFIX}
         COMMAND ${CMAKE_COMMAND} -E copy
@@ -225,6 +229,7 @@ add_dependencies ( dist
         wilton_cron
         wilton_fs
         wilton_http
+        wilton_logging
         wilton_net
         wilton_pdf
         wilton_process
@@ -232,8 +237,6 @@ add_dependencies ( dist
         wilton_signal
         wilton_thread
         js )
-add_dependencies ( wilton_cli
-        wilton_signal )
 
 if ( STATICLIB_TOOLCHAIN MATCHES "windows_[^_]+_[^_]+" )
     add_custom_target ( dist_windows
