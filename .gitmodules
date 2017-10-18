@@ -304,3 +304,9 @@
 [submodule "modules/wilton_process"]
 	path = modules/wilton_process
 	url = https://github.com/wilton-iot/wilton_process.git
+[submodule "modules/wilton_duktape"]
+	path = modules/wilton_duktape
+	url = https://github.com/wilton-iot/wilton_duktape.git
+[submodule "modules/wilton_rhino"]
+	path = modules/wilton_rhino
+	url = https://github.com/wilton-iot/wilton_rhino.git

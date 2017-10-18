@@ -94,10 +94,12 @@ staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_cli )
 staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_channel )
 staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_cron )
 staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_db )
+staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_duktape )
 staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_fs )
 staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_net )
 staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_pdf )
 staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_process )
+staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_rhino )
 staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_thread )
 if ( STATICLIB_TOOLCHAIN MATCHES "windows_[^_]+_[^_]+" )
     add_custom_target ( wilton_serial )
@@ -153,6 +155,9 @@ add_custom_target ( dist
                 bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_db${CMAKE_SHARED_LIBRARY_SUFFIX}
                 wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_db${CMAKE_SHARED_LIBRARY_SUFFIX}
         COMMAND ${CMAKE_COMMAND} -E copy
+                bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_duktape${CMAKE_SHARED_LIBRARY_SUFFIX}
+                wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_duktape${CMAKE_SHARED_LIBRARY_SUFFIX}
+        COMMAND ${CMAKE_COMMAND} -E copy
                 bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_fs${CMAKE_SHARED_LIBRARY_SUFFIX}
                 wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_fs${CMAKE_SHARED_LIBRARY_SUFFIX}
         COMMAND ${CMAKE_COMMAND} -E copy
@@ -164,6 +169,9 @@ add_custom_target ( dist
         COMMAND ${CMAKE_COMMAND} -E copy
                 bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_process${CMAKE_SHARED_LIBRARY_SUFFIX}
                 wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_process${CMAKE_SHARED_LIBRARY_SUFFIX}
+        COMMAND ${CMAKE_COMMAND} -E copy
+                bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_rhino${CMAKE_SHARED_LIBRARY_SUFFIX}
+                wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_rhino${CMAKE_SHARED_LIBRARY_SUFFIX}
         COMMAND ${CMAKE_COMMAND} -E copy
                 bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_thread${CMAKE_SHARED_LIBRARY_SUFFIX}
                 wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_thread${CMAKE_SHARED_LIBRARY_SUFFIX}
@@ -203,6 +211,7 @@ add_custom_target ( dist
 add_dependencies ( dist
         wilton_core
         wilton_db
+        wilton_duktape
         wilton_channel
         wilton_cli
         wilton_cron
@@ -210,6 +219,7 @@ add_dependencies ( dist
         wilton_net
         wilton_pdf
         wilton_process
+        wilton_rhino
         wilton_thread
         js )
 
