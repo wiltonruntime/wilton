@@ -1,0 +1,41 @@
+{
+    wilton_dyload_malloc
+    Memcheck:Leak
+    fun:malloc
+    ...
+    fun:_dl_open
+    ...
+}
+{
+    wilton_dyload_malloc_error
+    Memcheck:Leak
+    fun:malloc
+    ...
+    fun:dlerror
+    ...
+}
+{
+    wilton_dyload_calloc
+    Memcheck:Leak
+    fun:calloc
+    ...
+    fun:_dl_open
+    ...
+}
+{
+    wilton_dyload_calloc_error
+    Memcheck:Leak
+    fun:calloc
+    ...
+    fun:_dlerror_run
+    ...
+}
+
+{
+    wilton_dyload_malloc_error_xenial
+    Memcheck:Leak
+    fun:malloc
+    ...
+    fun:_dl_init
+    ...
+}

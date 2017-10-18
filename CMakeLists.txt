@@ -96,6 +96,7 @@ staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_cron )
 staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_db )
 staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_duktape )
 staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_fs )
+staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_http )
 staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_net )
 staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_pdf )
 staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_process )
@@ -162,6 +163,9 @@ add_custom_target ( dist
                 bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_fs${CMAKE_SHARED_LIBRARY_SUFFIX}
                 wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_fs${CMAKE_SHARED_LIBRARY_SUFFIX}
         COMMAND ${CMAKE_COMMAND} -E copy
+                bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_http${CMAKE_SHARED_LIBRARY_SUFFIX}
+                wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_http${CMAKE_SHARED_LIBRARY_SUFFIX}
+        COMMAND ${CMAKE_COMMAND} -E copy
                 bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_net${CMAKE_SHARED_LIBRARY_SUFFIX}
                 wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_net${CMAKE_SHARED_LIBRARY_SUFFIX}
         COMMAND ${CMAKE_COMMAND} -E copy
@@ -220,6 +224,7 @@ add_dependencies ( dist
         wilton_cli
         wilton_cron
         wilton_fs
+        wilton_http
         wilton_net
         wilton_pdf
         wilton_process
@@ -298,7 +303,8 @@ if ( STATICLIB_TOOLCHAIN MATCHES "linux_[^_]+_[^_]+" )
             --leak-check=yes --show-reachable=yes --track-origins=yes --error-exitcode=42 --track-fds=yes
             --suppressions=${CMAKE_CURRENT_LIST_DIR}/deps/cmake/resources/valgrind/openssl_malloc.supp
             --suppressions=${CMAKE_CURRENT_LIST_DIR}/deps/cmake/resources/valgrind/popt_poptGetNextOpt.supp 
-            --suppressions=${CMAKE_CURRENT_LIST_DIR}/deps/cmake/resources/valgrind/wilton_dyload.supp 
+            --suppressions=${CMAKE_CURRENT_LIST_DIR}/resources/valgrind/wilton_dyload.supp 
+            --suppressions=${CMAKE_CURRENT_LIST_DIR}/resources/valgrind/wilton_http.supp
         CACHE INTERNAL "" )
     add_custom_target ( valgrind
             COMMAND valgrind ${${PROJECT_NAME}_VGOPTS}

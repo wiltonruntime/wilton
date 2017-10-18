@@ -313,3 +313,6 @@
 [submodule "modules/wilton_signal"]
 	path = modules/wilton_signal
 	url = https://github.com/wilton-iot/wilton_signal.git
+[submodule "modules/wilton_http"]
+	path = modules/wilton_http
+	url = https://github.com/wilton-iot/wilton_http.git

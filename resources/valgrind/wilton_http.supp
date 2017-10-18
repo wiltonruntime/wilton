@@ -1,0 +1,8 @@
+{
+    asio_memalign
+    Memcheck:Leak
+    fun:memalign
+    fun:tls_get_addr_tail
+    ...
+    fun:wilton_Server_create
+}
