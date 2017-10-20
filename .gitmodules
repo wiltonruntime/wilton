@@ -319,3 +319,6 @@
 [submodule "modules/wilton_logging"]
 	path = modules/wilton_logging
 	url = https://github.com/wilton-iot/wilton_logging.git
+[submodule "modules/wilton_loader"]
+	path = modules/wilton_loader
+	url = https://github.com/wilton-iot/wilton_loader.git

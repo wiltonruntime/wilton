@@ -39,3 +39,12 @@
     fun:_dl_init
     ...
 }
+
+{
+    wilton_dyload_memalign_error_xenial
+    Memcheck:Leak
+    fun:memalign
+    ...
+    fun:_dl_init
+    ...
+}

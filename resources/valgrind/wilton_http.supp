@@ -6,3 +6,11 @@
     ...
     fun:wilton_Server_create
 }
+{
+    asio_malloc
+    Memcheck:Leak
+    fun:malloc
+    fun:tls_get_addr_tail
+    ...
+    fun:wilton_Server_create
+}
