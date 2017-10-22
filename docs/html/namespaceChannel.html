@@ -23,7 +23,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">wilton.js
-   &#160;<span id="projectnumber">v201710161</span>
+   &#160;<span id="projectnumber">v201710221</span>
    </div>
   </td>
  </tr>
@@ -106,19 +106,19 @@ Functions</h2></td></tr>
 <tr class="memdesc:a48a32acc60df4ea478ba03fc0659dc63"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy pending message without removing it from channel.  <a href="#a48a32acc60df4ea478ba03fc0659dc63"></a><br/></td></tr>
 <tr class="memitem:af3f31c5cce070639fe7b59e3597869bd"><td class="memItemLeft" align="right" valign="top">Object&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceChannel.html#af3f31c5cce070639fe7b59e3597869bd">poll</a> (Function|Undefined callback)</td></tr>
 <tr class="memdesc:af3f31c5cce070639fe7b59e3597869bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Poll channel for buffered messages.  <a href="#af3f31c5cce070639fe7b59e3597869bd"></a><br/></td></tr>
-<tr class="memitem:afa89dcb76ba9cbe3c4c750141f440494"><td class="memItemLeft" align="right" valign="top">Object&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceChannel.html#afa89dcb76ba9cbe3c4c750141f440494">receive</a> (Function|Undefined callback)</td></tr>
-<tr class="memdesc:afa89dcb76ba9cbe3c4c750141f440494"><td class="mdescLeft">&#160;</td><td class="mdescRight">Receive a message from the channel, blocks if channel is empty.  <a href="#afa89dcb76ba9cbe3c4c750141f440494"></a><br/></td></tr>
-<tr class="memitem:a0971301452cad0544bc26d8ae750696a"><td class="memItemLeft" align="right" valign="top">static Number&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceChannel.html#a0971301452cad0544bc26d8ae750696a">select</a> (Object options, Function|Undefined callback)</td></tr>
-<tr class="memdesc:a0971301452cad0544bc26d8ae750696a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wait for input data on multiple channels simultaneously.  <a href="#a0971301452cad0544bc26d8ae750696a"></a><br/></td></tr>
-<tr class="memitem:a3300a590b615ef861cfa255da0c8a856"><td class="memItemLeft" align="right" valign="top">Boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceChannel.html#a3300a590b615ef861cfa255da0c8a856">send</a> (Object|String msg, Function|Undefined callback)</td></tr>
-<tr class="memdesc:a3300a590b615ef861cfa255da0c8a856"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send a message to the channel, blocks if channel is full.  <a href="#a3300a590b615ef861cfa255da0c8a856"></a><br/></td></tr>
+<tr class="memitem:a4d4b52abcbf5a3ceb2ce56c25f8dbc96"><td class="memItemLeft" align="right" valign="top">Object&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceChannel.html#a4d4b52abcbf5a3ceb2ce56c25f8dbc96">receive</a> (Number|Undefined timeoutMillis, Function|Undefined callback)</td></tr>
+<tr class="memdesc:a4d4b52abcbf5a3ceb2ce56c25f8dbc96"><td class="mdescLeft">&#160;</td><td class="mdescRight">Receive a message from the channel, blocks if channel is empty.  <a href="#a4d4b52abcbf5a3ceb2ce56c25f8dbc96"></a><br/></td></tr>
+<tr class="memitem:ab8962af43e16bb954939344409adebd2"><td class="memItemLeft" align="right" valign="top">static Number&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceChannel.html#ab8962af43e16bb954939344409adebd2">select</a> (Array channels, Number|Undefined timeoutMillis, Function|Undefined callback)</td></tr>
+<tr class="memdesc:ab8962af43e16bb954939344409adebd2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wait for input data on multiple channels simultaneously.  <a href="#ab8962af43e16bb954939344409adebd2"></a><br/></td></tr>
+<tr class="memitem:a34a4755dec89788a09d3a75046eaca97"><td class="memItemLeft" align="right" valign="top">Boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceChannel.html#a34a4755dec89788a09d3a75046eaca97">send</a> (Object|String msg, Number|Undefined timeoutMillis, Function|Undefined callback)</td></tr>
+<tr class="memdesc:a34a4755dec89788a09d3a75046eaca97"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send a message to the channel, blocks if channel is full.  <a href="#a34a4755dec89788a09d3a75046eaca97"></a><br/></td></tr>
 </table>
 <a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>This module provides "pipes" - FIFO queues - that can be used to transfer data between differrent threads of execution. Data is transfered in JSON format.</p>
-<p>Data can be send and received in blocking (<code><a class="el" href="namespaceChannel.html#a3300a590b615ef861cfa255da0c8a856" title="Send a message to the channel, blocks if channel is full.">send()</a></code> and <code><a class="el" href="namespaceChannel.html#afa89dcb76ba9cbe3c4c750141f440494" title="Receive a message from the channel, blocks if channel is empty.">receive()</a></code> methods) or non-blocking (<code><a class="el" href="namespaceChannel.html#a8900b15997b9bddfd9f5735b3a49a268" title="Send a message to the channel, return false if channel is full.">offer()</a></code> and <code><a class="el" href="namespaceChannel.html#af3f31c5cce070639fe7b59e3597869bd" title="Poll channel for buffered messages.">poll()</a></code> methods) modes.</p>
+<p>Data can be send and received in blocking (<code><a class="el" href="namespaceChannel.html#a34a4755dec89788a09d3a75046eaca97" title="Send a message to the channel, blocks if channel is full.">send()</a></code> and <code><a class="el" href="namespaceChannel.html#a4d4b52abcbf5a3ceb2ce56c25f8dbc96" title="Receive a message from the channel, blocks if channel is empty.">receive()</a></code> methods) or non-blocking (<code><a class="el" href="namespaceChannel.html#a8900b15997b9bddfd9f5735b3a49a268" title="Send a message to the channel, return false if channel is full.">offer()</a></code> and <code><a class="el" href="namespaceChannel.html#af3f31c5cce070639fe7b59e3597869bd" title="Poll channel for buffered messages.">poll()</a></code> methods) modes.</p>
 <p>Multiple threads can write to and read from the same <code><a class="el" href="namespaceChannel.html" title="wilton/Channel   Pipes that connect concurrent threads.">Channel</a></code> at the same time.</p>
 <p><code><a class="el" href="namespaceChannel.html" title="wilton/Channel   Pipes that connect concurrent threads.">Channel</a></code>s can be "bufferred" (with some amount of intemediate storage), or synchronous (without intermediate storage). Only blocking methods can be used on synchronous channels.</p>
-<p>Readers can wait for the data on multiple channels simultaneously using <code><a class="el" href="namespaceChannel.html#a0971301452cad0544bc26d8ae750696a" title="Wait for input data on multiple channels simultaneously.">select()</a></code> function.</p>
+<p>Readers can wait for the data on multiple channels simultaneously using <code><a class="el" href="namespaceChannel.html#ab8962af43e16bb954939344409adebd2" title="Wait for input data on multiple channels simultaneously.">select()</a></code> function.</p>
 <p><code><a class="el" href="namespaceChannel.html" title="wilton/Channel   Pipes that connect concurrent threads.">Channel</a></code>s are similar in nature with <a href="https://tour.golang.org/concurrency/2">golang Channels</a>.</p>
 <p>Underlying system resources can be released manually using <code><a class="el" href="namespaceChannel.html#a9122e6f0e60b1141c5de0df33522d8ab" title="Close the channel releasing native resources.">close()</a></code> method, open channels will be closed during the shutdown.</p>
 <p>Usage example:</p>
@@ -157,10 +157,7 @@ Functions</h2></td></tr>
 <div class="line">var obj3 = chan.peek();</div>
 <div class="line"></div>
 <div class="line"><span class="comment">// wait on multiple channels, returns the index of channel that has data ready</span></div>
-<div class="line"> var idx = <a class="code" href="namespaceChannel.html#a31e912ae66edd06a075e1fd28d27a943" title="Create Channelinstance.">Channel</a>.select({</div>
-<div class="line">     channels: [chan, sync],</div>
-<div class="line">     timeoutMillis: 10000</div>
-<div class="line"> });</div>
+<div class="line"> var idx = <a class="code" href="namespaceChannel.html#a31e912ae66edd06a075e1fd28d27a943" title="Create Channelinstance.">Channel</a>.select([chan, sync], 10000);</div>
 <div class="line"></div>
 <div class="line"><span class="comment">// close channels</span></div>
 <div class="line">chan.close();</div>
@@ -395,22 +392,33 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="afa89dcb76ba9cbe3c4c750141f440494"></a>
+<a class="anchor" id="a4d4b52abcbf5a3ceb2ce56c25f8dbc96"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">Object Channel::receive </td>
           <td>(</td>
-          <td class="paramtype">Function|Undefined&#160;</td>
-          <td class="paramname"><em>callback</em></td><td>)</td>
+          <td class="paramtype">Number|Undefined&#160;</td>
+          <td class="paramname"><em>timeoutMillis</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">Function|Undefined&#160;</td>
+          <td class="paramname"><em>callback</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 <p>Receives JSON messages from the channel in blocking mode.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
+    <tr><td class="paramname">timeoutMillis</td><td><code>Number|Undefined</code> max timeout for waiting, in milliseconds, default value: <code>0</code> - inifinite timeout </td></tr>
     <tr><td class="paramname">callback</td><td><code>Function|Undefined</code> callback to receive result or error </td></tr>
   </table>
   </dd>
@@ -419,7 +427,7 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a0971301452cad0544bc26d8ae750696a"></a>
+<a class="anchor" id="ab8962af43e16bb954939344409adebd2"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -429,8 +437,14 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">static Number Channel::select </td>
           <td>(</td>
-          <td class="paramtype">Object&#160;</td>
-          <td class="paramname"><em>options</em>, </td>
+          <td class="paramtype">Array&#160;</td>
+          <td class="paramname"><em>channels</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Number|Undefined&#160;</td>
+          <td class="paramname"><em>timeoutMillis</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -454,21 +468,17 @@ Functions</h2></td></tr>
 <p>This function is similar in nature to <a href="http://pubs.opengroup.org/onlinepubs/009695399/functions/pselect.html">POSIX select</a> and <a href="https://gobyexample.com/select">golang's select</a>, but it support only "ready for read" logic ("ready for write" is not supported).</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">options</td><td><code>Object</code> configuration object, see possible options below </td></tr>
+    <tr><td class="paramname">channels</td><td><code>Array</code> list of channels to wait on </td></tr>
+    <tr><td class="paramname">timeoutMillis</td><td><code>Number|Undefined</code> max timeout for waiting, in milliseconds, default value: <code>0</code> - inifinite timeout </td></tr>
     <tr><td class="paramname">callback</td><td><code>Function|Undefined</code> callback to receive result or error </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd><code>Number</code> index of the channel in specified list, that is ready for reading, <code>-1</code> on timeout</dd></dl>
-<p><b>Options</b></p>
-<ul>
-<li><b>channels</b> <code>Array</code> list of channels to wait on</li>
-<li><b>timeoutMillis</b> <code>Number</code> max timeout for waiting, in milliseconds </li>
-</ul>
+<dl class="section return"><dt>Returns</dt><dd><code>Number</code> index of the channel in specified list, that is ready for reading, <code>-1</code> on timeout </dd></dl>
 
 </div>
 </div>
-<a class="anchor" id="a3300a590b615ef861cfa255da0c8a856"></a>
+<a class="anchor" id="a34a4755dec89788a09d3a75046eaca97"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -477,6 +487,12 @@ Functions</h2></td></tr>
           <td>(</td>
           <td class="paramtype">Object|String&#160;</td>
           <td class="paramname"><em>msg</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Number|Undefined&#160;</td>
+          <td class="paramname"><em>timeoutMillis</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -495,6 +511,7 @@ Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">msg</td><td><code>Object|String</code> message to send </td></tr>
+    <tr><td class="paramname">timeoutMillis</td><td><code>Number|Undefined</code> max timeout for waiting, in milliseconds, default value: <code>0</code> - inifinite timeout </td></tr>
     <tr><td class="paramname">callback</td><td><code>Function|Undefined</code> callback to receive result or error </td></tr>
   </table>
   </dd>
@@ -506,7 +523,7 @@ Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Oct 16 2017 22:16:39 for wilton.js by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Oct 22 2017 17:33:42 for wilton.js by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>

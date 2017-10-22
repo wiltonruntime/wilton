@@ -23,7 +23,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">wilton.js
-   &#160;<span id="projectnumber">v201710161</span>
+   &#160;<span id="projectnumber">v201710221</span>
    </div>
   </td>
  </tr>
@@ -92,12 +92,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a77e01b549ed9524638eb707e5a3b3a2d"><td class="memItemLeft" align="right" valign="top">Undefined&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemisc.html#a77e01b549ed9524638eb707e5a3b3a2d">spawnProcess</a> (Object options, Function|Undefined callback)</td></tr>
-<tr class="memdesc:a77e01b549ed9524638eb707e5a3b3a2d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Spawn new OS-level process.  <a href="#a77e01b549ed9524638eb707e5a3b3a2d"></a><br/></td></tr>
 <tr class="memitem:a39e77b40bdeda050c4ae1495d7a52c4d"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemisc.html#a39e77b40bdeda050c4ae1495d7a52c4d">stdinReadline</a> (Function|Undefined callback)</td></tr>
 <tr class="memdesc:a39e77b40bdeda050c4ae1495d7a52c4d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read a line from the <code>STDIN</code>.  <a href="#a39e77b40bdeda050c4ae1495d7a52c4d"></a><br/></td></tr>
-<tr class="memitem:ac8f1fae9bb2ee3cc194343f5c71d30c2"><td class="memItemLeft" align="right" valign="top">Undefined&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemisc.html#ac8f1fae9bb2ee3cc194343f5c71d30c2">tcpWaitForConnection</a> (Object options, Function|Undefined callback)</td></tr>
-<tr class="memdesc:ac8f1fae9bb2ee3cc194343f5c71d30c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wait for the remote TCP endpoint to become accessible.  <a href="#ac8f1fae9bb2ee3cc194343f5c71d30c2"></a><br/></td></tr>
 <tr class="memitem:adb7cfdcc68e9a1b6a69943fb18006baf"><td class="memItemLeft" align="right" valign="top">Undefined&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemisc.html#adb7cfdcc68e9a1b6a69943fb18006baf">waitForSignal</a> (Function|Undefined callback)</td></tr>
 <tr class="memdesc:adb7cfdcc68e9a1b6a69943fb18006baf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wait for <code>Ctrl-C</code>.  <a href="#adb7cfdcc68e9a1b6a69943fb18006baf"></a><br/></td></tr>
 <tr class="memitem:a0ec198a58759fe92757cd6316037be2a"><td class="memItemLeft" align="right" valign="top">Object&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemisc.html#a0ec198a58759fe92757cd6316037be2a">wiltonConfig</a> (Function|Undefined callback)</td></tr>
@@ -106,51 +102,6 @@ Functions</h2></td></tr>
 <a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>This module provides miscelanous functionality that doesn't belong to separate modules. </p>
 </div><h2>Function Documentation</h2>
-<a class="anchor" id="a77e01b549ed9524638eb707e5a3b3a2d"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">Undefined misc::spawnProcess </td>
-          <td>(</td>
-          <td class="paramtype">Object&#160;</td>
-          <td class="paramname"><em>options</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Function|Undefined&#160;</td>
-          <td class="paramname"><em>callback</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Spawns an OS-level process launching specified executable with the specified arguments.</p>
-<p>Spawned process does not have <code>STDIN</code> connected. <code>STDOUT</code> and <code>STDERR</code> are redirected to (the same) specified file.</p>
-<p>If <code>awaitExit</code> flag is enabled - waits for the spawned process to exit and returs its exit code.</p>
-<p>Otherwise (default behaviour) returns immediately returning a <code>pid</code> of the spawned process.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">options</td><td><code>Object</code> configuration object, see possible options below </td></tr>
-    <tr><td class="paramname">callback</td><td><code>Function|Undefined</code> callback to receive result or error </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd><code>Undefined</code></dd></dl>
-<p><b>Options</b></p>
-<ul>
-<li><b>executable</b> <code>String</code> path to the executable file</li>
-<li><b>args</b> <code>Array</code> list of the arguments to provide to the executable</li>
-<li><b>outputFile</b> <code>String</code> path to the file for the combined <code>STDOUT</code> and <code>STDERR</code>output</li>
-<li><b>awaitExit</b> <code>Boolean</code> whether to wait for the spawned process to exit, <code>false</code> by default </li>
-</ul>
-
-</div>
-</div>
 <a class="anchor" id="a39e77b40bdeda050c4ae1495d7a52c4d"></a>
 <div class="memitem">
 <div class="memproto">
@@ -172,48 +123,6 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><code>String</code> line passed to <code>STDIN</code> </dd></dl>
-
-</div>
-</div>
-<a class="anchor" id="ac8f1fae9bb2ee3cc194343f5c71d30c2"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">Undefined misc::tcpWaitForConnection </td>
-          <td>(</td>
-          <td class="paramtype">Object&#160;</td>
-          <td class="paramname"><em>options</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Function|Undefined&#160;</td>
-          <td class="paramname"><em>callback</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Tries to connect to the specified TCP endpoint. Throws <code>Error</code> on timeout.</p>
-<p>Intended to be used to check the state of the started HTTP server in spawned process.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">options</td><td><code>Object</code> configuration object, see possible options below </td></tr>
-    <tr><td class="paramname">callback</td><td><code>Function|Undefined</code> callback to receive result or error </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd><code>Undefined</code></dd></dl>
-<p><b>Options</b></p>
-<ul>
-<li><b>ipAddress</b> <code>String</code> IPv4 network address</li>
-<li><b>tcpPort</b> <code>Number</code> TCP port</li>
-<li><b>timeoutMillis</b> <code>Number</code> max wait time, in milliseconds </li>
-</ul>
 
 </div>
 </div>
@@ -271,7 +180,7 @@ Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Oct 16 2017 22:16:39 for wilton.js by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Oct 22 2017 17:33:43 for wilton.js by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>

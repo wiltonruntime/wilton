@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>wilton.js: mustache Namespace Reference</title>
+<title>wilton.js: process Namespace Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -82,54 +82,47 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div class="summary">
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">mustache Namespace Reference</div>  </div>
+<div class="title">process Namespace Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p><b>wilton/mustache</b> <br/>
- Render <a href="https://mustache.github.io/">mustache</a> templates.  
+<p><b>wilton/process</b> <br/>
+ OS process operations.  
 <a href="#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a12f67126eba5a120014ced171ed5cc1e"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemustache.html#a12f67126eba5a120014ced171ed5cc1e">render</a> (String template, Object|Undefined values, Function|Undefined callback)</td></tr>
-<tr class="memdesc:a12f67126eba5a120014ced171ed5cc1e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Renders template specified as a string.  <a href="#a12f67126eba5a120014ced171ed5cc1e"></a><br/></td></tr>
-<tr class="memitem:a4092e44f93b1e730e49ffebbe8e49386"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemustache.html#a4092e44f93b1e730e49ffebbe8e49386">renderFile</a> (String templateFile, Object|Undefined values, Function|Undefined callback)</td></tr>
+<tr class="memitem:af1d58f402a492512d2fb4d142819c807"><td class="memItemLeft" align="right" valign="top">Undefined&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceprocess.html#af1d58f402a492512d2fb4d142819c807">spawn</a> (Object options, Function|Undefined callback)</td></tr>
+<tr class="memdesc:af1d58f402a492512d2fb4d142819c807"><td class="mdescLeft">&#160;</td><td class="mdescRight">Spawn new OS-level process.  <a href="#af1d58f402a492512d2fb4d142819c807"></a><br/></td></tr>
 </table>
 <a name="details" id="details"></a><h2>Detailed Description</h2>
-<div class="textblock"><p>This module allows to render <a href="https://mustache.github.io/">mustache</a> templates from in-memory strings or directly from files.</p>
+<div class="textblock"><p>This module currently provides only one function: <code><a class="el" href="namespaceprocess.html#af1d58f402a492512d2fb4d142819c807" title="Spawn new OS-level process.">spawn()</a></code> .</p>
 <p>Usage example:</p>
-<div class="fragment"><div class="line"><span class="comment">// render string template</span></div>
-<div class="line">var rendered = mustache.render(<span class="stringliteral">&quot;{{#names}}Hi {{name}}!\n{{/names}}&quot;</span>, {</div>
-<div class="line">    names: [</div>
-<div class="line">        {name: <span class="stringliteral">&quot;Chris&quot;</span>},</div>
-<div class="line">        {name: <span class="stringliteral">&quot;Mark&quot;</span>},</div>
-<div class="line">        {name: <span class="stringliteral">&quot;Scott&quot;</span>}</div>
-<div class="line">    ]</div>
+<div class="fragment"><div class="line"><span class="comment">// spawn new process in background and return its pid</span></div>
+<div class="line">var pid = misc.spawnProcess({</div>
+<div class="line">    executable: path/to/executable</div>
+<div class="line">    args: [<span class="stringliteral">&quot;foo&quot;</span>, <span class="stringliteral">&quot;bar&quot;</span>], </div>
+<div class="line">    outputFile: path/to/out/file,</div>
+<div class="line">    awaitExit: <span class="keyword">false</span></div>
 <div class="line">});</div>
-<div class="line"><span class="comment">// rendered == &quot;Hi Chris!\nHi Mark!\nHi Scott!\n&quot;</span></div>
 <div class="line"></div>
-<div class="line"><span class="comment">// render template from file</span></div>
-<div class="line">var resp = mustache.renderFile(<span class="stringliteral">&quot;path/to/my.mustache&quot;</span>, {</div>
-<div class="line">    foo: <span class="stringliteral">&quot;bar&quot;</span>,</div>
-<div class="line">    baz: 42</div>
+<div class="line"><span class="comment">// spawn new process, wait for it to exit, return exit code</span></div>
+<div class="line">var code = misc.spawnProcess({</div>
+<div class="line">    executable: path/to/executable</div>
+<div class="line">    args: [<span class="stringliteral">&quot;foo&quot;</span>, <span class="stringliteral">&quot;bar&quot;</span>], </div>
+<div class="line">    outputFile: path/to/out/file,</div>
+<div class="line">    awaitExit: <span class="keyword">true</span></div>
 <div class="line">});</div>
 </div><!-- fragment --> </div><h2>Function Documentation</h2>
-<a class="anchor" id="a12f67126eba5a120014ced171ed5cc1e"></a>
+<a class="anchor" id="af1d58f402a492512d2fb4d142819c807"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">String mustache::render </td>
+          <td class="memname">Undefined process::spawn </td>
           <td>(</td>
-          <td class="paramtype">String&#160;</td>
-          <td class="paramname"><em>template</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Object|Undefined&#160;</td>
-          <td class="paramname"><em>values</em>, </td>
+          <td class="paramtype">Object&#160;</td>
+          <td class="paramname"><em>options</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -144,56 +137,25 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Spawns an OS-level process launching specified executable with the specified arguments.</p>
+<p>Spawned process does not have <code>STDIN</code> connected. <code>STDOUT</code> and <code>STDERR</code> are redirected to (the same) specified file.</p>
+<p>If <code>awaitExit</code> flag is enabled - waits for the spawned process to exit and returs its exit code.</p>
+<p>Otherwise (default behaviour) returns immediately returning a <code>pid</code> of the spawned process.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">template</td><td><code>String</code> template body </td></tr>
-    <tr><td class="paramname">values</td><td><code>Object|Undefined</code> template parameters to use </td></tr>
+    <tr><td class="paramname">options</td><td><code>Object</code> configuration object, see possible options below </td></tr>
     <tr><td class="paramname">callback</td><td><code>Function|Undefined</code> callback to receive result or error </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd><code>String</code> rendered template </dd></dl>
-
-</div>
-</div>
-<a class="anchor" id="a4092e44f93b1e730e49ffebbe8e49386"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">String mustache::renderFile </td>
-          <td>(</td>
-          <td class="paramtype">String&#160;</td>
-          <td class="paramname"><em>templateFile</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Object|Undefined&#160;</td>
-          <td class="paramname"><em>values</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Function|Undefined&#160;</td>
-          <td class="paramname"><em>callback</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">templateFile</td><td><code>String</code> path to template file </td></tr>
-    <tr><td class="paramname">values</td><td><code>Object|Undefined</code> template parameters to use </td></tr>
-    <tr><td class="paramname">callback</td><td><code>Function|Undefined</code> callback to receive result or error </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd><code>String</code> rendered template </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd><code>Undefined</code></dd></dl>
+<p><b>Options</b></p>
+<ul>
+<li><b>executable</b> <code>String</code> path to the executable file</li>
+<li><b>args</b> <code>Array</code> list of the arguments to provide to the executable</li>
+<li><b>outputFile</b> <code>String</code> path to the file for the combined <code>STDOUT</code> and <code>STDERR</code>output</li>
+<li><b>awaitExit</b> <code>Boolean</code> whether to wait for the spawned process to exit, <code>false</code> by default </li>
+</ul>
 
 </div>
 </div>

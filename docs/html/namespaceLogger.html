@@ -23,7 +23,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">wilton.js
-   &#160;<span id="projectnumber">v201710161</span>
+   &#160;<span id="projectnumber">v201710221</span>
    </div>
   </td>
  </tr>
@@ -131,18 +131,11 @@ Functions</h2></td></tr>
 <div class="line">            thresholdLevel: <span class="stringliteral">&quot;WARN&quot;</span></div>
 <div class="line">        }</div>
 <div class="line">    ],</div>
-<div class="line">    loggers: [</div>
-<div class="line">        {</div>
-<div class="line">            name: <span class="stringliteral">&quot;wilton&quot;</span>,</div>
-<div class="line">            level: <span class="stringliteral">&quot;WARN&quot;</span></div>
-<div class="line">        }, {</div>
-<div class="line">            name: <span class="stringliteral">&quot;myapp&quot;</span>,</div>
-<div class="line">            level: <span class="stringliteral">&quot;INFO&quot;</span></div>
-<div class="line">        }, {</div>
-<div class="line">            name: <span class="stringliteral">&quot;myapp.somemodule.submodule&quot;</span>,</div>
-<div class="line">            level: <span class="stringliteral">&quot;DEBUG&quot;</span></div>
-<div class="line">        }</div>
-<div class="line">    ]</div>
+<div class="line">    loggers: {</div>
+<div class="line">        <span class="stringliteral">&quot;wilton&quot;</span>: <span class="stringliteral">&quot;WARN&quot;</span>,</div>
+<div class="line">        <span class="stringliteral">&quot;myapp&quot;</span>: <span class="stringliteral">&quot;INFO&quot;</span>,</div>
+<div class="line">        <span class="stringliteral">&quot;myapp.somemodule.submodule&quot;</span>: <span class="stringliteral">&quot;DEBUG&quot;</span></div>
+<div class="line">    }</div>
 <div class="line">});</div>
 <div class="line"></div>
 <div class="line"><span class="comment">// create logger instance</span></div>
@@ -356,9 +349,9 @@ Functions</h2></td></tr>
 <li><b>maxBackupIndex</b> <code>Integer|Undefined</code> max number of old (rolled over) log files for <code>DAILY_ROLLING_FILE</code> appender, default value: <code>16</code></li>
 </ul>
 </li>
-<li><b>loggers</b> <code>Array</code> list of loggers to configure minimal allowed logging levels<ul>
-<li><b>name</b> <code>String</code> logger name</li>
-<li><b>level</b> <code>String</code> minimal allowed logging level for this logger, supported values: <code>TRACE</code>, <code>DEBUG</code>, <code>INFO</code>, <code>WARN</code>, <code>ERROR</code>, <code>FATAL</code> </li>
+<li><b>loggers</b> <code>Array|Object</code> list of loggers to configure minimal allowed logging levels<ul>
+<li><b>name</b> <code>String</code> logger name (<code>Object</code> key can be used instead)</li>
+<li><b>level</b> <code>String</code> minimal allowed logging level for this logger (<code>Object</code> value can be used instead), supported values: <code>TRACE</code>, <code>DEBUG</code>, <code>INFO</code>, <code>WARN</code>, <code>ERROR</code>, <code>FATAL</code> </li>
 </ul>
 </li>
 </ul>
@@ -508,7 +501,7 @@ Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Oct 16 2017 22:16:39 for wilton.js by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Oct 22 2017 17:33:43 for wilton.js by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>
