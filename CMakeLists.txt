@@ -303,10 +303,13 @@ else ( )
 endif ( )
 
 add_custom_target ( test
+        COMMAND bin/wilton ${CMAKE_CURRENT_LIST_DIR}/js/wilton/test/index.js -m ${CMAKE_CURRENT_LIST_DIR}/js
+        COMMAND bin/wilton ${CMAKE_CURRENT_LIST_DIR}/core/test/scripts/runSanityTests.js
+        COMMAND bin/wilton ${CMAKE_CURRENT_LIST_DIR}/core/test/scripts/runNodeTests.js -m ${CMAKE_CURRENT_LIST_DIR}/js
         COMMAND bin/wilton ${CMAKE_CURRENT_LIST_DIR}/js/wilton/test/index.js -m ${CMAKE_CURRENT_LIST_DIR}/js -j jsc
         COMMAND bin/wilton ${CMAKE_CURRENT_LIST_DIR}/core/test/scripts/runSanityTests.js -j jsc
         COMMAND bin/wilton ${CMAKE_CURRENT_LIST_DIR}/core/test/scripts/runNodeTests.js -m ${CMAKE_CURRENT_LIST_DIR}/js -j jsc
-#        COMMAND cd ${CMAKE_CURRENT_LIST_DIR}/jni && ${CMAKE_CURRENT_LIST_DIR}/tools/maven/bin/mvn clean test
+        COMMAND cd ${CMAKE_CURRENT_LIST_DIR}/jni && ${CMAKE_CURRENT_LIST_DIR}/tools/maven/bin/mvn clean test
         WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION} 
         COMMENT "Running tests ..." )
 add_dependencies ( test dist )
