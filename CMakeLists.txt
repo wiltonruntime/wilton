@@ -98,6 +98,7 @@ staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_db )
 staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_duktape )
 staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_fs )
 staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_http )
+staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_jsc )
 staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_loader )
 staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_net )
 staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_pdf )
@@ -168,6 +169,9 @@ add_custom_target ( dist
                 bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_http${CMAKE_SHARED_LIBRARY_SUFFIX}
                 wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_http${CMAKE_SHARED_LIBRARY_SUFFIX}
         COMMAND ${CMAKE_COMMAND} -E copy
+                bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_jsc${CMAKE_SHARED_LIBRARY_SUFFIX}
+                wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_jsc${CMAKE_SHARED_LIBRARY_SUFFIX}
+        COMMAND ${CMAKE_COMMAND} -E copy
                 bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_loader${CMAKE_SHARED_LIBRARY_SUFFIX}
                 wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_loader${CMAKE_SHARED_LIBRARY_SUFFIX}
         COMMAND ${CMAKE_COMMAND} -E copy
@@ -233,6 +237,7 @@ add_dependencies ( dist
         wilton_cron
         wilton_fs
         wilton_http
+        wilton_jsc
         wilton_loader
         wilton_logging
         wilton_net
@@ -298,10 +303,10 @@ else ( )
 endif ( )
 
 add_custom_target ( test
-        COMMAND bin/wilton ${CMAKE_CURRENT_LIST_DIR}/js/wilton/test/index.js -m ${CMAKE_CURRENT_LIST_DIR}/js
-        COMMAND bin/wilton ${CMAKE_CURRENT_LIST_DIR}/core/test/scripts/runSanityTests.js
-        COMMAND bin/wilton ${CMAKE_CURRENT_LIST_DIR}/core/test/scripts/runNodeTests.js -m ${CMAKE_CURRENT_LIST_DIR}/js
-        COMMAND cd ${CMAKE_CURRENT_LIST_DIR}/jni && ${CMAKE_CURRENT_LIST_DIR}/tools/maven/bin/mvn clean test
+        COMMAND bin/wilton ${CMAKE_CURRENT_LIST_DIR}/js/wilton/test/index.js -m ${CMAKE_CURRENT_LIST_DIR}/js -j jsc
+        COMMAND bin/wilton ${CMAKE_CURRENT_LIST_DIR}/core/test/scripts/runSanityTests.js -j jsc
+        COMMAND bin/wilton ${CMAKE_CURRENT_LIST_DIR}/core/test/scripts/runNodeTests.js -m ${CMAKE_CURRENT_LIST_DIR}/js -j jsc
+#        COMMAND cd ${CMAKE_CURRENT_LIST_DIR}/jni && ${CMAKE_CURRENT_LIST_DIR}/tools/maven/bin/mvn clean test
         WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION} 
         COMMENT "Running tests ..." )
 add_dependencies ( test dist )
