@@ -33,7 +33,7 @@ See platform-specific instructions below.
 
 Install dependencies:
 
-    sudo dnf install gcc-c++ make pkg-config zip zlib-devel jansson-devel log4cplus-devel openssl-devel curl-devel asio-devel popt-devel sqlite-devel postgresql-devel soci-devel soci-sqlite3-devel soci-postgresql-devel libharu-devel systemd-devel libusbx-devel
+    sudo dnf install gcc-c++ make pkg-config zip zlib-devel jansson-devel log4cplus-devel openssl-devel curl-devel asio-devel popt-devel sqlite-devel postgresql-devel soci-devel soci-sqlite3-devel soci-postgresql-devel libharu-devel systemd-devel libusbx-devel webkitgtk4-jsc-devel
 
 Build:
 
@@ -48,7 +48,7 @@ Build:
 
 Install dependencies:
 
-    sudo apt install build-essential pkg-config zip zlib1g-dev libjansson-dev liblog4cplus-dev libssl-dev libcurl4-openssl-dev libasio-dev libpopt-dev libsqlite3-dev libpq-dev libsoci-dev libpng12-dev libusb-1.0-0-dev libudev-dev
+    sudo apt install build-essential pkg-config zip zlib1g-dev libjansson-dev liblog4cplus-dev libssl-dev libcurl4-openssl-dev libasio-dev libpopt-dev libsqlite3-dev libpq-dev libsoci-dev libpng12-dev libusb-1.0-0-dev libudev-dev libglib2.0-dev libjavascriptcoregtk-4.0-dev
 
 Build:
 
@@ -67,7 +67,7 @@ Enable [EPEL repository](https://fedoraproject.org/wiki/EPEL):
 
 Install dependencies:
 
-    sudo yum install gcc-c++ make pkgconfig zip zlib-devel jansson-devel log4cplus-devel openssl-devel asio-devel popt-devel sqlite-devel postgresql-devel soci-devel soci-sqlite3-devel soci-postgresql-devel libpng-devel systemd-devel libusbx-devel
+    sudo yum install gcc-c++ make pkgconfig zip zlib-devel jansson-devel log4cplus-devel openssl-devel asio-devel popt-devel sqlite-devel postgresql-devel soci-devel soci-sqlite3-devel soci-postgresql-devel libpng-devel systemd-devel libusbx-devel webkitgtk3-devel
 
 Build:
 

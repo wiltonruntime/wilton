@@ -98,7 +98,6 @@ staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_db )
 staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_duktape )
 staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_fs )
 staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_http )
-staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_jsc )
 staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_loader )
 staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_net )
 staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_pdf )
@@ -107,10 +106,12 @@ staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_rhino )
 staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_signal )
 staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_thread )
 if ( STATICLIB_TOOLCHAIN MATCHES "windows_[^_]+_[^_]+" )
+    add_custom_target ( wilton_jsc )
     add_custom_target ( wilton_serial )
     add_custom_target ( wilton_usb )
     staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_winservice )
 else ( )
+    staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_jsc )
     staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_serial )
     staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_usb )
     add_custom_target ( wilton_winservice )
@@ -168,9 +169,6 @@ add_custom_target ( dist
         COMMAND ${CMAKE_COMMAND} -E copy
                 bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_http${CMAKE_SHARED_LIBRARY_SUFFIX}
                 wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_http${CMAKE_SHARED_LIBRARY_SUFFIX}
-        COMMAND ${CMAKE_COMMAND} -E copy
-                bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_jsc${CMAKE_SHARED_LIBRARY_SUFFIX}
-                wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_jsc${CMAKE_SHARED_LIBRARY_SUFFIX}
         COMMAND ${CMAKE_COMMAND} -E copy
                 bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_loader${CMAKE_SHARED_LIBRARY_SUFFIX}
                 wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_loader${CMAKE_SHARED_LIBRARY_SUFFIX}
@@ -237,7 +235,6 @@ add_dependencies ( dist
         wilton_cron
         wilton_fs
         wilton_http
-        wilton_jsc
         wilton_loader
         wilton_logging
         wilton_net
@@ -292,23 +289,24 @@ else ( )
             COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}
             COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}/bin
             COMMAND ${CMAKE_COMMAND} -E copy
+                    bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_jsc${CMAKE_SHARED_LIBRARY_SUFFIX}
+                    wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_jsc${CMAKE_SHARED_LIBRARY_SUFFIX}
+            COMMAND ${CMAKE_COMMAND} -E copy
                     bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_serial${CMAKE_SHARED_LIBRARY_SUFFIX}
                     wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_serial${CMAKE_SHARED_LIBRARY_SUFFIX}
             COMMAND ${CMAKE_COMMAND} -E copy
                     bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_usb${CMAKE_SHARED_LIBRARY_SUFFIX}
                     wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_usb${CMAKE_SHARED_LIBRARY_SUFFIX}
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR} )
-    add_dependencies ( dist_linux wilton_serial wilton_usb )      
+    add_dependencies ( dist_linux wilton_jsc wilton_serial wilton_usb )      
     add_dependencies ( dist dist_linux )
 endif ( )
 
 add_custom_target ( test
+        COMMAND bin/wilton ${CMAKE_CURRENT_LIST_DIR}/js/wilton/test/index.js -m ${CMAKE_CURRENT_LIST_DIR}/js -j duktape
         COMMAND bin/wilton ${CMAKE_CURRENT_LIST_DIR}/js/wilton/test/index.js -m ${CMAKE_CURRENT_LIST_DIR}/js
-        COMMAND bin/wilton ${CMAKE_CURRENT_LIST_DIR}/core/test/scripts/runSanityTests.js
+        COMMAND bin/wilton ${CMAKE_CURRENT_LIST_DIR}/core/test/scripts/runNodeTests.js -m ${CMAKE_CURRENT_LIST_DIR}/js -j duktape
         COMMAND bin/wilton ${CMAKE_CURRENT_LIST_DIR}/core/test/scripts/runNodeTests.js -m ${CMAKE_CURRENT_LIST_DIR}/js
-        COMMAND bin/wilton ${CMAKE_CURRENT_LIST_DIR}/js/wilton/test/index.js -m ${CMAKE_CURRENT_LIST_DIR}/js -j jsc
-        COMMAND bin/wilton ${CMAKE_CURRENT_LIST_DIR}/core/test/scripts/runSanityTests.js -j jsc
-        COMMAND bin/wilton ${CMAKE_CURRENT_LIST_DIR}/core/test/scripts/runNodeTests.js -m ${CMAKE_CURRENT_LIST_DIR}/js -j jsc
         COMMAND cd ${CMAKE_CURRENT_LIST_DIR}/jni && ${CMAKE_CURRENT_LIST_DIR}/tools/maven/bin/mvn clean test
         WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION} 
         COMMENT "Running tests ..." )
@@ -322,11 +320,12 @@ if ( STATICLIB_TOOLCHAIN MATCHES "linux_[^_]+_[^_]+" )
             --suppressions=${CMAKE_CURRENT_LIST_DIR}/resources/valgrind/wilton_dyload.supp 
             --suppressions=${CMAKE_CURRENT_LIST_DIR}/resources/valgrind/wilton_http.supp
         CACHE INTERNAL "" )
+
     add_custom_target ( valgrind
             COMMAND valgrind ${${PROJECT_NAME}_VGOPTS}
-                    ./bin/wilton ${CMAKE_CURRENT_LIST_DIR}/core/test/scripts/runZipLoadTests.js
+                    ./bin/wilton ${CMAKE_CURRENT_LIST_DIR}/core/test/scripts/runZipLoadTests.js -j duktape
             COMMAND valgrind ${${PROJECT_NAME}_VGOPTS}
-                    ./bin/wilton ${CMAKE_CURRENT_LIST_DIR}/js/wilton/test/index.js -m ../../js
+                    ./bin/wilton ${CMAKE_CURRENT_LIST_DIR}/js/wilton/test/index.js -m ../../js -j duktape
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION} 
             COMMENT "Running valgrind ..." )
     add_dependencies ( valgrind dist )
