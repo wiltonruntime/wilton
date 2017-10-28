@@ -127,7 +127,7 @@ if ( STATICLIB_TOOLCHAIN MATCHES "windows_[^_]+_[^_]+" )
     set ( TOOLS_ZIP ${CMAKE_CURRENT_LIST_DIR}/tools/windows/zip/zip.exe )
 endif ( )
 
-add_custom_command ( OUTPUT js.zip
+add_custom_command ( OUTPUT std.wlib
         COMMAND ${CMAKE_COMMAND} -E remove_directory js
         COMMAND ${TOOLS_JJS}
                 -J-XX:+UseSerialGC -J-XX:+TieredCompilation -J-XX:TieredStopAtLevel=1
@@ -135,11 +135,11 @@ add_custom_command ( OUTPUT js.zip
                 ${CMAKE_CURRENT_LIST_DIR}/tools/convertion-scripts/minify-modules.js
                 -- ${CMAKE_CURRENT_LIST_DIR}/js js
         COMMAND cd js && ${TOOLS_ZIP} -qr9 js.zip *
-        COMMAND ${CMAKE_COMMAND} -E rename js/js.zip js.zip
+        COMMAND ${CMAKE_COMMAND} -E rename js/js.zip std.wlib
         WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
         COMMENT "Preparing JavaScript modules bundle ..." )
 
-add_custom_target( js DEPENDS js.zip )
+add_custom_target( stdlib DEPENDS std.wlib )
 
 add_custom_target ( dist
         COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}
@@ -246,11 +246,18 @@ add_custom_target ( dist
                 bin/wilton_cli${CMAKE_EXECUTABLE_SUFFIX}
                 wilton_${WILTON_VERSION}/bin/wilton${CMAKE_EXECUTABLE_SUFFIX}
         COMMAND ${CMAKE_COMMAND} -E copy
-                js.zip
-                wilton_${WILTON_VERSION}/js.zip
+                std.wlib
+                wilton_${WILTON_VERSION}/std.wlib
         COMMAND ${CMAKE_COMMAND} -E copy_directory
                 ${CMAKE_CURRENT_LIST_DIR}/js/examples
                 wilton_${WILTON_VERSION}/examples
+        COMMAND cd wilton_${WILTON_VERSION}/examples/binmod &&
+                ${TOOLS_ZIP} -qyr9 binmod.zip *
+        COMMAND ${CMAKE_COMMAND} -E rename
+                wilton_${WILTON_VERSION}/examples/binmod/binmod.zip
+                wilton_${WILTON_VERSION}/examples/binmod.wlib
+        COMMAND ${CMAKE_COMMAND} -E remove_directory
+                wilton_${WILTON_VERSION}/examples/binmod
         COMMAND ${CMAKE_COMMAND} -E copy
                 ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_cli/resources/one-liner-template.js
                 wilton_${WILTON_VERSION}/conf/one-liner-template.js
@@ -268,7 +275,7 @@ add_custom_target ( dist
                 wilton_${WILTON_VERSION}/work/.keep
         COMMAND ${CMAKE_COMMAND} -E copy
                 wilton.version
-                wilton_${WILTON_VERSION}/wilton.version  
+                wilton_${WILTON_VERSION}/conf/wilton.version  
         WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
         COMMENT "Creating distribution at [${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION}] ..." )
 
@@ -289,7 +296,7 @@ add_dependencies ( dist
         wilton_rhino
         wilton_signal
         wilton_thread
-        js )
+        stdlib )
 
 if ( STATICLIB_TOOLCHAIN MATCHES "windows_[^_]+_[^_]+" )
     add_custom_target ( dist_windows
@@ -357,10 +364,10 @@ else ( )
 endif ( )
 
 add_custom_target ( test
-        COMMAND bin/wilton ${CMAKE_CURRENT_LIST_DIR}/js/wilton/test/index.js -m ${CMAKE_CURRENT_LIST_DIR}/js -j duktape
         COMMAND bin/wilton ${CMAKE_CURRENT_LIST_DIR}/js/wilton/test/index.js -m ${CMAKE_CURRENT_LIST_DIR}/js
-        COMMAND bin/wilton ${CMAKE_CURRENT_LIST_DIR}/core/test/scripts/runNodeTests.js -m ${CMAKE_CURRENT_LIST_DIR}/js -j duktape
+        COMMAND bin/wilton ${CMAKE_CURRENT_LIST_DIR}/js/wilton/test/index.js -m ${CMAKE_CURRENT_LIST_DIR}/js -j duktape
         COMMAND bin/wilton ${CMAKE_CURRENT_LIST_DIR}/core/test/scripts/runNodeTests.js -m ${CMAKE_CURRENT_LIST_DIR}/js
+        COMMAND bin/wilton ${CMAKE_CURRENT_LIST_DIR}/core/test/scripts/runNodeTests.js -m ${CMAKE_CURRENT_LIST_DIR}/js -j duktape
         COMMAND cd ${CMAKE_CURRENT_LIST_DIR}/jni && ${CMAKE_CURRENT_LIST_DIR}/tools/maven/bin/mvn clean test
         WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION} 
         COMMENT "Running tests ..." )
@@ -377,7 +384,7 @@ if ( STATICLIB_TOOLCHAIN MATCHES "linux_[^_]+_[^_]+" )
 
     add_custom_target ( valgrind
             COMMAND valgrind ${${PROJECT_NAME}_VGOPTS}
-                    ./bin/wilton ${CMAKE_CURRENT_LIST_DIR}/core/test/scripts/runZipLoadTests.js -j duktape
+                    ./bin/wilton ./examples/binaryModule.js -b ./examples/binmod.wlib -j duktape
             COMMAND valgrind ${${PROJECT_NAME}_VGOPTS}
                     ./bin/wilton ${CMAKE_CURRENT_LIST_DIR}/js/wilton/test/index.js -m ../../js -j duktape
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION} 
