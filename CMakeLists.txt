@@ -252,7 +252,7 @@ add_custom_target ( dist
                 ${CMAKE_CURRENT_LIST_DIR}/js/examples
                 wilton_${WILTON_VERSION}/examples
         COMMAND cd wilton_${WILTON_VERSION}/examples/binmod &&
-                ${TOOLS_ZIP} -qyr9 binmod.zip *
+                ${TOOLS_ZIP} -qr9 binmod.zip *
         COMMAND ${CMAKE_COMMAND} -E rename
                 wilton_${WILTON_VERSION}/examples/binmod/binmod.zip
                 wilton_${WILTON_VERSION}/examples/binmod.wlib
