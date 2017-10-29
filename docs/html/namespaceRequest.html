@@ -23,7 +23,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">wilton.js
-   &#160;<span id="projectnumber">v201710221</span>
+   &#160;<span id="projectnumber">v201710291</span>
    </div>
   </td>
  </tr>
@@ -104,6 +104,8 @@ Functions</h2></td></tr>
 <tr class="memdesc:a35a013d33feb11c39be7900508b064db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access request's metadata.  <a href="#a35a013d33feb11c39be7900508b064db"></a><br/></td></tr>
 <tr class="memitem:ad37051e97e4ecdfa64ebc1bf8112dbe4"><td class="memItemLeft" align="right" valign="top">Object&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceRequest.html#ad37051e97e4ecdfa64ebc1bf8112dbe4">queries</a> (Function|Undefined callback)</td></tr>
 <tr class="memdesc:ad37051e97e4ecdfa64ebc1bf8112dbe4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access request query string parameters.  <a href="#ad37051e97e4ecdfa64ebc1bf8112dbe4"></a><br/></td></tr>
+<tr class="memitem:a697131623d08fe426dfdcc8a4ccac360"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceRequest.html#a697131623d08fe426dfdcc8a4ccac360">query</a> (String name, String defaultValue, Function|Undefined callback)</td></tr>
+<tr class="memdesc:a697131623d08fe426dfdcc8a4ccac360"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access request quesry string parameter by name.  <a href="#a697131623d08fe426dfdcc8a4ccac360"></a><br/></td></tr>
 <tr class="memitem:a574fe938e31444d4ddef382c3b471987"><td class="memItemLeft" align="right" valign="top">Undefined&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceRequest.html#a574fe938e31444d4ddef382c3b471987">sendMustache</a> (String filePath, Object values, Object|Undefined options, Function|Undefined callback)</td></tr>
 <tr class="memdesc:a574fe938e31444d4ddef382c3b471987"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send rendered <a href="https://mustache.github.io/">mustache</a> template to client.  <a href="#a574fe938e31444d4ddef382c3b471987"></a><br/></td></tr>
 <tr class="memitem:a8aff8bb58ae8ac06c1d6c637775718c6"><td class="memItemLeft" align="right" valign="top">Undefined&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceRequest.html#a8aff8bb58ae8ac06c1d6c637775718c6">sendRedirect</a> (String location, Function|Undefined callback)</td></tr>
@@ -295,6 +297,48 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><code>Object</code> dictionary of request parameters parsed from URL query fields </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a697131623d08fe426dfdcc8a4ccac360"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">String Request::query </td>
+          <td>(</td>
+          <td class="paramtype">String&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">String&#160;</td>
+          <td class="paramname"><em>defaultValue</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Function|Undefined&#160;</td>
+          <td class="paramname"><em>callback</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Returns the value of the specified parameter from request string, or specified <code>defaultValue</code> if parameter not found.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td><code>String</code> parameter name </td></tr>
+    <tr><td class="paramname">defaultValue</td><td><code>String</code> default value </td></tr>
+    <tr><td class="paramname">callback</td><td><code>Function|Undefined</code> callback to receive result or error </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><code>String</code> parameter value or default value </dd></dl>
 
 </div>
 </div>
@@ -498,7 +542,7 @@ Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Oct 22 2017 17:33:43 for wilton.js by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Oct 29 2017 12:08:34 for wilton.js by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>

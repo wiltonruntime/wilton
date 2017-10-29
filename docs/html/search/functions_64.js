@@ -10,6 +10,7 @@ var searchData=
   ['defaultobject',['defaultObject',['../namespaceutils.html#add70892659d7fb4cc3d5263311c35912',1,'utils']]],
   ['defaultstring',['defaultString',['../namespaceutils.html#a1c14cd90bf106b6fbaab8516396082df',1,'utils']]],
   ['destroy',['destroy',['../namespacePDFDocument.html#a1ea7325f6a9d8f036d851c8fd8df77d4',1,'PDFDocument']]],
+  ['doinsynctransaction',['doInSyncTransaction',['../namespaceDBConnection.html#a024ad17ca0b1d11328641d7745ad3d05',1,'DBConnection']]],
   ['dointransaction',['doInTransaction',['../namespaceDBConnection.html#aeb66e8d918794ac8c7ddbed223b3985b',1,'DBConnection']]],
   ['drawline',['drawLine',['../namespacePDFDocument.html#a10dec5f2c3a974ca256a170dadcc71ab',1,'PDFDocument']]],
   ['drawrectangle',['drawRectangle',['../namespacePDFDocument.html#a87a0d16246e819306d076ba5216ab530',1,'PDFDocument']]],

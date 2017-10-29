@@ -13,9 +13,10 @@ var searchData=
   ['server',['Server',['../namespaceServer.html',1,'Server'],['../namespaceServer.html#a86c9ec71adb138c242dee20c68cb2530',1,'Server::Server()']]],
   ['shutdown',['shutdown',['../namespaceLogger.html#a316a5356ad3c47b5d42c2c60c56a2b17',1,'Logger']]],
   ['sleepmillis',['sleepMillis',['../namespacethread.html#a0e89aba0a6d011bbc1f178a29902b78f',1,'thread']]],
-  ['spawn',['spawn',['../namespaceprocess.html#af1d58f402a492512d2fb4d142819c807',1,'process']]],
+  ['spawn',['spawn',['../namespaceprocess.html#a5105167174690025411effc0a5970ed5',1,'process']]],
   ['startswith',['startsWith',['../namespaceutils.html#a4479e1dd8f6357a469ef3b3859e0b4c1',1,'utils']]],
   ['stat',['stat',['../namespacefs.html#abddacd3199c05eaf7e27a2dadc5892d5',1,'fs']]],
   ['stdinreadline',['stdinReadline',['../namespacemisc.html#a39e77b40bdeda050c4ae1495d7a52c4d',1,'misc']]],
-  ['stop',['stop',['../namespaceCronTask.html#a1001f0b8d854d68f0cd6f6b1870f847c',1,'CronTask::stop()'],['../namespaceServer.html#a7e5acc0cd99523bb3460f71260a56b13',1,'Server::stop()']]]
+  ['stop',['stop',['../namespaceCronTask.html#a1001f0b8d854d68f0cd6f6b1870f847c',1,'CronTask::stop()'],['../namespaceServer.html#a7e5acc0cd99523bb3460f71260a56b13',1,'Server::stop()']]],
+  ['synchronize',['synchronize',['../namespaceChannel.html#aeb092b42096f8dc47eb2af240adcccb4',1,'Channel']]]
 ];

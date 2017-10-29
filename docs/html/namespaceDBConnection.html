@@ -23,7 +23,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">wilton.js
-   &#160;<span id="projectnumber">v201710221</span>
+   &#160;<span id="projectnumber">v201710291</span>
    </div>
   </td>
  </tr>
@@ -96,6 +96,8 @@ Functions</h2></td></tr>
 <tr class="memdesc:a9546fd4600a7912d3ee6424ada3889aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Close database connection.  <a href="#a9546fd4600a7912d3ee6424ada3889aa"></a><br/></td></tr>
 <tr class="memitem:a4b2dc14caf4c35e6278ecc7eb08148e2"><td class="memItemLeft" align="right" valign="top">Object&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceDBConnection.html#a4b2dc14caf4c35e6278ecc7eb08148e2">DBConnection</a> (String url, Function|Undefined callback)</td></tr>
 <tr class="memdesc:a4b2dc14caf4c35e6278ecc7eb08148e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Open connection to database.  <a href="#a4b2dc14caf4c35e6278ecc7eb08148e2"></a><br/></td></tr>
+<tr class="memitem:a024ad17ca0b1d11328641d7745ad3d05"><td class="memItemLeft" align="right" valign="top">Any&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceDBConnection.html#a024ad17ca0b1d11328641d7745ad3d05">doInSyncTransaction</a> (String lockChannelName, Function operations, Function|Undefined callback)</td></tr>
+<tr class="memdesc:a024ad17ca0b1d11328641d7745ad3d05"><td class="mdescLeft">&#160;</td><td class="mdescRight">Perform a set of DB operations inside the synchronized transaction.  <a href="#a024ad17ca0b1d11328641d7745ad3d05"></a><br/></td></tr>
 <tr class="memitem:aeb66e8d918794ac8c7ddbed223b3985b"><td class="memItemLeft" align="right" valign="top">Any&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceDBConnection.html#aeb66e8d918794ac8c7ddbed223b3985b">doInTransaction</a> (Function operations, Function|Undefined callback)</td></tr>
 <tr class="memdesc:aeb66e8d918794ac8c7ddbed223b3985b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Perform a set of DB operations inside the transaction.  <a href="#aeb66e8d918794ac8c7ddbed223b3985b"></a><br/></td></tr>
 <tr class="memitem:a9c47c632dc600528a3da720ac7241b08"><td class="memItemLeft" align="right" valign="top">Undefined&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceDBConnection.html#a9c47c632dc600528a3da720ac7241b08">execute</a> (String sql, Object|Undefined params, Function|Undefined callback)</td></tr>
@@ -195,6 +197,48 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><code>Object</code> <code><a class="el" href="namespaceDBConnection.html" title="wilton/DBConnection   Connect to relational databases.">DBConnection</a></code> instance </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a024ad17ca0b1d11328641d7745ad3d05"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Any DBConnection::doInSyncTransaction </td>
+          <td>(</td>
+          <td class="paramtype">String&#160;</td>
+          <td class="paramname"><em>lockChannelName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Function&#160;</td>
+          <td class="paramname"><em>operations</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Function|Undefined&#160;</td>
+          <td class="paramname"><em>callback</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>This method runs specified operations inside the transaactional block (using <code>doInTransaction</code>) additionally wrapping it with synchroinized block (using <code><a class="el" href="namespaceChannel.html#aeb092b42096f8dc47eb2af240adcccb4" title="Run specified operations in syncronized mode.">Channel.synchronize()</a></code>).</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">lockChannelName</td><td><code>String</code> name of the channel to use for synchronization it must be existing empty channel with <code>maxSize</code> = <code>1</code> </td></tr>
+    <tr><td class="paramname">operations</td><td><code>Function</code> function performing DB operations </td></tr>
+    <tr><td class="paramname">callback</td><td><code>Function|Undefined</code> callback to receive result or error </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><code>Any</code> value returned by <code>operations</code> function </dd></dl>
 
 </div>
 </div>
@@ -433,7 +477,7 @@ Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Oct 22 2017 17:33:43 for wilton.js by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Oct 29 2017 12:08:34 for wilton.js by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>
