@@ -45,12 +45,13 @@ if ( NOT DEFINED STATICLIB_TOOLCHAIN )
 endif ( )
 set ( STATICLIB_DEPS ${CMAKE_CURRENT_LIST_DIR}/deps CACHE INTERNAL "" )
 set ( STATICLIB_CMAKE ${STATICLIB_DEPS}/cmake CACHE INTERNAL "" )
+set ( WILTON_DIR ${CMAKE_CURRENT_LIST_DIR} CACHE INTERNAL "" )
 set ( CMAKE_TOOLCHAIN_FILE ${CMAKE_CURRENT_LIST_DIR}/resources/toolchains/${STATICLIB_TOOLCHAIN}-${WILTON_BUILD_FLAVOUR}.cmake CACHE INTERNAL "" )
 
 # master project
 project ( wilton CXX C )
-set ( WILTON_DIR ${CMAKE_CURRENT_LIST_DIR} CACHE INTERNAL "" )
 include ( ${STATICLIB_CMAKE}/staticlibs_common.cmake )
+set_property ( GLOBAL PROPERTY TARGET_SUPPORTS_SHARED_LIBS TRUE )
 
 # version file
 configure_file ( ${WILTON_DIR}/resources/buildres/wilton.version
@@ -59,7 +60,7 @@ configure_file ( ${WILTON_DIR}/resources/buildres/wilton.version
 configure_file ( ${WILTON_DIR}/resources/doxygen/Doxyfile
         ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile )
 
-# supply missed pkg-config descriptor
+# supply missed pkg-config descriptors
 if ( WILTON_BUILD_FLAVOUR MATCHES "wheezy" )
     configure_file ( ${CMAKE_CURRENT_LIST_DIR}/resources/pkgconfig/log4cplus.pc
             ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/pkgconfig/log4cplus.pc )
@@ -91,7 +92,6 @@ add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/core )
 
 # modules
 staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_logging )
-staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_cli )
 staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_channel )
 staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_cron )
 staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_db )
@@ -101,27 +101,40 @@ staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_http )
 staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_loader )
 staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_net )
 staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_pdf )
-staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_process )
 staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_rhino )
-staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_signal )
 staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_thread )
-if ( STATICLIB_TOOLCHAIN MATCHES "windows_[^_]+_[^_]+" )
+if ( STATICLIB_TOOLCHAIN MATCHES "android_.+" )
+    add_custom_target ( wilton_cli )
+    add_custom_target ( wilton_jsc )
+    add_custom_target ( wilton_process )
+    add_custom_target ( wilton_serial )
+    add_custom_target ( wilton_signal )
+    add_custom_target ( wilton_usb )
+    add_custom_target ( wilton_winservice )
+elseif ( STATICLIB_TOOLCHAIN MATCHES "(windows|linux)_.+" )
+    staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_cli )
+    staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_process )
+    staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_signal )
+endif ( )
+if ( STATICLIB_TOOLCHAIN MATCHES "windows_.+" )
     add_custom_target ( wilton_jsc )
     add_custom_target ( wilton_serial )
     add_custom_target ( wilton_usb )
     staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_winservice )
-else ( )
+elseif ( STATICLIB_TOOLCHAIN MATCHES "linux_.+" )
     staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_jsc )
     staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_serial )
     staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_usb )
     add_custom_target ( wilton_winservice )
+else ( )
+    message ( FATAL_ERROR "Unsupported toolchain: [${STATICLIB_TOOLCHAIN}]" )
 endif ( )
 
 # platform tools
 set ( TOOLS_JAVA java )
 set ( TOOLS_JJS jjs )
 set ( TOOLS_ZIP zip )
-if ( STATICLIB_TOOLCHAIN MATCHES "windows_[^_]+_[^_]+" )
+if ( STATICLIB_TOOLCHAIN MATCHES "windows_.+" )
     set ( TOOLS_JAVA ${CMAKE_CURRENT_LIST_DIR}/tools/windows/jdk8/bin/java.exe )
     set ( TOOLS_JJS ${CMAKE_CURRENT_LIST_DIR}/tools/windows/jdk8/bin/jjs.exe )
     set ( TOOLS_ZIP ${CMAKE_CURRENT_LIST_DIR}/tools/windows/zip/zip.exe )
@@ -141,145 +154,7 @@ add_custom_command ( OUTPUT std.wlib
 
 add_custom_target( stdlib DEPENDS std.wlib )
 
-add_custom_target ( dist
-        COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}
-        COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}/bin
-        COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}/conf
-        COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}/devel
-        COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}/log
-        COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}/work
-        # core
-        COMMAND ${CMAKE_COMMAND} -E copy
-                bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_core${CMAKE_SHARED_LIBRARY_SUFFIX}
-                wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_core${CMAKE_SHARED_LIBRARY_SUFFIX}
-        COMMAND ${CMAKE_COMMAND} -E copy_directory
-                ${CMAKE_CURRENT_LIST_DIR}/core/include
-                wilton_${WILTON_VERSION}/devel/include
-        # channel
-        COMMAND ${CMAKE_COMMAND} -E copy
-                bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_channel${CMAKE_SHARED_LIBRARY_SUFFIX}
-                wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_channel${CMAKE_SHARED_LIBRARY_SUFFIX}
-        COMMAND ${CMAKE_COMMAND} -E copy
-                ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_channel/include/wilton/wilton_channel.h
-                wilton_${WILTON_VERSION}/devel/include/wilton/wilton_channel.h
-        # cron
-        COMMAND ${CMAKE_COMMAND} -E copy
-                bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_cron${CMAKE_SHARED_LIBRARY_SUFFIX}
-                wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_cron${CMAKE_SHARED_LIBRARY_SUFFIX}
-        COMMAND ${CMAKE_COMMAND} -E copy
-                ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_cron/include/wilton/wilton_cron.h
-                wilton_${WILTON_VERSION}/devel/include/wilton/wilton_cron.h
-        # db
-        COMMAND ${CMAKE_COMMAND} -E copy
-                bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_db${CMAKE_SHARED_LIBRARY_SUFFIX}
-                wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_db${CMAKE_SHARED_LIBRARY_SUFFIX}
-        COMMAND ${CMAKE_COMMAND} -E copy
-                ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_db/include/wilton/wilton_db.h
-                wilton_${WILTON_VERSION}/devel/include/wilton/wilton_db.h
-        # duktape
-        COMMAND ${CMAKE_COMMAND} -E copy
-                bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_duktape${CMAKE_SHARED_LIBRARY_SUFFIX}
-                wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_duktape${CMAKE_SHARED_LIBRARY_SUFFIX}
-        # fs
-        COMMAND ${CMAKE_COMMAND} -E copy
-                bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_fs${CMAKE_SHARED_LIBRARY_SUFFIX}
-                wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_fs${CMAKE_SHARED_LIBRARY_SUFFIX}
-        # http
-        COMMAND ${CMAKE_COMMAND} -E copy
-                bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_http${CMAKE_SHARED_LIBRARY_SUFFIX}
-                wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_http${CMAKE_SHARED_LIBRARY_SUFFIX}
-        COMMAND ${CMAKE_COMMAND} -E copy
-                ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_http/include/wilton/wilton_http.h
-                wilton_${WILTON_VERSION}/devel/include/wilton/wilton_http.h
-        # loader
-        COMMAND ${CMAKE_COMMAND} -E copy
-                bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_loader${CMAKE_SHARED_LIBRARY_SUFFIX}
-                wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_loader${CMAKE_SHARED_LIBRARY_SUFFIX}
-        COMMAND ${CMAKE_COMMAND} -E copy
-                ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_loader/include/wilton/wilton_loader.h
-                wilton_${WILTON_VERSION}/devel/include/wilton/wilton_loader.h
-        # logging
-        COMMAND ${CMAKE_COMMAND} -E copy
-                bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_logging${CMAKE_SHARED_LIBRARY_SUFFIX}
-                wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_logging${CMAKE_SHARED_LIBRARY_SUFFIX}
-        COMMAND ${CMAKE_COMMAND} -E copy
-                ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_logging/include/wilton/wilton_logging.h
-                wilton_${WILTON_VERSION}/devel/include/wilton/wilton_logging.h
-        # net
-        COMMAND ${CMAKE_COMMAND} -E copy
-                bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_net${CMAKE_SHARED_LIBRARY_SUFFIX}
-                wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_net${CMAKE_SHARED_LIBRARY_SUFFIX}
-        COMMAND ${CMAKE_COMMAND} -E copy
-                ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_net/include/wilton/wilton_net.h
-                wilton_${WILTON_VERSION}/devel/include/wilton/wilton_net.h
-        # pdf
-        COMMAND ${CMAKE_COMMAND} -E copy
-                bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_pdf${CMAKE_SHARED_LIBRARY_SUFFIX}
-                wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_pdf${CMAKE_SHARED_LIBRARY_SUFFIX}
-        # process
-        COMMAND ${CMAKE_COMMAND} -E copy
-                bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_process${CMAKE_SHARED_LIBRARY_SUFFIX}
-                wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_process${CMAKE_SHARED_LIBRARY_SUFFIX}
-        COMMAND ${CMAKE_COMMAND} -E copy
-                ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_process/include/wilton/wilton_process.h
-                wilton_${WILTON_VERSION}/devel/include/wilton/wilton_process.h
-        # rhino
-        COMMAND ${CMAKE_COMMAND} -E copy
-                bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_rhino${CMAKE_SHARED_LIBRARY_SUFFIX}
-                wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_rhino${CMAKE_SHARED_LIBRARY_SUFFIX}
-        # signal
-        COMMAND ${CMAKE_COMMAND} -E copy
-                bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_signal${CMAKE_SHARED_LIBRARY_SUFFIX}
-                wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_signal${CMAKE_SHARED_LIBRARY_SUFFIX}
-        COMMAND ${CMAKE_COMMAND} -E copy
-                ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_signal/include/wilton/wilton_signal.h
-                wilton_${WILTON_VERSION}/devel/include/wilton/wilton_signal.h
-        # thread
-        COMMAND ${CMAKE_COMMAND} -E copy
-                bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_thread${CMAKE_SHARED_LIBRARY_SUFFIX}
-                wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_thread${CMAKE_SHARED_LIBRARY_SUFFIX}
-        COMMAND ${CMAKE_COMMAND} -E copy
-                ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_thread/include/wilton/wilton_thread.h
-                wilton_${WILTON_VERSION}/devel/include/wilton/wilton_thread.h
-        # other resources
-        COMMAND ${CMAKE_COMMAND} -E copy
-                bin/wilton_cli${CMAKE_EXECUTABLE_SUFFIX}
-                wilton_${WILTON_VERSION}/bin/wilton${CMAKE_EXECUTABLE_SUFFIX}
-        COMMAND ${CMAKE_COMMAND} -E copy
-                std.wlib
-                wilton_${WILTON_VERSION}/std.wlib
-        COMMAND ${CMAKE_COMMAND} -E copy_directory
-                ${CMAKE_CURRENT_LIST_DIR}/js/examples
-                wilton_${WILTON_VERSION}/examples
-        COMMAND cd wilton_${WILTON_VERSION}/examples/binmod &&
-                ${TOOLS_ZIP} -qr9 binmod.zip *
-        COMMAND ${CMAKE_COMMAND} -E rename
-                wilton_${WILTON_VERSION}/examples/binmod/binmod.zip
-                wilton_${WILTON_VERSION}/examples/binmod.wlib
-        COMMAND ${CMAKE_COMMAND} -E remove_directory
-                wilton_${WILTON_VERSION}/examples/binmod
-        COMMAND ${CMAKE_COMMAND} -E copy
-                ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_cli/resources/one-liner-template.js
-                wilton_${WILTON_VERSION}/conf/one-liner-template.js
-        COMMAND ${CMAKE_COMMAND} -E copy
-                ${CMAKE_CURRENT_LIST_DIR}/js/examples/winservice/config.json
-                wilton_${WILTON_VERSION}/conf/config.json
-        COMMAND ${CMAKE_COMMAND} -E copy
-                ${CMAKE_CURRENT_LIST_DIR}/resources/toolchains/${STATICLIB_TOOLCHAIN}-${WILTON_BUILD_FLAVOUR}.cmake
-                wilton_${WILTON_VERSION}/devel/${STATICLIB_TOOLCHAIN}.cmake
-        COMMAND ${CMAKE_COMMAND} -E copy
-                ${CMAKE_CURRENT_LIST_DIR}/resources/installer/.keep
-                wilton_${WILTON_VERSION}/log/.keep
-        COMMAND ${CMAKE_COMMAND} -E copy
-                ${CMAKE_CURRENT_LIST_DIR}/resources/installer/.keep
-                wilton_${WILTON_VERSION}/work/.keep
-        COMMAND ${CMAKE_COMMAND} -E copy
-                wilton.version
-                wilton_${WILTON_VERSION}/conf/wilton.version  
-        WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-        COMMENT "Creating distribution at [${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION}] ..." )
-
-add_dependencies ( dist
+add_custom_target ( nativelibs DEPENDS
         wilton_core
         wilton_db
         wilton_duktape
@@ -287,6 +162,7 @@ add_dependencies ( dist
         wilton_cli
         wilton_cron
         wilton_fs
+        wilton_jsc
         wilton_http
         wilton_loader
         wilton_logging
@@ -294,11 +170,200 @@ add_dependencies ( dist
         wilton_pdf
         wilton_process
         wilton_rhino
+        wilton_serial
         wilton_signal
         wilton_thread
-        stdlib )
+        wilton_usb )
 
-if ( STATICLIB_TOOLCHAIN MATCHES "windows_[^_]+_[^_]+" )
+if ( STATICLIB_TOOLCHAIN MATCHES "android_.+" )
+
+    add_custom_target ( mvninstall
+            COMMAND cd ${CMAKE_CURRENT_LIST_DIR}/jni &&
+                    ${CMAKE_CURRENT_LIST_DIR}/tools/maven/bin/mvn clean package -Dmaven.test.skip=true
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    ${CMAKE_CURRENT_LIST_DIR}/jni/target/wilton-android.jar
+                    wilton-android.jar
+            COMMAND ${CMAKE_COMMAND} -E make_directory lib
+            COMMAND ${CMAKE_COMMAND} -E make_directory lib/x86
+            COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_core.so lib/x86/
+            COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_db.so lib/x86/
+            COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_duktape.so lib/x86/
+            COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_channel.so lib/x86/
+            COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_cron.so lib/x86/
+            COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_fs.so lib/x86/
+            COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_http.so lib/x86/
+            COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_loader.so lib/x86/
+            COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_logging.so lib/x86/
+            COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_net.so lib/x86/
+            COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_pdf.so lib/x86/
+            COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_rhino.so lib/x86/
+            COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_thread.so lib/x86/
+            COMMAND jar uf wilton-android.jar lib/x86/*.so
+            COMMAND ${CMAKE_CURRENT_LIST_DIR}/tools/maven/bin/mvn install:install-file
+                    -Dfile=wilton-android.jar
+                    -DgroupId=net.wiltontoolkit
+                    -DartifactId=wilton-android
+                    -Dversion=${WILTON_VERSION}
+                    -Dpackaging=jar
+            WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIRECTORY}
+            DEPENDS nativelibs
+            COMMENT "Installing library into local Maven repository ..." )
+
+elseif ( STATICLIB_TOOLCHAIN MATCHES "(windows|linux)_.+" )
+
+    add_custom_target ( dist
+            COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}
+            COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}/bin
+            COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}/conf
+            COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}/devel
+            COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}/log
+            COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}/work
+            # core
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_core${CMAKE_SHARED_LIBRARY_SUFFIX}
+                    wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_core${CMAKE_SHARED_LIBRARY_SUFFIX}
+            COMMAND ${CMAKE_COMMAND} -E copy_directory
+                    ${CMAKE_CURRENT_LIST_DIR}/core/include
+                    wilton_${WILTON_VERSION}/devel/include
+            # channel
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_channel${CMAKE_SHARED_LIBRARY_SUFFIX}
+                    wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_channel${CMAKE_SHARED_LIBRARY_SUFFIX}
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_channel/include/wilton/wilton_channel.h
+                    wilton_${WILTON_VERSION}/devel/include/wilton/wilton_channel.h
+            # cron
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_cron${CMAKE_SHARED_LIBRARY_SUFFIX}
+                    wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_cron${CMAKE_SHARED_LIBRARY_SUFFIX}
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_cron/include/wilton/wilton_cron.h
+                    wilton_${WILTON_VERSION}/devel/include/wilton/wilton_cron.h
+            # db
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_db${CMAKE_SHARED_LIBRARY_SUFFIX}
+                    wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_db${CMAKE_SHARED_LIBRARY_SUFFIX}
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_db/include/wilton/wilton_db.h
+                    wilton_${WILTON_VERSION}/devel/include/wilton/wilton_db.h
+            # duktape
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_duktape${CMAKE_SHARED_LIBRARY_SUFFIX}
+                    wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_duktape${CMAKE_SHARED_LIBRARY_SUFFIX}
+            # fs
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_fs${CMAKE_SHARED_LIBRARY_SUFFIX}
+                    wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_fs${CMAKE_SHARED_LIBRARY_SUFFIX}
+            # http
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_http${CMAKE_SHARED_LIBRARY_SUFFIX}
+                    wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_http${CMAKE_SHARED_LIBRARY_SUFFIX}
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_http/include/wilton/wilton_http.h
+                    wilton_${WILTON_VERSION}/devel/include/wilton/wilton_http.h
+            # loader
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_loader${CMAKE_SHARED_LIBRARY_SUFFIX}
+                    wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_loader${CMAKE_SHARED_LIBRARY_SUFFIX}
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_loader/include/wilton/wilton_loader.h
+                    wilton_${WILTON_VERSION}/devel/include/wilton/wilton_loader.h
+            # logging
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_logging${CMAKE_SHARED_LIBRARY_SUFFIX}
+                    wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_logging${CMAKE_SHARED_LIBRARY_SUFFIX}
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_logging/include/wilton/wilton_logging.h
+                    wilton_${WILTON_VERSION}/devel/include/wilton/wilton_logging.h
+            # net
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_net${CMAKE_SHARED_LIBRARY_SUFFIX}
+                    wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_net${CMAKE_SHARED_LIBRARY_SUFFIX}
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_net/include/wilton/wilton_net.h
+                    wilton_${WILTON_VERSION}/devel/include/wilton/wilton_net.h
+            # pdf
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_pdf${CMAKE_SHARED_LIBRARY_SUFFIX}
+                    wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_pdf${CMAKE_SHARED_LIBRARY_SUFFIX}
+            # process
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_process${CMAKE_SHARED_LIBRARY_SUFFIX}
+                    wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_process${CMAKE_SHARED_LIBRARY_SUFFIX}
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_process/include/wilton/wilton_process.h
+                    wilton_${WILTON_VERSION}/devel/include/wilton/wilton_process.h
+            # rhino
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_rhino${CMAKE_SHARED_LIBRARY_SUFFIX}
+                    wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_rhino${CMAKE_SHARED_LIBRARY_SUFFIX}
+            # signal
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_signal${CMAKE_SHARED_LIBRARY_SUFFIX}
+                    wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_signal${CMAKE_SHARED_LIBRARY_SUFFIX}
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_signal/include/wilton/wilton_signal.h
+                    wilton_${WILTON_VERSION}/devel/include/wilton/wilton_signal.h
+            # thread
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_thread${CMAKE_SHARED_LIBRARY_SUFFIX}
+                    wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_thread${CMAKE_SHARED_LIBRARY_SUFFIX}
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_thread/include/wilton/wilton_thread.h
+                    wilton_${WILTON_VERSION}/devel/include/wilton/wilton_thread.h
+            # other resources
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    bin/wilton_cli${CMAKE_EXECUTABLE_SUFFIX}
+                    wilton_${WILTON_VERSION}/bin/wilton${CMAKE_EXECUTABLE_SUFFIX}
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    std.wlib
+                    wilton_${WILTON_VERSION}/std.wlib
+            COMMAND ${CMAKE_COMMAND} -E copy_directory
+                    ${CMAKE_CURRENT_LIST_DIR}/js/examples
+                    wilton_${WILTON_VERSION}/examples
+            COMMAND cd wilton_${WILTON_VERSION}/examples/binmod &&
+                    ${TOOLS_ZIP} -qr9 binmod.zip *
+            COMMAND ${CMAKE_COMMAND} -E rename
+                    wilton_${WILTON_VERSION}/examples/binmod/binmod.zip
+                    wilton_${WILTON_VERSION}/examples/binmod.wlib
+            COMMAND ${CMAKE_COMMAND} -E remove_directory
+                    wilton_${WILTON_VERSION}/examples/binmod
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_cli/resources/one-liner-template.js
+                    wilton_${WILTON_VERSION}/conf/one-liner-template.js
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    ${CMAKE_CURRENT_LIST_DIR}/js/examples/winservice/config.json
+                    wilton_${WILTON_VERSION}/conf/config.json
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    ${CMAKE_CURRENT_LIST_DIR}/resources/toolchains/${STATICLIB_TOOLCHAIN}-${WILTON_BUILD_FLAVOUR}.cmake
+                    wilton_${WILTON_VERSION}/devel/${STATICLIB_TOOLCHAIN}.cmake
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    ${CMAKE_CURRENT_LIST_DIR}/resources/installer/.keep
+                    wilton_${WILTON_VERSION}/log/.keep
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    ${CMAKE_CURRENT_LIST_DIR}/resources/installer/.keep
+                    wilton_${WILTON_VERSION}/work/.keep
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    wilton.version
+                    wilton_${WILTON_VERSION}/conf/wilton.version  
+            WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+            DEPENDS nativelibs stdlib
+            COMMENT "Creating distribution at [${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION}] ..." )
+
+    add_custom_target ( test
+            COMMAND bin/wilton ${CMAKE_CURRENT_LIST_DIR}/js/wilton/test/index.js -m ${CMAKE_CURRENT_LIST_DIR}/js
+            COMMAND bin/wilton ${CMAKE_CURRENT_LIST_DIR}/js/wilton/test/index.js -m ${CMAKE_CURRENT_LIST_DIR}/js -j duktape
+            COMMAND bin/wilton ${CMAKE_CURRENT_LIST_DIR}/core/test/scripts/runNodeTests.js -m ${CMAKE_CURRENT_LIST_DIR}/js
+            COMMAND bin/wilton ${CMAKE_CURRENT_LIST_DIR}/core/test/scripts/runNodeTests.js -m ${CMAKE_CURRENT_LIST_DIR}/js -j duktape
+            COMMAND cd ${CMAKE_CURRENT_LIST_DIR}/jni && ${CMAKE_CURRENT_LIST_DIR}/tools/maven/bin/mvn clean test
+            WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION} 
+            DEPENDS dist
+            COMMENT "Running tests ..." )
+
+endif ( )
+
+if ( STATICLIB_TOOLCHAIN MATCHES "windows_.+" )
+
     add_custom_target ( dist_windows
             COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}
             COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}/bin            
@@ -314,8 +379,8 @@ if ( STATICLIB_TOOLCHAIN MATCHES "windows_[^_]+_[^_]+" )
             COMMAND ${CMAKE_COMMAND} -E copy
                 bin/wilton_core.lib
                 wilton_${WILTON_VERSION}/devel/wilton_core.lib
-            WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR} )
-    add_dependencies ( dist_windows wilton_winservice )      
+            WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+            DEPENDS wilton_winservice )
     add_dependencies ( dist dist_windows )
 
     configure_file ( 
@@ -335,9 +400,11 @@ if ( STATICLIB_TOOLCHAIN MATCHES "windows_[^_]+_[^_]+" )
                     -v -nologo -sw1076 -sval -ext WixUIExtension -ext WixUtilExtension
                     wilton_${WILTON_VERSION}.wixobj
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+            DEPENDS dist
             COMMENT "Creating MSI at [${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION}.msi] ..." )
-    add_dependencies ( installer dist )
-else ( )
+
+elseif ( STATICLIB_TOOLCHAIN MATCHES "linux_.+" )
+
     add_custom_target ( dist_linux
             COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}
             COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}/bin
@@ -358,22 +425,10 @@ else ( )
             COMMAND ${CMAKE_COMMAND} -E copy
                     ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_usb/include/wilton/wilton_usb.h
                     wilton_${WILTON_VERSION}/devel/include/wilton/wilton_usb.h
-            WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR} )
-    add_dependencies ( dist_linux wilton_jsc wilton_serial wilton_usb )      
+            WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+            DEPENDS wilton_jsc wilton_serial wilton_usb )
     add_dependencies ( dist dist_linux )
-endif ( )
 
-add_custom_target ( test
-        COMMAND bin/wilton ${CMAKE_CURRENT_LIST_DIR}/js/wilton/test/index.js -m ${CMAKE_CURRENT_LIST_DIR}/js
-        COMMAND bin/wilton ${CMAKE_CURRENT_LIST_DIR}/js/wilton/test/index.js -m ${CMAKE_CURRENT_LIST_DIR}/js -j duktape
-        COMMAND bin/wilton ${CMAKE_CURRENT_LIST_DIR}/core/test/scripts/runNodeTests.js -m ${CMAKE_CURRENT_LIST_DIR}/js
-        COMMAND bin/wilton ${CMAKE_CURRENT_LIST_DIR}/core/test/scripts/runNodeTests.js -m ${CMAKE_CURRENT_LIST_DIR}/js -j duktape
-        COMMAND cd ${CMAKE_CURRENT_LIST_DIR}/jni && ${CMAKE_CURRENT_LIST_DIR}/tools/maven/bin/mvn clean test
-        WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION} 
-        COMMENT "Running tests ..." )
-add_dependencies ( test dist )
-
-if ( STATICLIB_TOOLCHAIN MATCHES "linux_[^_]+_[^_]+" )
     set ( ${PROJECT_NAME}_VGOPTS 
             --leak-check=yes --show-reachable=yes --track-origins=yes --error-exitcode=42 --track-fds=yes
             --suppressions=${CMAKE_CURRENT_LIST_DIR}/deps/cmake/resources/valgrind/openssl_malloc.supp
@@ -388,62 +443,20 @@ if ( STATICLIB_TOOLCHAIN MATCHES "linux_[^_]+_[^_]+" )
             COMMAND valgrind ${${PROJECT_NAME}_VGOPTS}
                     ./bin/wilton ${CMAKE_CURRENT_LIST_DIR}/js/wilton/test/index.js -m ../../js -j duktape
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION} 
+            DEPENDS dist
             COMMENT "Running valgrind ..." )
-    add_dependencies ( valgrind dist )
+
+    add_custom_target ( docs
+            COMMAND ${CMAKE_COMMAND} -E remove_directory doxy
+            COMMAND ${CMAKE_COMMAND} -E remove_directory docs
+            COMMAND ${CMAKE_COMMAND} -E make_directory docs
+            COMMAND ${TOOLS_JJS}
+                    -J-XX:+UseSerialGC -J-XX:+TieredCompilation -J-XX:TieredStopAtLevel=1
+                    ${CMAKE_CURRENT_LIST_DIR}/resources/doxygen/generate-doxy.js
+                    ${CMAKE_CURRENT_LIST_DIR}/js/wilton doxy
+            COMMAND doxygen
+            # poor man's WARN_AS_ERROR
+            COMMAND [ ! -s doxygen_warnings.txt ]
+            WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+            COMMENT "Generating documentation at [${CMAKE_CURRENT_BINARY_DIR}/docs] ..." )
 endif ( )
-        
-add_custom_target ( docs
-        COMMAND ${CMAKE_COMMAND} -E remove_directory doxy
-        COMMAND ${CMAKE_COMMAND} -E remove_directory docs
-        COMMAND ${CMAKE_COMMAND} -E make_directory docs
-        COMMAND ${TOOLS_JJS}
-                -J-XX:+UseSerialGC -J-XX:+TieredCompilation -J-XX:TieredStopAtLevel=1
-                ${CMAKE_CURRENT_LIST_DIR}/resources/doxygen/generate-doxy.js
-                ${CMAKE_CURRENT_LIST_DIR}/js/wilton doxy
-        COMMAND doxygen
-        # poor man's WARN_AS_ERROR
-        COMMAND [ ! -s doxygen_warnings.txt ]
-        WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-        COMMENT "Generating documentation at [${CMAKE_CURRENT_BINARY_DIR}/docs] ..." )
-# todo
-
-# maven install
-#if ( WILTON_TOOLCHAIN MATCHES "android_armeabi_[^_]+" )
-#    set ( ${PROJECT_NAME}_CLASSIFIER "android_armeabi" CACHE INTERNAL "" )
-#    set ( ${PROJECT_NAME}_JAR_LIB_DIR "armeabi" CACHE INTERNAL "" )
-#elseif ( WILTON_TOOLCHAIN MATCHES "android_i386_[^_]+" )
-#    set ( ${PROJECT_NAME}_CLASSIFIER "android_i386" CACHE INTERNAL "" )
-#    set ( ${PROJECT_NAME}_JAR_LIB_DIR "x86" CACHE INTERNAL "" )
-#elseif ( WILTON_TOOLCHAIN MATCHES "linux_amd64_[^_]+" )
-#    set ( ${PROJECT_NAME}_CLASSIFIER "linux_amd64" CACHE INTERNAL "" )
-#elseif ( WILTON_TOOLCHAIN MATCHES "windows_amd64_[^_]+" )
-#    set ( ${PROJECT_NAME}_CLASSIFIER "windows_amd64" CACHE INTERNAL "" )
-#elseif ( WILTON_TOOLCHAIN MATCHES "windows_i386_[^_]+" )
-#    set ( ${PROJECT_NAME}_CLASSIFIER "windows_i386" CACHE INTERNAL "" )
-#else ( )
-#    message ( FATAL_ERROR "Unsupported toolchain: [WILTON_TOOLCHAIN]" )
-#endif ( )
-#string ( SUBSTRING ${CMAKE_SHARED_LIBRARY_SUFFIX} 1 -1 ${PROJECT_NAME}_SHARED_SUFFIX )
-#string ( SUBSTRING ${CMAKE_STATIC_LIBRARY_SUFFIX} 1 -1 ${PROJECT_NAME}_STATIC_SUFFIX )
-
-#add_custom_target ( mvninstall_shared
-#        COMMAND mvn install:install-file
-#                -Dfile=${CMAKE_SHARED_LIBRARY_PREFIX}${PROJECT_NAME}${CMAKE_SHARED_LIBRARY_SUFFIX}
-#                -DgroupId=net.wiltontoolkit
-#                -DartifactId=${PROJECT_NAME}
-#                -Dversion=${${PROJECT_NAME}_STATICLIB_VERSION}
-#                -Dclassifier=${${PROJECT_NAME}_CLASSIFIER}
-#                -Dpackaging=${${PROJECT_NAME}_SHARED_SUFFIX}
-#        WORKING_DIRECTORY ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}        
-#        COMMENT "Installing shared library into local Maven repository ..." )
-#
-#add_custom_target ( mvninstall_import
-#        COMMAND mvn install:install-file
-#                -Dfile=${CMAKE_SHARED_LIBRARY_PREFIX}${PROJECT_NAME}${CMAKE_STATIC_LIBRARY_SUFFIX}
-#                -DgroupId=net.wiltontoolkit
-#                -DartifactId=${PROJECT_NAME}
-#                -Dversion=${${PROJECT_NAME}_STATICLIB_VERSION}
-#                -Dclassifier=${${PROJECT_NAME}_CLASSIFIER}
-#                -Dpackaging=${${PROJECT_NAME}_STATIC_SUFFIX}
-#        WORKING_DIRECTORY ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}        
-#        COMMENT "Installing import library into local Maven repository ..." )
