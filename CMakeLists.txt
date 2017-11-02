@@ -43,6 +43,11 @@ if ( NOT DEFINED STATICLIB_TOOLCHAIN )
         message ( FATAL_ERROR "Cannot find out toolchain to use, please specify [STATICLIB_TOOLCHAIN]" )
     endif ( )
 endif ( )
+if ( STATICLIB_TOOLCHAIN MATCHES "android_.+" )
+    if ( NOT DEFINED WILTON_BUILD_FLAVOUR )
+        set ( WILTON_BUILD_FLAVOUR "r9d" CACHE STRING "" )
+    endif ( )
+endif ( )
 set ( STATICLIB_DEPS ${CMAKE_CURRENT_LIST_DIR}/deps CACHE INTERNAL "" )
 set ( STATICLIB_CMAKE ${STATICLIB_DEPS}/cmake CACHE INTERNAL "" )
 set ( WILTON_DIR ${CMAKE_CURRENT_LIST_DIR} CACHE INTERNAL "" )
@@ -126,17 +131,17 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "linux_.+" )
     staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_serial )
     staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_usb )
     add_custom_target ( wilton_winservice )
-else ( )
-    message ( FATAL_ERROR "Unsupported toolchain: [${STATICLIB_TOOLCHAIN}]" )
 endif ( )
 
 # platform tools
 set ( TOOLS_JAVA java )
 set ( TOOLS_JJS jjs )
+set ( TOOLS_JAR jar )
 set ( TOOLS_ZIP zip )
 if ( STATICLIB_TOOLCHAIN MATCHES "windows_.+" )
     set ( TOOLS_JAVA ${CMAKE_CURRENT_LIST_DIR}/tools/windows/jdk8/bin/java.exe )
     set ( TOOLS_JJS ${CMAKE_CURRENT_LIST_DIR}/tools/windows/jdk8/bin/jjs.exe )
+    set ( TOOLS_JAR ${CMAKE_CURRENT_LIST_DIR}/tools/windows/jdk8/bin/jar.exe )
     set ( TOOLS_ZIP ${CMAKE_CURRENT_LIST_DIR}/tools/windows/zip/zip.exe )
 endif ( )
 
@@ -176,38 +181,84 @@ add_custom_target ( nativelibs DEPENDS
         wilton_usb )
 
 if ( STATICLIB_TOOLCHAIN MATCHES "android_.+" )
+    if ( STATICLIB_TOOLCHAIN MATCHES "android_armeabi_.+" )
+        set ( ${PROJECT_NAME}_ANDROID_ARCH armeabi-v7a )
+    elseif ( STATICLIB_TOOLCHAIN MATCHES "android_i386_.+" )
+        set ( ${PROJECT_NAME}_ANDROID_ARCH x86 )
+    else ( )
+        message ( FATAL_ERROR "Cannot determine Android arch for toolchain: [${STATICLIB_TOOLCHAIN}]" )
+    endif ( )
 
-    add_custom_target ( mvninstall
+    add_custom_target ( jar
+            COMMAND ${CMAKE_COMMAND} -E remove wilton-android.jar
             COMMAND cd ${CMAKE_CURRENT_LIST_DIR}/jni &&
                     ${CMAKE_CURRENT_LIST_DIR}/tools/maven/bin/mvn clean package -Dmaven.test.skip=true
             COMMAND ${CMAKE_COMMAND} -E copy
                     ${CMAKE_CURRENT_LIST_DIR}/jni/target/wilton-android.jar
                     wilton-android.jar
+            COMMAND ${CMAKE_COMMAND} -E remove_directory lib
             COMMAND ${CMAKE_COMMAND} -E make_directory lib
-            COMMAND ${CMAKE_COMMAND} -E make_directory lib/x86
-            COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_core.so lib/x86/
-            COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_db.so lib/x86/
-            COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_duktape.so lib/x86/
-            COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_channel.so lib/x86/
-            COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_cron.so lib/x86/
-            COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_fs.so lib/x86/
-            COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_http.so lib/x86/
-            COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_loader.so lib/x86/
-            COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_logging.so lib/x86/
-            COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_net.so lib/x86/
-            COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_pdf.so lib/x86/
-            COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_rhino.so lib/x86/
-            COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_thread.so lib/x86/
-            COMMAND jar uf wilton-android.jar lib/x86/*.so
-            COMMAND ${CMAKE_CURRENT_LIST_DIR}/tools/maven/bin/mvn install:install-file
-                    -Dfile=wilton-android.jar
-                    -DgroupId=net.wiltontoolkit
-                    -DartifactId=wilton-android
-                    -Dversion=${WILTON_VERSION}
-                    -Dpackaging=jar
+            COMMAND ${CMAKE_COMMAND} -E make_directory lib/${${PROJECT_NAME}_ANDROID_ARCH}
+            # gnustl
+            COMMAND ${CMAKE_COMMAND} -E copy ${ANDROID_GNUSTL_SHARED_PATH}/libgnustl_shared.so lib/${${PROJECT_NAME}_ANDROID_ARCH}/
+            COMMAND ${CMAKE_STRIP} lib/${${PROJECT_NAME}_ANDROID_ARCH}/libgnustl_shared.so
+            COMMAND ${TOOLS_JAR} uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libgnustl_shared.so
+            # core
+            COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_core.so lib/${${PROJECT_NAME}_ANDROID_ARCH}/
+            COMMAND ${CMAKE_STRIP} lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_core.so
+            COMMAND ${TOOLS_JAR} uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_core.so
+            # db
+            COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_db.so lib/${${PROJECT_NAME}_ANDROID_ARCH}/
+            COMMAND ${CMAKE_STRIP} lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_db.so
+            COMMAND ${TOOLS_JAR} uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_db.so
+            # duktape
+            COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_duktape.so lib/${${PROJECT_NAME}_ANDROID_ARCH}/
+            COMMAND ${CMAKE_STRIP} lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_duktape.so
+            COMMAND ${TOOLS_JAR} uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_duktape.so
+            # channel
+            COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_channel.so lib/${${PROJECT_NAME}_ANDROID_ARCH}/
+            COMMAND ${CMAKE_STRIP} lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_channel.so
+            COMMAND ${TOOLS_JAR} uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_channel.so
+            # cron
+            COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_cron.so lib/${${PROJECT_NAME}_ANDROID_ARCH}/
+            COMMAND ${CMAKE_STRIP} lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_cron.so
+            COMMAND ${TOOLS_JAR} uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_cron.so
+            # fs    
+            COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_fs.so lib/${${PROJECT_NAME}_ANDROID_ARCH}/
+            COMMAND ${CMAKE_STRIP} lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_fs.so
+            COMMAND ${TOOLS_JAR} uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_fs.so
+            # http
+            COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_http.so lib/${${PROJECT_NAME}_ANDROID_ARCH}/
+            COMMAND ${CMAKE_STRIP} lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_http.so
+            COMMAND ${TOOLS_JAR} uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_http.so
+            # loader
+            COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_loader.so lib/${${PROJECT_NAME}_ANDROID_ARCH}/
+            COMMAND ${CMAKE_STRIP} lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_loader.so
+            COMMAND ${TOOLS_JAR} uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_loader.so
+            # logging
+            COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_logging.so lib/${${PROJECT_NAME}_ANDROID_ARCH}/
+            COMMAND ${CMAKE_STRIP} lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_logging.so
+            COMMAND ${TOOLS_JAR} uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_logging.so
+            # net
+            COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_net.so lib/${${PROJECT_NAME}_ANDROID_ARCH}/
+            COMMAND ${CMAKE_STRIP} lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_net.so
+            COMMAND ${TOOLS_JAR} uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_net.so
+            # pdf
+            COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_pdf.so lib/${${PROJECT_NAME}_ANDROID_ARCH}/
+            COMMAND ${CMAKE_STRIP} lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_pdf.so
+            COMMAND ${TOOLS_JAR} uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_pdf.so
+            # rhino
+            COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_rhino.so lib/${${PROJECT_NAME}_ANDROID_ARCH}/
+            COMMAND ${CMAKE_STRIP} lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_rhino.so
+            COMMAND ${TOOLS_JAR} uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_rhino.so
+            # thread
+            COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_thread.so lib/${${PROJECT_NAME}_ANDROID_ARCH}/
+            COMMAND ${CMAKE_STRIP} lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_thread.so
+            COMMAND ${TOOLS_JAR} uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_thread.so
+
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIRECTORY}
             DEPENDS nativelibs
-            COMMENT "Installing library into local Maven repository ..." )
+            COMMENT "Creating JAR ..." )
 
 elseif ( STATICLIB_TOOLCHAIN MATCHES "(windows|linux)_.+" )
 

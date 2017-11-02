@@ -325,3 +325,6 @@
 [submodule "modules/wilton_jsc"]
 	path = modules/wilton_jsc
 	url = https://github.com/wilton-iot/wilton_jsc.git
+[submodule "tools/android/android-ndk-r9d-arm-linux-androideabi-4.8"]
+	path = tools/android/android-ndk-r9d-arm-linux-androideabi-4.8
+	url = https://github.com/staticlibs/android-ndk-r9d-arm-linux-androideabi-4.8.git
