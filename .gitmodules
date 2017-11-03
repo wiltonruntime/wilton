@@ -328,3 +328,15 @@
 [submodule "tools/android/android-ndk-r9d-arm-linux-androideabi-4.8"]
 	path = tools/android/android-ndk-r9d-arm-linux-androideabi-4.8
 	url = https://github.com/staticlibs/android-ndk-r9d-arm-linux-androideabi-4.8.git
+[submodule "android"]
+	path = android
+	url = https://github.com/wilton-iot/wilton_android.git
+[submodule "tools/android/libc6_2.15"]
+	path = tools/android/libc6_2.15
+	url = https://github.com/wilton-iot/tools_android_libc6_2.15.git
+[submodule "tools/gradle"]
+	path = tools/gradle
+	url = https://github.com/wilton-iot/tools_gradle.git
+[submodule "tools/android/sdk"]
+	path = tools/android/sdk
+	url = https://github.com/wilton-iot/tools_android_sdk.git

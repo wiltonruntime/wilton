@@ -48,10 +48,10 @@ if ( STATICLIB_TOOLCHAIN MATCHES "android_.+" )
         set ( WILTON_BUILD_FLAVOUR "r9d" CACHE STRING "" )
     endif ( )
 endif ( )
-set ( STATICLIB_DEPS ${CMAKE_CURRENT_LIST_DIR}/deps CACHE INTERNAL "" )
-set ( STATICLIB_CMAKE ${STATICLIB_DEPS}/cmake CACHE INTERNAL "" )
 set ( WILTON_DIR ${CMAKE_CURRENT_LIST_DIR} CACHE INTERNAL "" )
-set ( CMAKE_TOOLCHAIN_FILE ${CMAKE_CURRENT_LIST_DIR}/resources/toolchains/${STATICLIB_TOOLCHAIN}-${WILTON_BUILD_FLAVOUR}.cmake CACHE INTERNAL "" )
+set ( STATICLIB_DEPS ${WILTON_DIR}/deps CACHE INTERNAL "" )
+set ( STATICLIB_CMAKE ${STATICLIB_DEPS}/cmake CACHE INTERNAL "" )
+set ( CMAKE_TOOLCHAIN_FILE ${WILTON_DIR}/resources/toolchains/${STATICLIB_TOOLCHAIN}-${WILTON_BUILD_FLAVOUR}.cmake CACHE INTERNAL "" )
 
 # master project
 project ( wilton CXX C )
@@ -67,47 +67,47 @@ configure_file ( ${WILTON_DIR}/resources/doxygen/Doxyfile
 
 # supply missed pkg-config descriptors
 if ( WILTON_BUILD_FLAVOUR MATCHES "wheezy" )
-    configure_file ( ${CMAKE_CURRENT_LIST_DIR}/resources/pkgconfig/log4cplus.pc
+    configure_file ( ${WILTON_DIR}/resources/pkgconfig/log4cplus.pc
             ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/pkgconfig/log4cplus.pc )
 elseif ( WILTON_BUILD_FLAVOUR MATCHES "fedora" )
-    configure_file ( ${CMAKE_CURRENT_LIST_DIR}/resources/pkgconfig/hpdf.pc
+    configure_file ( ${WILTON_DIR}/resources/pkgconfig/hpdf.pc
             ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/pkgconfig/hpdf.pc )
-    configure_file ( ${CMAKE_CURRENT_LIST_DIR}/resources/pkgconfig/soci.pc
+    configure_file ( ${WILTON_DIR}/resources/pkgconfig/soci.pc
             ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/pkgconfig/soci.pc )
-    configure_file ( ${CMAKE_CURRENT_LIST_DIR}/resources/pkgconfig/asio.pc
+    configure_file ( ${WILTON_DIR}/resources/pkgconfig/asio.pc
             ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/pkgconfig/asio.pc )
 elseif ( WILTON_BUILD_FLAVOUR MATCHES "xenial" )
-    configure_file ( ${CMAKE_CURRENT_LIST_DIR}/resources/pkgconfig/asio.pc
+    configure_file ( ${WILTON_DIR}/resources/pkgconfig/asio.pc
             ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/pkgconfig/asio.pc )
-    configure_file ( ${CMAKE_CURRENT_LIST_DIR}/resources/pkgconfig/log4cplus.pc
+    configure_file ( ${WILTON_DIR}/resources/pkgconfig/log4cplus.pc
             ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/pkgconfig/log4cplus.pc )
-    configure_file ( ${CMAKE_CURRENT_LIST_DIR}/resources/pkgconfig/soci.pc
+    configure_file ( ${WILTON_DIR}/resources/pkgconfig/soci.pc
             ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/pkgconfig/soci.pc )
 elseif ( WILTON_BUILD_FLAVOUR MATCHES "el7" )
-    configure_file ( ${CMAKE_CURRENT_LIST_DIR}/resources/pkgconfig/asio.pc
+    configure_file ( ${WILTON_DIR}/resources/pkgconfig/asio.pc
             ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/pkgconfig/asio.pc )
-    configure_file ( ${CMAKE_CURRENT_LIST_DIR}/resources/pkgconfig/popt.pc
+    configure_file ( ${WILTON_DIR}/resources/pkgconfig/popt.pc
             ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/pkgconfig/popt.pc )
-    configure_file ( ${CMAKE_CURRENT_LIST_DIR}/resources/pkgconfig/soci.pc
+    configure_file ( ${WILTON_DIR}/resources/pkgconfig/soci.pc
             ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/pkgconfig/soci.pc )
 endif ( )
 
 # core
-add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/core )
+add_subdirectory ( ${WILTON_DIR}/core )
 
 # modules
-staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_logging )
-staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_channel )
-staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_cron )
-staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_db )
-staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_duktape )
-staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_fs )
-staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_http )
-staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_loader )
-staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_net )
-staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_pdf )
-staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_rhino )
-staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_thread )
+staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_logging )
+staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_channel )
+staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_cron )
+staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_db )
+staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_duktape )
+staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_fs )
+staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_http )
+staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_loader )
+staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_net )
+staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_pdf )
+staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_rhino )
+staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_thread )
 if ( STATICLIB_TOOLCHAIN MATCHES "android_.+" )
     add_custom_target ( wilton_cli )
     add_custom_target ( wilton_jsc )
@@ -117,19 +117,19 @@ if ( STATICLIB_TOOLCHAIN MATCHES "android_.+" )
     add_custom_target ( wilton_usb )
     add_custom_target ( wilton_winservice )
 elseif ( STATICLIB_TOOLCHAIN MATCHES "(windows|linux)_.+" )
-    staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_cli )
-    staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_process )
-    staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_signal )
+    staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_cli )
+    staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_process )
+    staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_signal )
 endif ( )
 if ( STATICLIB_TOOLCHAIN MATCHES "windows_.+" )
     add_custom_target ( wilton_jsc )
     add_custom_target ( wilton_serial )
     add_custom_target ( wilton_usb )
-    staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_winservice )
+    staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_winservice )
 elseif ( STATICLIB_TOOLCHAIN MATCHES "linux_.+" )
-    staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_jsc )
-    staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_serial )
-    staticlib_add_subdirectory ( ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_usb )
+    staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_jsc )
+    staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_serial )
+    staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_usb )
     add_custom_target ( wilton_winservice )
 endif ( )
 
@@ -139,19 +139,19 @@ set ( TOOLS_JJS jjs )
 set ( TOOLS_JAR jar )
 set ( TOOLS_ZIP zip )
 if ( STATICLIB_TOOLCHAIN MATCHES "windows_.+" )
-    set ( TOOLS_JAVA ${CMAKE_CURRENT_LIST_DIR}/tools/windows/jdk8/bin/java.exe )
-    set ( TOOLS_JJS ${CMAKE_CURRENT_LIST_DIR}/tools/windows/jdk8/bin/jjs.exe )
-    set ( TOOLS_JAR ${CMAKE_CURRENT_LIST_DIR}/tools/windows/jdk8/bin/jar.exe )
-    set ( TOOLS_ZIP ${CMAKE_CURRENT_LIST_DIR}/tools/windows/zip/zip.exe )
+    set ( TOOLS_JAVA ${WILTON_DIR}/tools/windows/jdk8/bin/java.exe )
+    set ( TOOLS_JJS ${WILTON_DIR}/tools/windows/jdk8/bin/jjs.exe )
+    set ( TOOLS_JAR ${WILTON_DIR}/tools/windows/jdk8/bin/jar.exe )
+    set ( TOOLS_ZIP ${WILTON_DIR}/tools/windows/zip/zip.exe )
 endif ( )
 
 add_custom_command ( OUTPUT std.wlib
         COMMAND ${CMAKE_COMMAND} -E remove_directory js
         COMMAND ${TOOLS_JJS}
                 -J-XX:+UseSerialGC -J-XX:+TieredCompilation -J-XX:TieredStopAtLevel=1
-                -cp ${CMAKE_CURRENT_LIST_DIR}/tools/closure-compiler/closure-compiler.jar
-                ${CMAKE_CURRENT_LIST_DIR}/tools/convertion-scripts/minify-modules.js
-                -- ${CMAKE_CURRENT_LIST_DIR}/js js
+                -cp ${WILTON_DIR}/tools/closure-compiler/closure-compiler.jar
+                ${WILTON_DIR}/tools/convertion-scripts/minify-modules.js
+                -- ${WILTON_DIR}/js js
         COMMAND cd js && ${TOOLS_ZIP} -qr9 js.zip *
         COMMAND ${CMAKE_COMMAND} -E rename js/js.zip std.wlib
         WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
@@ -189,12 +189,12 @@ if ( STATICLIB_TOOLCHAIN MATCHES "android_.+" )
         message ( FATAL_ERROR "Cannot determine Android arch for toolchain: [${STATICLIB_TOOLCHAIN}]" )
     endif ( )
 
-    add_custom_target ( jar
+    add_custom_command ( OUTPUT wilton-android.jar
             COMMAND ${CMAKE_COMMAND} -E remove wilton-android.jar
-            COMMAND cd ${CMAKE_CURRENT_LIST_DIR}/jni &&
-                    ${CMAKE_CURRENT_LIST_DIR}/tools/maven/bin/mvn clean package -Dmaven.test.skip=true
+            COMMAND cd ${WILTON_DIR}/jni &&
+                    ${WILTON_DIR}/tools/maven/bin/mvn clean package -Dmaven.test.skip=true
             COMMAND ${CMAKE_COMMAND} -E copy
-                    ${CMAKE_CURRENT_LIST_DIR}/jni/target/wilton-android.jar
+                    ${WILTON_DIR}/jni/target/wilton-android.jar
                     wilton-android.jar
             COMMAND ${CMAKE_COMMAND} -E remove_directory lib
             COMMAND ${CMAKE_COMMAND} -E make_directory lib
@@ -256,9 +256,36 @@ if ( STATICLIB_TOOLCHAIN MATCHES "android_.+" )
             COMMAND ${CMAKE_STRIP} lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_thread.so
             COMMAND ${TOOLS_JAR} uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_thread.so
 
-            WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIRECTORY}
+            WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
             DEPENDS nativelibs
-            COMMENT "Creating JAR ..." )
+            COMMENT "Creating Android JAR ..." )
+    add_custom_target ( android_jar DEPENDS wilton-android.jar )
+
+    set ( ${PROJECT_NAME}_GRADLE_JVM_ARGS "-XX:MaxRAM=1024M -XX:+TieredCompilation -XX:TieredStopAtLevel=1 -XX:+UseSerialGC" CACHE INTERNAL "" )
+
+    add_custom_target ( android_apk
+            COMMAND ${CMAKE_COMMAND} -E remove_directory ${WILTON_DIR}/android/build
+            COMMAND ${CMAKE_COMMAND} -E remove_directory ${WILTON_DIR}/android/app/build
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    std.wlib
+                    ${WILTON_DIR}/android/app/src/main/assets/
+            COMMAND cd ${WILTON_DIR}/android &&
+                    LD_LIBRARY_PATH=${WILTON_DIR}/tools/android/libc6_2.15/lib/x86_64-linux-gnu/
+                    ANDROID_HOME=${WILTON_DIR}/tools/android/sdk
+                    ${WILTON_DIR}/tools/gradle/bin/gradle
+                    -Dorg.gradle.java.home=${WILTON_DIR}/tools/linux/jdk8
+                    -Dorg.gradle.jvmargs=${${PROJECT_NAME}_GRADLE_JVM_ARGS}
+                    -Dorg.gradle.parallel=false
+                    -Dorg.gradle.daemon=false
+                    clean
+                    assembleDebug
+                    #--refresh-dependencies
+            COMMAND ${CMAKE_COMMAND} -E copy
+                ${WILTON_DIR}/android/app/build/outputs/apk/debug/app-debug.apk
+                wilton_${WILTON_VERSION}.apk
+            WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+            DEPENDS stdlib android_jar
+            COMMENT "Creating Android APK ..." )
 
 elseif ( STATICLIB_TOOLCHAIN MATCHES "(windows|linux)_.+" )
 
@@ -274,28 +301,28 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "(windows|linux)_.+" )
                     bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_core${CMAKE_SHARED_LIBRARY_SUFFIX}
                     wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_core${CMAKE_SHARED_LIBRARY_SUFFIX}
             COMMAND ${CMAKE_COMMAND} -E copy_directory
-                    ${CMAKE_CURRENT_LIST_DIR}/core/include
+                    ${WILTON_DIR}/core/include
                     wilton_${WILTON_VERSION}/devel/include
             # channel
             COMMAND ${CMAKE_COMMAND} -E copy
                     bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_channel${CMAKE_SHARED_LIBRARY_SUFFIX}
                     wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_channel${CMAKE_SHARED_LIBRARY_SUFFIX}
             COMMAND ${CMAKE_COMMAND} -E copy
-                    ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_channel/include/wilton/wilton_channel.h
+                    ${WILTON_DIR}/modules/wilton_channel/include/wilton/wilton_channel.h
                     wilton_${WILTON_VERSION}/devel/include/wilton/wilton_channel.h
             # cron
             COMMAND ${CMAKE_COMMAND} -E copy
                     bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_cron${CMAKE_SHARED_LIBRARY_SUFFIX}
                     wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_cron${CMAKE_SHARED_LIBRARY_SUFFIX}
             COMMAND ${CMAKE_COMMAND} -E copy
-                    ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_cron/include/wilton/wilton_cron.h
+                    ${WILTON_DIR}/modules/wilton_cron/include/wilton/wilton_cron.h
                     wilton_${WILTON_VERSION}/devel/include/wilton/wilton_cron.h
             # db
             COMMAND ${CMAKE_COMMAND} -E copy
                     bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_db${CMAKE_SHARED_LIBRARY_SUFFIX}
                     wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_db${CMAKE_SHARED_LIBRARY_SUFFIX}
             COMMAND ${CMAKE_COMMAND} -E copy
-                    ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_db/include/wilton/wilton_db.h
+                    ${WILTON_DIR}/modules/wilton_db/include/wilton/wilton_db.h
                     wilton_${WILTON_VERSION}/devel/include/wilton/wilton_db.h
             # duktape
             COMMAND ${CMAKE_COMMAND} -E copy
@@ -310,28 +337,28 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "(windows|linux)_.+" )
                     bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_http${CMAKE_SHARED_LIBRARY_SUFFIX}
                     wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_http${CMAKE_SHARED_LIBRARY_SUFFIX}
             COMMAND ${CMAKE_COMMAND} -E copy
-                    ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_http/include/wilton/wilton_http.h
+                    ${WILTON_DIR}/modules/wilton_http/include/wilton/wilton_http.h
                     wilton_${WILTON_VERSION}/devel/include/wilton/wilton_http.h
             # loader
             COMMAND ${CMAKE_COMMAND} -E copy
                     bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_loader${CMAKE_SHARED_LIBRARY_SUFFIX}
                     wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_loader${CMAKE_SHARED_LIBRARY_SUFFIX}
             COMMAND ${CMAKE_COMMAND} -E copy
-                    ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_loader/include/wilton/wilton_loader.h
+                    ${WILTON_DIR}/modules/wilton_loader/include/wilton/wilton_loader.h
                     wilton_${WILTON_VERSION}/devel/include/wilton/wilton_loader.h
             # logging
             COMMAND ${CMAKE_COMMAND} -E copy
                     bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_logging${CMAKE_SHARED_LIBRARY_SUFFIX}
                     wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_logging${CMAKE_SHARED_LIBRARY_SUFFIX}
             COMMAND ${CMAKE_COMMAND} -E copy
-                    ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_logging/include/wilton/wilton_logging.h
+                    ${WILTON_DIR}/modules/wilton_logging/include/wilton/wilton_logging.h
                     wilton_${WILTON_VERSION}/devel/include/wilton/wilton_logging.h
             # net
             COMMAND ${CMAKE_COMMAND} -E copy
                     bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_net${CMAKE_SHARED_LIBRARY_SUFFIX}
                     wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_net${CMAKE_SHARED_LIBRARY_SUFFIX}
             COMMAND ${CMAKE_COMMAND} -E copy
-                    ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_net/include/wilton/wilton_net.h
+                    ${WILTON_DIR}/modules/wilton_net/include/wilton/wilton_net.h
                     wilton_${WILTON_VERSION}/devel/include/wilton/wilton_net.h
             # pdf
             COMMAND ${CMAKE_COMMAND} -E copy
@@ -342,7 +369,7 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "(windows|linux)_.+" )
                     bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_process${CMAKE_SHARED_LIBRARY_SUFFIX}
                     wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_process${CMAKE_SHARED_LIBRARY_SUFFIX}
             COMMAND ${CMAKE_COMMAND} -E copy
-                    ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_process/include/wilton/wilton_process.h
+                    ${WILTON_DIR}/modules/wilton_process/include/wilton/wilton_process.h
                     wilton_${WILTON_VERSION}/devel/include/wilton/wilton_process.h
             # rhino
             COMMAND ${CMAKE_COMMAND} -E copy
@@ -353,14 +380,14 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "(windows|linux)_.+" )
                     bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_signal${CMAKE_SHARED_LIBRARY_SUFFIX}
                     wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_signal${CMAKE_SHARED_LIBRARY_SUFFIX}
             COMMAND ${CMAKE_COMMAND} -E copy
-                    ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_signal/include/wilton/wilton_signal.h
+                    ${WILTON_DIR}/modules/wilton_signal/include/wilton/wilton_signal.h
                     wilton_${WILTON_VERSION}/devel/include/wilton/wilton_signal.h
             # thread
             COMMAND ${CMAKE_COMMAND} -E copy
                     bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_thread${CMAKE_SHARED_LIBRARY_SUFFIX}
                     wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_thread${CMAKE_SHARED_LIBRARY_SUFFIX}
             COMMAND ${CMAKE_COMMAND} -E copy
-                    ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_thread/include/wilton/wilton_thread.h
+                    ${WILTON_DIR}/modules/wilton_thread/include/wilton/wilton_thread.h
                     wilton_${WILTON_VERSION}/devel/include/wilton/wilton_thread.h
             # other resources
             COMMAND ${CMAKE_COMMAND} -E copy
@@ -370,7 +397,7 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "(windows|linux)_.+" )
                     std.wlib
                     wilton_${WILTON_VERSION}/std.wlib
             COMMAND ${CMAKE_COMMAND} -E copy_directory
-                    ${CMAKE_CURRENT_LIST_DIR}/js/examples
+                    ${WILTON_DIR}/js/examples
                     wilton_${WILTON_VERSION}/examples
             COMMAND cd wilton_${WILTON_VERSION}/examples/binmod &&
                     ${TOOLS_ZIP} -qr9 binmod.zip *
@@ -380,19 +407,19 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "(windows|linux)_.+" )
             COMMAND ${CMAKE_COMMAND} -E remove_directory
                     wilton_${WILTON_VERSION}/examples/binmod
             COMMAND ${CMAKE_COMMAND} -E copy
-                    ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_cli/resources/one-liner-template.js
+                    ${WILTON_DIR}/modules/wilton_cli/resources/one-liner-template.js
                     wilton_${WILTON_VERSION}/conf/one-liner-template.js
             COMMAND ${CMAKE_COMMAND} -E copy
-                    ${CMAKE_CURRENT_LIST_DIR}/js/examples/winservice/config.json
+                    ${WILTON_DIR}/js/examples/winservice/config.json
                     wilton_${WILTON_VERSION}/conf/config.json
             COMMAND ${CMAKE_COMMAND} -E copy
-                    ${CMAKE_CURRENT_LIST_DIR}/resources/toolchains/${STATICLIB_TOOLCHAIN}-${WILTON_BUILD_FLAVOUR}.cmake
+                    ${WILTON_DIR}/resources/toolchains/${STATICLIB_TOOLCHAIN}-${WILTON_BUILD_FLAVOUR}.cmake
                     wilton_${WILTON_VERSION}/devel/${STATICLIB_TOOLCHAIN}.cmake
             COMMAND ${CMAKE_COMMAND} -E copy
-                    ${CMAKE_CURRENT_LIST_DIR}/resources/installer/.keep
+                    ${WILTON_DIR}/resources/installer/.keep
                     wilton_${WILTON_VERSION}/log/.keep
             COMMAND ${CMAKE_COMMAND} -E copy
-                    ${CMAKE_CURRENT_LIST_DIR}/resources/installer/.keep
+                    ${WILTON_DIR}/resources/installer/.keep
                     wilton_${WILTON_VERSION}/work/.keep
             COMMAND ${CMAKE_COMMAND} -E copy
                     wilton.version
@@ -402,11 +429,11 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "(windows|linux)_.+" )
             COMMENT "Creating distribution at [${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION}] ..." )
 
     add_custom_target ( test
-            COMMAND bin/wilton ${CMAKE_CURRENT_LIST_DIR}/js/wilton/test/index.js -m ${CMAKE_CURRENT_LIST_DIR}/js
-            COMMAND bin/wilton ${CMAKE_CURRENT_LIST_DIR}/js/wilton/test/index.js -m ${CMAKE_CURRENT_LIST_DIR}/js -j duktape
-            COMMAND bin/wilton ${CMAKE_CURRENT_LIST_DIR}/core/test/scripts/runNodeTests.js -m ${CMAKE_CURRENT_LIST_DIR}/js
-            COMMAND bin/wilton ${CMAKE_CURRENT_LIST_DIR}/core/test/scripts/runNodeTests.js -m ${CMAKE_CURRENT_LIST_DIR}/js -j duktape
-            COMMAND cd ${CMAKE_CURRENT_LIST_DIR}/jni && ${CMAKE_CURRENT_LIST_DIR}/tools/maven/bin/mvn clean test
+            COMMAND bin/wilton ${WILTON_DIR}/js/wilton/test/index.js -m ${WILTON_DIR}/js
+            COMMAND bin/wilton ${WILTON_DIR}/js/wilton/test/index.js -m ${WILTON_DIR}/js -j duktape
+            COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runNodeTests.js -m ${WILTON_DIR}/js
+            COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runNodeTests.js -m ${WILTON_DIR}/js -j duktape
+            COMMAND cd ${WILTON_DIR}/jni && ${WILTON_DIR}/tools/maven/bin/mvn clean test
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION} 
             DEPENDS dist
             COMMENT "Running tests ..." )
@@ -435,19 +462,19 @@ if ( STATICLIB_TOOLCHAIN MATCHES "windows_.+" )
     add_dependencies ( dist dist_windows )
 
     configure_file ( 
-            ${CMAKE_CURRENT_LIST_DIR}/resources/installer/installer.json
+            ${WILTON_DIR}/resources/installer/installer.json
             ${CMAKE_CURRENT_BINARY_DIR}/installer.json )
 
     add_custom_target ( installer
             COMMAND ${CMAKE_COMMAND} -E remove wilton_${WILTON_VERSION}.wxs
             COMMAND ${TOOLS_JAVA}
                     -XX:+UseSerialGC -XX:+TieredCompilation -XX:TieredStopAtLevel=1
-                    -jar ${CMAKE_CURRENT_LIST_DIR}/tools/windows/wixgen/wixgen.jar
+                    -jar ${WILTON_DIR}/tools/windows/wixgen/wixgen.jar
                     wilton_${WILTON_VERSION}
                     -c installer.json
                     -o wilton_${WILTON_VERSION}.wxs
-            COMMAND ${CMAKE_CURRENT_LIST_DIR}/tools/windows/wix/bin/candle -v -nologo wilton_${WILTON_VERSION}.wxs
-            COMMAND ${CMAKE_CURRENT_LIST_DIR}/tools/windows/wix/bin/light
+            COMMAND ${WILTON_DIR}/tools/windows/wix/bin/candle -v -nologo wilton_${WILTON_VERSION}.wxs
+            COMMAND ${WILTON_DIR}/tools/windows/wix/bin/light
                     -v -nologo -sw1076 -sval -ext WixUIExtension -ext WixUtilExtension
                     wilton_${WILTON_VERSION}.wixobj
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
@@ -467,14 +494,14 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "linux_.+" )
                     bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_serial${CMAKE_SHARED_LIBRARY_SUFFIX}
                     wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_serial${CMAKE_SHARED_LIBRARY_SUFFIX}
             COMMAND ${CMAKE_COMMAND} -E copy
-                    ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_serial/include/wilton/wilton_serial.h
+                    ${WILTON_DIR}/modules/wilton_serial/include/wilton/wilton_serial.h
                     wilton_${WILTON_VERSION}/devel/include/wilton/wilton_serial.h
             # usb
             COMMAND ${CMAKE_COMMAND} -E copy
                     bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_usb${CMAKE_SHARED_LIBRARY_SUFFIX}
                     wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_usb${CMAKE_SHARED_LIBRARY_SUFFIX}
             COMMAND ${CMAKE_COMMAND} -E copy
-                    ${CMAKE_CURRENT_LIST_DIR}/modules/wilton_usb/include/wilton/wilton_usb.h
+                    ${WILTON_DIR}/modules/wilton_usb/include/wilton/wilton_usb.h
                     wilton_${WILTON_VERSION}/devel/include/wilton/wilton_usb.h
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
             DEPENDS wilton_jsc wilton_serial wilton_usb )
@@ -482,17 +509,17 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "linux_.+" )
 
     set ( ${PROJECT_NAME}_VGOPTS 
             --leak-check=yes --show-reachable=yes --track-origins=yes --error-exitcode=42 --track-fds=yes
-            --suppressions=${CMAKE_CURRENT_LIST_DIR}/deps/cmake/resources/valgrind/openssl_malloc.supp
-            --suppressions=${CMAKE_CURRENT_LIST_DIR}/deps/cmake/resources/valgrind/popt_poptGetNextOpt.supp 
-            --suppressions=${CMAKE_CURRENT_LIST_DIR}/resources/valgrind/wilton_dyload.supp 
-            --suppressions=${CMAKE_CURRENT_LIST_DIR}/resources/valgrind/wilton_http.supp
+            --suppressions=${WILTON_DIR}/deps/cmake/resources/valgrind/openssl_malloc.supp
+            --suppressions=${WILTON_DIR}/deps/cmake/resources/valgrind/popt_poptGetNextOpt.supp 
+            --suppressions=${WILTON_DIR}/resources/valgrind/wilton_dyload.supp 
+            --suppressions=${WILTON_DIR}/resources/valgrind/wilton_http.supp
         CACHE INTERNAL "" )
 
     add_custom_target ( valgrind
             COMMAND valgrind ${${PROJECT_NAME}_VGOPTS}
                     ./bin/wilton ./examples/binaryModule.js -b ./examples/binmod.wlib -j duktape
             COMMAND valgrind ${${PROJECT_NAME}_VGOPTS}
-                    ./bin/wilton ${CMAKE_CURRENT_LIST_DIR}/js/wilton/test/index.js -m ../../js -j duktape
+                    ./bin/wilton ${WILTON_DIR}/js/wilton/test/index.js -m ../../js -j duktape
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION} 
             DEPENDS dist
             COMMENT "Running valgrind ..." )
@@ -503,8 +530,8 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "linux_.+" )
             COMMAND ${CMAKE_COMMAND} -E make_directory docs
             COMMAND ${TOOLS_JJS}
                     -J-XX:+UseSerialGC -J-XX:+TieredCompilation -J-XX:TieredStopAtLevel=1
-                    ${CMAKE_CURRENT_LIST_DIR}/resources/doxygen/generate-doxy.js
-                    ${CMAKE_CURRENT_LIST_DIR}/js/wilton doxy
+                    ${WILTON_DIR}/resources/doxygen/generate-doxy.js
+                    ${WILTON_DIR}/js/wilton doxy
             COMMAND doxygen
             # poor man's WARN_AS_ERROR
             COMMAND [ ! -s doxygen_warnings.txt ]
