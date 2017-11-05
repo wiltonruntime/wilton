@@ -16,6 +16,19 @@ Obtain sources and build tools:
 
 See platform-specific instructions below.
 
+### Android
+
+Run on Linux `x86_64`:
+
+    cd wilton
+    . resources/scripts/env-linux.sh
+    mkdir build
+    cd build
+    cmake .. -DSTATICLIB_TOOLCHAIN=android_armeabi_gcc -DANDROID_SDK_ENABLE_LIBC_PRELOAD=OFF
+    make android_apk
+
+Resulting APK can be tested in VirtualBox using [Android x86](http://www.android-x86.org/) image with [native bridge](https://stackoverflow.com/a/13005569/314015) enabled.
+
 ### Windows
 
 32-bit build:

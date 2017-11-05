@@ -44,6 +44,7 @@ if ( NOT DEFINED STATICLIB_TOOLCHAIN )
     endif ( )
 endif ( )
 if ( STATICLIB_TOOLCHAIN MATCHES "android_.+" )
+    option ( ANDROID_SDK_ENABLE_LIBC_PRELOAD "Use libc_2.15 in LD_LIBRARY_PATH for running Android SDK" ON )
     if ( NOT DEFINED WILTON_BUILD_FLAVOUR )
         set ( WILTON_BUILD_FLAVOUR "r9d" CACHE STRING "" )
     endif ( )
@@ -180,6 +181,21 @@ add_custom_target ( nativelibs DEPENDS
         wilton_thread
         wilton_usb )
 
+add_custom_target ( examples 
+        COMMAND ${CMAKE_COMMAND} -E remove_directory examples
+        COMMAND ${CMAKE_COMMAND} -E copy_directory
+                ${WILTON_DIR}/js/examples
+                examples
+        COMMAND cd examples/binmod &&
+                ${TOOLS_ZIP} -qr9 binmod.zip *
+        COMMAND ${CMAKE_COMMAND} -E rename
+                examples/binmod/binmod.zip
+                examples/binmod.wlib
+        COMMAND ${CMAKE_COMMAND} -E remove_directory
+                examples/binmod
+        WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+        COMMENT "Preparing Examples directory ..." )
+
 if ( STATICLIB_TOOLCHAIN MATCHES "android_.+" )
     if ( STATICLIB_TOOLCHAIN MATCHES "android_armeabi_.+" )
         set ( ${PROJECT_NAME}_ANDROID_ARCH armeabi-v7a )
@@ -187,6 +203,11 @@ if ( STATICLIB_TOOLCHAIN MATCHES "android_.+" )
         set ( ${PROJECT_NAME}_ANDROID_ARCH x86 )
     else ( )
         message ( FATAL_ERROR "Cannot determine Android arch for toolchain: [${STATICLIB_TOOLCHAIN}]" )
+    endif ( )
+
+    if ( ANDROID_SDK_ENABLE_LIBC_PRELOAD )
+        set ( ${PROJECT_NAME}_LIBC_PRELOAD_CMD LD_LIBRARY_PATH=${WILTON_DIR}/tools/android/libc6_2.15/lib/x86_64-linux-gnu/ CACHE INTERNAL "" )
+                    
     endif ( )
 
     add_custom_command ( OUTPUT wilton-android.jar
@@ -268,9 +289,20 @@ if ( STATICLIB_TOOLCHAIN MATCHES "android_.+" )
             COMMAND ${CMAKE_COMMAND} -E remove_directory ${WILTON_DIR}/android/app/build
             COMMAND ${CMAKE_COMMAND} -E copy
                     std.wlib
-                    ${WILTON_DIR}/android/app/src/main/assets/
+                    ${WILTON_DIR}/android/app/src/main/assets/net.wiltontoolkit.android/
+            COMMAND ${CMAKE_COMMAND} -E copy_directory
+                    examples
+                    ${WILTON_DIR}/android/app/src/main/assets/net.wiltontoolkit.android/examples
+            COMMAND ${CMAKE_COMMAND} -E make_directory
+                    ${WILTON_DIR}/android/app/src/main/assets/net.wiltontoolkit.android/wilton
+            COMMAND ${CMAKE_COMMAND} -E copy_directory
+                    ${WILTON_DIR}/js/wilton/test
+                    ${WILTON_DIR}/android/app/src/main/assets/net.wiltontoolkit.android/wilton/test
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    wilton.version
+                    ${WILTON_DIR}/android/app/src/main/assets/net.wiltontoolkit.android/wilton.version
             COMMAND cd ${WILTON_DIR}/android &&
-                    LD_LIBRARY_PATH=${WILTON_DIR}/tools/android/libc6_2.15/lib/x86_64-linux-gnu/
+                    ${${PROJECT_NAME}_LIBC_PRELOAD_CMD}
                     ANDROID_HOME=${WILTON_DIR}/tools/android/sdk
                     ${WILTON_DIR}/tools/gradle/bin/gradle
                     -Dorg.gradle.java.home=${WILTON_DIR}/tools/linux/jdk8
@@ -284,7 +316,7 @@ if ( STATICLIB_TOOLCHAIN MATCHES "android_.+" )
                 ${WILTON_DIR}/android/app/build/outputs/apk/debug/app-debug.apk
                 wilton_${WILTON_VERSION}.apk
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-            DEPENDS stdlib android_jar
+            DEPENDS stdlib android_jar examples
             COMMENT "Creating Android APK ..." )
 
 elseif ( STATICLIB_TOOLCHAIN MATCHES "(windows|linux)_.+" )
@@ -397,15 +429,8 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "(windows|linux)_.+" )
                     std.wlib
                     wilton_${WILTON_VERSION}/std.wlib
             COMMAND ${CMAKE_COMMAND} -E copy_directory
-                    ${WILTON_DIR}/js/examples
+                    examples
                     wilton_${WILTON_VERSION}/examples
-            COMMAND cd wilton_${WILTON_VERSION}/examples/binmod &&
-                    ${TOOLS_ZIP} -qr9 binmod.zip *
-            COMMAND ${CMAKE_COMMAND} -E rename
-                    wilton_${WILTON_VERSION}/examples/binmod/binmod.zip
-                    wilton_${WILTON_VERSION}/examples/binmod.wlib
-            COMMAND ${CMAKE_COMMAND} -E remove_directory
-                    wilton_${WILTON_VERSION}/examples/binmod
             COMMAND ${CMAKE_COMMAND} -E copy
                     ${WILTON_DIR}/modules/wilton_cli/resources/one-liner-template.js
                     wilton_${WILTON_VERSION}/conf/one-liner-template.js
@@ -425,7 +450,7 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "(windows|linux)_.+" )
                     wilton.version
                     wilton_${WILTON_VERSION}/conf/wilton.version  
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-            DEPENDS nativelibs stdlib
+            DEPENDS nativelibs stdlib examples
             COMMENT "Creating distribution at [${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION}] ..." )
 
     add_custom_target ( test
