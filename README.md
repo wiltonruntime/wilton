@@ -91,6 +91,28 @@ Build:
     cmake .. -DWILTON_BUILD_FLAVOUR=el7
     make dist
 
+### Mac OS X
+
+Install Xcode, Xcode Command Line Tools and Java (required for dist bundling).
+
+Install build tools and dependencies:
+
+    brew install cmake pkg-config openssl popt
+
+Setup environment (adjust OpenSSL version as needed):
+
+    export JAVA_HOME=path/to/jdk
+    export PATH=$PATH:$JAVA_HOME/bin
+    export PKG_CONFIG_PATH=/usr/local/Cellar/openssl/1.0.2m/lib/pkgconfig/:$PKG_CONFIG_PATH
+
+Build:
+
+    cd wilton
+    mkdir build
+    cd build
+    cmake ..
+    make dist
+
 License information
 -------------------
 
