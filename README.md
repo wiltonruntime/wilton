@@ -31,16 +31,23 @@ Resulting APK can be tested in VirtualBox using [Android x86](http://www.android
 
 ### Windows
 
-32-bit build:
+32-bit build environment:
 
     cd wilton
     resources\scripts\set-compile-env-vs12-sdk71a-x86.bat
+
+
+64-bit build environment:
+
+    cd wilton
+    resources\scripts\set-compile-env-vs12-sdk81-x86_64.bat
+
+Build:
+
     mkdir build
     cd build
     cmake ..
     nmake installer
-
-64-bit build: TODO
 
 ### Fedora 27+
 

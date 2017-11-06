@@ -1,0 +1,38 @@
+@echo off
+rem Copyright 2017 ...
+
+rem shortcuts from script directory
+set BAD_SLASH_SCRIPT_DIR=%~dp0
+set SCRIPT_DIR=%BAD_SLASH_SCRIPT_DIR:\=/%
+set WILTON_DIR=%SCRIPT_DIR%/../..
+
+rem tools dirs
+set VS=%WILTON_DIR%/tools/windows/vs2013e
+set WINSDK=%VS%/8.1
+
+rem set compiler environment manually
+set VCINSTALLDIR=%VS%\VC\
+set VisualStudioVersion=12.0
+set VS120COMNTOOLS=
+set VSINSTALLDIR=%VS%
+set WindowsSdkDir=%WINSDK%
+
+set LIB=%VS%/VC/Lib/amd64;%WINSDK%/Lib/x64
+set LIBPATH=%VS%/VC/Lib/amd64
+set INCLUDE=%WINSDK%/include/um;%WINSDK%/include/shared;%VS%/VC/INCLUDE
+
+rem set path
+set PATH=%VS%/VC/Bin/amd64;%VS%/VC/Bin
+set PATH=%PATH%;%WINSDK%/Bin/x86;C:/WINDOWS/System32;C:/WINDOWS;C:/WINDOWS/System32/wbem
+set PATH=%PATH%;%VS%/VC/redist/x86/Microsoft.VC120.CRT/msvcr120.dll
+set PATH=%PATH%;%VS%/VC/redist/x86/Microsoft.VC120.CRT/msvcp120.dll
+set PATH=%PATH%;%WILTON_DIR%/tools/windows/cmake/bin
+set PATH=%PATH%;%WILTON_DIR%/tools/windows/jdk8/bin
+set PATH=%PATH%;%WILTON_DIR%/tools/windows/nasm
+set PATH=%PATH%;%WILTON_DIR%/tools/windows/pkgconfig/bin
+set PATH=%PATH%;%WILTON_DIR%/tools/windows/perl/perl/bin
+set PATH=%PATH%;%WILTON_DIR%/deps/cmake/resources/creset
+
+rem set vars for maven
+set JAVA_HOME=%WILTON_DIR%/tools/windows/jdk8
+set M2_HOME=%WILTON_DIR%/tools/maven

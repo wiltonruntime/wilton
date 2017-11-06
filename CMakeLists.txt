@@ -23,7 +23,7 @@ set ( WILTON_VERSION_EXE ${WILTON_VERSION_YEAR_SHORT},${WILTON_VERSION_MONTH},${
 # toolchain setup
 if ( NOT DEFINED STATICLIB_TOOLCHAIN )
     if ( WIN32 )
-        if ( CMAKE_SIZEOF_VOID_P EQUAL 8 )
+        if ( $ENV{LIBPATH} MATCHES ".*/amd64" )
             set ( STATICLIB_TOOLCHAIN "windows_amd64_msvc" CACHE STRING "" )
             if ( NOT DEFINED WILTON_BUILD_FLAVOUR )
                 set ( WILTON_BUILD_FLAVOUR "sdk81" CACHE STRING "" )
@@ -464,15 +464,27 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "(windows|linux|macosx)_.+" )
             DEPENDS nativelibs stdlib examples
             COMMENT "Creating distribution at [${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION}] ..." )
 
-    add_custom_target ( jstest
+    add_custom_target ( test_js
             COMMAND bin/wilton ${WILTON_DIR}/js/wilton/test/index.js -m ${WILTON_DIR}/js
-            COMMAND bin/wilton ${WILTON_DIR}/js/wilton/test/index.js -m ${WILTON_DIR}/js -j duktape
             COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runNodeTests.js -m ${WILTON_DIR}/js
+            WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION} 
+            DEPENDS dist
+            COMMENT "Running tests on default JavaScript engine ..." )
+
+    add_custom_target ( test_duktape
+            COMMAND bin/wilton ${WILTON_DIR}/js/wilton/test/index.js -m ${WILTON_DIR}/js -j duktape
             COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runNodeTests.js -m ${WILTON_DIR}/js -j duktape
+            WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION} 
+            DEPENDS dist
+            COMMENT "Running tests on Duktape JavaScript engines ..." )
+
+    add_custom_target ( test_jvm
             COMMAND cd ${WILTON_DIR}/jni && ${WILTON_DIR}/tools/maven/bin/mvn clean test
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION} 
             DEPENDS dist
-            COMMENT "Running tests ..." )
+            COMMENT "Running tests on Rhino and Nashorn JavaScript engines ..." )
+            
+     add_custom_target ( test_all DEPENDS test_js test_duktape test_jvm )
 
 endif ( )
 
