@@ -34,6 +34,9 @@ if ( NOT DEFINED STATICLIB_TOOLCHAIN )
                 set ( WILTON_BUILD_FLAVOUR "sdk71" CACHE STRING "" )
             endif ( )
         endif ( )
+    elseif ( APPLE)
+        set ( STATICLIB_TOOLCHAIN "macosx_amd64_clang" CACHE STRING "" )
+        set ( WILTON_BUILD_FLAVOUR "mavericks" CACHE STRING "" )
     elseif ( UNIX )
         set ( STATICLIB_TOOLCHAIN "linux_amd64_gcc" CACHE STRING "" )
         if ( NOT DEFINED WILTON_BUILD_FLAVOUR )
@@ -117,7 +120,8 @@ if ( STATICLIB_TOOLCHAIN MATCHES "android_.+" )
     add_custom_target ( wilton_signal )
     add_custom_target ( wilton_usb )
     add_custom_target ( wilton_winservice )
-elseif ( STATICLIB_TOOLCHAIN MATCHES "(windows|linux)_.+" )
+endif ( )
+if ( STATICLIB_TOOLCHAIN MATCHES "(windows|linux|macosx)_.+" )
     staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_cli )
     staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_process )
     staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_signal )
@@ -127,10 +131,17 @@ if ( STATICLIB_TOOLCHAIN MATCHES "windows_.+" )
     add_custom_target ( wilton_serial )
     add_custom_target ( wilton_usb )
     staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_winservice )
-elseif ( STATICLIB_TOOLCHAIN MATCHES "linux_.+" )
+endif ( )
+if ( STATICLIB_TOOLCHAIN MATCHES "linux_.+" )
     staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_jsc )
     staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_serial )
     staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_usb )
+    add_custom_target ( wilton_winservice )
+endif ( )
+if ( STATICLIB_TOOLCHAIN MATCHES "macosx_.+" )
+    staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_jsc )
+    add_custom_target ( wilton_serial )
+    add_custom_target ( wilton_usb )
     add_custom_target ( wilton_winservice )
 endif ( )
 
@@ -319,7 +330,7 @@ if ( STATICLIB_TOOLCHAIN MATCHES "android_.+" )
             DEPENDS stdlib android_jar examples
             COMMENT "Creating Android APK ..." )
 
-elseif ( STATICLIB_TOOLCHAIN MATCHES "(windows|linux)_.+" )
+elseif ( STATICLIB_TOOLCHAIN MATCHES "(windows|linux|macosx)_.+" )
 
     add_custom_target ( dist
             COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}
@@ -453,7 +464,7 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "(windows|linux)_.+" )
             DEPENDS nativelibs stdlib examples
             COMMENT "Creating distribution at [${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION}] ..." )
 
-    add_custom_target ( test
+    add_custom_target ( jstest
             COMMAND bin/wilton ${WILTON_DIR}/js/wilton/test/index.js -m ${WILTON_DIR}/js
             COMMAND bin/wilton ${WILTON_DIR}/js/wilton/test/index.js -m ${WILTON_DIR}/js -j duktape
             COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runNodeTests.js -m ${WILTON_DIR}/js
@@ -532,6 +543,36 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "linux_.+" )
             DEPENDS wilton_jsc wilton_serial wilton_usb )
     add_dependencies ( dist dist_linux )
 
+    add_custom_target ( docs
+            COMMAND ${CMAKE_COMMAND} -E remove_directory doxy
+            COMMAND ${CMAKE_COMMAND} -E remove_directory docs
+            COMMAND ${CMAKE_COMMAND} -E make_directory docs
+            COMMAND ${TOOLS_JJS}
+                    -J-XX:+UseSerialGC -J-XX:+TieredCompilation -J-XX:TieredStopAtLevel=1
+                    ${WILTON_DIR}/resources/doxygen/generate-doxy.js
+                    ${WILTON_DIR}/js/wilton doxy
+            COMMAND doxygen
+            # poor man's WARN_AS_ERROR
+            COMMAND [ ! -s doxygen_warnings.txt ]
+            WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+            COMMENT "Generating documentation at [${CMAKE_CURRENT_BINARY_DIR}/docs] ..." )
+
+elseif ( STATICLIB_TOOLCHAIN MATCHES "macosx_.+" )
+
+    add_custom_target ( dist_macosx
+            COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}
+            COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}/bin
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_jsc${CMAKE_SHARED_LIBRARY_SUFFIX}
+                    wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_jsc${CMAKE_SHARED_LIBRARY_SUFFIX}
+            WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+            DEPENDS wilton_jsc )
+    add_dependencies ( dist dist_macosx )
+
+endif ( )
+
+if ( STATICLIB_TOOLCHAIN MATCHES "(linux|macosx)_.+" )
+
     set ( ${PROJECT_NAME}_VGOPTS 
             --leak-check=yes --show-reachable=yes --track-origins=yes --error-exitcode=42 --track-fds=yes
             --suppressions=${WILTON_DIR}/deps/cmake/resources/valgrind/openssl_malloc.supp
@@ -548,18 +589,4 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "linux_.+" )
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION} 
             DEPENDS dist
             COMMENT "Running valgrind ..." )
-
-    add_custom_target ( docs
-            COMMAND ${CMAKE_COMMAND} -E remove_directory doxy
-            COMMAND ${CMAKE_COMMAND} -E remove_directory docs
-            COMMAND ${CMAKE_COMMAND} -E make_directory docs
-            COMMAND ${TOOLS_JJS}
-                    -J-XX:+UseSerialGC -J-XX:+TieredCompilation -J-XX:TieredStopAtLevel=1
-                    ${WILTON_DIR}/resources/doxygen/generate-doxy.js
-                    ${WILTON_DIR}/js/wilton doxy
-            COMMAND doxygen
-            # poor man's WARN_AS_ERROR
-            COMMAND [ ! -s doxygen_warnings.txt ]
-            WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-            COMMENT "Generating documentation at [${CMAKE_CURRENT_BINARY_DIR}/docs] ..." )
 endif ( )
