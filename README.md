@@ -104,7 +104,7 @@ Install Xcode, Xcode Command Line Tools and Java (required for dist bundling).
 
 Install build tools and dependencies:
 
-    brew install cmake pkg-config openssl popt
+    brew install cmake pkg-config openssl
 
 Setup environment (adjust OpenSSL version as needed):
 
