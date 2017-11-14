@@ -36,7 +36,6 @@ Resulting APK can be tested in VirtualBox using [Android x86](http://www.android
     cd wilton
     resources\scripts\set-compile-env-vs12-sdk71a-x86.bat
 
-
 64-bit build environment:
 
     cd wilton
