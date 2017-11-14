@@ -127,6 +127,36 @@ This project is released under the [Apache License 2.0](http://www.apache.org/li
 Changelog
 ---------
 
+**2017-11-07**
+
+ * `v201711071`
+ * Android, MacOS and Win64 builds
+
+**2017-10-29**
+
+ * `v201710291`
+ * JavaScriptCore engine
+ * logging added
+
+**2017-10-21**
+
+ * `v201710221`
+ * move all possible logic from core to modules
+
+**2017-10-13**
+ 
+ * `v201710161`
+ * better channel api
+ * db logging
+ * bootstrap example
+
+**2017-10-13**
+
+ * `v201710131`
+ * usb and serial fixes
+ * fs, logger and hex enhancements
+
+
 **2017-10-08**
 
  * build support for Ubuntu 16.04, Fedora 27 and CentOS 7
