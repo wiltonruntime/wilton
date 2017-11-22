@@ -23,7 +23,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">wilton.js
-   &#160;<span id="projectnumber">v201711151</span>
+   &#160;<span id="projectnumber">v201711221</span>
    </div>
   </td>
  </tr>
@@ -118,6 +118,8 @@ Functions</h2></td></tr>
 <tr class="memdesc:a5a4e0b5ec92578f62f96bbf6bb41e696"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check whether object has a specified property with a specified type.  <a href="#a5a4e0b5ec92578f62f96bbf6bb41e696"></a><br/></td></tr>
 <tr class="memitem:aa19165275b5700b09a100e76fc7c35b9"><td class="memItemLeft" align="right" valign="top">Array&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceutils.html#aa19165275b5700b09a100e76fc7c35b9">listProperties</a> (Object obj)</td></tr>
 <tr class="memdesc:aa19165275b5700b09a100e76fc7c35b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">List properties names of the specified object.  <a href="#aa19165275b5700b09a100e76fc7c35b9"></a><br/></td></tr>
+<tr class="memitem:a5dc98f63e16fd34d9374f8b6accfb656"><td class="memItemLeft" align="right" valign="top">Number&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceutils.html#a5dc98f63e16fd34d9374f8b6accfb656">localeComparator</a> (String str1, String str2)</td></tr>
+<tr class="memdesc:a5dc98f63e16fd34d9374f8b6accfb656"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compares two strings using <code>String.prototype.localeCompare()</code>  <a href="#a5dc98f63e16fd34d9374f8b6accfb656"></a><br/></td></tr>
 <tr class="memitem:a82a197e20f9fa0686b84e4f443996729"><td class="memItemLeft" align="right" valign="top">Object&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceutils.html#a82a197e20f9fa0686b84e4f443996729">promisifyAll</a> (Object obj)</td></tr>
 <tr class="memdesc:a82a197e20f9fa0686b84e4f443996729"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert all function in the specified module object to use <code>Promise</code>s.  <a href="#a82a197e20f9fa0686b84e4f443996729"></a><br/></td></tr>
 <tr class="memitem:a4479e1dd8f6357a469ef3b3859e0b4c1"><td class="memItemLeft" align="right" valign="top">Boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceutils.html#a4479e1dd8f6357a469ef3b3859e0b4c1">startsWith</a> (String str, String prefix)</td></tr>
@@ -539,6 +541,43 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a5dc98f63e16fd34d9374f8b6accfb656"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Number utils::localeComparator </td>
+          <td>(</td>
+          <td class="paramtype">String&#160;</td>
+          <td class="paramname"><em>str1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">String&#160;</td>
+          <td class="paramname"><em>str2</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Compares two strings using <code>String.prototype.localeCompare()</code>.</p>
+<p>Non-string input values are coalesced to strings.</p>
+<p>Null and undefined input values are colalesced to empty string.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">str1</td><td><code>String</code> first string to compare </td></tr>
+    <tr><td class="paramname">str2</td><td><code>String</code> second string to compare </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><code>Number</code> a negative number if the <code>str1</code> occurs before <code>str2</code>; positive if the <code>str1</code> occurs after <code>str2</code>; 0 if <code>str1</code> and <code>str2</code> are equivalent </dd></dl>
+
+</div>
+</div>
 <a class="anchor" id="a82a197e20f9fa0686b84e4f443996729"></a>
 <div class="memitem">
 <div class="memproto">
@@ -625,7 +664,7 @@ Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Nov 15 2017 09:35:31 for wilton.js by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Nov 22 2017 12:18:37 for wilton.js by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>
