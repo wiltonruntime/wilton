@@ -340,3 +340,6 @@
 [submodule "tools/android/sdk"]
 	path = tools/android/sdk
 	url = https://github.com/wilton-iot/tools_android_sdk.git
+[submodule "js/filesize"]
+	path = js/filesize
+	url = https://github.com/wilton-iot/filesize.js.git
