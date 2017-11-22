@@ -127,6 +127,18 @@ This project is released under the [Apache License 2.0](http://www.apache.org/li
 Changelog
 ---------
 
+**2017-11-22*
+
+ * `v201711221`
+ * `filesize` JS module added
+ * `appname` support in CLI launcher
+
+**2017-11-15**
+
+ * `v201711151`
+ * shutdown fix on MacOS 
+ * shutdown fix on Windows with JVM engines
+
 **2017-11-07**
 
  * `v201711071`
