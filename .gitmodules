@@ -124,9 +124,6 @@
 [submodule "js/events"]
 	path = js/events
 	url = https://github.com/wilton-iot/events.git
-[submodule "js/extend"]
-	path = js/extend
-	url = https://github.com/wilton-iot/node-extend.git
 [submodule "js/htmlparser2"]
 	path = js/htmlparser2
 	url = https://github.com/wilton-iot/htmlparser2.git
@@ -139,18 +136,12 @@
 [submodule "js/inherits"]
 	path = js/inherits
 	url = https://github.com/wilton-iot/inherits.git
-[submodule "js/is-buffer"]
-	path = js/is-buffer
-	url = https://github.com/wilton-iot/is-buffer.git
 [submodule "js/json-stringify-safe"]
 	path = js/json-stringify-safe
 	url = https://github.com/wilton-iot/json-stringify-safe.git
 [submodule "js/lodash"]
 	path = js/lodash
 	url = https://github.com/wilton-iot/lodash.git
-[submodule "js/minimist"]
-	path = js/minimist
-	url = https://github.com/wilton-iot/minimist.git
 [submodule "js/moment"]
 	path = js/moment
 	url = https://github.com/wilton-iot/moment.git
