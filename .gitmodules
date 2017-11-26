@@ -334,3 +334,24 @@
 [submodule "js/filesize"]
 	path = js/filesize
 	url = https://github.com/wilton-iot/filesize.js.git
+[submodule "js/statuses"]
+	path = js/statuses
+	url = https://github.com/wilton-iot/statuses.git
+[submodule "js/sjcl"]
+	path = js/sjcl
+	url = https://github.com/wilton-iot/sjcl.git
+[submodule "js/cuint"]
+	path = js/cuint
+	url = https://github.com/wilton-iot/js-cuint.git
+[submodule "js/mime-db"]
+	path = js/mime-db
+	url = https://github.com/wilton-iot/mime-db.git
+[submodule "js/weak-map"]
+	path = js/weak-map
+	url = https://github.com/wilton-iot/weak-map.git
+[submodule "js/collections"]
+	path = js/collections
+	url = https://github.com/wilton-iot/collections.git
+[submodule "js/tinycolor"]
+	path = js/tinycolor
+	url = https://github.com/wilton-iot/TinyColor.git
