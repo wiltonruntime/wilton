@@ -145,9 +145,6 @@
 [submodule "js/moment"]
 	path = js/moment
 	url = https://github.com/wilton-iot/moment.git
-[submodule "js/node-url"]
-	path = js/node-url
-	url = https://github.com/wilton-iot/node-url.git
 [submodule "js/nth-check"]
 	path = js/nth-check
 	url = https://github.com/wilton-iot/nth-check.git
@@ -397,3 +394,24 @@
 [submodule "js/fromcodepoint"]
 	path = js/fromcodepoint
 	url = https://github.com/wilton-iot/String.fromCodePoint.git
+[submodule "js/querystring"]
+	path = js/querystring
+	url = https://github.com/wilton-iot/querystring.git
+[submodule "js/url"]
+	path = js/url
+	url = https://github.com/wilton-iot/node-url.git
+[submodule "js/ip"]
+	path = js/ip
+	url = https://github.com/wilton-iot/node-ip.git
+[submodule "js/cookie"]
+	path = js/cookie
+	url = https://github.com/wilton-iot/cookie.git
+[submodule "js/sax"]
+	path = js/sax
+	url = https://github.com/wilton-iot/sax-js.git
+[submodule "js/xml-writer"]
+	path = js/xml-writer
+	url = https://github.com/wilton-iot/node-xml-writer.git
+[submodule "js/random"]
+	path = js/random
+	url = https://github.com/wilton-iot/random-js.git
