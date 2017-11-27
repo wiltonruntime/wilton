@@ -355,3 +355,45 @@
 [submodule "js/tinycolor"]
 	path = js/tinycolor
 	url = https://github.com/wilton-iot/TinyColor.git
+[submodule "js/ramda"]
+	path = js/ramda
+	url = https://github.com/wilton-iot/ramda.git
+[submodule "js/jsverify"]
+	path = js/jsverify
+	url = https://github.com/wilton-iot/jsverify.git
+[submodule "js/lazy-seq"]
+	path = js/lazy-seq
+	url = https://github.com/wilton-iot/lazy-seq.git
+[submodule "js/rc4"]
+	path = js/rc4
+	url = https://github.com/wilton-iot/rc4.git
+[submodule "js/typify-parser"]
+	path = js/typify-parser
+	url = https://github.com/wilton-iot/typify-parser.git
+[submodule "js/trampa"]
+	path = js/trampa
+	url = https://github.com/wilton-iot/trampa.git
+[submodule "js/sanctuary-type-identifiers"]
+	path = js/sanctuary-type-identifiers
+	url = https://github.com/wilton-iot/sanctuary-type-identifiers.git
+[submodule "js/sanctuary-type-classes"]
+	path = js/sanctuary-type-classes
+	url = https://github.com/wilton-iot/sanctuary-type-classes.git
+[submodule "js/sanctuary-def"]
+	path = js/sanctuary-def
+	url = https://github.com/wilton-iot/sanctuary-def.git
+[submodule "js/sanctuary"]
+	path = js/sanctuary
+	url = https://github.com/wilton-iot/sanctuary.git
+[submodule "js/fantasy-land"]
+	path = js/fantasy-land
+	url = https://github.com/wilton-iot/fantasy-land.git
+[submodule "js/immutable"]
+	path = js/immutable
+	url = https://github.com/wilton-iot/immutable-js.git
+[submodule "js/xregexp"]
+	path = js/xregexp
+	url = https://github.com/wilton-iot/xregexp.git
+[submodule "js/fromcodepoint"]
+	path = js/fromcodepoint
+	url = https://github.com/wilton-iot/String.fromCodePoint.git

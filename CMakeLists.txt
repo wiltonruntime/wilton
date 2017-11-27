@@ -480,6 +480,7 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "(windows|linux|macosx)_.+" )
     add_custom_target ( test_js
             COMMAND bin/wilton ${WILTON_DIR}/js/wilton/test/index.js -m ${WILTON_DIR}/js
             COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runNodeTests.js -m ${WILTON_DIR}/js
+            COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runSanityTests.js
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION} 
             DEPENDS dist
             COMMENT "Running tests on default JavaScript engine ..." )
@@ -487,6 +488,7 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "(windows|linux|macosx)_.+" )
     add_custom_target ( test_duktape
             COMMAND bin/wilton ${WILTON_DIR}/js/wilton/test/index.js -m ${WILTON_DIR}/js -j duktape
             COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runNodeTests.js -m ${WILTON_DIR}/js -j duktape
+            COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runSanityTests.js
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION} 
             DEPENDS dist
             COMMENT "Running tests on Duktape JavaScript engines ..." )
@@ -505,7 +507,7 @@ if ( STATICLIB_TOOLCHAIN MATCHES "windows_.+" )
 
     add_custom_target ( dist_windows
             COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}
-            COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}/bin            
+            COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}/bin
             COMMAND ${CMAKE_COMMAND} -E copy
                 bin/wilton_winservice.exe
                 wilton_${WILTON_VERSION}/bin/wilton_winservice.exe
