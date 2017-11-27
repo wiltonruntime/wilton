@@ -2,7 +2,7 @@ var searchData=
 [
   ['read',['read',['../namespaceSerial.html#afb9be5fb52dabc0b960059974cec8ef2',1,'Serial::read()'],['../namespaceUSB.html#ab7ddeb2358d816cc0964fff48b2d5a16',1,'USB::read()']]],
   ['readdir',['readdir',['../namespacefs.html#a15afc2e890ad668f9842536e3baafaad',1,'fs']]],
-  ['readfile',['readFile',['../namespacefs.html#ac41fbf9b48b4c765ac85b4add28ba72b',1,'fs']]],
+  ['readfile',['readFile',['../namespacefs.html#a8572b041dbfe9faa3f4b92040c8eecc9',1,'fs']]],
   ['readline',['readLine',['../namespaceSerial.html#ad2f55e59e85088dcb9b055c33283c38f',1,'Serial']]],
   ['readlines',['readLines',['../namespacefs.html#aaacdf8e24182b67d331788516139bd9b',1,'fs']]],
   ['realpath',['realpath',['../namespacefs.html#a82b63dc149c659a439232bc46eaa7c32',1,'fs']]],
