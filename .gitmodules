@@ -415,3 +415,9 @@
 [submodule "js/random"]
 	path = js/random
 	url = https://github.com/wilton-iot/random-js.git
+[submodule "js/text"]
+	path = js/text
+	url = https://github.com/wilton-iot/text.git
+[submodule "js/json"]
+	path = js/json
+	url = https://github.com/wilton-iot/requirejs-json-plugin.git
