@@ -421,3 +421,21 @@
 [submodule "js/json"]
 	path = js/json
 	url = https://github.com/wilton-iot/requirejs-json-plugin.git
+[submodule "js/saxpath"]
+	path = js/saxpath
+	url = https://github.com/wilton-iot/saxpath.git
+[submodule "js/string-to-stream"]
+	path = js/string-to-stream
+	url = https://github.com/wilton-iot/string-to-stream.git
+[submodule "js/typedarray"]
+	path = js/typedarray
+	url = https://github.com/wilton-iot/typedarray.git
+[submodule "js/concat-stream"]
+	path = js/concat-stream
+	url = https://github.com/wilton-iot/concat-stream.git
+[submodule "js/process-nextick-args"]
+	path = js/process-nextick-args
+	url = https://github.com/wilton-iot/process-nextick-args.git
+[submodule "js/is-in-browser"]
+	path = js/is-in-browser
+	url = https://github.com/wilton-iot/is-in-browser.git
