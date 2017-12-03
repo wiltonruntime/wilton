@@ -439,3 +439,15 @@
 [submodule "js/is-in-browser"]
 	path = js/is-in-browser
 	url = https://github.com/wilton-iot/is-in-browser.git
+[submodule "deps/staticlib_compress"]
+	path = deps/staticlib_compress
+	url = https://github.com/staticlibs/staticlib_compress.git
+[submodule "modules/wilton_crypto"]
+	path = modules/wilton_crypto
+	url = https://github.com/wilton-iot/wilton_crypto.git
+[submodule "modules/wilton_zip"]
+	path = modules/wilton_zip
+	url = https://github.com/wilton-iot/wilton_zip.git
+[submodule "modules/wilton_server"]
+	path = modules/wilton_server
+	url = https://github.com/wilton-iot/wilton_server.git

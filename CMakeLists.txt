@@ -114,6 +114,9 @@ add_subdirectory ( ${WILTON_DIR}/core )
 
 # modules
 staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_logging )
+staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_crypto )
+staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_zip )
+
 staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_channel )
 staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_cron )
 staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_db )
@@ -124,6 +127,7 @@ staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_loader )
 staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_net )
 staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_pdf )
 staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_rhino )
+staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_server )
 staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_thread )
 if ( STATICLIB_TOOLCHAIN MATCHES "android_.+" )
     add_custom_target ( wilton_cli )
@@ -191,6 +195,7 @@ add_custom_target ( nativelibs DEPENDS
         wilton_channel
         wilton_cli
         wilton_cron
+        wilton_crypto
         wilton_fs
         wilton_jsc
         wilton_http
@@ -201,9 +206,11 @@ add_custom_target ( nativelibs DEPENDS
         wilton_process
         wilton_rhino
         wilton_serial
+        wilton_server
         wilton_signal
         wilton_thread
-        wilton_usb )
+        wilton_usb
+        wilton_zip )
 
 add_custom_target ( examples 
         COMMAND ${CMAKE_COMMAND} -E remove_directory examples
@@ -268,6 +275,10 @@ if ( STATICLIB_TOOLCHAIN MATCHES "android_.+" )
             COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_cron.so lib/${${PROJECT_NAME}_ANDROID_ARCH}/
             COMMAND ${CMAKE_STRIP} lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_cron.so
             COMMAND ${TOOLS_JAR} uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_cron.so
+            # crypto
+            COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_crypto.so lib/${${PROJECT_NAME}_ANDROID_ARCH}/
+            COMMAND ${CMAKE_STRIP} lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_crypto.so
+            COMMAND ${TOOLS_JAR} uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_crypto.so
             # fs    
             COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_fs.so lib/${${PROJECT_NAME}_ANDROID_ARCH}/
             COMMAND ${CMAKE_STRIP} lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_fs.so
@@ -296,10 +307,18 @@ if ( STATICLIB_TOOLCHAIN MATCHES "android_.+" )
             COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_rhino.so lib/${${PROJECT_NAME}_ANDROID_ARCH}/
             COMMAND ${CMAKE_STRIP} lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_rhino.so
             COMMAND ${TOOLS_JAR} uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_rhino.so
+            # server
+            COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_server.so lib/${${PROJECT_NAME}_ANDROID_ARCH}/
+            COMMAND ${CMAKE_STRIP} lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_server.so
+            COMMAND ${TOOLS_JAR} uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_server.so
             # thread
             COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_thread.so lib/${${PROJECT_NAME}_ANDROID_ARCH}/
             COMMAND ${CMAKE_STRIP} lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_thread.so
             COMMAND ${TOOLS_JAR} uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_thread.so
+            # zip
+            COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_zip.so lib/${${PROJECT_NAME}_ANDROID_ARCH}/
+            COMMAND ${CMAKE_STRIP} lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_zip.so
+            COMMAND ${TOOLS_JAR} uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_zip.so
 
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
             DEPENDS nativelibs
@@ -373,6 +392,10 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "(windows|linux|macosx)_.+" )
             COMMAND ${CMAKE_COMMAND} -E copy
                     ${WILTON_DIR}/modules/wilton_cron/include/wilton/wilton_cron.h
                     wilton_${WILTON_VERSION}/devel/include/wilton/wilton_cron.h
+            # crypto
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_crypto${CMAKE_SHARED_LIBRARY_SUFFIX}
+                    wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_crypto${CMAKE_SHARED_LIBRARY_SUFFIX}
             # db
             COMMAND ${CMAKE_COMMAND} -E copy
                     bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_db${CMAKE_SHARED_LIBRARY_SUFFIX}
@@ -438,6 +461,13 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "(windows|linux|macosx)_.+" )
             COMMAND ${CMAKE_COMMAND} -E copy
                     ${WILTON_DIR}/modules/wilton_signal/include/wilton/wilton_signal.h
                     wilton_${WILTON_VERSION}/devel/include/wilton/wilton_signal.h
+            # server
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_server${CMAKE_SHARED_LIBRARY_SUFFIX}
+                    wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_server${CMAKE_SHARED_LIBRARY_SUFFIX}
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    ${WILTON_DIR}/modules/wilton_server/include/wilton/wilton_server.h
+                    wilton_${WILTON_VERSION}/devel/include/wilton/wilton_server.h
             # thread
             COMMAND ${CMAKE_COMMAND} -E copy
                     bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_thread${CMAKE_SHARED_LIBRARY_SUFFIX}
@@ -445,6 +475,10 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "(windows|linux|macosx)_.+" )
             COMMAND ${CMAKE_COMMAND} -E copy
                     ${WILTON_DIR}/modules/wilton_thread/include/wilton/wilton_thread.h
                     wilton_${WILTON_VERSION}/devel/include/wilton/wilton_thread.h
+            # zip
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_zip${CMAKE_SHARED_LIBRARY_SUFFIX}
+                    wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_zip${CMAKE_SHARED_LIBRARY_SUFFIX}
             # other resources
             COMMAND ${CMAKE_COMMAND} -E copy
                     bin/wilton_cli${CMAKE_EXECUTABLE_SUFFIX}
