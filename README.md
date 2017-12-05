@@ -127,7 +127,22 @@ This project is released under the [Apache License 2.0](http://www.apache.org/li
 Changelog
 ---------
 
-**2017-11-22*
+**2017-12-05**
+
+ * `v201712051`
+ * `wilton/zip` implementation for ZIP files IO
+ * some more JS modules added
+ * all JS modules (except `bluebird` and `wilton/*` ) adapted for use in browser
+ * `examples/browser` web-app example added
+
+**2017-11-27**
+
+ * `v201711271`
+ * binary data (`hex` flag) support in `wilton/fs`
+ * use `copyfile` syscall on MacOS for `wilton/fs.copyFile()`
+ * about 20 new JS modules adapted from NPM
+
+**2017-11-22**
 
  * `v201711221`
  * `filesize` JS module added
