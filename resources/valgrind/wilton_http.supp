@@ -14,3 +14,12 @@
     ...
     fun:wilton_Server_create
 }
+{
+    asio_memalign_allocate
+    Memcheck:Leak
+    fun:memalign
+    fun:allocate_and_init
+    fun:tls_get_addr_tail
+    ...
+    fun:wilton_Server_create
+}

@@ -97,6 +97,21 @@ Build:
     cmake .. -DWILTON_BUILD_FLAVOUR=el7
     make dist
 
+### Debian Wheezy (also works for Ubuntu 14.04)
+
+Install dependencies:
+
+    sudo apt-get install build-essential pkg-config zip zlib1g-dev libjansson-dev liblog4cplus-dev libssl-dev libcurl4-openssl-dev libpopt-dev libsqlite3-dev libpq-dev libpng12-dev libusb-1.0-0-dev libudev-dev libglib2.0-dev libjavascriptcoregtk-3.0-dev
+
+Build:
+
+    cd wilton
+    . resources/scripts/env-linux.sh
+    mkdir build
+    cd build
+    cmake .. -DWILTON_BUILD_FLAVOUR=wheezy
+    make dist
+
 ### Mac OS X
 
 Install Xcode, Xcode Command Line Tools and Java (required for dist bundling).
