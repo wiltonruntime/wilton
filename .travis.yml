@@ -59,3 +59,7 @@ before_script:
 
 script:
   - bash ./resources/ci/travis.sh
+
+notifications:
+  email:
+    on_success: always
