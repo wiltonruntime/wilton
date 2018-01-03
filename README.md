@@ -1,6 +1,9 @@
 Wilton [work in progress]
 =========================
 
+[![travis](https://travis-ci.org/wilton-iot/wilton.svg?branch=master)](https://travis-ci.org/wilton-iot/wilton)
+[![appveyor](https://ci.appveyor.com/api/projects/status/github/wilton-iot/wilton?svg=true)](https://ci.appveyor.com/project/wilton-iot/wilton)
+
 TODO: description
 
 Link to the [JavaScript API documentation](https://wilton-iot.github.io/wilton/docs/html/namespaces.html).
