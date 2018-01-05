@@ -651,3 +651,11 @@ if ( STATICLIB_TOOLCHAIN MATCHES "(linux|macosx)_.+" )
             DEPENDS dist
             COMMENT "Running valgrind ..." )
 endif ( )
+
+# benchmarks
+
+option ( WILTON_ENABLE_BENCHMARKS "Enable building the benchmarks" OFF )
+
+if ( WILTON_ENABLE_BENCHMARKS )
+    add_subdirectory ( bench )
+endif ( )

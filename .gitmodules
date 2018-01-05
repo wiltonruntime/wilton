@@ -454,3 +454,6 @@
 [submodule "js/spark-md5"]
 	path = js/spark-md5
 	url = https://github.com/wilton-iot/js-spark-md5.git
+[submodule "bench"]
+	path = bench
+	url = https://github.com/wilton-iot/wilton_bench.git
