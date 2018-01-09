@@ -23,7 +23,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">wilton.js
-   &#160;<span id="projectnumber">v201712051</span>
+   &#160;<span id="projectnumber">v201801091</span>
    </div>
   </td>
  </tr>
@@ -98,6 +98,8 @@ Functions</h2></td></tr>
 <tr class="memdesc:a88366aeed40ad84f623d5fbdf56497d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the name of the temporary file with request data.  <a href="#a88366aeed40ad84f623d5fbdf56497d4"></a><br/></td></tr>
 <tr class="memitem:a0779eafbd4285cd2c3b1e97922ecf5f9"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceRequest.html#a0779eafbd4285cd2c3b1e97922ecf5f9">form</a> (Function|Undefined callback)</td></tr>
 <tr class="memdesc:a0779eafbd4285cd2c3b1e97922ecf5f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access <code>application/x-www-form-urlencoded</code> request body.  <a href="#a0779eafbd4285cd2c3b1e97922ecf5f9"></a><br/></td></tr>
+<tr class="memitem:a07dd16a5a1569b3db917ddd43a374386"><td class="memItemLeft" align="right" valign="top">Object&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceRequest.html#a07dd16a5a1569b3db917ddd43a374386">headers</a> (Function|Undefined callback)</td></tr>
+<tr class="memdesc:a07dd16a5a1569b3db917ddd43a374386"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access request headers.  <a href="#a07dd16a5a1569b3db917ddd43a374386"></a><br/></td></tr>
 <tr class="memitem:a6ef945474f271277e607d0248578dcbd"><td class="memItemLeft" align="right" valign="top">Object&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceRequest.html#a6ef945474f271277e607d0248578dcbd">json</a> (Function|Undefined callback)</td></tr>
 <tr class="memdesc:a6ef945474f271277e607d0248578dcbd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access request body as JSON.  <a href="#a6ef945474f271277e607d0248578dcbd"></a><br/></td></tr>
 <tr class="memitem:a35a013d33feb11c39be7900508b064db"><td class="memItemLeft" align="right" valign="top">Object&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceRequest.html#a35a013d33feb11c39be7900508b064db">meta</a> (Function|Undefined callback)</td></tr>
@@ -126,8 +128,8 @@ Functions</h2></td></tr>
 <div class="line">    <span class="comment">// and specified custom status code and message</span></div>
 <div class="line">    req.sendResponse({</div>
 <div class="line">        msg: <span class="stringliteral">&quot;hello from GET handler&quot;</span>,</div>
-<div class="line">        receivedQueries: req.meta().queries,</div>
-<div class="line">        hostnameClientSpecified: req.meta().headers[<span class="stringliteral">&quot;Host&quot;</span>]</div>
+<div class="line">        receivedQueries: req.queries(),</div>
+<div class="line">        hostnameClientSpecified: req.headers()[<span class="stringliteral">&quot;Host&quot;</span>]</div>
 <div class="line">    }, {</div>
 <div class="line">        <a class="code" href="namespaceRequest.html#a35a013d33feb11c39be7900508b064db" title="Access request&#39;s metadata.">meta</a>: {</div>
 <div class="line">            statusCode: 451,</div>
@@ -212,6 +214,30 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><code>String</code> request body </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a07dd16a5a1569b3db917ddd43a374386"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Object Request::headers </td>
+          <td>(</td>
+          <td class="paramtype">Function|Undefined&#160;</td>
+          <td class="paramname"><em>callback</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Returns dictionary of request headers. The same as <code><a class="el" href="namespaceRequest.html#a35a013d33feb11c39be7900508b064db" title="Access request&#39;s metadata.">meta()</a>.headers</code>.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">callback</td><td><code>Function|Undefined</code> callback to receive result or error </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><code>Object</code> dictionary of request parameters parsed from URL query fields </dd></dl>
 
 </div>
 </div>
@@ -542,7 +568,7 @@ Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Dec 5 2017 15:13:13 for wilton.js by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Jan 9 2018 13:46:49 for wilton.js by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>

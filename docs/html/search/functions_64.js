@@ -12,6 +12,7 @@ var searchData=
   ['destroy',['destroy',['../namespacePDFDocument.html#a1ea7325f6a9d8f036d851c8fd8df77d4',1,'PDFDocument']]],
   ['doinsynctransaction',['doInSyncTransaction',['../namespaceDBConnection.html#a024ad17ca0b1d11328641d7745ad3d05',1,'DBConnection']]],
   ['dointransaction',['doInTransaction',['../namespaceDBConnection.html#aeb66e8d918794ac8c7ddbed223b3985b',1,'DBConnection']]],
+  ['drawimage',['drawImage',['../namespacePDFDocument.html#a62369da2b5dad210cc82b999613338a8',1,'PDFDocument']]],
   ['drawline',['drawLine',['../namespacePDFDocument.html#a10dec5f2c3a974ca256a170dadcc71ab',1,'PDFDocument']]],
   ['drawrectangle',['drawRectangle',['../namespacePDFDocument.html#a87a0d16246e819306d076ba5216ab530',1,'PDFDocument']]],
   ['dumpregistry',['dumpRegistry',['../namespaceChannel.html#a707dc0e0976f4c44cf250ef58ffbd815',1,'Channel']]],

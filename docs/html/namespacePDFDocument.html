@@ -23,7 +23,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">wilton.js
-   &#160;<span id="projectnumber">v201712051</span>
+   &#160;<span id="projectnumber">v201801091</span>
    </div>
   </td>
  </tr>
@@ -96,6 +96,8 @@ Functions</h2></td></tr>
 <tr class="memdesc:a0f52bf5984262851a613ea7637e1ac4d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Append page to the document.  <a href="#a0f52bf5984262851a613ea7637e1ac4d"></a><br/></td></tr>
 <tr class="memitem:a1ea7325f6a9d8f036d851c8fd8df77d4"><td class="memItemLeft" align="right" valign="top">Undefined&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacePDFDocument.html#a1ea7325f6a9d8f036d851c8fd8df77d4">destroy</a> (Function|Undefined callback)</td></tr>
 <tr class="memdesc:a1ea7325f6a9d8f036d851c8fd8df77d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Release memory allocated for this document.  <a href="#a1ea7325f6a9d8f036d851c8fd8df77d4"></a><br/></td></tr>
+<tr class="memitem:a62369da2b5dad210cc82b999613338a8"><td class="memItemLeft" align="right" valign="top">Undefined&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacePDFDocument.html#a62369da2b5dad210cc82b999613338a8">drawImage</a> (Object options, Function|Undefined callback)</td></tr>
+<tr class="memdesc:a62369da2b5dad210cc82b999613338a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw image.  <a href="#a62369da2b5dad210cc82b999613338a8"></a><br/></td></tr>
 <tr class="memitem:a10dec5f2c3a974ca256a170dadcc71ab"><td class="memItemLeft" align="right" valign="top">Undefined&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacePDFDocument.html#a10dec5f2c3a974ca256a170dadcc71ab">drawLine</a> (Object options, Function|Undefined callback)</td></tr>
 <tr class="memdesc:a10dec5f2c3a974ca256a170dadcc71ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw straight line.  <a href="#a10dec5f2c3a974ca256a170dadcc71ab"></a><br/></td></tr>
 <tr class="memitem:a87a0d16246e819306d076ba5216ab530"><td class="memItemLeft" align="right" valign="top">Undefined&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacePDFDocument.html#a87a0d16246e819306d076ba5216ab530">drawRectangle</a> (Object options, Function|Undefined callback)</td></tr>
@@ -217,6 +219,51 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><code>Undefined</code> </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a62369da2b5dad210cc82b999613338a8"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Undefined PDFDocument::drawImage </td>
+          <td>(</td>
+          <td class="paramtype">Object&#160;</td>
+          <td class="paramname"><em>options</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Function|Undefined&#160;</td>
+          <td class="paramname"><em>callback</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Draws the specified image scaling it to the specified <code>width</code> and <code>higth</code> at the current (last added) page of the document.</p>
+<p>See <code>libharu</code> documentation for the information about the <a href="https://github.com/libharu/libharu/wiki/Graphics#coordinate-system">coordinate system</a>.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">options</td><td><code>Object</code> configuration object, see possible options below </td></tr>
+    <tr><td class="paramname">callback</td><td><code>Function|Undefined</code> callback to receive result or error </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><code>Undefined</code></dd></dl>
+<p><b>Options</b></p>
+<ul>
+<li><b>imageHex</b> <code>String</code> image data in hexadecimal</li>
+<li><b>imageFormat</b> <code>String</code> file format of the specified image data, supported formats: <code>PNG</code></li>
+<li><b>x</b> <code>Number</code> <code>x</code> coordinate of the lower-left corner of the rectangle</li>
+<li><b>y</b> <code>Number</code> <code>y</code> coordinate of the lower-left corner of the rectangle</li>
+<li><b>width</b> <code>Number</code> Width of the rectangle in <code>pt</code></li>
+<li><b>height</b> <code>Number</code> Height of the rectangle in <code>pt</code> </li>
+</ul>
 
 </div>
 </div>
@@ -524,7 +571,7 @@ Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Dec 5 2017 15:13:13 for wilton.js by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Jan 9 2018 13:46:49 for wilton.js by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>
