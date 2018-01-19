@@ -457,3 +457,6 @@
 [submodule "bench"]
 	path = bench
 	url = https://github.com/wilton-iot/wilton_bench.git
+[submodule "tools/ant"]
+	path = tools/ant
+	url = https://github.com/wilton-iot/tools_ant.git
