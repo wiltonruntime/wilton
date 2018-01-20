@@ -75,6 +75,9 @@ project ( wilton CXX C )
 include ( ${STATICLIB_CMAKE}/staticlibs_common.cmake )
 set_property ( GLOBAL PROPERTY TARGET_SUPPORTS_SHARED_LIBS TRUE )
 
+# options
+option ( WILTON_STDLIB_MINIFY "Whether to minify JS code in std.wlib" OFF )
+
 # version file
 configure_file ( ${WILTON_DIR}/resources/buildres/wilton.version
         ${CMAKE_CURRENT_BINARY_DIR}/wilton.version )
@@ -174,13 +177,17 @@ if ( STATICLIB_TOOLCHAIN MATCHES "windows_.+" )
     set ( TOOLS_ZIP ${WILTON_DIR}/tools/windows/zip/zip.exe )
 endif ( )
 
+if ( WILTON_STDLIB_MINIFY )
+    set ( ${PROJECT_NAME}_STDWLIB_FORMAT minified )
+endif ( )
+
 add_custom_command ( OUTPUT std.wlib
         COMMAND ${CMAKE_COMMAND} -E remove_directory js
         COMMAND ${TOOLS_JJS}
                 -J-XX:+UseSerialGC -J-XX:+TieredCompilation -J-XX:TieredStopAtLevel=1
                 -cp ${WILTON_DIR}/tools/closure-compiler/closure-compiler.jar
-                ${WILTON_DIR}/tools/convertion-scripts/minify-modules.js
-                -- ${WILTON_DIR}/js js
+                ${WILTON_DIR}/tools/convertion-scripts/bundle-modules.js
+                -- ${WILTON_DIR}/js js ${${PROJECT_NAME}_STDWLIB_FORMAT}
         COMMAND cd js && ${TOOLS_ZIP} -qr9 js.zip *
         COMMAND ${CMAKE_COMMAND} -E rename js/js.zip std.wlib
         WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
