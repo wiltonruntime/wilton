@@ -189,7 +189,9 @@ add_custom_command ( OUTPUT std.wlib
                 ${WILTON_DIR}/tools/convertion-scripts/bundle-modules.js
                 -- ${WILTON_DIR}/js js ${${PROJECT_NAME}_STDWLIB_FORMAT}
         COMMAND cd js && ${TOOLS_ZIP} -qr9 js.zip *
-        COMMAND ${CMAKE_COMMAND} -E rename js/js.zip std.wlib
+        COMMAND ${CMAKE_COMMAND} -E rename
+                ${CMAKE_CURRENT_BINARY_DIR}/js/js.zip
+                ${CMAKE_CURRENT_BINARY_DIR}/std.wlib
         WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
         COMMENT "Preparing JavaScript modules bundle ..." )
 
@@ -227,8 +229,8 @@ add_custom_target ( examples
         COMMAND cd examples/binmod &&
                 ${TOOLS_ZIP} -qr9 binmod.zip *
         COMMAND ${CMAKE_COMMAND} -E rename
-                examples/binmod/binmod.zip
-                examples/binmod.wlib
+                ${CMAKE_CURRENT_BINARY_DIR}/examples/binmod/binmod.zip
+                ${CMAKE_CURRENT_BINARY_DIR}/examples/binmod.wlib
         COMMAND ${CMAKE_COMMAND} -E remove_directory
                 examples/binmod
         WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
