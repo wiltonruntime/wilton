@@ -193,12 +193,6 @@
 [submodule "tools/convertion-scripts"]
 	path = tools/convertion-scripts
 	url = https://github.com/wilton-iot/tools_convertion-scripts.git
-[submodule "tools/windows/vs2013e"]
-	path = tools/windows/vs2013e
-	url = https://github.com/wilton-iot/tools_windows_vs2013e.git
-[submodule "tools/windows/perl"]
-	path = tools/windows/perl
-	url = https://github.com/wilton-iot/tools_windows_perl.git
 [submodule "tools/windows/nasm"]
 	path = tools/windows/nasm
 	url = https://github.com/wilton-iot/tools_windows_nasm.git
@@ -208,9 +202,6 @@
 [submodule "tools/windows/zip"]
 	path = tools/windows/zip
 	url = https://github.com/wilton-iot/tools_windows_zip.git
-[submodule "tools/windows/cmake"]
-	path = tools/windows/cmake
-	url = https://github.com/wilton-iot/tools_windows_cmake.git
 [submodule "js/examples"]
 	path = js/examples
 	url = https://github.com/wilton-iot/examples.git
@@ -247,9 +238,6 @@
 [submodule "tools/maven"]
 	path = tools/maven
 	url = https://github.com/wilton-iot/tools_maven.git
-[submodule "tools/windows/jdk8"]
-	path = tools/windows/jdk8
-	url = https://github.com/wilton-iot/tools_windows_jdk8.git
 [submodule "tools/linux/cmake"]
 	path = tools/linux/cmake
 	url = https://github.com/wilton-iot/tools_linux_cmake.git
@@ -460,3 +448,6 @@
 [submodule "tools/ant"]
 	path = tools/ant
 	url = https://github.com/wilton-iot/tools_ant.git
+[submodule "tools/windows/perl520"]
+	path = tools/windows/perl520
+	url = https://github.com/wilton-iot/tools_windows_perl520.git

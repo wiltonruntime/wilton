@@ -34,22 +34,28 @@ Resulting APK can be tested in VirtualBox using [Android x86](http://www.android
 
 ### Windows
 
-32-bit build environment:
+Install dependencies:
+
+[Visual Studio 2013 Update 5 Express for Windows Desktop](https://www.visualstudio.com/en-us/news/releasenotes/vs2013-update5-vs)
+([direct ISO link](https://go.microsoft.com/fwlink/?LinkId=532499&type=ISO)),
+[CMake](https://cmake.org/download/), [OpenJDK 8](https://github.com/ojdkbuild/ojdkbuild#downloads-for-windows-x86_64).
+
+Prepare environment:
 
     cd wilton
-    resources\scripts\set-compile-env-vs12-sdk71a-x86.bat
-
-64-bit build environment:
-
-    cd wilton
-    resources\scripts\set-compile-env-vs12-sdk81-x86_64.bat
-
-Build:
-
+    resources\scripts\windows-tools.bat
     mkdir build
     cd build
-    cmake ..
-    nmake installer
+    
+Build for `x86_64`:
+
+    cmake .. -G "Visual Studio 12 2013 Win64"
+    cmake --build . --config Release --target installer
+    
+Build for `x86` (compatible with Windows XP):
+
+    cmake .. -G "Visual Studio 12 2013" -T v120_xp
+    cmake --build . --config Release --target installer
 
 ### Fedora 27+
 

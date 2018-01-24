@@ -18,6 +18,7 @@
   "featureId": "wilton",
   "featureTitle": "Wilton",
   "featureDescription": "Wilton Runtime",
+  "win64": ${WILTON_INSTALLER_WIN64},
 
   "environmentVariables": [
     {

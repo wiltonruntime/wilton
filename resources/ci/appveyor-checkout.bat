@@ -80,15 +80,14 @@ git submodule update --init modules/wilton_usb || exit /b 1
 git submodule update --init modules/wilton_winservice || exit /b 1
 git submodule update --init modules/wilton_zip || exit /b 1
 rem tools
-git submodule update --init tools/closure-compiler || exit /b 1
+rem git submodule update --init tools/closure-compiler || exit /b 1
 git submodule update --init tools/convertion-scripts || exit /b 1
 git submodule update --init tools/maven || exit /b 1
-git submodule update --init tools/windows/cmake || exit /b 1
-git submodule update --init tools/windows/jdk8 || exit /b 1
 git submodule update --init tools/windows/nasm || exit /b 1
-git submodule update --init tools/windows/perl || exit /b 1
+git submodule update --init tools/windows/perl520 || exit /b 1
 git submodule update --init tools/windows/pkgconfig || exit /b 1
-git submodule update --init tools/windows/vs2013e || exit /b 1
 git submodule update --init tools/windows/wix || exit /b 1
 git submodule update --init tools/windows/wixgen || exit /b 1
 git submodule update --init tools/windows/zip || exit /b 1
+rem additional tools
+git clone https://github.com/wilton-iot/tools_windows_jdk8.git tools/windows/jdk8

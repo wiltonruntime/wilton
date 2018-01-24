@@ -36,13 +36,17 @@ set ( WILTON_VERSION_EXE ${WILTON_VERSION_YEAR_SHORT},${WILTON_VERSION_MONTH},${
 # toolchain setup
 if ( NOT DEFINED STATICLIB_TOOLCHAIN )
     if ( WIN32 )
-        if ( $ENV{LIBPATH} MATCHES ".*/amd64" )
+        if ( ${CMAKE_GENERATOR} MATCHES ".*Win64" )
             set ( STATICLIB_TOOLCHAIN "windows_amd64_msvc" CACHE STRING "" )
+            set ( WILTON_INSTALLER_WIN64 "true" CACHE STRING "" )
+            set ( WILTON_MSVCR_ARCH "x64" CACHE STRING "" )
             if ( NOT DEFINED WILTON_BUILD_FLAVOUR )
                 set ( WILTON_BUILD_FLAVOUR "sdk81" CACHE STRING "" )
             endif ( )
         else ( )
             set ( STATICLIB_TOOLCHAIN "windows_i386_msvc" CACHE STRING "" )
+            set ( WILTON_INSTALLER_WIN64 "false" CACHE STRING "" )
+            set ( WILTON_MSVCR_ARCH "x86" CACHE STRING "" )
             if ( NOT DEFINED WILTON_BUILD_FLAVOUR )
                 set ( WILTON_BUILD_FLAVOUR "sdk71" CACHE STRING "" )
             endif ( )
@@ -165,30 +169,18 @@ if ( STATICLIB_TOOLCHAIN MATCHES "macosx_.+" )
     add_custom_target ( wilton_winservice )
 endif ( )
 
-# platform tools
-set ( TOOLS_JAVA java )
-set ( TOOLS_JJS jjs )
-set ( TOOLS_JAR jar )
-set ( TOOLS_ZIP zip )
-if ( STATICLIB_TOOLCHAIN MATCHES "windows_.+" )
-    set ( TOOLS_JAVA ${WILTON_DIR}/tools/windows/jdk8/bin/java.exe )
-    set ( TOOLS_JJS ${WILTON_DIR}/tools/windows/jdk8/bin/jjs.exe )
-    set ( TOOLS_JAR ${WILTON_DIR}/tools/windows/jdk8/bin/jar.exe )
-    set ( TOOLS_ZIP ${WILTON_DIR}/tools/windows/zip/zip.exe )
-endif ( )
-
 if ( WILTON_STDLIB_MINIFY )
     set ( ${PROJECT_NAME}_STDWLIB_FORMAT minified )
 endif ( )
 
 add_custom_command ( OUTPUT std.wlib
         COMMAND ${CMAKE_COMMAND} -E remove_directory js
-        COMMAND ${TOOLS_JJS}
+        COMMAND jjs
                 -J-XX:+UseSerialGC -J-XX:+TieredCompilation -J-XX:TieredStopAtLevel=1
                 -cp ${WILTON_DIR}/tools/closure-compiler/closure-compiler.jar
                 ${WILTON_DIR}/tools/convertion-scripts/bundle-modules.js
                 -- ${WILTON_DIR}/js js ${${PROJECT_NAME}_STDWLIB_FORMAT}
-        COMMAND cd js && ${TOOLS_ZIP} -qr9 js.zip *
+        COMMAND cd js && zip -qr9 js.zip *
         COMMAND ${CMAKE_COMMAND} -E rename
                 ${CMAKE_CURRENT_BINARY_DIR}/js/js.zip
                 ${CMAKE_CURRENT_BINARY_DIR}/std.wlib
@@ -227,7 +219,7 @@ add_custom_target ( examples
                 ${WILTON_DIR}/js/examples
                 examples
         COMMAND cd examples/binmod &&
-                ${TOOLS_ZIP} -qr9 binmod.zip *
+                zip -qr9 binmod.zip *
         COMMAND ${CMAKE_COMMAND} -E rename
                 ${CMAKE_CURRENT_BINARY_DIR}/examples/binmod/binmod.zip
                 ${CMAKE_CURRENT_BINARY_DIR}/examples/binmod.wlib
@@ -263,71 +255,71 @@ if ( STATICLIB_TOOLCHAIN MATCHES "android_.+" )
             # gnustl
             COMMAND ${CMAKE_COMMAND} -E copy ${ANDROID_GNUSTL_SHARED_PATH}/libgnustl_shared.so lib/${${PROJECT_NAME}_ANDROID_ARCH}/
             COMMAND ${CMAKE_STRIP} lib/${${PROJECT_NAME}_ANDROID_ARCH}/libgnustl_shared.so
-            COMMAND ${TOOLS_JAR} uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libgnustl_shared.so
+            COMMAND jar uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libgnustl_shared.so
             # core
             COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_core.so lib/${${PROJECT_NAME}_ANDROID_ARCH}/
             COMMAND ${CMAKE_STRIP} lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_core.so
-            COMMAND ${TOOLS_JAR} uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_core.so
+            COMMAND jar uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_core.so
             # db
             COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_db.so lib/${${PROJECT_NAME}_ANDROID_ARCH}/
             COMMAND ${CMAKE_STRIP} lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_db.so
-            COMMAND ${TOOLS_JAR} uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_db.so
+            COMMAND jar uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_db.so
             # duktape
             COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_duktape.so lib/${${PROJECT_NAME}_ANDROID_ARCH}/
             COMMAND ${CMAKE_STRIP} lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_duktape.so
-            COMMAND ${TOOLS_JAR} uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_duktape.so
+            COMMAND jar uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_duktape.so
             # channel
             COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_channel.so lib/${${PROJECT_NAME}_ANDROID_ARCH}/
             COMMAND ${CMAKE_STRIP} lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_channel.so
-            COMMAND ${TOOLS_JAR} uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_channel.so
+            COMMAND jar uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_channel.so
             # cron
             COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_cron.so lib/${${PROJECT_NAME}_ANDROID_ARCH}/
             COMMAND ${CMAKE_STRIP} lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_cron.so
-            COMMAND ${TOOLS_JAR} uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_cron.so
+            COMMAND jar uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_cron.so
             # crypto
             COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_crypto.so lib/${${PROJECT_NAME}_ANDROID_ARCH}/
             COMMAND ${CMAKE_STRIP} lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_crypto.so
-            COMMAND ${TOOLS_JAR} uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_crypto.so
+            COMMAND jar uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_crypto.so
             # fs    
             COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_fs.so lib/${${PROJECT_NAME}_ANDROID_ARCH}/
             COMMAND ${CMAKE_STRIP} lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_fs.so
-            COMMAND ${TOOLS_JAR} uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_fs.so
+            COMMAND jar uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_fs.so
             # http
             COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_http.so lib/${${PROJECT_NAME}_ANDROID_ARCH}/
             COMMAND ${CMAKE_STRIP} lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_http.so
-            COMMAND ${TOOLS_JAR} uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_http.so
+            COMMAND jar uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_http.so
             # loader
             COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_loader.so lib/${${PROJECT_NAME}_ANDROID_ARCH}/
             COMMAND ${CMAKE_STRIP} lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_loader.so
-            COMMAND ${TOOLS_JAR} uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_loader.so
+            COMMAND jar uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_loader.so
             # logging
             COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_logging.so lib/${${PROJECT_NAME}_ANDROID_ARCH}/
             COMMAND ${CMAKE_STRIP} lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_logging.so
-            COMMAND ${TOOLS_JAR} uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_logging.so
+            COMMAND jar uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_logging.so
             # net
             COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_net.so lib/${${PROJECT_NAME}_ANDROID_ARCH}/
             COMMAND ${CMAKE_STRIP} lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_net.so
-            COMMAND ${TOOLS_JAR} uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_net.so
+            COMMAND jar uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_net.so
             # pdf
             COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_pdf.so lib/${${PROJECT_NAME}_ANDROID_ARCH}/
             COMMAND ${CMAKE_STRIP} lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_pdf.so
-            COMMAND ${TOOLS_JAR} uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_pdf.so
+            COMMAND jar uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_pdf.so
             # rhino
             COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_rhino.so lib/${${PROJECT_NAME}_ANDROID_ARCH}/
             COMMAND ${CMAKE_STRIP} lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_rhino.so
-            COMMAND ${TOOLS_JAR} uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_rhino.so
+            COMMAND jar uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_rhino.so
             # server
             COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_server.so lib/${${PROJECT_NAME}_ANDROID_ARCH}/
             COMMAND ${CMAKE_STRIP} lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_server.so
-            COMMAND ${TOOLS_JAR} uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_server.so
+            COMMAND jar uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_server.so
             # thread
             COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_thread.so lib/${${PROJECT_NAME}_ANDROID_ARCH}/
             COMMAND ${CMAKE_STRIP} lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_thread.so
-            COMMAND ${TOOLS_JAR} uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_thread.so
+            COMMAND jar uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_thread.so
             # zip
             COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_zip.so lib/${${PROJECT_NAME}_ANDROID_ARCH}/
             COMMAND ${CMAKE_STRIP} lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_zip.so
-            COMMAND ${TOOLS_JAR} uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_zip.so
+            COMMAND jar uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_zip.so
 
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
             DEPENDS nativelibs
@@ -548,6 +540,10 @@ endif ( )
 
 if ( STATICLIB_TOOLCHAIN MATCHES "windows_.+" )
 
+    if ( NOT DEFINED WILTON_MSVCR_DIR )
+        set ( WILTON_MSVCR_DIR "C:/Program Files (x86)/Microsoft Visual Studio 12.0/VC/redist" CACHE STRING "" )
+    endif ( )
+
     add_custom_target ( dist_windows
             COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}
             COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}/bin
@@ -555,10 +551,10 @@ if ( STATICLIB_TOOLCHAIN MATCHES "windows_.+" )
                 bin/wilton_winservice.exe
                 wilton_${WILTON_VERSION}/bin/wilton_winservice.exe
             COMMAND ${CMAKE_COMMAND} -E copy
-                ${WILTON_DIR}/tools/windows/vs2013e/VC/redist/x86/Microsoft.VC120.CRT/msvcr120.dll
+                ${WILTON_MSVCR_DIR}/${WILTON_MSVCR_ARCH}/Microsoft.VC120.CRT/msvcr120.dll
                 wilton_${WILTON_VERSION}/bin/msvcr120.dll
             COMMAND ${CMAKE_COMMAND} -E copy
-                ${WILTON_DIR}/tools/windows/vs2013e/VC/redist/x86/Microsoft.VC120.CRT/msvcp120.dll
+                ${WILTON_MSVCR_DIR}/${WILTON_MSVCR_ARCH}/Microsoft.VC120.CRT/msvcp120.dll
                 wilton_${WILTON_VERSION}/bin/msvcp120.dll
             COMMAND ${CMAKE_COMMAND} -E copy
                 bin/wilton_core.lib
@@ -573,7 +569,7 @@ if ( STATICLIB_TOOLCHAIN MATCHES "windows_.+" )
 
     add_custom_target ( installer
             COMMAND ${CMAKE_COMMAND} -E remove wilton_${WILTON_VERSION}.wxs
-            COMMAND ${TOOLS_JAVA}
+            COMMAND java
                     -XX:+UseSerialGC -XX:+TieredCompilation -XX:TieredStopAtLevel=1
                     -jar ${WILTON_DIR}/tools/windows/wixgen/wixgen.jar
                     wilton_${WILTON_VERSION}
@@ -617,7 +613,7 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "linux_.+" )
             COMMAND ${CMAKE_COMMAND} -E remove_directory doxy
             COMMAND ${CMAKE_COMMAND} -E remove_directory docs
             COMMAND ${CMAKE_COMMAND} -E make_directory docs
-            COMMAND ${TOOLS_JJS}
+            COMMAND jjs
                     -J-XX:+UseSerialGC -J-XX:+TieredCompilation -J-XX:TieredStopAtLevel=1
                     ${WILTON_DIR}/resources/doxygen/generate-doxy.js
                     ${WILTON_DIR}/js/wilton doxy

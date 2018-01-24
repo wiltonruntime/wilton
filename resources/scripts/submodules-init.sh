@@ -19,4 +19,5 @@ set -x
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
+# todo: update modlist with new submodules
 cat "$SCRIPT_DIR"/submodules-linux.txt | while read mod ; do git submodule update --init --recursive $mod ; done

@@ -15,13 +15,19 @@ rem limitations under the License.
 
 @echo on
 
+rem shortcuts from script directory
+set BAD_SLASH_SCRIPT_DIR=%~dp0
+set SCRIPT_DIR=%BAD_SLASH_SCRIPT_DIR:\=/%
+set WILTON_DIR=%SCRIPT_DIR%../..
+
 rem env
-call resources\scripts\set-compile-env-vs12-sdk71a-x86.bat
+call resources\scripts\windows-tools.bat
+set PATH=%WILTON_DIR%/tools/windows/jdk8/bin;%PATH%
 
 rem build
 mkdir build || exit /b 1
 cd build || exit /b 1
-cmake .. -G "NMake Makefiles" || exit /b 1
-nmake installer || exit /b 1
-nmake test_duktape > test_duktape.log || exit /b 1
-nmake test_jvm > test_jvm.log || exit /b 1
+cmake .. -G "Visual Studio 12 2013" -T v120_xp || exit /b 1
+cmake --build . --config Release --target installer || exit /b 1
+cmake --build . --config Release --target test_duktape > test_duktape.log || exit /b 1
+cmake --build . --config Release --target test_jvm > test_jvm.log || exit /b 1
