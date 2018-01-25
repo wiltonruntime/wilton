@@ -451,3 +451,15 @@
 [submodule "tools/windows/perl520"]
 	path = tools/windows/perl520
 	url = https://github.com/wilton-iot/tools_windows_perl520.git
+[submodule "tools/bench/wrk"]
+	path = tools/bench/wrk
+	url = https://github.com/wilton-iot/wrk.git
+[submodule "tools/bench/FlameGraph"]
+	path = tools/bench/FlameGraph
+	url = https://github.com/wilton-iot/FlameGraph.git
+[submodule "tools/bench/nmon"]
+	path = tools/bench/nmon
+	url = https://github.com/wilton-iot/nmon.git
+[submodule "tools/bench/nmonvisualizer"]
+	path = tools/bench/nmonvisualizer
+	url = https://github.com/wilton-iot/nmonvisualizer.git
