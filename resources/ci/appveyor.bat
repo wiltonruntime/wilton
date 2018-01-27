@@ -28,17 +28,17 @@ rem build
 mkdir build || exit /b 1
 cd build || exit /b 1
 cmake .. -G "Visual Studio 12 2013" -T v120_xp || exit /b 1
-"C:/Program Files (x86)/MSBuild/12.0/Bin/msbuild.exe" wilton.sln /p:Configuration=Release /t:installer
+"C:/Program Files (x86)/MSBuild/12.0/Bin/msbuild.exe" /p:Configuration=Release installer.vcxproj
 if errorlevel 1 (
     echo msbuild error, target: installer
     exit /b 1
 )
-"C:/Program Files (x86)/MSBuild/12.0/Bin/msbuild.exe" wilton.sln /p:Configuration=Release /t:test_duktape > test_duktape.log
+"C:/Program Files (x86)/MSBuild/12.0/Bin/msbuild.exe" /p:Configuration=Release test_duktape.vcxproj > test_duktape.log
 if errorlevel 1 (
     echo msbuild error, target: test_duktape
     exit /b 1
 )
-"C:/Program Files (x86)/MSBuild/12.0/Bin/msbuild.exe" wilton.sln /p:Configuration=Release /t:test_jvm > test_jvm.log
+"C:/Program Files (x86)/MSBuild/12.0/Bin/msbuild.exe" /p:Configuration=Release test_jvm.vcxproj > test_jvm.log
 if errorlevel 1 (
     echo msbuild error, target: test_jvm
     exit /b 1
