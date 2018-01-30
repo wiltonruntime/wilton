@@ -154,6 +154,7 @@ if ( STATICLIB_TOOLCHAIN MATCHES "windows_.+" )
     add_custom_target ( wilton_jsc )
     add_custom_target ( wilton_serial )
     add_custom_target ( wilton_usb )
+    staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_chakra )
     staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_winservice )
 endif ( )
 if ( STATICLIB_TOOLCHAIN MATCHES "linux_.+" )
@@ -547,6 +548,9 @@ if ( STATICLIB_TOOLCHAIN MATCHES "windows_.+" )
     add_custom_target ( dist_windows
             COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}
             COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}/bin
+            COMMAND ${CMAKE_COMMAND} -E copy
+                bin/wilton_chakra.dll
+                wilton_${WILTON_VERSION}/bin/wilton_chakra.dll
             COMMAND ${CMAKE_COMMAND} -E copy
                 bin/wilton_winservice.exe
                 wilton_${WILTON_VERSION}/bin/wilton_winservice.exe

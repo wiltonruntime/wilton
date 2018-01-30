@@ -463,3 +463,6 @@
 [submodule "tools/bench/nmonvisualizer"]
 	path = tools/bench/nmonvisualizer
 	url = https://github.com/wilton-iot/nmonvisualizer.git
+[submodule "modules/wilton_chakra"]
+	path = modules/wilton_chakra
+	url = https://github.com/wilton-iot/wilton_chakra
