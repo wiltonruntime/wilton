@@ -564,7 +564,7 @@ if ( STATICLIB_TOOLCHAIN MATCHES "windows_.+" )
                 bin/wilton_core.lib
                 wilton_${WILTON_VERSION}/devel/wilton_core.lib
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-            DEPENDS wilton_winservice )
+            DEPENDS wilton_chakra wilton_winservice )
     add_dependencies ( dist dist_windows )
 
     configure_file ( 

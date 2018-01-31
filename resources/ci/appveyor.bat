@@ -38,6 +38,11 @@ if errorlevel 1 (
     echo msbuild error, target: test_duktape
     exit /b 1
 )
+"C:/Program Files (x86)/MSBuild/12.0/Bin/msbuild.exe" /p:Configuration=Release test_js.vcxproj > test_js.log
+if errorlevel 1 (
+    echo msbuild error, target: test_js
+    exit /b 1
+)
 "C:/Program Files (x86)/MSBuild/12.0/Bin/msbuild.exe" /p:Configuration=Release test_jvm.vcxproj > test_jvm.log
 if errorlevel 1 (
     echo msbuild error, target: test_jvm
