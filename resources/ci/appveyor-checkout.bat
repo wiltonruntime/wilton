@@ -91,5 +91,5 @@ git submodule update --init tools/windows/wix || exit /b 1
 git submodule update --init tools/windows/wixgen || exit /b 1
 git submodule update --init tools/windows/zip || exit /b 1
 rem additional tools
-git clone https://github.com/wilton-iot/tools_windows_jdk8.git tools/windows/jdk8
+rem git clone https://github.com/wilton-iot/tools_windows_jdk8.git tools/windows/jdk8
 git clone https://github.com/wilton-iot/tools_windows_jdk8_64.git tools/windows/jdk8_64
