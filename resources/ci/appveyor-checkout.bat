@@ -57,6 +57,7 @@ git submodule update --init jni || exit /b 1
 rem js
 rd /s /q js
 git clone https://github.com/wilton-iot/js-libs-ci-monorepo.git js || exit /b 1
+git submodule update --init modules/wilton_chakra || exit /b 1
 git submodule update --init modules/wilton_channel || exit /b 1
 git submodule update --init modules/wilton_cli || exit /b 1
 git submodule update --init modules/wilton_cron || exit /b 1
