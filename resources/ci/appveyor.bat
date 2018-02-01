@@ -22,12 +22,12 @@ set WILTON_DIR=%SCRIPT_DIR%../..
 
 rem env
 call resources\scripts\windows-tools.bat
-set PATH=%WILTON_DIR%/tools/windows/jdk8/bin;%PATH%
 
-rem build
+rem build x86_64
+set PATH=%WILTON_DIR%/tools/windows/jdk8_64/bin;%PATH%
 mkdir build || exit /b 1
 cd build || exit /b 1
-cmake .. -G "Visual Studio 12 2013" -T v120_xp || exit /b 1
+cmake .. -G "Visual Studio 12 2013 Win64" || exit /b 1
 "C:/Program Files (x86)/MSBuild/12.0/Bin/msbuild.exe" /p:Configuration=Release installer.vcxproj
 if errorlevel 1 (
     echo msbuild error, target: installer
@@ -48,3 +48,29 @@ if errorlevel 1 (
     echo msbuild error, target: test_jvm
     exit /b 1
 )
+
+rem cleanup
+cd ..
+rd /s /q build
+
+rem build x86 - WinXP
+set PATH=%WILTON_DIR%/tools/windows/jdk8/bin;%PATH%
+mkdir build || exit /b 1
+cd build || exit /b 1
+cmake .. -G "Visual Studio 12 2013" -T v120_xp || exit /b 1
+"C:/Program Files (x86)/MSBuild/12.0/Bin/msbuild.exe" /p:Configuration=Release installer.vcxproj
+if errorlevel 1 (
+    echo msbuild error, target: installer
+    exit /b 1
+)
+"C:/Program Files (x86)/MSBuild/12.0/Bin/msbuild.exe" /p:Configuration=Release test_js.vcxproj > test_js.log
+if errorlevel 1 (
+    echo msbuild error, target: test_js
+    exit /b 1
+)
+"C:/Program Files (x86)/MSBuild/12.0/Bin/msbuild.exe" /p:Configuration=Release test_jvm.vcxproj > test_jvm.log
+if errorlevel 1 (
+    echo msbuild error, target: test_jvm
+    exit /b 1
+)
+

@@ -154,9 +154,14 @@ if ( STATICLIB_TOOLCHAIN MATCHES "windows_.+" )
     add_custom_target ( wilton_jsc )
     add_custom_target ( wilton_serial )
     add_custom_target ( wilton_usb )
-    staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_chakra )
+    if ( STATICLIB_TOOLCHAIN MATCHES "windows_amd64_.+" )
+        staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_chakra )
+    else ( )
+        add_custom_target ( wilton_chakra )
+    endif ( )
     staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_winservice )
 endif ( )
+
 if ( STATICLIB_TOOLCHAIN MATCHES "linux_.+" )
     staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_jsc )
     staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_serial )
@@ -544,13 +549,10 @@ if ( STATICLIB_TOOLCHAIN MATCHES "windows_.+" )
     if ( NOT DEFINED WILTON_MSVCR_DIR )
         set ( WILTON_MSVCR_DIR "C:/Program Files (x86)/Microsoft Visual Studio 12.0/VC/redist" CACHE STRING "" )
     endif ( )
-
-    add_custom_target ( dist_windows
+    
+    add_custom_target ( dist_windows_generic
             COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}
-            COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}/bin
-            COMMAND ${CMAKE_COMMAND} -E copy
-                bin/wilton_chakra.dll
-                wilton_${WILTON_VERSION}/bin/wilton_chakra.dll
+            COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}/bin           
             COMMAND ${CMAKE_COMMAND} -E copy
                 bin/wilton_winservice.exe
                 wilton_${WILTON_VERSION}/bin/wilton_winservice.exe
@@ -564,7 +566,22 @@ if ( STATICLIB_TOOLCHAIN MATCHES "windows_.+" )
                 bin/wilton_core.lib
                 wilton_${WILTON_VERSION}/devel/wilton_core.lib
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-            DEPENDS wilton_chakra wilton_winservice )
+            DEPENDS wilton_winservice )
+    
+    # no chakra on winxp
+    add_custom_target ( dist_windows_amd64
+         COMMAND ${CMAKE_COMMAND} -E copy
+                bin/wilton_chakra.dll
+                wilton_${WILTON_VERSION}/bin/wilton_chakra.dll
+            WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+            DEPENDS wilton_chakra dist_windows_generic )
+    
+    add_custom_target ( dist_windows DEPENDS dist_windows_generic )
+    
+    if ( STATICLIB_TOOLCHAIN MATCHES "windows_amd64_.+" )
+        add_dependencies ( dist_windows dist_windows_amd64 )
+    endif ( )
+    
     add_dependencies ( dist dist_windows )
 
     configure_file ( 
