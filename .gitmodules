@@ -466,3 +466,6 @@
 [submodule "modules/wilton_chakra"]
 	path = modules/wilton_chakra
 	url = https://github.com/wilton-iot/wilton_chakra
+[submodule "modules/wilton_examples"]
+	path = modules/wilton_examples
+	url = https://github.com/wilton-iot/wilton_examples.git

@@ -382,9 +382,12 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "(windows|linux|macosx)_.+" )
             COMMAND ${CMAKE_COMMAND} -E copy
                     bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_core${CMAKE_SHARED_LIBRARY_SUFFIX}
                     wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_core${CMAKE_SHARED_LIBRARY_SUFFIX}
-            COMMAND ${CMAKE_COMMAND} -E copy_directory
-                    ${WILTON_DIR}/core/include
-                    wilton_${WILTON_VERSION}/devel/include
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    ${WILTON_DIR}/core/include/wilton/wilton.h
+                    wilton_${WILTON_VERSION}/devel/include/wilton/wilton.h
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    ${WILTON_DIR}/core/include/wilton/wiltoncall.h
+                    wilton_${WILTON_VERSION}/devel/include/wilton/wiltoncall.h
             # channel
             COMMAND ${CMAKE_COMMAND} -E copy
                     bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_channel${CMAKE_SHARED_LIBRARY_SUFFIX}
@@ -539,8 +542,8 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "(windows|linux|macosx)_.+" )
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION} 
             DEPENDS dist
             COMMENT "Running tests on Rhino and Nashorn JavaScript engines ..." )
-            
-     add_custom_target ( test_all DEPENDS test_js test_duktape test_jvm )
+
+    add_custom_target ( test_all DEPENDS test_js test_duktape test_jvm )
 
 endif ( )
 
@@ -552,7 +555,7 @@ if ( STATICLIB_TOOLCHAIN MATCHES "windows_.+" )
     
     add_custom_target ( dist_windows_generic
             COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}
-            COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}/bin           
+            COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}/bin
             COMMAND ${CMAKE_COMMAND} -E copy
                 bin/wilton_winservice.exe
                 wilton_${WILTON_VERSION}/bin/wilton_winservice.exe
