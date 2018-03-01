@@ -18,7 +18,7 @@ cmake_minimum_required ( VERSION 2.8.12 )
 set ( CMAKE_BUILD_TYPE "Release" CACHE STRING "Default build type" )
 
 set ( ANDROID_TOOLCHAIN_NAME arm-linux-androideabi CACHE INTERNAL "" )
-set ( ANDROID_TOOLCHAIN_DIR "SPECIFY_ME_I_AM_ANDROID_TOOLCHAIN_DIR" CACHE STRING "" )
+set ( ANDROID_TOOLCHAIN_DIR "${WILTON_DIR}/tools/android/android-ndk-r9d-${ANDROID_TOOLCHAIN_NAME}-4.8" CACHE STRING "" )
 set ( ANDROID_TOOLCHAIN_PREFIX ${ANDROID_TOOLCHAIN_DIR}/bin/${ANDROID_TOOLCHAIN_NAME} CACHE INTERNAL "" )
 set ( ANDROID_GNUSTL_SHARED_PATH ${ANDROID_TOOLCHAIN_DIR}/${ANDROID_TOOLCHAIN_NAME}/lib/armv7-a/thumb )
 
@@ -75,6 +75,7 @@ set ( CMAKE_CXX_FLAGS_LIST
         -Wlogical-op
         -DANDROID
         -mandroid
+        -lgnustl_shared
         --sysroot=${CMAKE_SYSROOT}
         -march=armv7-a
         -mthumb
