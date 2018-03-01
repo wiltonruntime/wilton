@@ -469,3 +469,45 @@
 [submodule "modules/wilton_examples"]
 	path = modules/wilton_examples
 	url = https://github.com/wilton-iot/wilton_examples.git
+[submodule "deps/lookaside_openssl"]
+	path = deps/lookaside_openssl
+	url = https://github.com/staticlibs/lookaside_openssl.git
+[submodule "deps/lookaside_asio"]
+	path = deps/lookaside_asio
+	url = https://github.com/staticlibs/lookaside_asio.git
+[submodule "deps/lookaside_curl"]
+	path = deps/lookaside_curl
+	url = https://github.com/staticlibs/lookaside_curl.git
+[submodule "deps/lookaside_libharu"]
+	path = deps/lookaside_libharu
+	url = https://github.com/staticlibs/lookaside_libharu.git
+[submodule "deps/lookaside_jansson"]
+	path = deps/lookaside_jansson
+	url = https://github.com/staticlibs/lookaside_jansson.git
+[submodule "deps/lookaside_libpng"]
+	path = deps/lookaside_libpng
+	url = https://github.com/staticlibs/lookaside_libpng.git
+[submodule "deps/lookaside_postgresql"]
+	path = deps/lookaside_postgresql
+	url = https://github.com/staticlibs/lookaside_postgresql.git
+[submodule "deps/lookaside_log4cplus"]
+	path = deps/lookaside_log4cplus
+	url = https://github.com/staticlibs/lookaside_log4cplus.git
+[submodule "deps/lookaside_popt"]
+	path = deps/lookaside_popt
+	url = https://github.com/staticlibs/lookaside_popt.git
+[submodule "deps/lookaside_soci"]
+	path = deps/lookaside_soci
+	url = https://github.com/staticlibs/lookaside_soci.git
+[submodule "deps/lookaside_zlib"]
+	path = deps/lookaside_zlib
+	url = https://github.com/staticlibs/lookaside_zlib.git
+[submodule "deps/ccronexpr"]
+	path = deps/ccronexpr
+	url = https://github.com/staticlibs/ccronexpr.git
+[submodule "deps/mstch_cpp11"]
+	path = deps/mstch_cpp11
+	url = https://github.com/staticlibs/mstch_cpp11.git
+[submodule "deps/tinydir"]
+	path = deps/tinydir
+	url = https://github.com/staticlibs/tinydir.git

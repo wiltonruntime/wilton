@@ -19,24 +19,73 @@ set ( CMAKE_BUILD_TYPE "Release" CACHE STRING "Default build type" )
 set ( CMAKE_SYSTEM_NAME Linux )
 set ( CMAKE_C_COMPILER gcc )
 set ( CMAKE_CXX_COMPILER g++ )
-set ( CMAKE_C_FLAGS "-fPIC" CACHE INTERNAL "" )
-set ( CMAKE_C_FLAGS_DEBUG "-g -O0" CACHE INTERNAL "" )
-set ( CMAKE_C_FLAGS_RELEASE "-Os -DNDEBUG" CACHE INTERNAL "" )
-set ( CMAKE_CXX_FLAGS "--std=c++14 -fPIC -Wall -Werror -Wextra" )
-set ( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-strict-overflow -fno-strict-aliasing -fstack-protector-all" )
-set ( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wlogical-op -Wduplicated-cond" )
-# duktape
-set ( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-implicit-fallthrough -Wno-format-truncation" )
-# pion: todo: fixme
-set ( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-noexcept-type -Wno-nonnull-compare" )
-# tinydir
-set ( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-deprecated-declarations" )
+
+# CMAKE_C_FLAGS
+set ( CMAKE_C_FLAGS_LIST
+        -fPIC )
+string ( REPLACE ";" " " CMAKE_C_FLAGS "${CMAKE_C_FLAGS_LIST}" )
+set ( CMAKE_C_FLAGS "${CMAKE_C_FLAGS}" CACHE INTERNAL "" )
+
+# CMAKE_C_FLAGS_DEBUG
+set ( CMAKE_C_FLAGS_DEBUG_LIST
+        -g
+        -O0 )
+string ( REPLACE ";" " " CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG_LIST}" )
+set ( CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG}" CACHE INTERNAL "" )
+
+# CMAKE_C_FLAGS_RELEASE
+set ( CMAKE_C_FLAGS_RELEASE_LIST
+        -Os
+        -DNDEBUG )
+string ( REPLACE ";" " " CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS_RELEASE_LIST}" )
+set ( CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS_RELEASE}" CACHE INTERNAL "" )
+
+# CMAKE_CXX_FLAGS
+set ( CMAKE_CXX_FLAGS_LIST
+        --std=c++17
+        -fPIC
+        -Wall
+        -Werror
+        -Wextra
+        -fno-strict-overflow
+        -fno-strict-aliasing
+        -fstack-protector-all
+        -Wlogical-op 
+        -Wduplicated-cond
+        # duktape
+        -Wno-implicit-fallthrough
+        -Wno-format-truncation
+        # pion: todo: fixme
+        -Wno-noexcept-type
+        -Wno-nonnull-compare
+        # tinydir
+        -Wno-deprecated-declarations )
+string ( REPLACE ";" " " CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS_LIST}" )
 set ( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}" CACHE INTERNAL "" )
-set ( CMAKE_CXX_FLAGS_DEBUG "-g -O0" CACHE INTERNAL "" )
-set ( CMAKE_CXX_FLAGS_RELEASE "-Os -DNDEBUG" CACHE INTERNAL "" )
+
+# CMAKE_CXX_FLAGS_DEBUG
+set ( CMAKE_CXX_FLAGS_DEBUG_LIST
+        -g
+        -O0 )
+string ( REPLACE ";" " " CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG_LIST}" )
+set ( CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG}" CACHE INTERNAL "" )
+
+# CMAKE_CXX_FLAGS_RELEASE
+set ( CMAKE_CXX_FLAGS_RELEASE_LIST
+        -Os
+        -DNDEBUG )
+string ( REPLACE ";" " " CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE_LIST}" )
+set ( CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE}" CACHE INTERNAL "" )
 
 # https://stackoverflow.com/a/6331749/314015
-set ( CMAKE_EXE_LINKER_FLAGS "-Wl,-rpath -Wl,$ORIGIN -Wl,-z -Wl,origin" CACHE INTERNAL "" )
+# CMAKE_EXE_LINKER_FLAGS
+set ( CMAKE_EXE_LINKER_FLAGS_LIST
+        -Wl,-rpath
+        -Wl,$ORIGIN
+        -Wl,-z
+        -Wl,origin )
+string ( REPLACE ";" " " CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS_LIST}" )
+set ( CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS}" CACHE INTERNAL "" )
 set ( CMAKE_SKIP_RPATH TRUE CACHE INTERNAL "" )
 
 # variables for packages that are present, but do not have pkg-config support

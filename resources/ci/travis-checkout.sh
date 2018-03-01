@@ -23,35 +23,50 @@ git submodule update --init android
 git submodule update --init core
 # deps
 git submodule update --init deps/cmake
-git submodule update --init --recursive deps/external_asio
-git submodule update --init --recursive deps/external_curl
+git submodule update --init deps/external_asio
+git submodule update --init deps/lookaside_asio
+git submodule update --init deps/external_curl
+git submodule update --init deps/lookaside_curl
 git submodule update --init deps/external_duktape
-git submodule update --init --recursive deps/external_hpdf
-git submodule update --init --recursive deps/external_jansson
-git submodule update --init --recursive deps/external_libpng
-git submodule update --init --recursive deps/external_libpq
-git submodule update --init --recursive deps/external_log4cplus
-git submodule update --init --recursive deps/external_popt
-git submodule update --init --recursive deps/external_soci
+git submodule update --init deps/external_hpdf
+git submodule update --init deps/lookaside_libharu
+git submodule update --init deps/external_jansson
+git submodule update --init deps/lookaside_jansson
+git submodule update --init deps/external_libpng
+git submodule update --init deps/lookaside_libpng
+git submodule update --init deps/external_libpq
+git submodule update --init deps/lookaside_postgresql
+git submodule update --init deps/external_log4cplus
+git submodule update --init deps/lookaside_log4cplus
+git submodule update --init deps/external_openssl
+git submodule update --init deps/lookaside_openssl
+git submodule update --init deps/external_popt
+git submodule update --init deps/lookaside_popt
+git submodule update --init deps/external_soci
+git submodule update --init deps/lookaside_soci
 git submodule update --init deps/external_sqlite
-git submodule update --init --recursive deps/external_zlib
+git submodule update --init deps/external_zlib
+git submodule update --init deps/lookaside_zlib
 git submodule update --init deps/staticlib_compress
 git submodule update --init deps/staticlib_concurrent
 git submodule update --init deps/staticlib_config
-git submodule update --init --recursive deps/staticlib_cron
+git submodule update --init deps/staticlib_cron
+git submodule update --init deps/ccronexpr
 git submodule update --init deps/staticlib_crypto
 git submodule update --init deps/staticlib_endian
 git submodule update --init deps/staticlib_http
 git submodule update --init deps/staticlib_io
 git submodule update --init deps/staticlib_jni
 git submodule update --init deps/staticlib_json
-git submodule update --init --recursive deps/staticlib_mustache
+git submodule update --init deps/staticlib_mustache
+git submodule update --init deps/mstch_cpp11
 git submodule update --init deps/staticlib_orm
 git submodule update --init deps/staticlib_pimpl
 git submodule update --init deps/staticlib_pion
 git submodule update --init deps/staticlib_ranges
 git submodule update --init deps/staticlib_support
-git submodule update --init --recursive deps/staticlib_tinydir
+git submodule update --init deps/staticlib_tinydir
+git submodule update --init deps/tinydir
 git submodule update --init deps/staticlib_unzip
 git submodule update --init deps/staticlib_utils
 # jni

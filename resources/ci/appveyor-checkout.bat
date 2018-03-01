@@ -19,36 +19,50 @@ rem core
 git submodule update --init core || exit /b 1
 rem deps
 git submodule update --init deps/cmake || exit /b 1
-git submodule update --init --recursive deps/external_asio || exit /b 1
-git submodule update --init --recursive deps/external_curl || exit /b 1
+git submodule update --init deps/external_asio || exit /b 1
+git submodule update --init deps/lookaside_asio || exit /b 1
+git submodule update --init deps/external_curl || exit /b 1
+git submodule update --init deps/lookaside_curl || exit /b 1
 git submodule update --init deps/external_duktape || exit /b 1
-git submodule update --init --recursive deps/external_hpdf || exit /b 1
-git submodule update --init --recursive deps/external_jansson || exit /b 1
-git submodule update --init --recursive deps/external_libpng || exit /b 1
-git submodule update --init --recursive deps/external_libpq || exit /b 1
-git submodule update --init --recursive deps/external_log4cplus || exit /b 1
-git submodule update --init --recursive deps/external_openssl || exit /b 1
-git submodule update --init --recursive deps/external_popt || exit /b 1
-git submodule update --init --recursive deps/external_soci || exit /b 1
+git submodule update --init deps/external_hpdf || exit /b 1
+git submodule update --init deps/lookaside_libharu || exit /b 1
+git submodule update --init deps/external_jansson || exit /b 1
+git submodule update --init deps/lookaside_jansson || exit /b 1
+git submodule update --init deps/external_libpng || exit /b 1
+git submodule update --init deps/lookaside_libpng || exit /b 1
+git submodule update --init deps/external_libpq || exit /b 1
+git submodule update --init deps/lookaside_postgresql || exit /b 1
+git submodule update --init deps/external_log4cplus || exit /b 1
+git submodule update --init deps/lookaside_log4cplus || exit /b 1
+git submodule update --init deps/external_openssl || exit /b 1
+git submodule update --init deps/lookaside_openssl || exit /b 1
+git submodule update --init deps/external_popt || exit /b 1
+git submodule update --init deps/lookaside_popt || exit /b 1
+git submodule update --init deps/external_soci || exit /b 1
+git submodule update --init deps/lookaside_soci || exit /b 1
 git submodule update --init deps/external_sqlite || exit /b 1
-git submodule update --init --recursive deps/external_zlib || exit /b 1
+git submodule update --init deps/external_zlib || exit /b 1
+git submodule update --init deps/lookaside_zlib || exit /b 1
 git submodule update --init deps/staticlib_compress || exit /b 1
 git submodule update --init deps/staticlib_concurrent || exit /b 1
 git submodule update --init deps/staticlib_config || exit /b 1
-git submodule update --init --recursive deps/staticlib_cron || exit /b 1
+git submodule update --init deps/staticlib_cron || exit /b 1
+git submodule update --init deps/ccronexpr || exit /b 1
 git submodule update --init deps/staticlib_crypto || exit /b 1
 git submodule update --init deps/staticlib_endian || exit /b 1
 git submodule update --init deps/staticlib_http || exit /b 1
 git submodule update --init deps/staticlib_io || exit /b 1
 git submodule update --init deps/staticlib_jni || exit /b 1
 git submodule update --init deps/staticlib_json || exit /b 1
-git submodule update --init --recursive deps/staticlib_mustache || exit /b 1
+git submodule update --init deps/staticlib_mustache || exit /b 1
+git submodule update --init deps/mstch_cpp11 || exit /b 1
 git submodule update --init deps/staticlib_orm || exit /b 1
 git submodule update --init deps/staticlib_pimpl || exit /b 1
 git submodule update --init deps/staticlib_pion || exit /b 1
 git submodule update --init deps/staticlib_ranges || exit /b 1
 git submodule update --init deps/staticlib_support || exit /b 1
-git submodule update --init --recursive deps/staticlib_tinydir || exit /b 1
+git submodule update --init deps/staticlib_tinydir || exit /b 1
+git submodule update --init deps/tinydir || exit /b 1
 git submodule update --init deps/staticlib_unzip || exit /b 1
 git submodule update --init deps/staticlib_utils || exit /b 1
 git submodule update --init deps/staticlib_winservice || exit /b 1

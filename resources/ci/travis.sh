@@ -20,7 +20,6 @@ set -x
 if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
 
     # tools
-    git submodule update --init --recursive deps/external_openssl
     git submodule update --init tools/gradle
     git submodule update --init tools/maven
     git submodule update --init tools/linux/jdk8
@@ -57,8 +56,6 @@ fi
 if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
     set +e
     mkdir /Users/travis/build/staticlibs
-    git clone https://github.com/staticlibs/tools_macos_openssl.git /Users/travis/build/staticlibs/tools_macos_openssl
-    export PKG_CONFIG_PATH=/Users/travis/build/staticlibs/tools_macos_openssl/lib/pkgconfig:$PKG_CONFIG_PATH
     mkdir build
     pushd build
     set -e
