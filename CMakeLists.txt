@@ -79,9 +79,6 @@ project ( wilton CXX C )
 include ( ${STATICLIB_CMAKE}/staticlibs_common.cmake )
 set_property ( GLOBAL PROPERTY TARGET_SUPPORTS_SHARED_LIBS TRUE )
 
-# options
-option ( WILTON_STDLIB_MINIFY "Whether to minify JS code in std.wlib" OFF )
-
 # version file
 configure_file ( ${WILTON_DIR}/resources/buildres/wilton.version
         ${CMAKE_CURRENT_BINARY_DIR}/wilton.version )
@@ -175,26 +172,6 @@ if ( STATICLIB_TOOLCHAIN MATCHES "macosx_.+" )
     add_custom_target ( wilton_winservice )
 endif ( )
 
-if ( WILTON_STDLIB_MINIFY )
-    set ( ${PROJECT_NAME}_STDWLIB_FORMAT minified )
-endif ( )
-
-add_custom_command ( OUTPUT std.wlib
-        COMMAND ${CMAKE_COMMAND} -E remove_directory js
-        COMMAND jjs
-                -J-XX:+UseSerialGC -J-XX:+TieredCompilation -J-XX:TieredStopAtLevel=1
-                -cp ${WILTON_DIR}/tools/closure-compiler/closure-compiler.jar
-                ${WILTON_DIR}/tools/convertion-scripts/bundle-modules.js
-                -- ${WILTON_DIR}/js js ${${PROJECT_NAME}_STDWLIB_FORMAT}
-        COMMAND cd js && zip -qr9 js.zip *
-        COMMAND ${CMAKE_COMMAND} -E rename
-                ${CMAKE_CURRENT_BINARY_DIR}/js/js.zip
-                ${CMAKE_CURRENT_BINARY_DIR}/std.wlib
-        WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-        COMMENT "Preparing JavaScript modules bundle ..." )
-
-add_custom_target( stdlib DEPENDS std.wlib )
-
 add_custom_target ( nativelibs DEPENDS
         wilton_core
         wilton_db
@@ -218,6 +195,38 @@ add_custom_target ( nativelibs DEPENDS
         wilton_thread
         wilton_usb
         wilton_zip )
+
+add_custom_command ( OUTPUT std.wlib
+        COMMAND ${CMAKE_COMMAND} -E remove_directory js
+        COMMAND jjs
+                -J-XX:+UseSerialGC -J-XX:+TieredCompilation -J-XX:TieredStopAtLevel=1
+                -cp ${WILTON_DIR}/tools/closure-compiler/closure-compiler.jar
+                ${WILTON_DIR}/tools/convertion-scripts/bundle-modules.js
+                -- ${WILTON_DIR}/js js
+        COMMAND cd js && zip -qr9 js.zip *
+        COMMAND ${CMAKE_COMMAND} -E rename
+                ${CMAKE_CURRENT_BINARY_DIR}/js/js.zip
+                ${CMAKE_CURRENT_BINARY_DIR}/std.wlib
+        WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+        DEPENDS nativelibs # just to preserve ordering
+        COMMENT "Preparing JavaScript modules bundle ..." )
+
+add_custom_command ( OUTPUT std.min.wlib
+        COMMAND ${CMAKE_COMMAND} -E remove_directory js
+        COMMAND jjs
+                -J-XX:+UseSerialGC -J-XX:+TieredCompilation -J-XX:TieredStopAtLevel=1
+                -cp ${WILTON_DIR}/tools/closure-compiler/closure-compiler.jar
+                ${WILTON_DIR}/tools/convertion-scripts/bundle-modules.js
+                -- ${WILTON_DIR}/js js minified
+        COMMAND cd js && zip -qr9 js.zip *
+        COMMAND ${CMAKE_COMMAND} -E rename
+                ${CMAKE_CURRENT_BINARY_DIR}/js/js.zip
+                ${CMAKE_CURRENT_BINARY_DIR}/std.min.wlib
+        WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+        DEPENDS std.wlib
+        COMMENT "Preparing JavaScript modules minified bundle ..." )
+
+add_custom_target( stdlib DEPENDS std.wlib std.min.wlib )
 
 add_custom_target ( examples 
         COMMAND ${CMAKE_COMMAND} -E remove_directory examples
@@ -245,7 +254,7 @@ if ( STATICLIB_TOOLCHAIN MATCHES "android_.+" )
 
     if ( ANDROID_SDK_ENABLE_LIBC_PRELOAD )
         set ( ${PROJECT_NAME}_LIBC_PRELOAD_CMD LD_LIBRARY_PATH=${WILTON_DIR}/tools/android/libc6_2.15/lib/x86_64-linux-gnu/ CACHE INTERNAL "" )
-                    
+
     endif ( )
 
     add_custom_command ( OUTPUT wilton-android.jar
@@ -338,8 +347,8 @@ if ( STATICLIB_TOOLCHAIN MATCHES "android_.+" )
             COMMAND ${CMAKE_COMMAND} -E remove_directory ${WILTON_DIR}/android/build
             COMMAND ${CMAKE_COMMAND} -E remove_directory ${WILTON_DIR}/android/app/build
             COMMAND ${CMAKE_COMMAND} -E copy
-                    std.wlib
-                    ${WILTON_DIR}/android/app/src/main/assets/net.wiltontoolkit.android/
+                    std.min.wlib
+                    ${WILTON_DIR}/android/app/src/main/assets/net.wiltontoolkit.android/std.wlib
             COMMAND ${CMAKE_COMMAND} -E copy_directory
                     examples
                     ${WILTON_DIR}/android/app/src/main/assets/net.wiltontoolkit.android/examples
@@ -496,6 +505,9 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "(windows|linux|macosx)_.+" )
             COMMAND ${CMAKE_COMMAND} -E copy
                     std.wlib
                     wilton_${WILTON_VERSION}/std.wlib
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    std.min.wlib
+                    wilton_${WILTON_VERSION}/std.min.wlib
             COMMAND ${CMAKE_COMMAND} -E copy_directory
                     examples
                     wilton_${WILTON_VERSION}/examples
@@ -525,6 +537,7 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "(windows|linux|macosx)_.+" )
             COMMAND bin/wilton ${WILTON_DIR}/js/wilton/test/index.js -m ${WILTON_DIR}/js
             COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runNodeTests.js -m ${WILTON_DIR}/js
             COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runSanityTests.js
+            COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runSanityTests.js -m std.min.wlib
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION} 
             DEPENDS dist
             COMMENT "Running tests on default JavaScript engine ..." )
@@ -533,6 +546,7 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "(windows|linux|macosx)_.+" )
             COMMAND bin/wilton ${WILTON_DIR}/js/wilton/test/index.js -m ${WILTON_DIR}/js -j duktape
             COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runNodeTests.js -m ${WILTON_DIR}/js -j duktape
             COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runSanityTests.js
+            COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runSanityTests.js -m std.min.wlib
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION} 
             DEPENDS dist
             COMMENT "Running tests on Duktape JavaScript engines ..." )
@@ -578,13 +592,13 @@ if ( STATICLIB_TOOLCHAIN MATCHES "windows_.+" )
                 wilton_${WILTON_VERSION}/bin/wilton_chakra.dll
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
             DEPENDS wilton_chakra dist_windows_generic )
-    
+
     add_custom_target ( dist_windows DEPENDS dist_windows_generic )
-    
+
     if ( STATICLIB_TOOLCHAIN MATCHES "windows_amd64_.+" )
         add_dependencies ( dist_windows dist_windows_amd64 )
     endif ( )
-    
+
     add_dependencies ( dist dist_windows )
 
     configure_file ( 
