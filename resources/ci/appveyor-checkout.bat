@@ -95,7 +95,7 @@ git submodule update --init modules/wilton_usb || exit /b 1
 git submodule update --init modules/wilton_winservice || exit /b 1
 git submodule update --init modules/wilton_zip || exit /b 1
 rem tools
-rem git submodule update --init tools/closure-compiler || exit /b 1
+git submodule update --init tools/closure-compiler || exit /b 1
 git submodule update --init tools/convertion-scripts || exit /b 1
 git submodule update --init tools/maven || exit /b 1
 git submodule update --init tools/windows/nasm || exit /b 1
