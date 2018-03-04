@@ -511,3 +511,6 @@
 [submodule "deps/tinydir"]
 	path = deps/tinydir
 	url = https://github.com/staticlibs/tinydir.git
+[submodule "js/pwdauth"]
+	path = js/pwdauth
+	url = https://github.com/wilton-iot/pwdauth.git
