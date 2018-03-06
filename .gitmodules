@@ -514,3 +514,6 @@
 [submodule "js/pwdauth"]
 	path = js/pwdauth
 	url = https://github.com/wilton-iot/pwdauth.git
+[submodule "js/xml-js"]
+	path = js/xml-js
+	url = https://github.com/wilton-iot/xml-js.git
