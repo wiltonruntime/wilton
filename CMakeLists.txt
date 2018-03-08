@@ -243,6 +243,77 @@ add_custom_target ( examples
         WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
         COMMENT "Preparing Examples directory ..." )
 
+add_custom_target ( debuginfo
+        COMMAND ${CMAKE_COMMAND} -E make_directory
+                wilton_${WILTON_VERSION}_debuginfo
+        # core
+        COMMAND ${CMAKE_COMMAND} -E copy
+                ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_core${STATICLIB_DEBUGINFO_SHARED_SUFFIX}
+                wilton_${WILTON_VERSION}_debuginfo/
+        # channel
+        COMMAND ${CMAKE_COMMAND} -E copy
+                ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_channel${STATICLIB_DEBUGINFO_SHARED_SUFFIX}
+                wilton_${WILTON_VERSION}_debuginfo/
+        # cron
+        COMMAND ${CMAKE_COMMAND} -E copy
+                ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_cron${STATICLIB_DEBUGINFO_SHARED_SUFFIX}
+                wilton_${WILTON_VERSION}_debuginfo/
+        # crypto
+        COMMAND ${CMAKE_COMMAND} -E copy
+                ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_crypto${STATICLIB_DEBUGINFO_SHARED_SUFFIX}
+                wilton_${WILTON_VERSION}_debuginfo/
+        # db
+        COMMAND ${CMAKE_COMMAND} -E copy
+                ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_db${STATICLIB_DEBUGINFO_SHARED_SUFFIX}
+                wilton_${WILTON_VERSION}_debuginfo/
+        # duktape
+        COMMAND ${CMAKE_COMMAND} -E copy
+                ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_duktape${STATICLIB_DEBUGINFO_SHARED_SUFFIX}
+                wilton_${WILTON_VERSION}_debuginfo/
+        # fs
+        COMMAND ${CMAKE_COMMAND} -E copy
+                ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_fs${STATICLIB_DEBUGINFO_SHARED_SUFFIX}
+                wilton_${WILTON_VERSION}_debuginfo/
+        # http
+        COMMAND ${CMAKE_COMMAND} -E copy
+                ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_http${STATICLIB_DEBUGINFO_SHARED_SUFFIX}
+                wilton_${WILTON_VERSION}_debuginfo/
+        # loader
+        COMMAND ${CMAKE_COMMAND} -E copy
+                ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_loader${STATICLIB_DEBUGINFO_SHARED_SUFFIX}
+                wilton_${WILTON_VERSION}_debuginfo/
+        # logging
+        COMMAND ${CMAKE_COMMAND} -E copy
+                ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_logging${STATICLIB_DEBUGINFO_SHARED_SUFFIX}
+                wilton_${WILTON_VERSION}_debuginfo/
+        # net
+        COMMAND ${CMAKE_COMMAND} -E copy
+                ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_net${STATICLIB_DEBUGINFO_SHARED_SUFFIX}
+                wilton_${WILTON_VERSION}_debuginfo/
+        # pdf
+        COMMAND ${CMAKE_COMMAND} -E copy
+                ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_pdf${STATICLIB_DEBUGINFO_SHARED_SUFFIX}
+                wilton_${WILTON_VERSION}_debuginfo/
+        # rhino
+        COMMAND ${CMAKE_COMMAND} -E copy
+                ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_rhino${STATICLIB_DEBUGINFO_SHARED_SUFFIX}
+                wilton_${WILTON_VERSION}_debuginfo/
+        # server
+        COMMAND ${CMAKE_COMMAND} -E copy
+                ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_server${STATICLIB_DEBUGINFO_SHARED_SUFFIX}
+                wilton_${WILTON_VERSION}_debuginfo/
+        # thread
+        COMMAND ${CMAKE_COMMAND} -E copy
+                ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_thread${STATICLIB_DEBUGINFO_SHARED_SUFFIX}
+                wilton_${WILTON_VERSION}_debuginfo/
+        # zip
+        COMMAND ${CMAKE_COMMAND} -E copy
+                ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_zip${STATICLIB_DEBUGINFO_SHARED_SUFFIX}
+                wilton_${WILTON_VERSION}_debuginfo/
+        DEPENDS nativelibs
+        WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+        COMMENT "Preparing debuginfo bundle ..." )
+
 if ( STATICLIB_TOOLCHAIN MATCHES "android_.+" )
     if ( STATICLIB_TOOLCHAIN MATCHES "android_armeabi_.+" )
         set ( ${PROJECT_NAME}_ANDROID_ARCH armeabi-v7a )
@@ -380,6 +451,24 @@ if ( STATICLIB_TOOLCHAIN MATCHES "android_.+" )
 
 elseif ( STATICLIB_TOOLCHAIN MATCHES "(windows|linux|macosx)_.+" )
 
+    add_custom_target ( debuginfo_launcher
+            COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}_debuginfo
+            # cli
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${CMAKE_EXECUTABLE_PREFIX}wilton_cli${STATICLIB_DEBUGINFO_EXE_SUFFIX}
+                    wilton_${WILTON_VERSION}_debuginfo/
+            # process
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_process${STATICLIB_DEBUGINFO_SHARED_SUFFIX}
+                    wilton_${WILTON_VERSION}_debuginfo/
+            # signal
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_signal${STATICLIB_DEBUGINFO_SHARED_SUFFIX}
+                    wilton_${WILTON_VERSION}_debuginfo/
+            WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+            DEPENDS wilton_cli wilton_process wilton_signal )
+    add_dependencies ( debuginfo debuginfo_launcher )
+
     add_custom_target ( dist
             COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}
             COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}/bin
@@ -389,7 +478,7 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "(windows|linux|macosx)_.+" )
             COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}/work
             # core
             COMMAND ${CMAKE_COMMAND} -E copy
-                    bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_core${CMAKE_SHARED_LIBRARY_SUFFIX}
+                    ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_core${CMAKE_SHARED_LIBRARY_SUFFIX}
                     wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_core${CMAKE_SHARED_LIBRARY_SUFFIX}
             COMMAND ${CMAKE_COMMAND} -E copy
                     ${WILTON_DIR}/core/include/wilton/wilton.h
@@ -399,108 +488,108 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "(windows|linux|macosx)_.+" )
                     wilton_${WILTON_VERSION}/devel/include/wilton/wiltoncall.h
             # channel
             COMMAND ${CMAKE_COMMAND} -E copy
-                    bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_channel${CMAKE_SHARED_LIBRARY_SUFFIX}
+                    ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_channel${CMAKE_SHARED_LIBRARY_SUFFIX}
                     wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_channel${CMAKE_SHARED_LIBRARY_SUFFIX}
             COMMAND ${CMAKE_COMMAND} -E copy
                     ${WILTON_DIR}/modules/wilton_channel/include/wilton/wilton_channel.h
                     wilton_${WILTON_VERSION}/devel/include/wilton/wilton_channel.h
             # cron
             COMMAND ${CMAKE_COMMAND} -E copy
-                    bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_cron${CMAKE_SHARED_LIBRARY_SUFFIX}
+                    ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_cron${CMAKE_SHARED_LIBRARY_SUFFIX}
                     wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_cron${CMAKE_SHARED_LIBRARY_SUFFIX}
             COMMAND ${CMAKE_COMMAND} -E copy
                     ${WILTON_DIR}/modules/wilton_cron/include/wilton/wilton_cron.h
                     wilton_${WILTON_VERSION}/devel/include/wilton/wilton_cron.h
             # crypto
             COMMAND ${CMAKE_COMMAND} -E copy
-                    bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_crypto${CMAKE_SHARED_LIBRARY_SUFFIX}
+                    ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_crypto${CMAKE_SHARED_LIBRARY_SUFFIX}
                     wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_crypto${CMAKE_SHARED_LIBRARY_SUFFIX}
             # db
             COMMAND ${CMAKE_COMMAND} -E copy
-                    bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_db${CMAKE_SHARED_LIBRARY_SUFFIX}
+                    ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_db${CMAKE_SHARED_LIBRARY_SUFFIX}
                     wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_db${CMAKE_SHARED_LIBRARY_SUFFIX}
             COMMAND ${CMAKE_COMMAND} -E copy
                     ${WILTON_DIR}/modules/wilton_db/include/wilton/wilton_db.h
                     wilton_${WILTON_VERSION}/devel/include/wilton/wilton_db.h
             # duktape
             COMMAND ${CMAKE_COMMAND} -E copy
-                    bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_duktape${CMAKE_SHARED_LIBRARY_SUFFIX}
+                    ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_duktape${CMAKE_SHARED_LIBRARY_SUFFIX}
                     wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_duktape${CMAKE_SHARED_LIBRARY_SUFFIX}
             # fs
             COMMAND ${CMAKE_COMMAND} -E copy
-                    bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_fs${CMAKE_SHARED_LIBRARY_SUFFIX}
+                    ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_fs${CMAKE_SHARED_LIBRARY_SUFFIX}
                     wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_fs${CMAKE_SHARED_LIBRARY_SUFFIX}
             # http
             COMMAND ${CMAKE_COMMAND} -E copy
-                    bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_http${CMAKE_SHARED_LIBRARY_SUFFIX}
+                    ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_http${CMAKE_SHARED_LIBRARY_SUFFIX}
                     wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_http${CMAKE_SHARED_LIBRARY_SUFFIX}
             COMMAND ${CMAKE_COMMAND} -E copy
                     ${WILTON_DIR}/modules/wilton_http/include/wilton/wilton_http.h
                     wilton_${WILTON_VERSION}/devel/include/wilton/wilton_http.h
             # loader
             COMMAND ${CMAKE_COMMAND} -E copy
-                    bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_loader${CMAKE_SHARED_LIBRARY_SUFFIX}
+                    ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_loader${CMAKE_SHARED_LIBRARY_SUFFIX}
                     wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_loader${CMAKE_SHARED_LIBRARY_SUFFIX}
             COMMAND ${CMAKE_COMMAND} -E copy
                     ${WILTON_DIR}/modules/wilton_loader/include/wilton/wilton_loader.h
                     wilton_${WILTON_VERSION}/devel/include/wilton/wilton_loader.h
             # logging
             COMMAND ${CMAKE_COMMAND} -E copy
-                    bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_logging${CMAKE_SHARED_LIBRARY_SUFFIX}
+                    ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_logging${CMAKE_SHARED_LIBRARY_SUFFIX}
                     wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_logging${CMAKE_SHARED_LIBRARY_SUFFIX}
             COMMAND ${CMAKE_COMMAND} -E copy
                     ${WILTON_DIR}/modules/wilton_logging/include/wilton/wilton_logging.h
                     wilton_${WILTON_VERSION}/devel/include/wilton/wilton_logging.h
             # net
             COMMAND ${CMAKE_COMMAND} -E copy
-                    bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_net${CMAKE_SHARED_LIBRARY_SUFFIX}
+                    ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_net${CMAKE_SHARED_LIBRARY_SUFFIX}
                     wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_net${CMAKE_SHARED_LIBRARY_SUFFIX}
             COMMAND ${CMAKE_COMMAND} -E copy
                     ${WILTON_DIR}/modules/wilton_net/include/wilton/wilton_net.h
                     wilton_${WILTON_VERSION}/devel/include/wilton/wilton_net.h
             # pdf
             COMMAND ${CMAKE_COMMAND} -E copy
-                    bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_pdf${CMAKE_SHARED_LIBRARY_SUFFIX}
+                    ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_pdf${CMAKE_SHARED_LIBRARY_SUFFIX}
                     wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_pdf${CMAKE_SHARED_LIBRARY_SUFFIX}
             # process
             COMMAND ${CMAKE_COMMAND} -E copy
-                    bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_process${CMAKE_SHARED_LIBRARY_SUFFIX}
+                    ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_process${CMAKE_SHARED_LIBRARY_SUFFIX}
                     wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_process${CMAKE_SHARED_LIBRARY_SUFFIX}
             COMMAND ${CMAKE_COMMAND} -E copy
                     ${WILTON_DIR}/modules/wilton_process/include/wilton/wilton_process.h
                     wilton_${WILTON_VERSION}/devel/include/wilton/wilton_process.h
             # rhino
             COMMAND ${CMAKE_COMMAND} -E copy
-                    bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_rhino${CMAKE_SHARED_LIBRARY_SUFFIX}
+                    ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_rhino${CMAKE_SHARED_LIBRARY_SUFFIX}
                     wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_rhino${CMAKE_SHARED_LIBRARY_SUFFIX}
             # signal
             COMMAND ${CMAKE_COMMAND} -E copy
-                    bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_signal${CMAKE_SHARED_LIBRARY_SUFFIX}
+                    ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_signal${CMAKE_SHARED_LIBRARY_SUFFIX}
                     wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_signal${CMAKE_SHARED_LIBRARY_SUFFIX}
             COMMAND ${CMAKE_COMMAND} -E copy
                     ${WILTON_DIR}/modules/wilton_signal/include/wilton/wilton_signal.h
                     wilton_${WILTON_VERSION}/devel/include/wilton/wilton_signal.h
             # server
             COMMAND ${CMAKE_COMMAND} -E copy
-                    bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_server${CMAKE_SHARED_LIBRARY_SUFFIX}
+                    ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_server${CMAKE_SHARED_LIBRARY_SUFFIX}
                     wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_server${CMAKE_SHARED_LIBRARY_SUFFIX}
             COMMAND ${CMAKE_COMMAND} -E copy
                     ${WILTON_DIR}/modules/wilton_server/include/wilton/wilton_server.h
                     wilton_${WILTON_VERSION}/devel/include/wilton/wilton_server.h
             # thread
             COMMAND ${CMAKE_COMMAND} -E copy
-                    bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_thread${CMAKE_SHARED_LIBRARY_SUFFIX}
+                    ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_thread${CMAKE_SHARED_LIBRARY_SUFFIX}
                     wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_thread${CMAKE_SHARED_LIBRARY_SUFFIX}
             COMMAND ${CMAKE_COMMAND} -E copy
                     ${WILTON_DIR}/modules/wilton_thread/include/wilton/wilton_thread.h
                     wilton_${WILTON_VERSION}/devel/include/wilton/wilton_thread.h
             # zip
             COMMAND ${CMAKE_COMMAND} -E copy
-                    bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_zip${CMAKE_SHARED_LIBRARY_SUFFIX}
+                    ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_zip${CMAKE_SHARED_LIBRARY_SUFFIX}
                     wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_zip${CMAKE_SHARED_LIBRARY_SUFFIX}
             # other resources
             COMMAND ${CMAKE_COMMAND} -E copy
-                    bin/wilton_cli${CMAKE_EXECUTABLE_SUFFIX}
+                    ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/wilton_cli${CMAKE_EXECUTABLE_SUFFIX}
                     wilton_${WILTON_VERSION}/bin/wilton${CMAKE_EXECUTABLE_SUFFIX}
             COMMAND ${CMAKE_COMMAND} -E copy
                     std.wlib
@@ -530,8 +619,17 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "(windows|linux|macosx)_.+" )
                     wilton.version
                     wilton_${WILTON_VERSION}/conf/wilton.version  
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-            DEPENDS nativelibs stdlib examples
+            DEPENDS debuginfo stdlib examples
             COMMENT "Creating distribution at [${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION}] ..." )
+
+    add_custom_target ( dist_debug
+            COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}
+            COMMAND ${CMAKE_COMMAND} -E copy_directory
+                wilton_${WILTON_VERSION}_debuginfo
+                wilton_${WILTON_VERSION}/bin
+            WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+            DEPENDS debuginfo dist
+            COMMENT "Adding debuginfo to the distibution ..." )
 
     add_custom_target ( test_js
             COMMAND bin/wilton ${WILTON_DIR}/js/wilton/test/index.js -m ${WILTON_DIR}/js
@@ -566,12 +664,22 @@ if ( STATICLIB_TOOLCHAIN MATCHES "windows_.+" )
     if ( NOT DEFINED WILTON_MSVCR_DIR )
         set ( WILTON_MSVCR_DIR "C:/Program Files (x86)/Microsoft Visual Studio 12.0/VC/redist" CACHE STRING "" )
     endif ( )
-    
+
+    add_custom_target ( debuginfo_windows_generic
+            COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}_debuginfo
+            # winservice
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/wilton_winservice.pdb
+                    wilton_${WILTON_VERSION}_debuginfo/
+            WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+            DEPENDS wilton_winservice )
+
     add_custom_target ( dist_windows_generic
             COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}
             COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}/bin
+            # winservice
             COMMAND ${CMAKE_COMMAND} -E copy
-                bin/wilton_winservice.exe
+                ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/wilton_winservice.exe
                 wilton_${WILTON_VERSION}/bin/wilton_winservice.exe
             COMMAND ${CMAKE_COMMAND} -E copy
                 ${WILTON_MSVCR_DIR}/${WILTON_MSVCR_ARCH}/Microsoft.VC120.CRT/msvcr120.dll
@@ -579,26 +687,39 @@ if ( STATICLIB_TOOLCHAIN MATCHES "windows_.+" )
             COMMAND ${CMAKE_COMMAND} -E copy
                 ${WILTON_MSVCR_DIR}/${WILTON_MSVCR_ARCH}/Microsoft.VC120.CRT/msvcp120.dll
                 wilton_${WILTON_VERSION}/bin/msvcp120.dll
+            # todo: think about import libs for other modules
             COMMAND ${CMAKE_COMMAND} -E copy
-                bin/wilton_core.lib
+                ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/wilton_core.lib
                 wilton_${WILTON_VERSION}/devel/wilton_core.lib
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-            DEPENDS wilton_winservice )
-    
-    # no chakra on winxp
-    add_custom_target ( dist_windows_amd64
-         COMMAND ${CMAKE_COMMAND} -E copy
-                bin/wilton_chakra.dll
-                wilton_${WILTON_VERSION}/bin/wilton_chakra.dll
+            DEPENDS wilton_winservice debuginfo_windows_generic )
+
+    add_custom_target ( debuginfo_windows_amd64
+            # chakra
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/wilton_chakra.pdb
+                    wilton_${WILTON_VERSION}_debuginfo/
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-            DEPENDS wilton_chakra dist_windows_generic )
+            DEPENDS wilton_chakra debuginfo_windows_generic )
 
-    add_custom_target ( dist_windows DEPENDS dist_windows_generic )
+    add_custom_target ( dist_windows_amd64
+            # chakra
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/wilton_chakra.dll
+                    wilton_${WILTON_VERSION}/bin/wilton_chakra.dll
+            WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+            DEPENDS wilton_chakra dist_windows_generic debuginfo_windows_amd64 )
 
+    add_custom_target ( debuginfo_windows DEPENDS debuginfo_windows_generic )
+    add_custom_target ( dist_windows DEPENDS dist_windows_generic debuginfo_windows )
+
+    # no chakra on winxp
     if ( STATICLIB_TOOLCHAIN MATCHES "windows_amd64_.+" )
+        add_dependencies ( debuginfo_windows debuginfo_windows_amd64 )
         add_dependencies ( dist_windows dist_windows_amd64 )
     endif ( )
 
+    add_dependencies ( debuginfo debuginfo_windows )
     add_dependencies ( dist dist_windows )
 
     configure_file ( 
@@ -623,28 +744,47 @@ if ( STATICLIB_TOOLCHAIN MATCHES "windows_.+" )
 
 elseif ( STATICLIB_TOOLCHAIN MATCHES "linux_.+" )
 
+    add_custom_target ( debuginfo_linux
+            COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}_debuginfo
+            # jsc
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_jsc${STATICLIB_DEBUGINFO_SHARED_SUFFIX}
+                    wilton_${WILTON_VERSION}_debuginfo/
+            # serial
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_serial${STATICLIB_DEBUGINFO_SHARED_SUFFIX}
+                    wilton_${WILTON_VERSION}_debuginfo/
+            # usb
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_usb${STATICLIB_DEBUGINFO_SHARED_SUFFIX}
+                    wilton_${WILTON_VERSION}_debuginfo/
+            WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+            DEPENDS wilton_jsc wilton_serial wilton_usb )
+    add_dependencies ( debuginfo debuginfo_linux )
+
     add_custom_target ( dist_linux
             COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}
             COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}/bin
+            # jsc
             COMMAND ${CMAKE_COMMAND} -E copy
-                    bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_jsc${CMAKE_SHARED_LIBRARY_SUFFIX}
+                    ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_jsc${CMAKE_SHARED_LIBRARY_SUFFIX}
                     wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_jsc${CMAKE_SHARED_LIBRARY_SUFFIX}
             # serial
             COMMAND ${CMAKE_COMMAND} -E copy
-                    bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_serial${CMAKE_SHARED_LIBRARY_SUFFIX}
+                    ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_serial${CMAKE_SHARED_LIBRARY_SUFFIX}
                     wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_serial${CMAKE_SHARED_LIBRARY_SUFFIX}
             COMMAND ${CMAKE_COMMAND} -E copy
                     ${WILTON_DIR}/modules/wilton_serial/include/wilton/wilton_serial.h
                     wilton_${WILTON_VERSION}/devel/include/wilton/wilton_serial.h
             # usb
             COMMAND ${CMAKE_COMMAND} -E copy
-                    bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_usb${CMAKE_SHARED_LIBRARY_SUFFIX}
+                    ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_usb${CMAKE_SHARED_LIBRARY_SUFFIX}
                     wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_usb${CMAKE_SHARED_LIBRARY_SUFFIX}
             COMMAND ${CMAKE_COMMAND} -E copy
                     ${WILTON_DIR}/modules/wilton_usb/include/wilton/wilton_usb.h
                     wilton_${WILTON_VERSION}/devel/include/wilton/wilton_usb.h
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-            DEPENDS wilton_jsc wilton_serial wilton_usb )
+            DEPENDS wilton_jsc wilton_serial wilton_usb debuginfo_linux )
     add_dependencies ( dist dist_linux )
 
     add_custom_target ( docs
@@ -663,14 +803,24 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "linux_.+" )
 
 elseif ( STATICLIB_TOOLCHAIN MATCHES "macosx_.+" )
 
+    add_custom_target ( debuginfo_macosx
+            COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}_debuginfo
+            # jsc
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_jsc${STATICLIB_DEBUGINFO_SHARED_SUFFIX}
+                    wilton_${WILTON_VERSION}_debuginfo/
+            WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+            DEPENDS wilton_jsc wilton_serial wilton_usb )
+    add_dependencies ( debuginfo debuginfo_macosx )
+
     add_custom_target ( dist_macosx
             COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}
             COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}/bin
             COMMAND ${CMAKE_COMMAND} -E copy
-                    bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_jsc${CMAKE_SHARED_LIBRARY_SUFFIX}
+                    ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_jsc${CMAKE_SHARED_LIBRARY_SUFFIX}
                     wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_jsc${CMAKE_SHARED_LIBRARY_SUFFIX}
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-            DEPENDS wilton_jsc )
+            DEPENDS wilton_jsc debuginfo_macosx )
     add_dependencies ( dist dist_macosx )
 
 endif ( )
