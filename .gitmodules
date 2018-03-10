@@ -517,3 +517,9 @@
 [submodule "js/xml-js"]
 	path = js/xml-js
 	url = https://github.com/wilton-iot/xml-js.git
+[submodule "js/uglify-js"]
+	path = js/uglify-js
+	url = https://github.com/wilton-iot/UglifyJS.git
+[submodule "js/es6-shim"]
+	path = js/es6-shim
+	url = https://github.com/wilton-iot/es6-shim.git

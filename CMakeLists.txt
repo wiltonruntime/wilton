@@ -201,7 +201,7 @@ add_custom_command ( OUTPUT std.wlib
         COMMAND jjs
                 -J-XX:+UseSerialGC -J-XX:+TieredCompilation -J-XX:TieredStopAtLevel=1
                 -cp ${WILTON_DIR}/tools/closure-compiler/closure-compiler.jar
-                ${WILTON_DIR}/tools/convertion-scripts/bundle-modules.js
+                ${WILTON_DIR}/tools/convertion-scripts/bundle-stdlib-modules.js
                 -- ${WILTON_DIR}/js js
         COMMAND cd js && zip -qr9 js.zip *
         COMMAND ${CMAKE_COMMAND} -E rename
@@ -216,7 +216,7 @@ add_custom_command ( OUTPUT std.min.wlib
         COMMAND jjs
                 -J-XX:+UseSerialGC -J-XX:+TieredCompilation -J-XX:TieredStopAtLevel=1
                 -cp ${WILTON_DIR}/tools/closure-compiler/closure-compiler.jar
-                ${WILTON_DIR}/tools/convertion-scripts/bundle-modules.js
+                ${WILTON_DIR}/tools/convertion-scripts/bundle-stdlib-modules.js
                 -- ${WILTON_DIR}/js js minified
         COMMAND cd js && zip -qr9 js.zip *
         COMMAND ${CMAKE_COMMAND} -E rename
