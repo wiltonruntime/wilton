@@ -23,7 +23,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">wilton.js
-   &#160;<span id="projectnumber">v201801271</span>
+   &#160;<span id="projectnumber">v201803111</span>
    </div>
   </td>
  </tr>
@@ -92,19 +92,67 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2><a name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:a44e6d3d06a8631b18965d33079f33438"><td class="memItemLeft" align="right" valign="top">Array&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenet.html#a44e6d3d06a8631b18965d33079f33438">resolveHostname</a> (Object options, Function|Undefined callback)</td></tr>
+<tr class="memdesc:a44e6d3d06a8631b18965d33079f33438"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find IP address for the specified hostname.  <a href="#a44e6d3d06a8631b18965d33079f33438"></a><br/></td></tr>
 <tr class="memitem:ac4f9c3a88c53ee741cb5438c356f04cc"><td class="memItemLeft" align="right" valign="top">Undefined&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacenet.html#ac4f9c3a88c53ee741cb5438c356f04cc">waitForTcpConnection</a> (Object options, Function|Undefined callback)</td></tr>
 <tr class="memdesc:ac4f9c3a88c53ee741cb5438c356f04cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wait for the remote TCP endpoint to become accessible.  <a href="#ac4f9c3a88c53ee741cb5438c356f04cc"></a><br/></td></tr>
 </table>
 <a name="details" id="details"></a><h2>Detailed Description</h2>
-<div class="textblock"><p>This module currently provides only one function: <code><a class="el" href="namespacenet.html#ac4f9c3a88c53ee741cb5438c356f04cc" title="Wait for the remote TCP endpoint to become accessible.">waitForTcpConnection()</a></code> .</p>
+<div class="textblock"><p>This module provide a number of networking oprerations, auxilary to the networking sockets API provided by <code>wilton/Socket</code> module.</p>
 <p>Usage example:</p>
-<div class="fragment"><div class="line"><span class="comment">// wait for the TCP endpoint to become available</span></div>
+<div class="fragment"><div class="line"><span class="comment">// resolve hostname to a list of IP addresses</span></div>
+<div class="line">var ipList = net.resolveHostname({</div>
+<div class="line">    hostname: <span class="stringliteral">&quot;github.com&quot;</span>,</div>
+<div class="line">    timeoutMillis: 3000</div>
+<div class="line">});</div>
+<div class="line"></div>
+<div class="line"><span class="comment">// wait for the TCP endpoint to become available</span></div>
 <div class="line">net.waitForTcpConnection({</div>
 <div class="line">    ipAddress: <span class="stringliteral">&quot;127.0.0.1&quot;</span>,</div>
 <div class="line">    tcpPort: 8080,</div>
 <div class="line">    timeoutMillis: 10000</div>
 <div class="line">});</div>
 </div><!-- fragment --> </div><h2>Function Documentation</h2>
+<a class="anchor" id="a44e6d3d06a8631b18965d33079f33438"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Array net::resolveHostname </td>
+          <td>(</td>
+          <td class="paramtype">Object&#160;</td>
+          <td class="paramname"><em>options</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Function|Undefined&#160;</td>
+          <td class="paramname"><em>callback</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Finds the list of IPv4 addresses for the specified hostname. If call exits without exception, the returned list of IP addresses is always non-empty.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">options</td><td><code>Object</code> configuration object, see possible options below </td></tr>
+    <tr><td class="paramname">callback</td><td><code>Function|Undefined</code> callback to receive result or error </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><code>Array</code> list of IP addresses</dd></dl>
+<p><b>Options</b></p>
+<ul>
+<li><b>hostname</b> <code>String</code> hostname to resolve</li>
+<li><b>timeoutMillis</b> <code>Number</code> max wait time, in milliseconds </li>
+</ul>
+
+</div>
+</div>
 <a class="anchor" id="ac4f9c3a88c53ee741cb5438c356f04cc"></a>
 <div class="memitem">
 <div class="memproto">
@@ -150,7 +198,7 @@ Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Jan 27 2018 15:02:41 for wilton.js by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Mar 11 2018 19:51:31 for wilton.js by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>

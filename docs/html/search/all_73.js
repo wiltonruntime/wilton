@@ -13,6 +13,7 @@ var searchData=
   ['server',['Server',['../namespaceServer.html',1,'Server'],['../namespaceServer.html#a86c9ec71adb138c242dee20c68cb2530',1,'Server::Server()']]],
   ['shutdown',['shutdown',['../namespaceLogger.html#a316a5356ad3c47b5d42c2c60c56a2b17',1,'Logger']]],
   ['sleepmillis',['sleepMillis',['../namespacethread.html#a0e89aba0a6d011bbc1f178a29902b78f',1,'thread']]],
+  ['socket',['Socket',['../namespaceSocket.html',1,'Socket'],['../namespaceSocket.html#add303d16e7288aa757ffced40288f9cf',1,'Socket::Socket()']]],
   ['spawn',['spawn',['../namespaceprocess.html#a5105167174690025411effc0a5970ed5',1,'process']]],
   ['startswith',['startsWith',['../namespaceutils.html#a4479e1dd8f6357a469ef3b3859e0b4c1',1,'utils']]],
   ['stat',['stat',['../namespacefs.html#abddacd3199c05eaf7e27a2dadc5892d5',1,'fs']]],
