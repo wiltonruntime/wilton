@@ -39,14 +39,16 @@ if errorlevel 1 (
     echo msbuild error, target: test_js
     exit /b 1
 )
+rem temporary verbose
 echo test_duktape
-"C:/Program Files (x86)/MSBuild/12.0/Bin/msbuild.exe" /p:Configuration=Release test_duktape.vcxproj > test_duktape.log
+"C:/Program Files (x86)/MSBuild/12.0/Bin/msbuild.exe" /p:Configuration=Release test_duktape.vcxproj
 if errorlevel 1 (
     echo msbuild error, target: test_duktape
     exit /b 1
 )
+rem temporary verbose
 echo test_jvm
-"C:/Program Files (x86)/MSBuild/12.0/Bin/msbuild.exe" /p:Configuration=Release test_jvm.vcxproj > test_jvm.log
+"C:/Program Files (x86)/MSBuild/12.0/Bin/msbuild.exe" /p:Configuration=Release test_jvm.vcxproj
 if errorlevel 1 (
     echo msbuild error, target: test_jvm
     exit /b 1
@@ -66,8 +68,9 @@ if errorlevel 1 (
     echo msbuild error, target: installer
     exit /b 1
 )
+rem temporary verbose
 echo test_js
-"C:/Program Files (x86)/MSBuild/12.0/Bin/msbuild.exe" /p:Configuration=Release test_js.vcxproj > test_js.log
+"C:/Program Files (x86)/MSBuild/12.0/Bin/msbuild.exe" /p:Configuration=Release test_js.vcxproj
 if errorlevel 1 (
     echo msbuild error, target: test_js
     exit /b 1

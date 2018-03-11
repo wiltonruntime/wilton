@@ -12,10 +12,13 @@ How to build
 ------------
 
 _Note: see [releases](https://github.com/wilton-iot/wilton/releases) for Windows binaries (MSI installer)_
+_Note: see [repo](https://copr.fedorainfracloud.org/coprs/wilton/wilton/) for CentOS 7 and Fedora binaries (RPM packages)_
 
 Obtain sources and build tools:
 
-    git clone --recursive https://github.com/wilton-iot/wilton.git
+    git clone https://github.com/wilton-iot/wilton.git
+    cd wilton
+    git submodule update --init
 
 See platform-specific instructions below.
 
@@ -61,12 +64,11 @@ Build for `x86` (compatible with Windows XP):
 
 Install dependencies:
 
-    sudo dnf install gcc-c++ make pkg-config zip zlib-devel jansson-devel log4cplus-devel openssl-devel curl-devel asio-devel popt-devel sqlite-devel postgresql-devel soci-devel soci-sqlite3-devel soci-postgresql-devel libharu-devel systemd-devel libusbx-devel webkitgtk4-jsc-devel
+    sudo dnf install gcc-c++ make cmake pkg-config zip java-1.8.0-openjdk-devel zlib-devel jansson-devel log4cplus-devel openssl-devel curl-devel asio-devel popt-devel sqlite-devel postgresql-devel soci-devel soci-sqlite3-devel soci-postgresql-devel libpng-devel libharu-devel systemd-devel libusbx-devel webkitgtk4-jsc-devel
 
 Build:
 
     cd wilton
-    . resources/scripts/env-linux.sh
     mkdir build
     cd build
     cmake .. -DWILTON_BUILD_FLAVOUR=fedora
@@ -76,12 +78,11 @@ Build:
 
 Install dependencies:
 
-    sudo apt install build-essential pkg-config zip zlib1g-dev libjansson-dev liblog4cplus-dev libssl-dev libcurl4-openssl-dev libasio-dev libpopt-dev libsqlite3-dev libpq-dev libsoci-dev libpng12-dev libusb-1.0-0-dev libudev-dev libglib2.0-dev libjavascriptcoregtk-4.0-dev
+    sudo apt install build-essential cmake pkg-config zip openjdk-8-jdk zlib1g-dev libjansson-dev liblog4cplus-dev libssl-dev libcurl4-openssl-dev libasio-dev libpopt-dev libsqlite3-dev libpq-dev libsoci-dev libpng12-dev libusb-1.0-0-dev libudev-dev libglib2.0-dev libjavascriptcoregtk-4.0-dev
 
 Build:
 
     cd wilton
-    . resources/scripts/env-linux.sh
     mkdir build
     cd build
     cmake .. -DWILTON_BUILD_FLAVOUR=xenial
@@ -95,12 +96,11 @@ Enable [EPEL repository](https://fedoraproject.org/wiki/EPEL):
 
 Install dependencies:
 
-    sudo yum install gcc-c++ make pkgconfig zip zlib-devel jansson-devel log4cplus-devel openssl-devel asio-devel popt-devel sqlite-devel postgresql-devel soci-devel soci-sqlite3-devel soci-postgresql-devel libpng-devel systemd-devel libusbx-devel webkitgtk4-jsc-devel
+    sudo yum install gcc-c++ make cmake pkgconfig zip java-1.8.0-openjdk-devel zlib-devel jansson-devel log4cplus-devel openssl-devel asio-devel popt-devel sqlite-devel postgresql-devel soci-devel soci-sqlite3-devel soci-postgresql-devel libpng-devel systemd-devel libusbx-devel webkitgtk4-jsc-devel
 
 Build:
 
     cd wilton
-    . resources/scripts/env-linux.sh
     mkdir build
     cd build
     cmake .. -DWILTON_BUILD_FLAVOUR=el7
@@ -149,6 +149,35 @@ This project is released under the [Apache License 2.0](http://www.apache.org/li
 
 Changelog
 ---------
+
+**2018-03-11**
+
+ * `v201803111`
+ * CentOS 7 CI setup
+ * debugging with Duktape engine from VSCode
+ * native debuginfo bundles for all platforms
+ * Chakra JS engine support on windows-x86_64
+ * TCP and UDP sockets access from JS
+ * native deps update
+ * do not require Brew OpenSSL on Mac
+ * `xml-js`, `uglify-js` and `es6-shim` JS libs
+
+**2018-01-27**
+
+ * `v201801271`
+ * Jansson 2.10 usage fix on CentOS 7
+
+**2018-01-25**
+
+ * `v201801251`
+ * more baud rate values for `wilton/Serial`
+ * fix spawned process signals on Linux in `wilton/process`
+ * update JSC to `webkitgtk-4.0` in CentOS 7
+
+**2018-01-09**
+
+ * `v201801091`
+ * PNG images support in `wilton/PDFDocument`
 
 **2017-12-05**
 
