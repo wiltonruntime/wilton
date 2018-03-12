@@ -12,6 +12,7 @@ How to build
 ------------
 
 _Note: see [releases](https://github.com/wilton-iot/wilton/releases) for Windows binaries (MSI installer)_
+
 _Note: see [repo](https://copr.fedorainfracloud.org/coprs/wilton/wilton/) for CentOS 7 and Fedora binaries (RPM packages)_
 
 Obtain sources and build tools:
