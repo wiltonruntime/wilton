@@ -523,3 +523,6 @@
 [submodule "js/es6-shim"]
 	path = js/es6-shim
 	url = https://github.com/wilton-iot/es6-shim.git
+[submodule "modules/wilton_ghc"]
+	path = modules/wilton_ghc
+	url = https://github.com/wilton-iot/wilton_ghc.git

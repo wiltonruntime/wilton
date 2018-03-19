@@ -126,6 +126,7 @@ staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_cron )
 staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_db )
 staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_duktape )
 staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_fs )
+staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_ghc )
 staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_http )
 staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_loader )
 staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_pdf )
@@ -181,6 +182,7 @@ add_custom_target ( nativelibs DEPENDS
         wilton_cron
         wilton_crypto
         wilton_fs
+        wilton_ghc
         wilton_jsc
         wilton_http
         wilton_loader
@@ -274,6 +276,10 @@ add_custom_target ( debuginfo
         COMMAND ${CMAKE_COMMAND} -E copy
                 ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_fs${STATICLIB_DEBUGINFO_SHARED_SUFFIX}
                 wilton_${WILTON_VERSION}_debuginfo/
+        # ghc
+        COMMAND ${CMAKE_COMMAND} -E copy
+                ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_ghc${STATICLIB_DEBUGINFO_SHARED_SUFFIX}
+                wilton_${WILTON_VERSION}_debuginfo/
         # http
         COMMAND ${CMAKE_COMMAND} -E copy
                 ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_http${STATICLIB_DEBUGINFO_SHARED_SUFFIX}
@@ -366,10 +372,14 @@ if ( STATICLIB_TOOLCHAIN MATCHES "android_.+" )
             COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_crypto.so lib/${${PROJECT_NAME}_ANDROID_ARCH}/
             COMMAND ${CMAKE_STRIP} lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_crypto.so
             COMMAND jar uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_crypto.so
-            # fs    
+            # fs
             COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_fs.so lib/${${PROJECT_NAME}_ANDROID_ARCH}/
             COMMAND ${CMAKE_STRIP} lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_fs.so
             COMMAND jar uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_fs.so
+            # ghc
+            COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_ghc.so lib/${${PROJECT_NAME}_ANDROID_ARCH}/
+            COMMAND ${CMAKE_STRIP} lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_ghc.so
+            COMMAND jar uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_ghc.so
             # http
             COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_http.so lib/${${PROJECT_NAME}_ANDROID_ARCH}/
             COMMAND ${CMAKE_STRIP} lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_http.so
@@ -519,6 +529,16 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "(windows|linux|macosx)_.+" )
             COMMAND ${CMAKE_COMMAND} -E copy
                     ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_fs${CMAKE_SHARED_LIBRARY_SUFFIX}
                     wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_fs${CMAKE_SHARED_LIBRARY_SUFFIX}
+            # ghc
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_ghc${CMAKE_SHARED_LIBRARY_SUFFIX}
+                    wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_ghc${CMAKE_SHARED_LIBRARY_SUFFIX}
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    ${WILTON_DIR}/modules/wilton_ghc/include/wilton/wilton_ghc.h
+                    wilton_${WILTON_VERSION}/devel/include/wilton/wilton_ghc.h
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    ${WILTON_DIR}/modules/wilton_ghc/resources/wilton_ghcshim.c
+                    wilton_${WILTON_VERSION}/devel/ghc/wilton_ghcshim.c
             # http
             COMMAND ${CMAKE_COMMAND} -E copy
                     ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_http${CMAKE_SHARED_LIBRARY_SUFFIX}
