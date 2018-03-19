@@ -79,6 +79,7 @@ git submodule update --init modules/wilton_crypto || exit /b 1
 git submodule update --init modules/wilton_db || exit /b 1
 git submodule update --init modules/wilton_duktape || exit /b 1
 git submodule update --init modules/wilton_fs || exit /b 1
+git submodule update --init modules/wilton_ghc || exit /b 1
 git submodule update --init modules/wilton_http || exit /b 1
 git submodule update --init modules/wilton_jsc || exit /b 1
 git submodule update --init modules/wilton_loader || exit /b 1
