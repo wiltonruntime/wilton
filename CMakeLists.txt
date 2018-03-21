@@ -150,7 +150,7 @@ if ( STATICLIB_TOOLCHAIN MATCHES "(windows|linux|macosx)_.+" )
 endif ( )
 if ( STATICLIB_TOOLCHAIN MATCHES "windows_.+" )
     add_custom_target ( wilton_jsc )
-    add_custom_target ( wilton_serial )
+    staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_serial )
     add_custom_target ( wilton_usb )
     if ( STATICLIB_TOOLCHAIN MATCHES "windows_amd64_.+" )
         staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_chakra )
@@ -697,6 +697,13 @@ if ( STATICLIB_TOOLCHAIN MATCHES "windows_.+" )
     add_custom_target ( dist_windows_generic
             COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}
             COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}/bin
+            # serial
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_serial${CMAKE_SHARED_LIBRARY_SUFFIX}
+                    wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_serial${CMAKE_SHARED_LIBRARY_SUFFIX}
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    ${WILTON_DIR}/modules/wilton_serial/include/wilton/wilton_serial.h
+                    wilton_${WILTON_VERSION}/devel/include/wilton/wilton_serial.h
             # winservice
             COMMAND ${CMAKE_COMMAND} -E copy
                 ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/wilton_winservice.exe
