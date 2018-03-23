@@ -151,7 +151,7 @@ endif ( )
 if ( STATICLIB_TOOLCHAIN MATCHES "windows_.+" )
     add_custom_target ( wilton_jsc )
     staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_serial )
-    add_custom_target ( wilton_usb )
+    staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_usb )
     if ( STATICLIB_TOOLCHAIN MATCHES "windows_amd64_.+" )
         staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_chakra )
     else ( )
@@ -685,14 +685,26 @@ if ( STATICLIB_TOOLCHAIN MATCHES "windows_.+" )
         set ( WILTON_MSVCR_DIR "C:/Program Files (x86)/Microsoft Visual Studio 12.0/VC/redist" CACHE STRING "" )
     endif ( )
 
+    if ( NOT DEFINED WILTON_WINDDK71_DIR )
+        set ( WILTON_WINDDK71_DIR "C:/WinDDK/7600.16385.1" CACHE STRING "" )
+    endif ( )    
+
     add_custom_target ( debuginfo_windows_generic
             COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}_debuginfo
+            # serial
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/wilton_serial.pdb
+                    wilton_${WILTON_VERSION}_debuginfo/
+            # usb
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/wilton_usb.pdb
+                    wilton_${WILTON_VERSION}_debuginfo/
             # winservice
             COMMAND ${CMAKE_COMMAND} -E copy
                     ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/wilton_winservice.pdb
                     wilton_${WILTON_VERSION}_debuginfo/
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-            DEPENDS wilton_winservice )
+            DEPENDS wilton_serial wilton_usb wilton_winservice )
 
     add_custom_target ( dist_windows_generic
             COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}
@@ -704,6 +716,13 @@ if ( STATICLIB_TOOLCHAIN MATCHES "windows_.+" )
             COMMAND ${CMAKE_COMMAND} -E copy
                     ${WILTON_DIR}/modules/wilton_serial/include/wilton/wilton_serial.h
                     wilton_${WILTON_VERSION}/devel/include/wilton/wilton_serial.h
+            # serial
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_usb${CMAKE_SHARED_LIBRARY_SUFFIX}
+                    wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_usb${CMAKE_SHARED_LIBRARY_SUFFIX}
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    ${WILTON_DIR}/modules/wilton_usb/include/wilton/wilton_usb.h
+                    wilton_${WILTON_VERSION}/devel/include/wilton/wilton_usb.h
             # winservice
             COMMAND ${CMAKE_COMMAND} -E copy
                 ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/wilton_winservice.exe

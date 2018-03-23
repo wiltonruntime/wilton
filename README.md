@@ -42,6 +42,7 @@ Install dependencies:
 
 [Visual Studio 2013 Update 5 Express for Windows Desktop](https://www.visualstudio.com/en-us/news/releasenotes/vs2013-update5-vs)
 ([direct ISO link](https://go.microsoft.com/fwlink/?LinkId=532499&type=ISO)),
+[Windows Driver Kit Version 7.1.0](https://www.microsoft.com/en-us/download/details.aspx?id=11800),
 [CMake](https://cmake.org/download/), [OpenJDK 8](https://github.com/ojdkbuild/ojdkbuild#downloads-for-windows-x86_64).
 
 Prepare environment:
