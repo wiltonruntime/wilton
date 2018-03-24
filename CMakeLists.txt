@@ -79,6 +79,16 @@ project ( wilton CXX C )
 include ( ${STATICLIB_CMAKE}/staticlibs_common.cmake )
 set_property ( GLOBAL PROPERTY TARGET_SUPPORTS_SHARED_LIBS TRUE )
 
+# options
+if ( STATICLIB_TOOLCHAIN MATCHES "windows_.+" )
+    if ( NOT DEFINED WILTON_MSVCR_DIR )
+        set ( WILTON_MSVCR_DIR "C:/Program Files (x86)/Microsoft Visual Studio 12.0/VC/redist" CACHE STRING "" )
+    endif ( )
+    if ( NOT DEFINED WILTON_WINDDK71_DIR )
+        set ( WILTON_WINDDK71_DIR "C:/WinDDK/7600.16385.1" CACHE STRING "" )
+    endif ( )
+endif ( )
+
 # version file
 configure_file ( ${WILTON_DIR}/resources/buildres/wilton.version
         ${CMAKE_CURRENT_BINARY_DIR}/wilton.version )
@@ -680,14 +690,6 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "(windows|linux|macosx)_.+" )
 endif ( )
 
 if ( STATICLIB_TOOLCHAIN MATCHES "windows_.+" )
-
-    if ( NOT DEFINED WILTON_MSVCR_DIR )
-        set ( WILTON_MSVCR_DIR "C:/Program Files (x86)/Microsoft Visual Studio 12.0/VC/redist" CACHE STRING "" )
-    endif ( )
-
-    if ( NOT DEFINED WILTON_WINDDK71_DIR )
-        set ( WILTON_WINDDK71_DIR "C:/WinDDK/7600.16385.1" CACHE STRING "" )
-    endif ( )    
 
     add_custom_target ( debuginfo_windows_generic
             COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}_debuginfo
