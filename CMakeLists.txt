@@ -489,6 +489,15 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "(windows|linux|macosx)_.+" )
             DEPENDS wilton_cli wilton_process wilton_signal )
     add_dependencies ( debuginfo debuginfo_launcher )
 
+    add_custom_command ( OUTPUT wilton_rhino.jar
+            COMMAND cd ${WILTON_DIR}/jni &&
+                    ${WILTON_DIR}/tools/maven/bin/mvn clean package -Dmaven.test.skip=true
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    ${WILTON_DIR}/jni/target/wilton-android.jar
+                    wilton_rhino.jar
+            WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR} 
+            COMMENT "Creating wilton_rhino.jar ..." )
+
     add_custom_target ( dist
             COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}
             COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}/bin
@@ -592,6 +601,9 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "(windows|linux|macosx)_.+" )
             COMMAND ${CMAKE_COMMAND} -E copy
                     ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_rhino${CMAKE_SHARED_LIBRARY_SUFFIX}
                     wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_rhino${CMAKE_SHARED_LIBRARY_SUFFIX}
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    wilton_rhino.jar
+                    wilton_${WILTON_VERSION}/bin/wilton_rhino.jar
             # signal
             COMMAND ${CMAKE_COMMAND} -E copy
                     ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_signal${CMAKE_SHARED_LIBRARY_SUFFIX}
@@ -649,7 +661,7 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "(windows|linux|macosx)_.+" )
                     wilton.version
                     wilton_${WILTON_VERSION}/conf/wilton.version  
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-            DEPENDS debuginfo stdlib examples
+            DEPENDS debuginfo stdlib examples wilton_rhino.jar
             COMMENT "Creating distribution at [${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION}] ..." )
 
     add_custom_target ( dist_debug
@@ -877,10 +889,10 @@ if ( STATICLIB_TOOLCHAIN MATCHES "(linux|macosx)_.+" )
 
     set ( ${PROJECT_NAME}_VGOPTS 
             --leak-check=yes --show-reachable=yes --track-origins=yes --error-exitcode=42 --track-fds=yes
-            --suppressions=${WILTON_DIR}/deps/cmake/resources/valgrind/openssl_malloc.supp
-            --suppressions=${WILTON_DIR}/deps/cmake/resources/valgrind/popt_poptGetNextOpt.supp 
+            --suppressions=${WILTON_DIR}/resources/valgrind/asio.supp
+            --suppressions=${WILTON_DIR}/resources/valgrind/openssl.supp
+            --suppressions=${WILTON_DIR}/resources/valgrind/popt.supp 
             --suppressions=${WILTON_DIR}/resources/valgrind/wilton_dyload.supp 
-            --suppressions=${WILTON_DIR}/resources/valgrind/wilton_http.supp
         CACHE INTERNAL "" )
 
     add_custom_target ( valgrind

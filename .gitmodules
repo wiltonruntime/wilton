@@ -526,3 +526,6 @@
 [submodule "modules/wilton_ghc"]
 	path = modules/wilton_ghc
 	url = https://github.com/wilton-iot/wilton_ghc.git
+[submodule "tools/mvnrepo"]
+	path = tools/mvnrepo
+	url = https://github.com/wilton-iot/tools_mvnrepo.git

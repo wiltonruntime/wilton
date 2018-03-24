@@ -15,7 +15,7 @@
 # Fedora COPR spec file
 # https://copr.fedorainfracloud.org/coprs/wilton/wilton/
 
-%global wilton_version 201803111
+%global wilton_version 201803251
 %global wilton_release v%{wilton_version}
 %if ! 0%{?epel}
 %global wilton_build_flavour fedora
@@ -129,6 +129,8 @@ git submodule update --init modules/wilton_zip
 # tools
 git submodule update --init tools/closure-compiler
 git submodule update --init tools/convertion-scripts
+git submodule update --init tools/maven
+git submodule update --init tools/mvnrepo
 
 %build
 cd wilton

@@ -1,4 +1,11 @@
 {
+    asio_tls
+    Memcheck:Leak
+    fun:malloc
+    fun:CRYPTO_malloc
+    ...
+}
+{
     asio_memalign
     Memcheck:Leak
     fun:memalign
@@ -10,6 +17,13 @@
     Memcheck:Leak
     fun:malloc
     fun:tls_get_addr_tail
+    ...
+}
+{
+    asio_malloc0
+    Memcheck:Leak
+    fun:malloc
+    fun:tls_get_addr_tail.isra.0
     ...
 }
 {

@@ -99,6 +99,7 @@ rem tools
 git submodule update --init tools/closure-compiler || exit /b 1
 git submodule update --init tools/convertion-scripts || exit /b 1
 git submodule update --init tools/maven || exit /b 1
+git submodule update --init tools/mvnrepo || exit /b 1
 git submodule update --init tools/windows/nasm || exit /b 1
 git submodule update --init tools/windows/perl520 || exit /b 1
 git submodule update --init tools/windows/pkgconfig || exit /b 1
