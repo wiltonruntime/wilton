@@ -489,14 +489,15 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "(windows|linux|macosx)_.+" )
             DEPENDS wilton_cli wilton_process wilton_signal )
     add_dependencies ( debuginfo debuginfo_launcher )
 
-    add_custom_command ( OUTPUT wilton_rhino.jar
-            COMMAND cd ${WILTON_DIR}/jni &&
-                    ${WILTON_DIR}/tools/maven/bin/mvn clean package -Dmaven.test.skip=true
-            COMMAND ${CMAKE_COMMAND} -E copy
-                    ${WILTON_DIR}/jni/target/wilton-android.jar
-                    wilton_rhino.jar
-            WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR} 
+    add_custom_command ( OUTPUT ${WILTON_DIR}/jni/target/wilton-android.jar
+            COMMAND ${WILTON_DIR}/tools/maven/bin/mvn clean package -Dmaven.test.skip=true
+            # broken on windows for some reason
+            #COMMAND ${CMAKE_COMMAND} -E copy
+            #        ${WILTON_DIR}/jni/target/wilton-android.jar
+            #        ${CMAKE_CURRENT_BINARY_DIR}/wilton_rhino.jar
+            WORKING_DIRECTORY ${WILTON_DIR}/jni 
             COMMENT "Creating wilton_rhino.jar ..." )
+    add_custom_target ( wilton_rhino_jar DEPENDS ${WILTON_DIR}/jni/target/wilton-android.jar )
 
     add_custom_target ( dist
             COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}
@@ -602,7 +603,7 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "(windows|linux|macosx)_.+" )
                     ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_rhino${CMAKE_SHARED_LIBRARY_SUFFIX}
                     wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_rhino${CMAKE_SHARED_LIBRARY_SUFFIX}
             COMMAND ${CMAKE_COMMAND} -E copy
-                    wilton_rhino.jar
+                    ${WILTON_DIR}/jni/target/wilton-android.jar
                     wilton_${WILTON_VERSION}/bin/wilton_rhino.jar
             # signal
             COMMAND ${CMAKE_COMMAND} -E copy
@@ -661,14 +662,14 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "(windows|linux|macosx)_.+" )
                     wilton.version
                     wilton_${WILTON_VERSION}/conf/wilton.version  
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-            DEPENDS debuginfo stdlib examples wilton_rhino.jar
+            DEPENDS debuginfo stdlib examples wilton_rhino_jar
             COMMENT "Creating distribution at [${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION}] ..." )
 
     add_custom_target ( dist_debug
             COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}
             COMMAND ${CMAKE_COMMAND} -E copy_directory
-                wilton_${WILTON_VERSION}_debuginfo
-                wilton_${WILTON_VERSION}/bin
+                    wilton_${WILTON_VERSION}_debuginfo
+                    wilton_${WILTON_VERSION}/bin
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
             DEPENDS debuginfo dist
             COMMENT "Adding debuginfo to the distibution ..." )
@@ -730,7 +731,7 @@ if ( STATICLIB_TOOLCHAIN MATCHES "windows_.+" )
             COMMAND ${CMAKE_COMMAND} -E copy
                     ${WILTON_DIR}/modules/wilton_serial/include/wilton/wilton_serial.h
                     wilton_${WILTON_VERSION}/devel/include/wilton/wilton_serial.h
-            # serial
+            # usb
             COMMAND ${CMAKE_COMMAND} -E copy
                     ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_usb${CMAKE_SHARED_LIBRARY_SUFFIX}
                     wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_usb${CMAKE_SHARED_LIBRARY_SUFFIX}
@@ -752,7 +753,7 @@ if ( STATICLIB_TOOLCHAIN MATCHES "windows_.+" )
                 ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/wilton_core.lib
                 wilton_${WILTON_VERSION}/devel/wilton_core.lib
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-            DEPENDS wilton_winservice debuginfo_windows_generic )
+            DEPENDS wilton_serial wilton_usb wilton_winservice debuginfo_windows_generic )
 
     add_custom_target ( debuginfo_windows_amd64
             # chakra

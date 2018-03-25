@@ -112,6 +112,7 @@ git submodule update --init modules/wilton_crypto
 git submodule update --init modules/wilton_db
 git submodule update --init modules/wilton_duktape
 git submodule update --init modules/wilton_fs
+git submodule update --init modules/wilton_ghc
 git submodule update --init modules/wilton_http
 git submodule update --init modules/wilton_jsc
 git submodule update --init modules/wilton_loader
