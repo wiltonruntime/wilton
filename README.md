@@ -152,6 +152,13 @@ This project is released under the [Apache License 2.0](http://www.apache.org/li
 Changelog
 ---------
 
+**2018-03-25**
+
+ * `v201803251`
+ * `Serial` and `USB` support on Windows
+ * Fedora 28 builds
+ * support for native modules in Rust and Haskell
+
 **2018-03-11**
 
  * `v201803111`

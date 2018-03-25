@@ -104,6 +104,8 @@ git submodule update --init deps/staticlib_utils
 # js
 rm -rf js
 git clone --branch %{wilton_release} https://github.com/wilton-iot/js-libs-ci-monorepo.git js
+# jni
+git submodule update --init jni
 # modules
 git submodule update --init modules/wilton_channel
 git submodule update --init modules/wilton_cli
