@@ -529,3 +529,6 @@
 [submodule "tools/mvnrepo"]
 	path = tools/mvnrepo
 	url = https://github.com/wilton-iot/tools_mvnrepo.git
+[submodule "modules/wilton_mustache"]
+	path = modules/wilton_mustache
+	url = https://github.com/wilton-iot/wilton_mustache.git

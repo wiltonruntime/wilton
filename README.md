@@ -125,7 +125,7 @@ Build:
 
 ### Mac OS X
 
-Install Xcode, Xcode Command Line Tools and Java (required for dist bundling).
+Install Xcode, Xcode Command Line Tools and Java 8.
 
 Install build tools and dependencies:
 

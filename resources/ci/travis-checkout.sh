@@ -87,6 +87,7 @@ git submodule update --init modules/wilton_http
 git submodule update --init modules/wilton_jsc
 git submodule update --init modules/wilton_loader
 git submodule update --init modules/wilton_logging
+git submodule update --init modules/wilton_mustache
 git submodule update --init modules/wilton_net
 git submodule update --init modules/wilton_pdf
 git submodule update --init modules/wilton_process

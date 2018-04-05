@@ -139,6 +139,7 @@ staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_fs )
 staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_ghc )
 staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_http )
 staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_loader )
+staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_mustache )
 staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_pdf )
 staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_rhino )
 staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_server )
@@ -198,6 +199,7 @@ add_custom_target ( nativelibs DEPENDS
         wilton_loader
         wilton_logging
         wilton_net
+        wilton_mustache
         wilton_pdf
         wilton_process
         wilton_rhino
@@ -302,6 +304,10 @@ add_custom_target ( debuginfo
         COMMAND ${CMAKE_COMMAND} -E copy
                 ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_logging${STATICLIB_DEBUGINFO_SHARED_SUFFIX}
                 wilton_${WILTON_VERSION}_debuginfo/
+        # mustache
+        COMMAND ${CMAKE_COMMAND} -E copy
+                ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_mustache${STATICLIB_DEBUGINFO_SHARED_SUFFIX}
+                wilton_${WILTON_VERSION}_debuginfo/
         # net
         COMMAND ${CMAKE_COMMAND} -E copy
                 ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_net${STATICLIB_DEBUGINFO_SHARED_SUFFIX}
@@ -402,6 +408,10 @@ if ( STATICLIB_TOOLCHAIN MATCHES "android_.+" )
             COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_logging.so lib/${${PROJECT_NAME}_ANDROID_ARCH}/
             COMMAND ${CMAKE_STRIP} lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_logging.so
             COMMAND jar uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_logging.so
+            # mustache
+            COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_mustache.so lib/${${PROJECT_NAME}_ANDROID_ARCH}/
+            COMMAND ${CMAKE_STRIP} lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_mustache.so
+            COMMAND jar uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_mustache.so
             # net
             COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_net.so lib/${${PROJECT_NAME}_ANDROID_ARCH}/
             COMMAND ${CMAKE_STRIP} lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_net.so
@@ -580,6 +590,13 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "(windows|linux|macosx)_.+" )
             COMMAND ${CMAKE_COMMAND} -E copy
                     ${WILTON_DIR}/modules/wilton_logging/include/wilton/wilton_logging.h
                     wilton_${WILTON_VERSION}/devel/include/wilton/wilton_logging.h
+            # mustache
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_mustache${CMAKE_SHARED_LIBRARY_SUFFIX}
+                    wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_mustache${CMAKE_SHARED_LIBRARY_SUFFIX}
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    ${WILTON_DIR}/modules/wilton_mustache/include/wilton/wilton_mustache.h
+                    wilton_${WILTON_VERSION}/devel/include/wilton/wilton_mustache.h
             # net
             COMMAND ${CMAKE_COMMAND} -E copy
                     ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_net${CMAKE_SHARED_LIBRARY_SUFFIX}

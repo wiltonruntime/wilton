@@ -84,6 +84,7 @@ git submodule update --init modules/wilton_http || exit /b 1
 git submodule update --init modules/wilton_jsc || exit /b 1
 git submodule update --init modules/wilton_loader || exit /b 1
 git submodule update --init modules/wilton_logging || exit /b 1
+git submodule update --init modules/wilton_mustache || exit /b 1
 git submodule update --init modules/wilton_net || exit /b 1
 git submodule update --init modules/wilton_pdf || exit /b 1
 git submodule update --init modules/wilton_process || exit /b 1
