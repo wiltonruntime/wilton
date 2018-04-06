@@ -707,13 +707,31 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "(windows|linux|macosx)_.+" )
             COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runSanityTests.js -m std.min.wlib -j duktape
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION} 
             DEPENDS dist
-            COMMENT "Running tests on Duktape JavaScript engines ..." )
+            COMMENT "Running tests on Duktape JavaScript engine ..." )
 
-    add_custom_target ( test_jvm
-            COMMAND cd ${WILTON_DIR}/jni && ${WILTON_DIR}/tools/maven/bin/mvn clean test
+    add_custom_target ( test_rhino
+            COMMAND bin/wilton ${WILTON_DIR}/js/wilton/test/index.js -m ${WILTON_DIR}/js -j rhino
+            COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runNodeTests.js -m ${WILTON_DIR}/js -j rhino
+            COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runSanityTests.js -j rhino
+            COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runSanityTests.js -m std.min.wlib -j rhino
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION} 
             DEPENDS dist
-            COMMENT "Running tests on Rhino and Nashorn JavaScript engines ..." )
+            COMMENT "Running tests on Rhino JavaScript engine ..." )
+
+    add_custom_target ( test_nashorn
+            COMMAND bin/wilton ${WILTON_DIR}/js/wilton/test/index.js -m ${WILTON_DIR}/js -j nashorn
+            COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runNodeTests.js -m ${WILTON_DIR}/js -j nashorn
+            COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runSanityTests.js -j nashorn
+            COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runSanityTests.js -m std.min.wlib -j nashorn
+            WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION} 
+            DEPENDS dist
+            COMMENT "Running tests on Nashorn JavaScript engine ..." )
+
+    add_custom_target ( test_jvm
+            COMMAND cd ${WILTON_DIR}/jni && ${WILTON_DIR}/tools/maven/bin/mvn test
+            WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION} 
+            DEPENDS dist
+            COMMENT "Running Java tests ..." )
 
     add_custom_target ( test_all DEPENDS test_js test_duktape test_jvm )
 
@@ -864,6 +882,14 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "linux_.+" )
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
             DEPENDS wilton_jsc wilton_serial wilton_usb debuginfo_linux )
     add_dependencies ( dist dist_linux )
+
+    add_custom_target ( dist_linux_jre
+            COMMAND rm -f jre
+            COMMAND ln -s ${WILTON_DIR}/tools/linux/jdk8/jre
+            WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION}
+            DEPENDS dist )
+
+    add_custom_target ( test_all_jvm DEPENDS test_all dist_linux_jre test_rhino test_nashorn )
 
     add_custom_target ( docs
             COMMAND ${CMAKE_COMMAND} -E remove_directory doxy

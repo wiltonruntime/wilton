@@ -40,6 +40,9 @@ if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
     # make test_js > test_js.log
     make test_duktape > test_duktape.log
     make test_jvm > test_jvm.log
+    make dist_linux_jre
+    make test_rhino > test_rhino.log
+    make test_nashorn > test_nashorn.log
     make valgrind
     popd
 
