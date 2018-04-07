@@ -501,19 +501,24 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "(windows|linux|macosx)_.+" )
 
     add_custom_command ( OUTPUT ${WILTON_DIR}/jni/target/wilton-android.jar
             COMMAND ${WILTON_DIR}/tools/maven/bin/mvn clean package -Dmaven.test.skip=true
-            # add FxApp classfile that cannot be compiled without JFX
-            COMMAND ${CMAKE_COMMAND} -E make_directory target/wilton/support/fx
+            WORKING_DIRECTORY ${WILTON_DIR}/jni
+            COMMENT "Building wilton_rhino.jar ..." )
+    add_custom_target ( wilton_rhino_jar_build DEPENDS ${WILTON_DIR}/jni/target/wilton-android.jar )
+    
+    add_custom_command ( OUTPUT wilton_rhino.jar            
             COMMAND ${CMAKE_COMMAND} -E copy
-                    src/main/java/wilton/support/fx/FxApp.class
-                    target/wilton/support/fx/FxApp.class
-            COMMAND cd target && jar uf wilton-android.jar wilton/support/fx/FxApp.class
-            # broken on windows for some reason
-            #COMMAND ${CMAKE_COMMAND} -E copy
-            #        ${WILTON_DIR}/jni/target/wilton-android.jar
-            #        ${CMAKE_CURRENT_BINARY_DIR}/wilton_rhino.jar
-            WORKING_DIRECTORY ${WILTON_DIR}/jni 
-            COMMENT "Creating wilton_rhino.jar ..." )
-    add_custom_target ( wilton_rhino_jar DEPENDS ${WILTON_DIR}/jni/target/wilton-android.jar )
+                    ${WILTON_DIR}/jni/target/wilton-android.jar
+                    wilton_rhino.jar
+            # add FxApp classfile that cannot be compiled without JFX
+            COMMAND ${CMAKE_COMMAND} -E make_directory wilton/support/fx
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    ${WILTON_DIR}/jni/src/main/java/wilton/support/fx/FxApp.class
+                    wilton/support/fx/FxApp.class
+            COMMAND jar uf wilton_rhino.jar wilton/support/fx/FxApp.class
+            WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+            DEPENDS wilton_rhino_jar_build
+            COMMENT "Bundling wilton_rhino.jar ..." )
+    add_custom_target ( wilton_rhino_jar DEPENDS wilton_rhino.jar )
 
     add_custom_target ( dist
             COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}
@@ -626,7 +631,7 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "(windows|linux|macosx)_.+" )
                     ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_rhino${CMAKE_SHARED_LIBRARY_SUFFIX}
                     wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_rhino${CMAKE_SHARED_LIBRARY_SUFFIX}
             COMMAND ${CMAKE_COMMAND} -E copy
-                    ${WILTON_DIR}/jni/target/wilton-android.jar
+                    wilton_rhino.jar
                     wilton_${WILTON_VERSION}/bin/wilton_rhino.jar
             # signal
             COMMAND ${CMAKE_COMMAND} -E copy
@@ -734,8 +739,8 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "(windows|linux|macosx)_.+" )
             COMMENT "Running tests on Nashorn JavaScript engine ..." )
 
     add_custom_target ( test_jvm
-            COMMAND cd ${WILTON_DIR}/jni && ${WILTON_DIR}/tools/maven/bin/mvn test
-            WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION} 
+            COMMAND ${WILTON_DIR}/tools/maven/bin/mvn test
+            WORKING_DIRECTORY ${WILTON_DIR}/jni
             DEPENDS dist
             COMMENT "Running Java tests ..." )
 
