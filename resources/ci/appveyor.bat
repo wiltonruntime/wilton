@@ -28,27 +28,43 @@ set PATH=%WILTON_DIR%/tools/windows/jdk8_64/bin;%PATH%
 mkdir build || exit /b 1
 cd build || exit /b 1
 cmake .. -G "Visual Studio 12 2013 Win64" || exit /b 1
-"C:/Program Files (x86)/MSBuild/12.0/Bin/msbuild.exe" /p:Configuration=Release installer.vcxproj
+cmake --build . --config Release --target installer
 if errorlevel 1 (
-    echo msbuild error, target: installer
+    echo error, target: installer
     exit /b 1
 )
 echo test_js
-"C:/Program Files (x86)/MSBuild/12.0/Bin/msbuild.exe" /p:Configuration=Release test_js.vcxproj > test_js.log
+cmake --build . --config Release --target test_js > test_js.log
 if errorlevel 1 (
-    echo msbuild error, target: test_js
+    echo error, target: test_js
     exit /b 1
 )
 echo test_duktape
-"C:/Program Files (x86)/MSBuild/12.0/Bin/msbuild.exe" /p:Configuration=Release test_duktape.vcxproj > test_duktape.log
+cmake --build . --config Release --target test_duktape > test_duktape.log
 if errorlevel 1 (
-    echo msbuild error, target: test_duktape
+    echo error, target: test_duktape
     exit /b 1
 )
 echo test_jvm
-"C:/Program Files (x86)/MSBuild/12.0/Bin/msbuild.exe" /p:Configuration=Release test_jvm.vcxproj > test_jvm.log
+cmake --build . --config Release --target test_jvm > test_jvm.log
 if errorlevel 1 (
-    echo msbuild error, target: test_jvm
+    echo error, target: test_jvm
+    exit /b 1
+)
+
+echo dist_windows_jre
+cmake --build . --config Release --target dist_windows_jre
+
+echo test_rhino
+cmake --build . --config Release --target test_rhino > test_rhino.log
+if errorlevel 1 (
+    echo error, target: test_rhino
+    exit /b 1
+)
+echo test_nashorn
+cmake --build . --config Release --target test_nashorn > test_nashorn.log
+if errorlevel 1 (
+    echo error, target: test_nashorn
     exit /b 1
 )
 
@@ -61,20 +77,14 @@ rem set PATH=%WILTON_DIR%/tools/windows/jdk8/bin;%PATH%
 mkdir build || exit /b 1
 cd build || exit /b 1
 cmake .. -G "Visual Studio 12 2013" -T v120_xp || exit /b 1
-"C:/Program Files (x86)/MSBuild/12.0/Bin/msbuild.exe" /p:Configuration=Release installer.vcxproj
+cmake --build . --config Release --target installer
 if errorlevel 1 (
     echo msbuild error, target: installer
     exit /b 1
 )
 echo test_js
-"C:/Program Files (x86)/MSBuild/12.0/Bin/msbuild.exe" /p:Configuration=Release test_js.vcxproj > test_js.log
+cmake --build . --config Release --target test_js > test_js.log
 if errorlevel 1 (
     echo msbuild error, target: test_js
     exit /b 1
 )
-rem test_jvm
-rem "C:/Program Files (x86)/MSBuild/12.0/Bin/msbuild.exe" /p:Configuration=Release test_jvm.vcxproj > test_jvm.log
-rem if errorlevel 1 (
-rem     echo msbuild error, target: test_jvm
-rem     exit /b 1
-rem )

@@ -449,18 +449,18 @@ if ( STATICLIB_TOOLCHAIN MATCHES "android_.+" )
             COMMAND ${CMAKE_COMMAND} -E remove_directory ${WILTON_DIR}/android/app/build
             COMMAND ${CMAKE_COMMAND} -E copy
                     std.min.wlib
-                    ${WILTON_DIR}/android/app/src/main/assets/net.wiltontoolkit.android/std.wlib
+                    ${WILTON_DIR}/android/app/src/main/assets/wilton.android/std.wlib
             COMMAND ${CMAKE_COMMAND} -E copy_directory
                     examples
-                    ${WILTON_DIR}/android/app/src/main/assets/net.wiltontoolkit.android/examples
+                    ${WILTON_DIR}/android/app/src/main/assets/wilton.android/examples
             COMMAND ${CMAKE_COMMAND} -E make_directory
-                    ${WILTON_DIR}/android/app/src/main/assets/net.wiltontoolkit.android/wilton
+                    ${WILTON_DIR}/android/app/src/main/assets/wilton.android/wilton
             COMMAND ${CMAKE_COMMAND} -E copy_directory
                     ${WILTON_DIR}/js/wilton/test
-                    ${WILTON_DIR}/android/app/src/main/assets/net.wiltontoolkit.android/wilton/test
+                    ${WILTON_DIR}/android/app/src/main/assets/wilton.android/wilton/test
             COMMAND ${CMAKE_COMMAND} -E copy
                     wilton.version
-                    ${WILTON_DIR}/android/app/src/main/assets/net.wiltontoolkit.android/wilton.version
+                    ${WILTON_DIR}/android/app/src/main/assets/wilton.android/wilton.version
             COMMAND cd ${WILTON_DIR}/android &&
                     ${${PROJECT_NAME}_LIBC_PRELOAD_CMD}
                     ANDROID_HOME=${WILTON_DIR}/tools/android/sdk
@@ -501,6 +501,12 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "(windows|linux|macosx)_.+" )
 
     add_custom_command ( OUTPUT ${WILTON_DIR}/jni/target/wilton-android.jar
             COMMAND ${WILTON_DIR}/tools/maven/bin/mvn clean package -Dmaven.test.skip=true
+            # add FxApp classfile that cannot be compiled without JFX
+            COMMAND ${CMAKE_COMMAND} -E make_directory target/wilton/support/fx
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    src/main/java/wilton/support/fx/FxApp.class
+                    target/wilton/support/fx/FxApp.class
+            COMMAND cd target && jar uf wilton-android.jar wilton/support/fx/FxApp.class
             # broken on windows for some reason
             #COMMAND ${CMAKE_COMMAND} -E copy
             #        ${WILTON_DIR}/jni/target/wilton-android.jar
@@ -817,6 +823,14 @@ if ( STATICLIB_TOOLCHAIN MATCHES "windows_.+" )
 
     add_dependencies ( debuginfo debuginfo_windows )
     add_dependencies ( dist dist_windows )
+
+    add_custom_target ( dist_windows_jre
+            COMMAND if exist jre rd /s /q jre
+            COMMAND ${CMAKE_COMMAND} -E copy_directory
+                    ${WILTON_DIR}/tools/windows/jdk8_64/jre
+                    jre
+            WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION}
+            DEPENDS dist )
 
     configure_file ( 
             ${WILTON_DIR}/resources/installer/installer.json
