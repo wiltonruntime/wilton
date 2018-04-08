@@ -15,7 +15,7 @@
 # Fedora COPR spec file
 # https://copr.fedorainfracloud.org/coprs/wilton/wilton/
 
-%global wilton_version 201803251
+%global wilton_version 201804081
 %global wilton_release v%{wilton_version}
 %if ! 0%{?epel}
 %global wilton_build_flavour fedora
