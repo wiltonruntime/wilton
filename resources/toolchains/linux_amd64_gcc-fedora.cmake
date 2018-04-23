@@ -60,7 +60,9 @@ set ( CMAKE_CXX_FLAGS_LIST
         -Wno-noexcept-type
         -Wno-nonnull-compare
         # tinydir
-        -Wno-deprecated-declarations )
+        -Wno-deprecated-declarations
+        # gtk-3.0
+        -Wno-parentheses )
 string ( REPLACE ";" " " CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS_LIST}" )
 set ( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}" CACHE INTERNAL "" )
 

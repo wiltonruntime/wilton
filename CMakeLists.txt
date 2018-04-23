@@ -148,6 +148,7 @@ staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_thread )
 if ( STATICLIB_TOOLCHAIN MATCHES "android_.+" )
     add_custom_target ( wilton_cli )
     add_custom_target ( wilton_jsc )
+    add_custom_target ( wilton_kiosk )
     add_custom_target ( wilton_process )
     add_custom_target ( wilton_serial )
     add_custom_target ( wilton_signal )
@@ -161,6 +162,7 @@ if ( STATICLIB_TOOLCHAIN MATCHES "(windows|linux|macosx)_.+" )
 endif ( )
 if ( STATICLIB_TOOLCHAIN MATCHES "windows_.+" )
     add_custom_target ( wilton_jsc )
+    add_custom_target ( wilton_kiosk )
     staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_serial )
     staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_usb )
     if ( STATICLIB_TOOLCHAIN MATCHES "windows_amd64_.+" )
@@ -173,12 +175,14 @@ endif ( )
 
 if ( STATICLIB_TOOLCHAIN MATCHES "linux_.+" )
     staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_jsc )
+    staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_kiosk )
     staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_serial )
     staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_usb )
     add_custom_target ( wilton_winservice )
 endif ( )
 if ( STATICLIB_TOOLCHAIN MATCHES "macosx_.+" )
     staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_jsc )
+    add_custom_target ( wilton_kiosk )
     add_custom_target ( wilton_serial )
     add_custom_target ( wilton_usb )
     add_custom_target ( wilton_winservice )
@@ -208,6 +212,7 @@ add_custom_target ( nativelibs DEPENDS
         wilton_signal
         wilton_thread
         wilton_usb
+        wilton_kiosk
         wilton_zip )
 
 add_custom_command ( OUTPUT std.wlib
@@ -865,6 +870,10 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "linux_.+" )
             COMMAND ${CMAKE_COMMAND} -E copy
                     ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_jsc${STATICLIB_DEBUGINFO_SHARED_SUFFIX}
                     wilton_${WILTON_VERSION}_debuginfo/
+            # kiosk
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_kiosk${STATICLIB_DEBUGINFO_SHARED_SUFFIX}
+                    wilton_${WILTON_VERSION}_debuginfo/
             # serial
             COMMAND ${CMAKE_COMMAND} -E copy
                     ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_serial${STATICLIB_DEBUGINFO_SHARED_SUFFIX}
@@ -874,7 +883,7 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "linux_.+" )
                     ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_usb${STATICLIB_DEBUGINFO_SHARED_SUFFIX}
                     wilton_${WILTON_VERSION}_debuginfo/
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-            DEPENDS wilton_jsc wilton_serial wilton_usb )
+            DEPENDS wilton_jsc wilton_serial wilton_usb wilton_kiosk )
     add_dependencies ( debuginfo debuginfo_linux )
 
     add_custom_target ( dist_linux
@@ -884,6 +893,13 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "linux_.+" )
             COMMAND ${CMAKE_COMMAND} -E copy
                     ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_jsc${CMAKE_SHARED_LIBRARY_SUFFIX}
                     wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_jsc${CMAKE_SHARED_LIBRARY_SUFFIX}
+            # kiosk
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_kiosk${CMAKE_SHARED_LIBRARY_SUFFIX}
+                    wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_kiosk${CMAKE_SHARED_LIBRARY_SUFFIX}
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    ${WILTON_DIR}/modules/wilton_kiosk/include/wilton/wilton_kiosk.h
+                    wilton_${WILTON_VERSION}/devel/include/wilton/wilton_kiosk.h
             # serial
             COMMAND ${CMAKE_COMMAND} -E copy
                     ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_serial${CMAKE_SHARED_LIBRARY_SUFFIX}
@@ -899,7 +915,7 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "linux_.+" )
                     ${WILTON_DIR}/modules/wilton_usb/include/wilton/wilton_usb.h
                     wilton_${WILTON_VERSION}/devel/include/wilton/wilton_usb.h
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-            DEPENDS wilton_jsc wilton_serial wilton_usb debuginfo_linux )
+            DEPENDS wilton_jsc wilton_serial wilton_usb wilton_kiosk debuginfo_linux )
     add_dependencies ( dist dist_linux )
 
     add_custom_target ( dist_linux_jre
@@ -933,7 +949,7 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "macosx_.+" )
                     ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_jsc${STATICLIB_DEBUGINFO_SHARED_SUFFIX}
                     wilton_${WILTON_VERSION}_debuginfo/
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-            DEPENDS wilton_jsc wilton_serial wilton_usb )
+            DEPENDS wilton_jsc )
     add_dependencies ( debuginfo debuginfo_macosx )
 
     add_custom_target ( dist_macosx

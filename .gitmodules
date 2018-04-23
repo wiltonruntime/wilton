@@ -532,3 +532,6 @@
 [submodule "modules/wilton_mustache"]
 	path = modules/wilton_mustache
 	url = https://github.com/wilton-iot/wilton_mustache.git
+[submodule "modules/wilton_kiosk"]
+	path = modules/wilton_kiosk
+	url = https://github.com/wilton-iot/wilton_kiosk.git
