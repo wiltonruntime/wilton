@@ -67,7 +67,7 @@ Build for `x86` (compatible with Windows XP):
 
 Install dependencies:
 
-    sudo dnf install gcc-c++ make cmake pkg-config zip java-1.8.0-openjdk-devel zlib-devel jansson-devel log4cplus-devel openssl-devel curl-devel asio-devel popt-devel sqlite-devel postgresql-devel soci-devel soci-sqlite3-devel soci-postgresql-devel libpng-devel libharu-devel systemd-devel libusbx-devel webkitgtk4-jsc-devel
+    sudo dnf install gcc-c++ make cmake pkg-config zip java-1.8.0-openjdk-devel zlib-devel jansson-devel log4cplus-devel openssl-devel curl-devel asio-devel popt-devel sqlite-devel postgresql-devel soci-devel soci-sqlite3-devel soci-postgresql-devel libpng-devel libharu-devel systemd-devel libusbx-devel webkitgtk4-jsc-devel glib2-devel gtk3-devel webkitgtk4-devel
 
 Build:
 
@@ -81,7 +81,7 @@ Build:
 
 Install dependencies:
 
-    sudo apt install build-essential cmake pkg-config zip openjdk-8-jdk zlib1g-dev libjansson-dev liblog4cplus-dev libssl-dev libcurl4-openssl-dev libasio-dev libpopt-dev libsqlite3-dev libpq-dev libsoci-dev libpng12-dev libusb-1.0-0-dev libudev-dev libglib2.0-dev libjavascriptcoregtk-4.0-dev
+    sudo apt install build-essential cmake pkg-config zip openjdk-8-jdk zlib1g-dev libjansson-dev liblog4cplus-dev libssl-dev libcurl4-openssl-dev libasio-dev libpopt-dev libsqlite3-dev libpq-dev libsoci-dev libpng12-dev libusb-1.0-0-dev libudev-dev libglib2.0-dev libjavascriptcoregtk-4.0-dev libgtk-3-dev libwebkitgtk-4.0-dev
 
 Build:
 
@@ -99,7 +99,7 @@ Enable [EPEL repository](https://fedoraproject.org/wiki/EPEL):
 
 Install dependencies:
 
-    sudo yum install gcc-c++ make cmake pkgconfig zip java-1.8.0-openjdk-devel zlib-devel jansson-devel log4cplus-devel openssl-devel asio-devel popt-devel sqlite-devel postgresql-devel soci-devel soci-sqlite3-devel soci-postgresql-devel libpng-devel systemd-devel libusbx-devel webkitgtk4-jsc-devel
+    sudo yum install gcc-c++ make cmake pkgconfig zip java-1.8.0-openjdk-devel zlib-devel jansson-devel log4cplus-devel openssl-devel asio-devel popt-devel sqlite-devel postgresql-devel soci-devel soci-sqlite3-devel soci-postgresql-devel libpng-devel systemd-devel libusbx-devel webkitgtk4-jsc-devel glib2-devel gtk3-devel webkitgtk4-devel
 
 Build:
 
@@ -113,7 +113,7 @@ Build:
 
 Install dependencies:
 
-    sudo apt-get install build-essential pkg-config zip zlib1g-dev libjansson-dev liblog4cplus-dev libssl-dev libcurl4-openssl-dev libpopt-dev libsqlite3-dev libpq-dev libpng12-dev libusb-1.0-0-dev libudev-dev libglib2.0-dev libjavascriptcoregtk-3.0-dev
+    sudo apt-get install build-essential pkg-config zip zlib1g-dev libjansson-dev liblog4cplus-dev libssl-dev libcurl4-openssl-dev libpopt-dev libsqlite3-dev libpq-dev libpng12-dev libusb-1.0-0-dev libudev-dev libglib2.0-dev libjavascriptcoregtk-3.0-dev libgtk-3-dev libwebkitgtk-3.0-dev
 
 Build:
 
