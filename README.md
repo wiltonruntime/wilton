@@ -81,7 +81,7 @@ Build:
 
 Install dependencies:
 
-    sudo apt install build-essential cmake pkg-config zip openjdk-8-jdk zlib1g-dev libjansson-dev liblog4cplus-dev libssl-dev libcurl4-openssl-dev libasio-dev libpopt-dev libsqlite3-dev libpq-dev libsoci-dev libpng12-dev libusb-1.0-0-dev libudev-dev libglib2.0-dev libjavascriptcoregtk-4.0-dev libgtk-3-dev libwebkitgtk-4.0-dev
+    sudo apt install build-essential cmake pkg-config zip openjdk-8-jdk zlib1g-dev libjansson-dev liblog4cplus-dev libssl-dev libcurl4-openssl-dev libasio-dev libpopt-dev libsqlite3-dev libpq-dev libsoci-dev libpng12-dev libusb-1.0-0-dev libudev-dev libglib2.0-dev libjavascriptcoregtk-4.0-dev libgtk-3-dev libwebkit2gtk-4.0-dev
 
 Build:
 

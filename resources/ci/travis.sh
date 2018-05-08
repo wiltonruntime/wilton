@@ -36,8 +36,8 @@ if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
     pushd build
     cmake .. -DWILTON_BUILD_FLAVOUR=wheezy
     make
-    # JSC is broken subtly on u1404
-    # make test_js > test_js.log
+    # JSC is broken subtly on u1404, try to run it without DFG
+    JSC_useDFGJIT=false make test_js > test_js.log
     make test_duktape > test_duktape.log
     make test_jvm > test_jvm.log
     make dist_linux_jre

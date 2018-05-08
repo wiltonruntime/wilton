@@ -535,3 +535,18 @@
 [submodule "modules/wilton_kiosk"]
 	path = modules/wilton_kiosk
 	url = https://github.com/wilton-iot/wilton_kiosk.git
+[submodule "js/vue"]
+	path = js/vue
+	url = https://github.com/wilton-iot/vue.git
+[submodule "js/vuex"]
+	path = js/vuex
+	url = https://github.com/wilton-iot/vuex.git
+[submodule "js/vue-router"]
+	path = js/vue-router
+	url = https://github.com/wilton-iot/vue-router.git
+[submodule "js/bootstrap4"]
+	path = js/bootstrap4
+	url = https://github.com/wilton-iot/bootstrap4.git
+[submodule "js/arrays"]
+	path = js/arrays
+	url = https://github.com/wilton-iot/arrays.git
