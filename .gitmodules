@@ -229,6 +229,9 @@
 [submodule "deps/staticlib_orm"]
 	path = deps/staticlib_orm
 	url = https://github.com/staticlibs/staticlib_orm.git
+[submodule "deps/external_duktape"]
+	path = deps/external_duktape
+	url = https://github.com/staticlibs/external_duktape.git
 [submodule "jni"]
 	path = jni
 	url = https://github.com/wilton-iot/wilton_jni.git
@@ -277,9 +280,6 @@
 [submodule "modules/wilton_process"]
 	path = modules/wilton_process
 	url = https://github.com/wilton-iot/wilton_process.git
-[submodule "modules/wilton_duktape"]
-	path = modules/wilton_duktape
-	url = https://github.com/wilton-iot/wilton_duktape.git
 [submodule "modules/wilton_signal"]
 	path = modules/wilton_signal
 	url = https://github.com/wilton-iot/wilton_signal.git
