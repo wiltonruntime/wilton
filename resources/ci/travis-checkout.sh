@@ -74,17 +74,19 @@ git submodule update --init jni
 # js
 rm -rf js
 git clone https://github.com/wilton-iot/js-libs-ci-monorepo.git js
+# engines
+git submodule update --init engines/wilton_duktape
+git submodule update --init engines/wilton_jsc
+git submodule update --init engines/wilton_rhino
 # modules
 git submodule update --init modules/wilton_channel
 git submodule update --init modules/wilton_cli
 git submodule update --init modules/wilton_cron
 git submodule update --init modules/wilton_crypto
 git submodule update --init modules/wilton_db
-git submodule update --init modules/wilton_duktape
 git submodule update --init modules/wilton_fs
 git submodule update --init modules/wilton_ghc
 git submodule update --init modules/wilton_http
-git submodule update --init modules/wilton_jsc
 git submodule update --init modules/wilton_kiosk
 git submodule update --init modules/wilton_loader
 git submodule update --init modules/wilton_logging
@@ -92,7 +94,6 @@ git submodule update --init modules/wilton_mustache
 git submodule update --init modules/wilton_net
 git submodule update --init modules/wilton_pdf
 git submodule update --init modules/wilton_process
-git submodule update --init modules/wilton_rhino
 git submodule update --init modules/wilton_serial
 git submodule update --init modules/wilton_server
 git submodule update --init modules/wilton_signal

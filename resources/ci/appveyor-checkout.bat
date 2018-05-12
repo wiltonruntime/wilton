@@ -71,24 +71,25 @@ git submodule update --init jni || exit /b 1
 rem js
 rd /s /q js
 git clone https://github.com/wilton-iot/js-libs-ci-monorepo.git js || exit /b 1
-git submodule update --init modules/wilton_chakra || exit /b 1
+rem engines
+git submodule update --init engines/wilton_chakra || exit /b 1
+git submodule update --init engines/wilton_duktape || exit /b 1
+git submodule update --init engines/wilton_rhino || exit /b 1
+rem modules
 git submodule update --init modules/wilton_channel || exit /b 1
 git submodule update --init modules/wilton_cli || exit /b 1
 git submodule update --init modules/wilton_cron || exit /b 1
 git submodule update --init modules/wilton_crypto || exit /b 1
 git submodule update --init modules/wilton_db || exit /b 1
-git submodule update --init modules/wilton_duktape || exit /b 1
 git submodule update --init modules/wilton_fs || exit /b 1
 git submodule update --init modules/wilton_ghc || exit /b 1
 git submodule update --init modules/wilton_http || exit /b 1
-git submodule update --init modules/wilton_jsc || exit /b 1
 git submodule update --init modules/wilton_loader || exit /b 1
 git submodule update --init modules/wilton_logging || exit /b 1
 git submodule update --init modules/wilton_mustache || exit /b 1
 git submodule update --init modules/wilton_net || exit /b 1
 git submodule update --init modules/wilton_pdf || exit /b 1
 git submodule update --init modules/wilton_process || exit /b 1
-git submodule update --init modules/wilton_rhino || exit /b 1
 git submodule update --init modules/wilton_serial || exit /b 1
 git submodule update --init modules/wilton_server || exit /b 1
 git submodule update --init modules/wilton_signal || exit /b 1

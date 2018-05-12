@@ -126,6 +126,10 @@ endif ( )
 # core
 add_subdirectory ( ${WILTON_DIR}/core )
 
+# engines
+staticlib_add_subdirectory ( ${WILTON_DIR}/engines/wilton_duktape )
+staticlib_add_subdirectory ( ${WILTON_DIR}/engines/wilton_rhino )
+
 # modules
 staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_logging )
 staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_crypto )
@@ -134,20 +138,20 @@ staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_zip )
 staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_channel )
 staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_cron )
 staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_db )
-staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_duktape )
 staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_fs )
 staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_ghc )
 staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_http )
 staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_loader )
 staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_mustache )
 staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_pdf )
-staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_rhino )
 staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_server )
 staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_net )
 staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_thread )
 if ( STATICLIB_TOOLCHAIN MATCHES "android_.+" )
-    add_custom_target ( wilton_cli )
+    # engines
     add_custom_target ( wilton_jsc )
+    # modules
+    add_custom_target ( wilton_cli )
     add_custom_target ( wilton_kiosk )
     add_custom_target ( wilton_process )
     add_custom_target ( wilton_serial )
@@ -161,27 +165,33 @@ if ( STATICLIB_TOOLCHAIN MATCHES "(windows|linux|macosx)_.+" )
     staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_signal )
 endif ( )
 if ( STATICLIB_TOOLCHAIN MATCHES "windows_.+" )
-    add_custom_target ( wilton_jsc )
-    add_custom_target ( wilton_kiosk )
-    staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_serial )
-    staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_usb )
+    # engines
     if ( STATICLIB_TOOLCHAIN MATCHES "windows_amd64_.+" )
-        staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_chakra )
+        staticlib_add_subdirectory ( ${WILTON_DIR}/engines/wilton_chakra )
     else ( )
         add_custom_target ( wilton_chakra )
     endif ( )
+    add_custom_target ( wilton_jsc )
+    # modules
+    add_custom_target ( wilton_kiosk )
+    staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_serial )
+    staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_usb )
     staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_winservice )
 endif ( )
 
 if ( STATICLIB_TOOLCHAIN MATCHES "linux_.+" )
-    staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_jsc )
+    # engines
+    staticlib_add_subdirectory ( ${WILTON_DIR}/engines/wilton_jsc )
+    # modules
     staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_kiosk )
     staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_serial )
     staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_usb )
     add_custom_target ( wilton_winservice )
 endif ( )
 if ( STATICLIB_TOOLCHAIN MATCHES "macosx_.+" )
-    staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_jsc )
+    # engines
+    staticlib_add_subdirectory ( ${WILTON_DIR}/engines/wilton_jsc )
+    # modules
     add_custom_target ( wilton_kiosk )
     add_custom_target ( wilton_serial )
     add_custom_target ( wilton_usb )
@@ -190,15 +200,19 @@ endif ( )
 
 add_custom_target ( nativelibs DEPENDS
         wilton_core
-        wilton_db
+        # engines
+        #wilton_chakra
         wilton_duktape
+        wilton_jsc
+        wilton_rhino
+        # modules
+        wilton_db
         wilton_channel
         wilton_cli
         wilton_cron
         wilton_crypto
         wilton_fs
         wilton_ghc
-        wilton_jsc
         wilton_http
         wilton_loader
         wilton_logging
@@ -206,7 +220,6 @@ add_custom_target ( nativelibs DEPENDS
         wilton_mustache
         wilton_pdf
         wilton_process
-        wilton_rhino
         wilton_serial
         wilton_server
         wilton_signal
@@ -269,6 +282,18 @@ add_custom_target ( debuginfo
         COMMAND ${CMAKE_COMMAND} -E copy
                 ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_core${STATICLIB_DEBUGINFO_SHARED_SUFFIX}
                 wilton_${WILTON_VERSION}_debuginfo/
+
+        # engines
+        # duktape
+        COMMAND ${CMAKE_COMMAND} -E copy
+                ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_duktape${STATICLIB_DEBUGINFO_SHARED_SUFFIX}
+                wilton_${WILTON_VERSION}_debuginfo/
+        # rhino
+        COMMAND ${CMAKE_COMMAND} -E copy
+                ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_rhino${STATICLIB_DEBUGINFO_SHARED_SUFFIX}
+                wilton_${WILTON_VERSION}_debuginfo/
+
+        # modules
         # channel
         COMMAND ${CMAKE_COMMAND} -E copy
                 ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_channel${STATICLIB_DEBUGINFO_SHARED_SUFFIX}
@@ -284,10 +309,6 @@ add_custom_target ( debuginfo
         # db
         COMMAND ${CMAKE_COMMAND} -E copy
                 ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_db${STATICLIB_DEBUGINFO_SHARED_SUFFIX}
-                wilton_${WILTON_VERSION}_debuginfo/
-        # duktape
-        COMMAND ${CMAKE_COMMAND} -E copy
-                ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_duktape${STATICLIB_DEBUGINFO_SHARED_SUFFIX}
                 wilton_${WILTON_VERSION}_debuginfo/
         # fs
         COMMAND ${CMAKE_COMMAND} -E copy
@@ -320,10 +341,6 @@ add_custom_target ( debuginfo
         # pdf
         COMMAND ${CMAKE_COMMAND} -E copy
                 ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_pdf${STATICLIB_DEBUGINFO_SHARED_SUFFIX}
-                wilton_${WILTON_VERSION}_debuginfo/
-        # rhino
-        COMMAND ${CMAKE_COMMAND} -E copy
-                ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_rhino${STATICLIB_DEBUGINFO_SHARED_SUFFIX}
                 wilton_${WILTON_VERSION}_debuginfo/
         # server
         COMMAND ${CMAKE_COMMAND} -E copy
@@ -373,14 +390,22 @@ if ( STATICLIB_TOOLCHAIN MATCHES "android_.+" )
             COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_core.so lib/${${PROJECT_NAME}_ANDROID_ARCH}/
             COMMAND ${CMAKE_STRIP} lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_core.so
             COMMAND jar uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_core.so
-            # db
-            COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_db.so lib/${${PROJECT_NAME}_ANDROID_ARCH}/
-            COMMAND ${CMAKE_STRIP} lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_db.so
-            COMMAND jar uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_db.so
+
+            # engines
             # duktape
             COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_duktape.so lib/${${PROJECT_NAME}_ANDROID_ARCH}/
             COMMAND ${CMAKE_STRIP} lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_duktape.so
             COMMAND jar uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_duktape.so
+            # rhino
+            COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_rhino.so lib/${${PROJECT_NAME}_ANDROID_ARCH}/
+            COMMAND ${CMAKE_STRIP} lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_rhino.so
+            COMMAND jar uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_rhino.so
+ 
+            # modules
+            # db
+            COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_db.so lib/${${PROJECT_NAME}_ANDROID_ARCH}/
+            COMMAND ${CMAKE_STRIP} lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_db.so
+            COMMAND jar uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_db.so
             # channel
             COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_channel.so lib/${${PROJECT_NAME}_ANDROID_ARCH}/
             COMMAND ${CMAKE_STRIP} lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_channel.so
@@ -425,10 +450,6 @@ if ( STATICLIB_TOOLCHAIN MATCHES "android_.+" )
             COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_pdf.so lib/${${PROJECT_NAME}_ANDROID_ARCH}/
             COMMAND ${CMAKE_STRIP} lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_pdf.so
             COMMAND jar uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_pdf.so
-            # rhino
-            COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_rhino.so lib/${${PROJECT_NAME}_ANDROID_ARCH}/
-            COMMAND ${CMAKE_STRIP} lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_rhino.so
-            COMMAND jar uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_rhino.so
             # server
             COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_server.so lib/${${PROJECT_NAME}_ANDROID_ARCH}/
             COMMAND ${CMAKE_STRIP} lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_server.so
@@ -542,6 +563,22 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "(windows|linux|macosx)_.+" )
             COMMAND ${CMAKE_COMMAND} -E copy
                     ${WILTON_DIR}/core/include/wilton/wiltoncall.h
                     wilton_${WILTON_VERSION}/devel/include/wilton/wiltoncall.h
+
+            # engines
+            # duktape
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_duktape${CMAKE_SHARED_LIBRARY_SUFFIX}
+                    wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_duktape${CMAKE_SHARED_LIBRARY_SUFFIX}
+            # rhino
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_rhino${CMAKE_SHARED_LIBRARY_SUFFIX}
+                    wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_rhino${CMAKE_SHARED_LIBRARY_SUFFIX}
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    wilton_rhino.jar
+                    wilton_${WILTON_VERSION}/bin/wilton_rhino.jar
+
+
+            # modules
             # channel
             COMMAND ${CMAKE_COMMAND} -E copy
                     ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_channel${CMAKE_SHARED_LIBRARY_SUFFIX}
@@ -567,10 +604,6 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "(windows|linux|macosx)_.+" )
             COMMAND ${CMAKE_COMMAND} -E copy
                     ${WILTON_DIR}/modules/wilton_db/include/wilton/wilton_db.h
                     wilton_${WILTON_VERSION}/devel/include/wilton/wilton_db.h
-            # duktape
-            COMMAND ${CMAKE_COMMAND} -E copy
-                    ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_duktape${CMAKE_SHARED_LIBRARY_SUFFIX}
-                    wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_duktape${CMAKE_SHARED_LIBRARY_SUFFIX}
             # fs
             COMMAND ${CMAKE_COMMAND} -E copy
                     ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_fs${CMAKE_SHARED_LIBRARY_SUFFIX}
@@ -631,13 +664,6 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "(windows|linux|macosx)_.+" )
             COMMAND ${CMAKE_COMMAND} -E copy
                     ${WILTON_DIR}/modules/wilton_process/include/wilton/wilton_process.h
                     wilton_${WILTON_VERSION}/devel/include/wilton/wilton_process.h
-            # rhino
-            COMMAND ${CMAKE_COMMAND} -E copy
-                    ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_rhino${CMAKE_SHARED_LIBRARY_SUFFIX}
-                    wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_rhino${CMAKE_SHARED_LIBRARY_SUFFIX}
-            COMMAND ${CMAKE_COMMAND} -E copy
-                    wilton_rhino.jar
-                    wilton_${WILTON_VERSION}/bin/wilton_rhino.jar
             # signal
             COMMAND ${CMAKE_COMMAND} -E copy
                     ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_signal${CMAKE_SHARED_LIBRARY_SUFFIX}
@@ -663,6 +689,7 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "(windows|linux|macosx)_.+" )
             COMMAND ${CMAKE_COMMAND} -E copy
                     ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_zip${CMAKE_SHARED_LIBRARY_SUFFIX}
                     wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_zip${CMAKE_SHARED_LIBRARY_SUFFIX}
+
             # other resources
             COMMAND ${CMAKE_COMMAND} -E copy
                     ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/wilton_cli${CMAKE_EXECUTABLE_SUFFIX}
@@ -718,7 +745,7 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "(windows|linux|macosx)_.+" )
 
     add_custom_target ( test_duktape
             COMMAND bin/wilton ${WILTON_DIR}/js/wilton/test/index.js -m ${WILTON_DIR}/js -j duktape
-            COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runNodeTests.js -m ${WILTON_DIR}/js -j duktape
+            #COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runNodeTests.js -m ${WILTON_DIR}/js -j duktape
             COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runSanityTests.js -j duktape
             COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runSanityTests.js -m std.min.wlib -j duktape
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION} 
@@ -727,7 +754,7 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "(windows|linux|macosx)_.+" )
 
     add_custom_target ( test_rhino
             COMMAND bin/wilton ${WILTON_DIR}/js/wilton/test/index.js -m ${WILTON_DIR}/js -j rhino
-            COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runNodeTests.js -m ${WILTON_DIR}/js -j rhino
+            #COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runNodeTests.js -m ${WILTON_DIR}/js -j rhino
             COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runSanityTests.js -j rhino
             COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runSanityTests.js -m std.min.wlib -j rhino
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION} 
@@ -736,7 +763,7 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "(windows|linux|macosx)_.+" )
 
     add_custom_target ( test_nashorn
             COMMAND bin/wilton ${WILTON_DIR}/js/wilton/test/index.js -m ${WILTON_DIR}/js -j nashorn
-            COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runNodeTests.js -m ${WILTON_DIR}/js -j nashorn
+            #COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runNodeTests.js -m ${WILTON_DIR}/js -j nashorn
             COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runSanityTests.js -j nashorn
             COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runSanityTests.js -m std.min.wlib -j nashorn
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION} 
@@ -749,7 +776,7 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "(windows|linux|macosx)_.+" )
             DEPENDS dist
             COMMENT "Running Java tests ..." )
 
-    add_custom_target ( test_all DEPENDS test_js test_duktape test_jvm )
+    add_custom_target ( test_all DEPENDS test_js test_duktape )
 
 endif ( )
 
@@ -866,10 +893,12 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "linux_.+" )
 
     add_custom_target ( debuginfo_linux
             COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}_debuginfo
+            # engines
             # jsc
             COMMAND ${CMAKE_COMMAND} -E copy
                     ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_jsc${STATICLIB_DEBUGINFO_SHARED_SUFFIX}
                     wilton_${WILTON_VERSION}_debuginfo/
+            # modules
             # kiosk
             COMMAND ${CMAKE_COMMAND} -E copy
                     ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_kiosk${STATICLIB_DEBUGINFO_SHARED_SUFFIX}
@@ -889,10 +918,12 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "linux_.+" )
     add_custom_target ( dist_linux
             COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}
             COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}/bin
+            # engines
             # jsc
             COMMAND ${CMAKE_COMMAND} -E copy
                     ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_jsc${CMAKE_SHARED_LIBRARY_SUFFIX}
                     wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_jsc${CMAKE_SHARED_LIBRARY_SUFFIX}
+            # modules
             # kiosk
             COMMAND ${CMAKE_COMMAND} -E copy
                     ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_kiosk${CMAKE_SHARED_LIBRARY_SUFFIX}
@@ -924,7 +955,10 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "linux_.+" )
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION}
             DEPENDS dist )
 
-    add_custom_target ( test_all_jvm DEPENDS test_all dist_linux_jre test_rhino test_nashorn )
+    add_custom_target ( test_all_jvm DEPENDS test_all dist_linux_jre test_jvm test_rhino test_nashorn )
+    add_dependencies ( test_jvm dist_linux_jre )
+    add_dependencies ( test_rhino dist_linux_jre )
+    add_dependencies ( test_nashorn dist_linux_jre )
 
     add_custom_target ( docs
             COMMAND ${CMAKE_COMMAND} -E remove_directory doxy

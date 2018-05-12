@@ -22,9 +22,6 @@
 [submodule "deps/external_popt"]
 	path = deps/external_popt
 	url = https://github.com/staticlibs/external_popt.git
-[submodule "deps/external_duktape"]
-	path = deps/external_duktape
-	url = https://github.com/staticlibs/external_duktape.git
 [submodule "deps/staticlib_config"]
 	path = deps/staticlib_config
 	url = https://github.com/staticlibs/staticlib_config.git
@@ -283,9 +280,6 @@
 [submodule "modules/wilton_duktape"]
 	path = modules/wilton_duktape
 	url = https://github.com/wilton-iot/wilton_duktape.git
-[submodule "modules/wilton_rhino"]
-	path = modules/wilton_rhino
-	url = https://github.com/wilton-iot/wilton_rhino.git
 [submodule "modules/wilton_signal"]
 	path = modules/wilton_signal
 	url = https://github.com/wilton-iot/wilton_signal.git
@@ -298,9 +292,6 @@
 [submodule "modules/wilton_loader"]
 	path = modules/wilton_loader
 	url = https://github.com/wilton-iot/wilton_loader.git
-[submodule "modules/wilton_jsc"]
-	path = modules/wilton_jsc
-	url = https://github.com/wilton-iot/wilton_jsc.git
 [submodule "tools/android/android-ndk-r9d-arm-linux-androideabi-4.8"]
 	path = tools/android/android-ndk-r9d-arm-linux-androideabi-4.8
 	url = https://github.com/staticlibs/android-ndk-r9d-arm-linux-androideabi-4.8.git
@@ -463,9 +454,6 @@
 [submodule "tools/bench/nmonvisualizer"]
 	path = tools/bench/nmonvisualizer
 	url = https://github.com/wilton-iot/nmonvisualizer.git
-[submodule "modules/wilton_chakra"]
-	path = modules/wilton_chakra
-	url = https://github.com/wilton-iot/wilton_chakra
 [submodule "modules/wilton_examples"]
 	path = modules/wilton_examples
 	url = https://github.com/wilton-iot/wilton_examples.git
@@ -550,3 +538,15 @@
 [submodule "js/arrays"]
 	path = js/arrays
 	url = https://github.com/wilton-iot/arrays.git
+[submodule "engines/wilton_chakra"]
+	path = engines/wilton_chakra
+	url = https://github.com/wilton-iot/wilton_chakra.git
+[submodule "engines/wilton_duktape"]
+	path = engines/wilton_duktape
+	url = https://github.com/wilton-iot/wilton_duktape.git
+[submodule "engines/wilton_jsc"]
+	path = engines/wilton_jsc
+	url = https://github.com/wilton-iot/wilton_jsc.git
+[submodule "engines/wilton_rhino"]
+	path = engines/wilton_rhino
+	url = https://github.com/wilton-iot/wilton_rhino.git
