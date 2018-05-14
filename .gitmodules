@@ -550,3 +550,15 @@
 [submodule "engines/wilton_rhino"]
 	path = engines/wilton_rhino
 	url = https://github.com/wilton-iot/wilton_rhino.git
+[submodule "deps/external_icu"]
+	path = deps/external_icu
+	url = https://github.com/staticlibs/external_icu.git
+[submodule "deps/external_chakracore"]
+	path = deps/external_chakracore
+	url = https://github.com/staticlibs/external_chakracore.git
+[submodule "deps/external_v8"]
+	path = deps/external_v8
+	url = https://github.com/staticlibs/external_v8.git
+[submodule "engines/wilton_chakracore"]
+	path = engines/wilton_chakracore
+	url = https://github.com/wilton-iot/wilton_chakracore.git

@@ -149,7 +149,9 @@ staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_net )
 staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_thread )
 if ( STATICLIB_TOOLCHAIN MATCHES "android_.+" )
     # engines
+    add_custom_target ( wilton_chakracore )
     add_custom_target ( wilton_jsc )
+    add_custom_target ( wilton_v8 )
     # modules
     add_custom_target ( wilton_cli )
     add_custom_target ( wilton_kiosk )
@@ -171,7 +173,9 @@ if ( STATICLIB_TOOLCHAIN MATCHES "windows_.+" )
     else ( )
         add_custom_target ( wilton_chakra )
     endif ( )
+    add_custom_target ( wilton_chakracore )
     add_custom_target ( wilton_jsc )
+    add_custom_target ( wilton_v8 )
     # modules
     add_custom_target ( wilton_kiosk )
     staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_serial )
@@ -181,7 +185,9 @@ endif ( )
 
 if ( STATICLIB_TOOLCHAIN MATCHES "linux_.+" )
     # engines
+    staticlib_add_subdirectory ( ${WILTON_DIR}/engines/wilton_chakracore )
     staticlib_add_subdirectory ( ${WILTON_DIR}/engines/wilton_jsc )
+    staticlib_add_subdirectory ( ${WILTON_DIR}/engines/wilton_v8 )
     # modules
     staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_kiosk )
     staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_serial )
@@ -190,7 +196,9 @@ if ( STATICLIB_TOOLCHAIN MATCHES "linux_.+" )
 endif ( )
 if ( STATICLIB_TOOLCHAIN MATCHES "macosx_.+" )
     # engines
+    add_custom_target ( wilton_chakracore )
     staticlib_add_subdirectory ( ${WILTON_DIR}/engines/wilton_jsc )
+    add_custom_target ( wilton_v8 )
     # modules
     add_custom_target ( wilton_kiosk )
     add_custom_target ( wilton_serial )
@@ -201,10 +209,11 @@ endif ( )
 add_custom_target ( nativelibs DEPENDS
         wilton_core
         # engines
-        #wilton_chakra
+        wilton_chakracore
         wilton_duktape
         wilton_jsc
         wilton_rhino
+        wilton_v8
         # modules
         wilton_db
         wilton_channel
@@ -214,6 +223,7 @@ add_custom_target ( nativelibs DEPENDS
         wilton_fs
         wilton_ghc
         wilton_http
+        wilton_kiosk
         wilton_loader
         wilton_logging
         wilton_net
@@ -225,7 +235,6 @@ add_custom_target ( nativelibs DEPENDS
         wilton_signal
         wilton_thread
         wilton_usb
-        wilton_kiosk
         wilton_zip )
 
 add_custom_command ( OUTPUT std.wlib
@@ -743,18 +752,45 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "(windows|linux|macosx)_.+" )
             DEPENDS dist
             COMMENT "Running tests on default JavaScript engine ..." )
 
+    add_custom_target ( test_chakracore
+            COMMAND bin/wilton ${WILTON_DIR}/js/wilton/test/index.js -m ${WILTON_DIR}/js -j chakracore
+            COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runNodeTests.js -m ${WILTON_DIR}/js -j chakracore
+            COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runSanityTests.js -j chakracore
+            COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runSanityTests.js -m std.min.wlib -j chakracore
+            WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION} 
+            DEPENDS dist
+            COMMENT "Running tests on ChakraCore JavaScript engine ..." )
+
     add_custom_target ( test_duktape
             COMMAND bin/wilton ${WILTON_DIR}/js/wilton/test/index.js -m ${WILTON_DIR}/js -j duktape
-            #COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runNodeTests.js -m ${WILTON_DIR}/js -j duktape
+            COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runNodeTests.js -m ${WILTON_DIR}/js -j duktape
             COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runSanityTests.js -j duktape
             COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runSanityTests.js -m std.min.wlib -j duktape
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION} 
             DEPENDS dist
             COMMENT "Running tests on Duktape JavaScript engine ..." )
 
+    add_custom_target ( test_jsc
+            COMMAND bin/wilton ${WILTON_DIR}/js/wilton/test/index.js -m ${WILTON_DIR}/js -j jsc
+            COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runNodeTests.js -m ${WILTON_DIR}/js -j jsc
+            COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runSanityTests.js -j jsc
+            COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runSanityTests.js -m std.min.wlib -j jsc
+            WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION} 
+            DEPENDS dist
+            COMMENT "Running tests on JSC JavaScript engine ..." )
+
+    add_custom_target ( test_v8
+            COMMAND bin/wilton ${WILTON_DIR}/js/wilton/test/index.js -m ${WILTON_DIR}/js -j v8
+            COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runNodeTests.js -m ${WILTON_DIR}/js -j v8
+            COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runSanityTests.js -j v8
+            COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runSanityTests.js -m std.min.wlib -j v8
+            WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION} 
+            DEPENDS dist
+            COMMENT "Running tests on V8 JavaScript engine ..." )
+
     add_custom_target ( test_rhino
             COMMAND bin/wilton ${WILTON_DIR}/js/wilton/test/index.js -m ${WILTON_DIR}/js -j rhino
-            #COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runNodeTests.js -m ${WILTON_DIR}/js -j rhino
+            COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runNodeTests.js -m ${WILTON_DIR}/js -j rhino
             COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runSanityTests.js -j rhino
             COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runSanityTests.js -m std.min.wlib -j rhino
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION} 
@@ -763,7 +799,7 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "(windows|linux|macosx)_.+" )
 
     add_custom_target ( test_nashorn
             COMMAND bin/wilton ${WILTON_DIR}/js/wilton/test/index.js -m ${WILTON_DIR}/js -j nashorn
-            #COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runNodeTests.js -m ${WILTON_DIR}/js -j nashorn
+            COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runNodeTests.js -m ${WILTON_DIR}/js -j nashorn
             COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runSanityTests.js -j nashorn
             COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runSanityTests.js -m std.min.wlib -j nashorn
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION} 
@@ -894,9 +930,17 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "linux_.+" )
     add_custom_target ( debuginfo_linux
             COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}_debuginfo
             # engines
+            # chakracore
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_chakracore${STATICLIB_DEBUGINFO_SHARED_SUFFIX}
+                    wilton_${WILTON_VERSION}_debuginfo/
             # jsc
             COMMAND ${CMAKE_COMMAND} -E copy
                     ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_jsc${STATICLIB_DEBUGINFO_SHARED_SUFFIX}
+                    wilton_${WILTON_VERSION}_debuginfo/
+            # v8 
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_v8${STATICLIB_DEBUGINFO_SHARED_SUFFIX}
                     wilton_${WILTON_VERSION}_debuginfo/
             # modules
             # kiosk
@@ -912,7 +956,7 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "linux_.+" )
                     ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_usb${STATICLIB_DEBUGINFO_SHARED_SUFFIX}
                     wilton_${WILTON_VERSION}_debuginfo/
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-            DEPENDS wilton_jsc wilton_serial wilton_usb wilton_kiosk )
+            DEPENDS wilton_chakracore wilton_jsc wilton_kiosk wilton_serial wilton_usb wilton_v8 )
     add_dependencies ( debuginfo debuginfo_linux )
 
     add_custom_target ( dist_linux
@@ -923,6 +967,33 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "linux_.+" )
             COMMAND ${CMAKE_COMMAND} -E copy
                     ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_jsc${CMAKE_SHARED_LIBRARY_SUFFIX}
                     wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_jsc${CMAKE_SHARED_LIBRARY_SUFFIX}
+            # icu
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}icuuc${CMAKE_SHARED_LIBRARY_SUFFIX}
+                    wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}icuuc${CMAKE_SHARED_LIBRARY_SUFFIX}
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}icui18n${CMAKE_SHARED_LIBRARY_SUFFIX}
+                    wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}icui18n${CMAKE_SHARED_LIBRARY_SUFFIX}
+            # chakracore
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}ChakraCore${CMAKE_SHARED_LIBRARY_SUFFIX}
+                    wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}ChakraCore${CMAKE_SHARED_LIBRARY_SUFFIX}
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_chakracore${CMAKE_SHARED_LIBRARY_SUFFIX}
+                    wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_chakracore${CMAKE_SHARED_LIBRARY_SUFFIX}
+            # v8
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}v8${CMAKE_SHARED_LIBRARY_SUFFIX}
+                    wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}v8${CMAKE_SHARED_LIBRARY_SUFFIX}
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}v8_libbase${CMAKE_SHARED_LIBRARY_SUFFIX}
+                    wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}v8_libbase${CMAKE_SHARED_LIBRARY_SUFFIX}
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}v8_libplatform${CMAKE_SHARED_LIBRARY_SUFFIX}
+                    wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}v8_libplatform${CMAKE_SHARED_LIBRARY_SUFFIX}
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_v8${CMAKE_SHARED_LIBRARY_SUFFIX}
+                    wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_v8${CMAKE_SHARED_LIBRARY_SUFFIX}
             # modules
             # kiosk
             COMMAND ${CMAKE_COMMAND} -E copy
@@ -946,7 +1017,7 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "linux_.+" )
                     ${WILTON_DIR}/modules/wilton_usb/include/wilton/wilton_usb.h
                     wilton_${WILTON_VERSION}/devel/include/wilton/wilton_usb.h
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-            DEPENDS wilton_jsc wilton_serial wilton_usb wilton_kiosk debuginfo_linux )
+            DEPENDS wilton_chakracore wilton_jsc wilton_kiosk wilton_serial wilton_usb wilton_v8 debuginfo_linux )
     add_dependencies ( dist dist_linux )
 
     add_custom_target ( dist_linux_jre
@@ -956,6 +1027,7 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "linux_.+" )
             DEPENDS dist )
 
     add_custom_target ( test_all_jvm DEPENDS test_all dist_linux_jre test_jvm test_rhino test_nashorn )
+    add_dependencies ( test_all test_chakracore )
     add_dependencies ( test_jvm dist_linux_jre )
     add_dependencies ( test_rhino dist_linux_jre )
     add_dependencies ( test_nashorn dist_linux_jre )

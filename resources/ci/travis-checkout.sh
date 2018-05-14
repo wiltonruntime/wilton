@@ -75,9 +75,11 @@ git submodule update --init jni
 rm -rf js
 git clone https://github.com/wilton-iot/js-libs-ci-monorepo.git js
 # engines
+git submodule update --init engines/wilton_chakracore
 git submodule update --init engines/wilton_duktape
 git submodule update --init engines/wilton_jsc
 git submodule update --init engines/wilton_rhino
+git submodule update --init engines/wilton_v8
 # modules
 git submodule update --init modules/wilton_channel
 git submodule update --init modules/wilton_cli
