@@ -562,3 +562,6 @@
 [submodule "engines/wilton_chakracore"]
 	path = engines/wilton_chakracore
 	url = https://github.com/wilton-iot/wilton_chakracore.git
+[submodule "engines/wilton_v8"]
+	path = engines/wilton_v8
+	url = https://github.com/wilton-iot/wilton_v8.git
