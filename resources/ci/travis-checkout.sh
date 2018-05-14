@@ -25,10 +25,12 @@ git submodule update --init core
 git submodule update --init deps/cmake
 git submodule update --init deps/external_asio
 git submodule update --init deps/lookaside_asio
+git submodule update --init deps/external_chakracore
 git submodule update --init deps/external_curl
 git submodule update --init deps/lookaside_curl
 git submodule update --init deps/external_duktape
 git submodule update --init deps/external_hpdf
+git submodule update --init deps/external_icu
 git submodule update --init deps/lookaside_libharu
 git submodule update --init deps/external_jansson
 git submodule update --init deps/lookaside_jansson
@@ -45,6 +47,7 @@ git submodule update --init deps/lookaside_popt
 git submodule update --init deps/external_soci
 git submodule update --init deps/lookaside_soci
 git submodule update --init deps/external_sqlite
+git submodule update --init deps/external_v8
 git submodule update --init deps/external_zlib
 git submodule update --init deps/lookaside_zlib
 git submodule update --init deps/staticlib_compress
