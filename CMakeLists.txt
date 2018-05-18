@@ -1028,6 +1028,7 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "linux_.+" )
 
     add_custom_target ( test_all_jvm DEPENDS test_all dist_linux_jre test_jvm test_rhino test_nashorn )
     add_dependencies ( test_all test_chakracore )
+    add_dependencies ( test_all test_v8 )
     add_dependencies ( test_jvm dist_linux_jre )
     add_dependencies ( test_rhino dist_linux_jre )
     add_dependencies ( test_nashorn dist_linux_jre )
