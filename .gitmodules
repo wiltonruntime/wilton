@@ -565,3 +565,15 @@
 [submodule "engines/wilton_v8"]
 	path = engines/wilton_v8
 	url = https://github.com/wilton-iot/wilton_v8.git
+[submodule "deps/external_mozjs"]
+	path = deps/external_mozjs
+	url = https://github.com/staticlibs/external_mozjs.git
+[submodule "deps/lookaside_utf8cpp"]
+	path = deps/lookaside_utf8cpp
+	url = https://github.com/staticlibs/lookaside_utf8cpp.git
+[submodule "deps/external_utf8cpp"]
+	path = deps/external_utf8cpp
+	url = https://github.com/staticlibs/external_utf8cpp.git
+[submodule "engines/wilton_mozjs"]
+	path = engines/wilton_mozjs
+	url = https://github.com/wilton-iot/wilton_mozjs.git

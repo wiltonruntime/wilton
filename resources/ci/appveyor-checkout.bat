@@ -41,6 +41,8 @@ git submodule update --init deps/lookaside_popt || exit /b 1
 git submodule update --init deps/external_soci || exit /b 1
 git submodule update --init deps/lookaside_soci || exit /b 1
 git submodule update --init deps/external_sqlite || exit /b 1
+git submodule update --init deps/external_utf8cpp || exit /b 1
+git submodule update --init deps/lookaside_utf8cpp || exit /b 1
 git submodule update --init deps/external_zlib || exit /b 1
 git submodule update --init deps/lookaside_zlib || exit /b 1
 git submodule update --init deps/staticlib_compress || exit /b 1

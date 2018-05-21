@@ -40,6 +40,7 @@ git submodule update --init deps/external_libpq
 git submodule update --init deps/lookaside_postgresql
 git submodule update --init deps/external_log4cplus
 git submodule update --init deps/lookaside_log4cplus
+git submodule update --init deps/external_mozjs
 git submodule update --init deps/external_openssl
 git submodule update --init deps/lookaside_openssl
 git submodule update --init deps/external_popt
@@ -48,6 +49,8 @@ git submodule update --init deps/external_soci
 git submodule update --init deps/lookaside_soci
 git submodule update --init deps/external_sqlite
 git submodule update --init deps/external_v8
+git submodule update --init deps/external_utf8cpp
+git submodule update --init deps/lookaside_utf8cpp
 git submodule update --init deps/external_zlib
 git submodule update --init deps/lookaside_zlib
 git submodule update --init deps/staticlib_compress
@@ -81,6 +84,7 @@ git clone https://github.com/wilton-iot/js-libs-ci-monorepo.git js
 git submodule update --init engines/wilton_chakracore
 git submodule update --init engines/wilton_duktape
 git submodule update --init engines/wilton_jsc
+git submodule update --init engines/wilton_mozjs
 git submodule update --init engines/wilton_rhino
 git submodule update --init engines/wilton_v8
 # modules
