@@ -748,6 +748,14 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "(windows|linux|macosx)_.+" )
             DEPENDS debuginfo dist
             COMMENT "Adding debuginfo to the distibution ..." )
 
+    add_custom_target ( dist_unversioned
+            COMMAND ${CMAKE_COMMAND} -E copy_directory
+                    wilton_${WILTON_VERSION}
+                    wilton_dist
+            WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+            DEPENDS dist
+            COMMENT "Creaing unversioned distribution ..." )
+
     add_custom_target ( test_js
             COMMAND bin/wilton ${WILTON_DIR}/js/wilton/test/index.js -m ${WILTON_DIR}/js
             COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runNodeTests.js -m ${WILTON_DIR}/js
