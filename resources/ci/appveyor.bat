@@ -36,13 +36,13 @@ if errorlevel 1 (
 echo test_js
 rem for some reason chakra segfaults when run from msbuild
 rem cmake --build . --config Release --target test_js > test_js.log
-cmake --build . --config Release --target dist_unversioned
-wilton_dist\bin\wilton.exe -m ../js ../js/wilton/test/index.js
+cmake --build . --config Release --target dist_unversioned > dist_unversioned.log
+wilton_dist\bin\wilton.exe -m ../js ../js/wilton/test/index.js > test_js_wilton.log
 if errorlevel 1 (
     echo error, target: test_js_wilton
     exit /b 1
 )
-wilton_dist\bin\wilton.exe -m ../js ../core/test/scripts/runNodeTests.js
+wilton_dist\bin\wilton.exe -m ../js ../core/test/scripts/runNodeTests.js > test_js_wilton.log
 if errorlevel 1 (
     echo error, target: test_js_node
     exit /b 1
