@@ -264,6 +264,16 @@ add_custom_command ( OUTPUT std.min.wlib
                 -cp ${WILTON_DIR}/tools/closure-compiler/closure-compiler.jar
                 ${WILTON_DIR}/tools/convertion-scripts/bundle-stdlib-modules.js
                 -- ${WILTON_DIR}/js js minified
+        # special handling for vue, see: https://github.com/vuejs/vue/issues/289
+        COMMAND ${CMAKE_COMMAND} -E copy
+                ${WILTON_DIR}/js/vue/dist/vue.min.js
+                ${CMAKE_CURRENT_BINARY_DIR}/js/vue/dist/vue.js
+        COMMAND ${CMAKE_COMMAND} -E copy
+                ${WILTON_DIR}/js/vue-router/dist/vue-router.min.js
+                ${CMAKE_CURRENT_BINARY_DIR}/js/vue-router/dist/vue-router.js
+        COMMAND ${CMAKE_COMMAND} -E copy
+                ${WILTON_DIR}/js/vuex/dist/vuex.min.js
+                ${CMAKE_CURRENT_BINARY_DIR}/js/vuex/dist/vuex.js
         COMMAND cd js && zip -qr9 js.zip *
         COMMAND ${CMAKE_COMMAND} -E rename
                 ${CMAKE_CURRENT_BINARY_DIR}/js/js.zip
