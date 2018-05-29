@@ -80,9 +80,6 @@ git submodule update --init jni
 # js
 rm -rf js
 git clone https://github.com/wilton-iot/js-libs-ci-monorepo.git js
-# todo: removeme
-ls -lhR js/vue
-# end: removeme
 # engines
 git submodule update --init engines/wilton_chakracore
 git submodule update --init engines/wilton_duktape
