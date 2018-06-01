@@ -187,10 +187,16 @@ endif ( )
 
 if ( STATICLIB_TOOLCHAIN MATCHES "linux_.+" )
     # engines
-    staticlib_add_subdirectory ( ${WILTON_DIR}/engines/wilton_chakracore )
     staticlib_add_subdirectory ( ${WILTON_DIR}/engines/wilton_jsc )
-    staticlib_add_subdirectory ( ${WILTON_DIR}/engines/wilton_mozjs )
-    staticlib_add_subdirectory ( ${WILTON_DIR}/engines/wilton_v8 )
+    if ( STATICLIB_TOOLCHAIN MATCHES "linux_amd64_.+" )
+        staticlib_add_subdirectory ( ${WILTON_DIR}/engines/wilton_chakracore )
+        staticlib_add_subdirectory ( ${WILTON_DIR}/engines/wilton_mozjs )
+        staticlib_add_subdirectory ( ${WILTON_DIR}/engines/wilton_v8 )
+    else ( )
+        add_custom_target ( wilton_chakracore )
+        add_custom_target ( wilton_mozjs )
+        add_custom_target ( wilton_v8 )
+    endif ( )
     # modules
     staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_kiosk )
     staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_serial )
@@ -962,21 +968,9 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "linux_.+" )
     add_custom_target ( debuginfo_linux
             COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}_debuginfo
             # engines
-            # chakracore
-            COMMAND ${CMAKE_COMMAND} -E copy
-                    ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_chakracore${STATICLIB_DEBUGINFO_SHARED_SUFFIX}
-                    wilton_${WILTON_VERSION}_debuginfo/
             # jsc
             COMMAND ${CMAKE_COMMAND} -E copy
                     ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_jsc${STATICLIB_DEBUGINFO_SHARED_SUFFIX}
-                    wilton_${WILTON_VERSION}_debuginfo/
-            # mozjs
-            COMMAND ${CMAKE_COMMAND} -E copy
-                    ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_mozjs${STATICLIB_DEBUGINFO_SHARED_SUFFIX}
-                    wilton_${WILTON_VERSION}_debuginfo/
-            # v8 
-            COMMAND ${CMAKE_COMMAND} -E copy
-                    ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_v8${STATICLIB_DEBUGINFO_SHARED_SUFFIX}
                     wilton_${WILTON_VERSION}_debuginfo/
             # modules
             # kiosk
@@ -992,8 +986,26 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "linux_.+" )
                     ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_usb${STATICLIB_DEBUGINFO_SHARED_SUFFIX}
                     wilton_${WILTON_VERSION}_debuginfo/
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-            DEPENDS wilton_chakracore wilton_jsc wilton_mozjs wilton_kiosk wilton_serial wilton_usb wilton_v8 )
+            DEPENDS wilton_jsc wilton_kiosk wilton_serial wilton_usb )
     add_dependencies ( debuginfo debuginfo_linux )
+    add_custom_target ( debuginfo_linux_amd64 
+            # chakracore
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_chakracore${STATICLIB_DEBUGINFO_SHARED_SUFFIX}
+                    wilton_${WILTON_VERSION}_debuginfo/
+            # mozjs
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_mozjs${STATICLIB_DEBUGINFO_SHARED_SUFFIX}
+                    wilton_${WILTON_VERSION}_debuginfo/
+            # v8 
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_v8${STATICLIB_DEBUGINFO_SHARED_SUFFIX}
+                    wilton_${WILTON_VERSION}_debuginfo/
+            WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+            DEPENDS wilton_chakracore wilton_mozjs wilton_v8 debuginfo_linux )
+    if ( STATICLIB_TOOLCHAIN MATCHES "linux_amd64_.+" )
+        add_dependencies ( debuginfo debuginfo_linux_amd64 )
+    endif ( )
 
     add_custom_target ( dist_linux
             COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}
@@ -1003,6 +1015,33 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "linux_.+" )
             COMMAND ${CMAKE_COMMAND} -E copy
                     ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_jsc${CMAKE_SHARED_LIBRARY_SUFFIX}
                     wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_jsc${CMAKE_SHARED_LIBRARY_SUFFIX}
+            # modules
+            # kiosk
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_kiosk${CMAKE_SHARED_LIBRARY_SUFFIX}
+                    wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_kiosk${CMAKE_SHARED_LIBRARY_SUFFIX}
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    ${WILTON_DIR}/modules/wilton_kiosk/include/wilton/wilton_kiosk.h
+                    wilton_${WILTON_VERSION}/devel/include/wilton/wilton_kiosk.h
+            # serial
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_serial${CMAKE_SHARED_LIBRARY_SUFFIX}
+                    wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_serial${CMAKE_SHARED_LIBRARY_SUFFIX}
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    ${WILTON_DIR}/modules/wilton_serial/include/wilton/wilton_serial.h
+                    wilton_${WILTON_VERSION}/devel/include/wilton/wilton_serial.h
+            # usb
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_usb${CMAKE_SHARED_LIBRARY_SUFFIX}
+                    wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_usb${CMAKE_SHARED_LIBRARY_SUFFIX}
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    ${WILTON_DIR}/modules/wilton_usb/include/wilton/wilton_usb.h
+                    wilton_${WILTON_VERSION}/devel/include/wilton/wilton_usb.h
+            WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+            DEPENDS wilton_chakracore wilton_jsc wilton_mozjs wilton_kiosk wilton_serial wilton_usb wilton_v8 debuginfo_linux )
+    add_dependencies ( dist dist_linux )
+
+    add_custom_target ( dist_linux_amd64
             # icu
             COMMAND ${CMAKE_COMMAND} -E copy
                     ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}icuuc${CMAKE_SHARED_LIBRARY_SUFFIX}
@@ -1037,31 +1076,11 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "linux_.+" )
             COMMAND ${CMAKE_COMMAND} -E copy
                     ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_v8${CMAKE_SHARED_LIBRARY_SUFFIX}
                     wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_v8${CMAKE_SHARED_LIBRARY_SUFFIX}
-            # modules
-            # kiosk
-            COMMAND ${CMAKE_COMMAND} -E copy
-                    ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_kiosk${CMAKE_SHARED_LIBRARY_SUFFIX}
-                    wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_kiosk${CMAKE_SHARED_LIBRARY_SUFFIX}
-            COMMAND ${CMAKE_COMMAND} -E copy
-                    ${WILTON_DIR}/modules/wilton_kiosk/include/wilton/wilton_kiosk.h
-                    wilton_${WILTON_VERSION}/devel/include/wilton/wilton_kiosk.h
-            # serial
-            COMMAND ${CMAKE_COMMAND} -E copy
-                    ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_serial${CMAKE_SHARED_LIBRARY_SUFFIX}
-                    wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_serial${CMAKE_SHARED_LIBRARY_SUFFIX}
-            COMMAND ${CMAKE_COMMAND} -E copy
-                    ${WILTON_DIR}/modules/wilton_serial/include/wilton/wilton_serial.h
-                    wilton_${WILTON_VERSION}/devel/include/wilton/wilton_serial.h
-            # usb
-            COMMAND ${CMAKE_COMMAND} -E copy
-                    ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_usb${CMAKE_SHARED_LIBRARY_SUFFIX}
-                    wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_usb${CMAKE_SHARED_LIBRARY_SUFFIX}
-            COMMAND ${CMAKE_COMMAND} -E copy
-                    ${WILTON_DIR}/modules/wilton_usb/include/wilton/wilton_usb.h
-                    wilton_${WILTON_VERSION}/devel/include/wilton/wilton_usb.h
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-            DEPENDS wilton_chakracore wilton_jsc wilton_mozjs wilton_kiosk wilton_serial wilton_usb wilton_v8 debuginfo_linux )
-    add_dependencies ( dist dist_linux )
+            DEPENDS wilton_chakracore wilton_mozjs wilton_v8 dist_linux )
+    if ( STATICLIB_TOOLCHAIN MATCHES "linux_amd64_.+" )
+        add_dependencies ( dist dist_linux_amd64 )
+    endif ( )
 
     add_custom_target ( dist_linux_jre
             COMMAND rm -f jre
