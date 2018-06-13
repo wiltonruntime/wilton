@@ -80,9 +80,14 @@ git submodule update --init core
 git submodule update --init deps/cmake
 git submodule update --init deps/external_curl
 git submodule update --init deps/lookaside_curl
+git submodule update --init deps/external_chakracore
 git submodule update --init deps/external_duktape
 git submodule update --init deps/external_hpdf
 git submodule update --init deps/lookaside_libharu
+git submodule update --init deps/external_mozjs
+git submodule update --init deps/external_v8
+git submodule update --init deps/external_utf8cpp
+git submodule update --init deps/lookaside_utf8cpp
 git submodule update --init deps/staticlib_compress
 git submodule update --init deps/staticlib_concurrent
 git submodule update --init deps/staticlib_config
@@ -110,17 +115,22 @@ rm -rf js
 git clone --branch %{wilton_release} https://github.com/wilton-iot/js-libs-ci-monorepo.git js
 # jni
 git submodule update --init jni
+# engines
+git submodule update --init engines/wilton_chakracore
+git submodule update --init engines/wilton_duktape
+git submodule update --init engines/wilton_jsc
+git submodule update --init engines/wilton_mozjs
+git submodule update --init engines/wilton_rhino
+git submodule update --init engines/wilton_v8
 # modules
 git submodule update --init modules/wilton_channel
 git submodule update --init modules/wilton_cli
 git submodule update --init modules/wilton_cron
 git submodule update --init modules/wilton_crypto
 git submodule update --init modules/wilton_db
-git submodule update --init modules/wilton_duktape
 git submodule update --init modules/wilton_fs
 git submodule update --init modules/wilton_ghc
 git submodule update --init modules/wilton_http
-git submodule update --init modules/wilton_jsc
 git submodule update --init modules/wilton_kiosk
 git submodule update --init modules/wilton_loader
 git submodule update --init modules/wilton_logging
@@ -128,7 +138,6 @@ git submodule update --init modules/wilton_mustache
 git submodule update --init modules/wilton_net
 git submodule update --init modules/wilton_pdf
 git submodule update --init modules/wilton_process
-git submodule update --init modules/wilton_rhino
 git submodule update --init modules/wilton_serial
 git submodule update --init modules/wilton_server
 git submodule update --init modules/wilton_signal
