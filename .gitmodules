@@ -577,3 +577,30 @@
 [submodule "engines/wilton_mozjs"]
 	path = engines/wilton_mozjs
 	url = https://github.com/wilton-iot/wilton_mozjs.git
+[submodule "js/mathjs"]
+	path = js/mathjs
+	url = https://github.com/wilton-iot/mathjs.git
+[submodule "js/typed-function"]
+	path = js/typed-function
+	url = https://github.com/wilton-iot/typed-function.git
+[submodule "js/tiny-emitter"]
+	path = js/tiny-emitter
+	url = https://github.com/wilton-iot/tiny-emitter.git
+[submodule "js/seed-random"]
+	path = js/seed-random
+	url = https://github.com/wilton-iot/seed-random.git
+[submodule "js/javascript-natural-sort"]
+	path = js/javascript-natural-sort
+	url = https://github.com/wilton-iot/javascript-natural-sort.git
+[submodule "js/fractionjs"]
+	path = js/fractionjs
+	url = https://github.com/wilton-iot/Fraction.js.git
+[submodule "js/escape-latex"]
+	path = js/escape-latex
+	url = https://github.com/wilton-iot/escape-latex.git
+[submodule "js/decimaljs"]
+	path = js/decimaljs
+	url = https://github.com/wilton-iot/decimal.js.git
+[submodule "js/complexjs"]
+	path = js/complexjs
+	url = https://github.com/wilton-iot/Complex.js.git

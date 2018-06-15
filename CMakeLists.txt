@@ -270,16 +270,6 @@ add_custom_command ( OUTPUT std.min.wlib
                 -cp ${WILTON_DIR}/tools/closure-compiler/closure-compiler.jar
                 ${WILTON_DIR}/tools/convertion-scripts/bundle-stdlib-modules.js
                 -- ${WILTON_DIR}/js js minified
-        # special handling for vue, see: https://github.com/vuejs/vue/issues/289
-        COMMAND ${CMAKE_COMMAND} -E copy
-                ${WILTON_DIR}/js/vue/dist/vue.min.js
-                ${CMAKE_CURRENT_BINARY_DIR}/js/vue/dist/vue.js
-        COMMAND ${CMAKE_COMMAND} -E copy
-                ${WILTON_DIR}/js/vue-router/dist/vue-router.min.js
-                ${CMAKE_CURRENT_BINARY_DIR}/js/vue-router/dist/vue-router.js
-        COMMAND ${CMAKE_COMMAND} -E copy
-                ${WILTON_DIR}/js/vuex/dist/vuex.min.js
-                ${CMAKE_CURRENT_BINARY_DIR}/js/vuex/dist/vuex.js
         COMMAND cd js && zip -qr9 js.zip *
         COMMAND ${CMAKE_COMMAND} -E rename
                 ${CMAKE_CURRENT_BINARY_DIR}/js/js.zip
@@ -775,6 +765,7 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "(windows|linux|macosx)_.+" )
     add_custom_target ( test_js
             COMMAND bin/wilton ${WILTON_DIR}/js/wilton/test/index.js -m ${WILTON_DIR}/js
             COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runNodeTests.js -m ${WILTON_DIR}/js
+            COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runMathJsTests.js -m ${WILTON_DIR}/js
             COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runSanityTests.js
             COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runSanityTests.js -m std.min.wlib
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION} 
@@ -784,6 +775,7 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "(windows|linux|macosx)_.+" )
     add_custom_target ( test_chakracore
             COMMAND bin/wilton ${WILTON_DIR}/js/wilton/test/index.js -m ${WILTON_DIR}/js -j chakracore
             COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runNodeTests.js -m ${WILTON_DIR}/js -j chakracore
+            COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runMathJsTests.js -m ${WILTON_DIR}/js -j chakracore
             COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runSanityTests.js -j chakracore
             COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runSanityTests.js -m std.min.wlib -j chakracore
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION} 
@@ -793,6 +785,7 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "(windows|linux|macosx)_.+" )
     add_custom_target ( test_duktape
             COMMAND bin/wilton ${WILTON_DIR}/js/wilton/test/index.js -m ${WILTON_DIR}/js -j duktape
             COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runNodeTests.js -m ${WILTON_DIR}/js -j duktape
+            COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runMathJsTests.js -m ${WILTON_DIR}/js -j duktape
             COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runSanityTests.js -j duktape
             COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runSanityTests.js -m std.min.wlib -j duktape
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION} 
@@ -802,6 +795,7 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "(windows|linux|macosx)_.+" )
     add_custom_target ( test_jsc
             COMMAND bin/wilton ${WILTON_DIR}/js/wilton/test/index.js -m ${WILTON_DIR}/js -j jsc
             COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runNodeTests.js -m ${WILTON_DIR}/js -j jsc
+            COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runMathJsTests.js -m ${WILTON_DIR}/js -j jsc
             COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runSanityTests.js -j jsc
             COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runSanityTests.js -m std.min.wlib -j jsc
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION} 
@@ -811,6 +805,7 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "(windows|linux|macosx)_.+" )
     add_custom_target ( test_mozjs
             COMMAND bin/wilton ${WILTON_DIR}/js/wilton/test/index.js -m ${WILTON_DIR}/js -j mozjs
             COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runNodeTests.js -m ${WILTON_DIR}/js -j mozjs
+            COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runMathJsTests.js -m ${WILTON_DIR}/js -j mozjs
             COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runSanityTests.js -j mozjs
             COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runSanityTests.js -m std.min.wlib -j mozjs
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION} 
@@ -820,6 +815,7 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "(windows|linux|macosx)_.+" )
     add_custom_target ( test_v8
             COMMAND bin/wilton ${WILTON_DIR}/js/wilton/test/index.js -m ${WILTON_DIR}/js -j v8
             COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runNodeTests.js -m ${WILTON_DIR}/js -j v8
+            COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runMathJsTests.js -m ${WILTON_DIR}/js -j v8
             COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runSanityTests.js -j v8
             COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runSanityTests.js -m std.min.wlib -j v8
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION} 
@@ -829,6 +825,8 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "(windows|linux|macosx)_.+" )
     add_custom_target ( test_rhino
             COMMAND bin/wilton ${WILTON_DIR}/js/wilton/test/index.js -m ${WILTON_DIR}/js -j rhino
             COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runNodeTests.js -m ${WILTON_DIR}/js -j rhino
+            # requires rhino 1.7.10
+            # COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runMathJsTests.js -m ${WILTON_DIR}/js -j rhino
             COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runSanityTests.js -j rhino
             COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runSanityTests.js -m std.min.wlib -j rhino
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION} 
@@ -838,6 +836,7 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "(windows|linux|macosx)_.+" )
     add_custom_target ( test_nashorn
             COMMAND bin/wilton ${WILTON_DIR}/js/wilton/test/index.js -m ${WILTON_DIR}/js -j nashorn
             COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runNodeTests.js -m ${WILTON_DIR}/js -j nashorn
+            COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runMathJsTests.js -m ${WILTON_DIR}/js -j nashorn
             COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runSanityTests.js -j nashorn
             COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runSanityTests.js -m std.min.wlib -j nashorn
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION} 
