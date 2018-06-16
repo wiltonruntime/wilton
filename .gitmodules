@@ -607,3 +607,6 @@
 [submodule "js/test-runners"]
 	path = js/test-runners
 	url = https://github.com/wilton-iot/test-runners.git
+[submodule "deps/staticlib_websocket"]
+	path = deps/staticlib_websocket
+	url = https://github.com/staticlibs/staticlib_websocket.git

@@ -42,12 +42,12 @@ if errorlevel 1 (
     echo error, target: test_js_wilton
     exit /b 1
 )
-wilton_dist\bin\wilton.exe -m ../js ../core/test/scripts/runNodeTests.js > test_js_wilton.log
+wilton_dist\bin\wilton.exe -m ../js ../js/test-runners/runNodeTests.js > test_js_wilton.log
 if errorlevel 1 (
     echo error, target: test_js_node
     exit /b 1
 )
-wilton_dist\bin\wilton.exe -m wilton_dist/std.min.wlib ../core/test/scripts/runSanityTests.js
+wilton_dist\bin\wilton.exe -m wilton_dist/std.min.wlib ../js/test-runners/runSanityTests.js
 if errorlevel 1 (
     echo error, target: test_js_sanity
     exit /b 1

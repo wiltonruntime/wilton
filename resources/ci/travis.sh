@@ -68,6 +68,6 @@ if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
     set -e
     cmake ..
     make
-    make test_js > test_js.log
+    make test_js #> test_js.log
     make test_duktape > test_duktape.log
 fi
