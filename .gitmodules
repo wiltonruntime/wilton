@@ -604,3 +604,6 @@
 [submodule "js/complexjs"]
 	path = js/complexjs
 	url = https://github.com/wilton-iot/Complex.js.git
+[submodule "js/test-runners"]
+	path = js/test-runners
+	url = https://github.com/wilton-iot/test-runners.git

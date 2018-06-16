@@ -764,81 +764,81 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "(windows|linux|macosx)_.+" )
 
     add_custom_target ( test_js
             COMMAND bin/wilton ${WILTON_DIR}/js/wilton/test/index.js -m ${WILTON_DIR}/js
-            COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runNodeTests.js -m ${WILTON_DIR}/js
-            COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runMathJsTests.js -m ${WILTON_DIR}/js
-            COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runSanityTests.js
-            COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runSanityTests.js -m std.min.wlib
+            COMMAND bin/wilton ${WILTON_DIR}/js/test-runners/runNodeTests.js -m ${WILTON_DIR}/js
+            COMMAND bin/wilton ${WILTON_DIR}/js/test-runners/runMathJsTests.js -m ${WILTON_DIR}/js
+            COMMAND bin/wilton ${WILTON_DIR}/js/test-runners/runSanityTests.js
+            COMMAND bin/wilton ${WILTON_DIR}/js/test-runners/runSanityTests.js -m std.min.wlib
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION} 
             DEPENDS dist
             COMMENT "Running tests on default JavaScript engine ..." )
 
     add_custom_target ( test_chakracore
             COMMAND bin/wilton ${WILTON_DIR}/js/wilton/test/index.js -m ${WILTON_DIR}/js -j chakracore
-            COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runNodeTests.js -m ${WILTON_DIR}/js -j chakracore
-            COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runMathJsTests.js -m ${WILTON_DIR}/js -j chakracore
-            COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runSanityTests.js -j chakracore
-            COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runSanityTests.js -m std.min.wlib -j chakracore
+            COMMAND bin/wilton ${WILTON_DIR}/js/test-runners/runNodeTests.js -m ${WILTON_DIR}/js -j chakracore
+            COMMAND bin/wilton ${WILTON_DIR}/js/test-runners/runMathJsTests.js -m ${WILTON_DIR}/js -j chakracore
+            COMMAND bin/wilton ${WILTON_DIR}/js/test-runners/runSanityTests.js -j chakracore
+            COMMAND bin/wilton ${WILTON_DIR}/js/test-runners/runSanityTests.js -m std.min.wlib -j chakracore
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION} 
             DEPENDS dist
             COMMENT "Running tests on ChakraCore JavaScript engine ..." )
 
     add_custom_target ( test_duktape
-            COMMAND bin/wilton ${WILTON_DIR}/js/wilton/test/index.js -m ${WILTON_DIR}/js -j duktape
-            COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runNodeTests.js -m ${WILTON_DIR}/js -j duktape
-            COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runMathJsTests.js -m ${WILTON_DIR}/js -j duktape
-            COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runSanityTests.js -j duktape
-            COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runSanityTests.js -m std.min.wlib -j duktape
+#            COMMAND bin/wilton ${WILTON_DIR}/js/wilton/test/index.js -m ${WILTON_DIR}/js -j duktape
+            COMMAND bin/wilton ${WILTON_DIR}/js/test-runners/runNodeTests.js -m ${WILTON_DIR}/js -j duktape
+#            COMMAND bin/wilton ${WILTON_DIR}/js/test-runners/runMathJsTests.js -m ${WILTON_DIR}/js -j duktape
+            COMMAND bin/wilton ${WILTON_DIR}/js/test-runners/runSanityTests.js -j duktape
+            COMMAND bin/wilton ${WILTON_DIR}/js/test-runners/runSanityTests.js -m std.min.wlib -j duktape
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION} 
             DEPENDS dist
             COMMENT "Running tests on Duktape JavaScript engine ..." )
 
     add_custom_target ( test_jsc
             COMMAND bin/wilton ${WILTON_DIR}/js/wilton/test/index.js -m ${WILTON_DIR}/js -j jsc
-            COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runNodeTests.js -m ${WILTON_DIR}/js -j jsc
-            COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runMathJsTests.js -m ${WILTON_DIR}/js -j jsc
-            COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runSanityTests.js -j jsc
-            COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runSanityTests.js -m std.min.wlib -j jsc
+            COMMAND bin/wilton ${WILTON_DIR}/js/test-runners/runNodeTests.js -m ${WILTON_DIR}/js -j jsc
+            COMMAND bin/wilton ${WILTON_DIR}/js/test-runners/runMathJsTests.js -m ${WILTON_DIR}/js -j jsc
+            COMMAND bin/wilton ${WILTON_DIR}/js/test-runners/runSanityTests.js -j jsc
+            COMMAND bin/wilton ${WILTON_DIR}/js/test-runners/runSanityTests.js -m std.min.wlib -j jsc
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION} 
             DEPENDS dist
             COMMENT "Running tests on JSC JavaScript engine ..." )
 
     add_custom_target ( test_mozjs
             COMMAND bin/wilton ${WILTON_DIR}/js/wilton/test/index.js -m ${WILTON_DIR}/js -j mozjs
-            COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runNodeTests.js -m ${WILTON_DIR}/js -j mozjs
-            COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runMathJsTests.js -m ${WILTON_DIR}/js -j mozjs
-            COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runSanityTests.js -j mozjs
-            COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runSanityTests.js -m std.min.wlib -j mozjs
+            COMMAND bin/wilton ${WILTON_DIR}/js/test-runners/runNodeTests.js -m ${WILTON_DIR}/js -j mozjs
+            COMMAND bin/wilton ${WILTON_DIR}/js/test-runners/runMathJsTests.js -m ${WILTON_DIR}/js -j mozjs
+            COMMAND bin/wilton ${WILTON_DIR}/js/test-runners/runSanityTests.js -j mozjs
+            COMMAND bin/wilton ${WILTON_DIR}/js/test-runners/runSanityTests.js -m std.min.wlib -j mozjs
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION} 
             DEPENDS dist
             COMMENT "Running tests on MozJS JavaScript engine ..." )
 
     add_custom_target ( test_v8
             COMMAND bin/wilton ${WILTON_DIR}/js/wilton/test/index.js -m ${WILTON_DIR}/js -j v8
-            COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runNodeTests.js -m ${WILTON_DIR}/js -j v8
-            COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runMathJsTests.js -m ${WILTON_DIR}/js -j v8
-            COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runSanityTests.js -j v8
-            COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runSanityTests.js -m std.min.wlib -j v8
+            COMMAND bin/wilton ${WILTON_DIR}/js/test-runners/runNodeTests.js -m ${WILTON_DIR}/js -j v8
+            COMMAND bin/wilton ${WILTON_DIR}/js/test-runners/runMathJsTests.js -m ${WILTON_DIR}/js -j v8
+            COMMAND bin/wilton ${WILTON_DIR}/js/test-runners/runSanityTests.js -j v8
+            COMMAND bin/wilton ${WILTON_DIR}/js/test-runners/runSanityTests.js -m std.min.wlib -j v8
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION} 
             DEPENDS dist
             COMMENT "Running tests on V8 JavaScript engine ..." )
 
     add_custom_target ( test_rhino
-            COMMAND bin/wilton ${WILTON_DIR}/js/wilton/test/index.js -m ${WILTON_DIR}/js -j rhino
-            COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runNodeTests.js -m ${WILTON_DIR}/js -j rhino
-            # requires rhino 1.7.10
-            # COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runMathJsTests.js -m ${WILTON_DIR}/js -j rhino
-            COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runSanityTests.js -j rhino
-            COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runSanityTests.js -m std.min.wlib -j rhino
+#            COMMAND bin/wilton ${WILTON_DIR}/js/wilton/test/index.js -m ${WILTON_DIR}/js -j rhino
+            COMMAND bin/wilton ${WILTON_DIR}/js/test-runners/runNodeTests.js -m ${WILTON_DIR}/js -j rhino
+            # requires rhino 1.7.7.2+
+            # COMMAND bin/wilton ${WILTON_DIR}/js/test-runners/runMathJsTests.js -m ${WILTON_DIR}/js -j rhino
+            COMMAND bin/wilton ${WILTON_DIR}/js/test-runners/runSanityTests.js -j rhino
+            COMMAND bin/wilton ${WILTON_DIR}/js/test-runners/runSanityTests.js -m std.min.wlib -j rhino
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION} 
             DEPENDS dist
             COMMENT "Running tests on Rhino JavaScript engine ..." )
 
     add_custom_target ( test_nashorn
             COMMAND bin/wilton ${WILTON_DIR}/js/wilton/test/index.js -m ${WILTON_DIR}/js -j nashorn
-            COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runNodeTests.js -m ${WILTON_DIR}/js -j nashorn
-            COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runMathJsTests.js -m ${WILTON_DIR}/js -j nashorn
-            COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runSanityTests.js -j nashorn
-            COMMAND bin/wilton ${WILTON_DIR}/core/test/scripts/runSanityTests.js -m std.min.wlib -j nashorn
+            COMMAND bin/wilton ${WILTON_DIR}/js/test-runners/runNodeTests.js -m ${WILTON_DIR}/js -j nashorn
+            COMMAND bin/wilton ${WILTON_DIR}/js/test-runners/runMathJsTests.js -m ${WILTON_DIR}/js -j nashorn
+            COMMAND bin/wilton ${WILTON_DIR}/js/test-runners/runSanityTests.js -j nashorn
+            COMMAND bin/wilton ${WILTON_DIR}/js/test-runners/runSanityTests.js -m std.min.wlib -j nashorn
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION} 
             DEPENDS dist
             COMMENT "Running tests on Nashorn JavaScript engine ..." )
