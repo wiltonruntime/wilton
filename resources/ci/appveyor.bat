@@ -37,7 +37,7 @@ echo test_js
 rem for some reason chakra segfaults when run from msbuild
 rem cmake --build . --config Release --target test_js > test_js.log
 cmake --build . --config Release --target dist_unversioned > dist_unversioned.log
-wilton_dist\bin\wilton.exe -m ../js ../js/wilton/test/index.js > test_js_wilton.log
+wilton_dist\bin\wilton.exe -m ../js ../js/wilton/test/index.js
 if errorlevel 1 (
     echo error, target: test_js_wilton
     exit /b 1
