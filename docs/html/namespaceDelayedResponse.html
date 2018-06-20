@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>wilton.js: mustache Namespace Reference</title>
+<title>wilton.js: DelayedResponse Namespace Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -82,55 +82,54 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div class="summary">
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">mustache Namespace Reference</div>  </div>
+<div class="title">DelayedResponse Namespace Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p><b>wilton/mustache</b> <br/>
- Render <a href="https://mustache.github.io/">mustache</a> templates.  
+<p><b>wilton/DelayedResponse</b> <br/>
+ Send HTTP response to client from another thread  
 <a href="#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a12f67126eba5a120014ced171ed5cc1e"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemustache.html#a12f67126eba5a120014ced171ed5cc1e">render</a> (String template, Object|Undefined values, Function|Undefined callback)</td></tr>
-<tr class="memdesc:a12f67126eba5a120014ced171ed5cc1e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Render template specified as a string.  <a href="#a12f67126eba5a120014ced171ed5cc1e"></a><br/></td></tr>
-<tr class="memitem:a4092e44f93b1e730e49ffebbe8e49386"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemustache.html#a4092e44f93b1e730e49ffebbe8e49386">renderFile</a> (String templateFile, Object|Undefined values, Function|Undefined callback)</td></tr>
-<tr class="memdesc:a4092e44f93b1e730e49ffebbe8e49386"><td class="mdescLeft">&#160;</td><td class="mdescRight">Render template specified as a path to file.  <a href="#a4092e44f93b1e730e49ffebbe8e49386"></a><br/></td></tr>
+<tr class="memitem:aa5a66827f5417dc4903eb0520145c525"><td class="memItemLeft" align="right" valign="top">Object&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceDelayedResponse.html#aa5a66827f5417dc4903eb0520145c525">DelayedResponse</a> (Number responseWriterHandle, Function|Undefined callback)</td></tr>
+<tr class="memdesc:aa5a66827f5417dc4903eb0520145c525"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create <code><a class="el" href="namespaceDelayedResponse.html" title="wilton/DelayedResponse   Send HTTP response to client from another thread">DelayedResponse</a></code> instance.  <a href="#aa5a66827f5417dc4903eb0520145c525"></a><br/></td></tr>
+<tr class="memitem:a262353fdc452f5c0e31ae9568d6d2d8b"><td class="memItemLeft" align="right" valign="top">Undefined&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceDelayedResponse.html#a262353fdc452f5c0e31ae9568d6d2d8b">send</a> (String|Object data, Object|Undefined options, Function|Undefined callback)</td></tr>
+<tr class="memdesc:a262353fdc452f5c0e31ae9568d6d2d8b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send string or JSON response to client.  <a href="#a262353fdc452f5c0e31ae9568d6d2d8b"></a><br/></td></tr>
 </table>
 <a name="details" id="details"></a><h2>Detailed Description</h2>
-<div class="textblock"><p>This module allows to render <a href="https://mustache.github.io/">mustache</a> templates from in-memory strings or directly from files.</p>
+<div class="textblock"><p>This module allows to send a "delayed" HTTP response to client. To create a <code><a class="el" href="namespaceDelayedResponse.html" title="wilton/DelayedResponse   Send HTTP response to client from another thread">DelayedResponse</a></code> instance, first <code>responseWriterHandle</code> needs to be obtained inside the <code><a class="el" href="namespaceServer.html" title="wilton/Server   HTTP server.">Server</a></code> request handler (view) using the <code>req.sendResponseLater()</code>function.</p>
+<p><code><a class="el" href="namespaceDelayedResponse.html" title="wilton/DelayedResponse   Send HTTP response to client from another thread">DelayedResponse</a></code> may be created from any thread specifying the <code>responseWriterHandle</code> as an argument.</p>
 <p>Usage example:</p>
-<div class="fragment"><div class="line"><span class="comment">// render string template</span></div>
-<div class="line">var rendered = mustache.render(<span class="stringliteral">&quot;{{#names}}Hi {{name}}!\n{{/names}}&quot;</span>, {</div>
-<div class="line">    names: [</div>
-<div class="line">        {<a class="code" href="namespaceChannel.html#ac362c825ae7b53f3c0faa6f0321991bc" title="Name of this channel.">name</a>: <span class="stringliteral">&quot;Chris&quot;</span>},</div>
-<div class="line">        {<a class="code" href="namespaceChannel.html#ac362c825ae7b53f3c0faa6f0321991bc" title="Name of this channel.">name</a>: <span class="stringliteral">&quot;Mark&quot;</span>},</div>
-<div class="line">        {<a class="code" href="namespaceChannel.html#ac362c825ae7b53f3c0faa6f0321991bc" title="Name of this channel.">name</a>: <span class="stringliteral">&quot;Scott&quot;</span>}</div>
-<div class="line">    ]</div>
-<div class="line">});</div>
-<div class="line"><span class="comment">// rendered == &quot;Hi Chris!\nHi Mark!\nHi Scott!\n&quot;</span></div>
+<div class="fragment"><div class="line"><span class="comment">// inside server request handler</span></div>
+<div class="line">GET: <span class="keyword">function</span>(req) {</div>
+<div class="line">    <span class="comment">// delay sending a response</span></div>
+<div class="line">    <span class="comment">// and release the current worker thread</span></div>
+<div class="line">    <span class="comment">// creating a responseWriterHandle</span></div>
+<div class="line">    var handle = req.sendResponseLater();</div>
 <div class="line"></div>
-<div class="line"><span class="comment">// render template from file</span></div>
-<div class="line">var resp = mustache.renderFile(<span class="stringliteral">&quot;path/to/my.mustache&quot;</span>, {</div>
-<div class="line">    foo: <span class="stringliteral">&quot;bar&quot;</span>,</div>
-<div class="line">    baz: 42</div>
+<div class="line">    <span class="comment">// pass the handle to other thread using some channel</span></div>
+<div class="line">    chan.send({</div>
+<div class="line">        handle: handle</div>
+<div class="line">    });</div>
+<div class="line">}</div>
+<div class="line"></div>
+<div class="line"><span class="comment">// in other thread</span></div>
+<div class="line">var obj = chan.receive();</div>
+<div class="line">var writer = <span class="keyword">new</span> <a class="code" href="namespaceDelayedResponse.html#aa5a66827f5417dc4903eb0520145c525" title="Create DelayedResponse instance.">DelayedResponse</a>(obj.handle);</div>
+<div class="line">writer.sendResponse({</div>
+<div class="line">    foo: <span class="stringliteral">&quot;bar&quot;</span></div>
 <div class="line">});</div>
 </div><!-- fragment --> </div><h2>Function Documentation</h2>
-<a class="anchor" id="a12f67126eba5a120014ced171ed5cc1e"></a>
+<a class="anchor" id="aa5a66827f5417dc4903eb0520145c525"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">String mustache::render </td>
+          <td class="memname">Object DelayedResponse::DelayedResponse </td>
           <td>(</td>
-          <td class="paramtype">String&#160;</td>
-          <td class="paramname"><em>template</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Object|Undefined&#160;</td>
-          <td class="paramname"><em>values</em>, </td>
+          <td class="paramtype">Number&#160;</td>
+          <td class="paramname"><em>responseWriterHandle</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -145,34 +144,33 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Renders template specified as a string.</p>
+<p>Creates <code><a class="el" href="namespaceDelayedResponse.html" title="wilton/DelayedResponse   Send HTTP response to client from another thread">DelayedResponse</a></code> object instance that can be used to send HTTP response to client from the different thread.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">template</td><td><code>String</code> template body </td></tr>
-    <tr><td class="paramname">values</td><td><code>Object|Undefined</code> template parameters to use </td></tr>
+    <tr><td class="paramname">responseWriterHandle</td><td><code>Number</code> handle value, that must be obtained inside request handler (view) using <code>req.sendResponseLater()</code> call and (optionally) be passed to another thread after that </td></tr>
     <tr><td class="paramname">callback</td><td><code>Function|Undefined</code> callback to receive result or error </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd><code>String</code> rendered template </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd><code>Object</code> <code><a class="el" href="namespaceDelayedResponse.html" title="wilton/DelayedResponse   Send HTTP response to client from another thread">DelayedResponse</a></code> instance </dd></dl>
 
 </div>
 </div>
-<a class="anchor" id="a4092e44f93b1e730e49ffebbe8e49386"></a>
+<a class="anchor" id="a262353fdc452f5c0e31ae9568d6d2d8b"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">String mustache::renderFile </td>
+          <td class="memname">Undefined DelayedResponse::send </td>
           <td>(</td>
-          <td class="paramtype">String&#160;</td>
-          <td class="paramname"><em>templateFile</em>, </td>
+          <td class="paramtype">String|Object&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">Object|Undefined&#160;</td>
-          <td class="paramname"><em>values</em>, </td>
+          <td class="paramname"><em>options</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -187,16 +185,25 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Renders template specified as a path to file.</p>
+<p>Sends response to client converting specified object into JSON if necessary (<code>Content-Type</code> is set to <code>application/json</code> in this case).</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">templateFile</td><td><code>String</code> path to template file </td></tr>
-    <tr><td class="paramname">values</td><td><code>Object|Undefined</code> template parameters to use </td></tr>
+    <tr><td class="paramname">data</td><td><code>String|Object</code> response body, object will be converted to JSON </td></tr>
+    <tr><td class="paramname">options</td><td><code>Object|Undefined</code> configuration object, see possible options below </td></tr>
     <tr><td class="paramname">callback</td><td><code>Function|Undefined</code> callback to receive result or error </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd><code>String</code> rendered template </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd><code>Undefined</code></dd></dl>
+<p><b>Options</b></p>
+<ul>
+<li><b>meta</b> <code>Object</code> response metadata<ul>
+<li><b>statusCode</b> <code>Number</code> HTTP status code</li>
+<li><b>statusMessage</b> <code>String</code> HTTP status message</li>
+<li><b>headers</b> <code>Object</code> response headers in <code>"Header-Name": "value"</code> format </li>
+</ul>
+</li>
+</ul>
 
 </div>
 </div>

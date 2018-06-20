@@ -23,7 +23,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">wilton.js
-   &#160;<span id="projectnumber">v201804081</span>
+   &#160;<span id="projectnumber">v201806201</span>
    </div>
   </td>
  </tr>
@@ -92,8 +92,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:af32e282ad8539bcf46fbb1e947e33c23"><td class="memItemLeft" align="right" valign="top">Undefined&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacefs.html#af32e282ad8539bcf46fbb1e947e33c23">appendFile</a> (String path, String data, Object|Undefined options, Function|Undefined callback)</td></tr>
-<tr class="memdesc:af32e282ad8539bcf46fbb1e947e33c23"><td class="mdescLeft">&#160;</td><td class="mdescRight">Append data to a file, creating the file if it does not yet exist.  <a href="#af32e282ad8539bcf46fbb1e947e33c23"></a><br/></td></tr>
+<tr class="memitem:ad134795cc3a926ca718257c28a77ac7b"><td class="memItemLeft" align="right" valign="top">Undefined&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacefs.html#ad134795cc3a926ca718257c28a77ac7b">appendFile</a> (String path, String|Array data, Object|Undefined options, Function|Undefined callback)</td></tr>
+<tr class="memdesc:ad134795cc3a926ca718257c28a77ac7b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Append data to a file, creating the file if it does not yet exist.  <a href="#ad134795cc3a926ca718257c28a77ac7b"></a><br/></td></tr>
 <tr class="memitem:a6148298c50528ad3f51cb88153a8f43a"><td class="memItemLeft" align="right" valign="top">Undefined&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacefs.html#a6148298c50528ad3f51cb88153a8f43a">copyDirectory</a> (String oldPath, String newPath, Function|Undefined callback)</td></tr>
 <tr class="memdesc:a6148298c50528ad3f51cb88153a8f43a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy a directory.  <a href="#a6148298c50528ad3f51cb88153a8f43a"></a><br/></td></tr>
 <tr class="memitem:a1ffff491daba7a970f0b7691ebe4d286"><td class="memItemLeft" align="right" valign="top">Undefined&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacefs.html#a1ffff491daba7a970f0b7691ebe4d286">copyFile</a> (String oldPath, String newPath, Function|Undefined callback)</td></tr>
@@ -118,8 +118,8 @@ Functions</h2></td></tr>
 <tr class="memdesc:abddacd3199c05eaf7e27a2dadc5892d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read file or directory status.  <a href="#abddacd3199c05eaf7e27a2dadc5892d5"></a><br/></td></tr>
 <tr class="memitem:a2bfb8be5b1936b9a3991921e2ed6e9b1"><td class="memItemLeft" align="right" valign="top">Undefined&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacefs.html#a2bfb8be5b1936b9a3991921e2ed6e9b1">unlink</a> (String path, Function|Undefined callback)</td></tr>
 <tr class="memdesc:a2bfb8be5b1936b9a3991921e2ed6e9b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delete file.  <a href="#a2bfb8be5b1936b9a3991921e2ed6e9b1"></a><br/></td></tr>
-<tr class="memitem:a73dcb71a75a2a0895f928c30cf2d0fbb"><td class="memItemLeft" align="right" valign="top">Undefined&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacefs.html#a73dcb71a75a2a0895f928c30cf2d0fbb">writeFile</a> (String path, String data, Object|Undefined options, Function|Undefined callback)</td></tr>
-<tr class="memdesc:a73dcb71a75a2a0895f928c30cf2d0fbb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write specified data to a file, overwriting a file if it exists.  <a href="#a73dcb71a75a2a0895f928c30cf2d0fbb"></a><br/></td></tr>
+<tr class="memitem:a69b49e867d31350aa03b9ee3d75f67e9"><td class="memItemLeft" align="right" valign="top">Undefined&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacefs.html#a69b49e867d31350aa03b9ee3d75f67e9">writeFile</a> (String path, String|Array data, Object|Undefined options, Function|Undefined callback)</td></tr>
+<tr class="memdesc:a69b49e867d31350aa03b9ee3d75f67e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write specified data to a file, overwriting a file if it exists.  <a href="#a69b49e867d31350aa03b9ee3d75f67e9"></a><br/></td></tr>
 </table>
 <a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>This module implements a synchronous-only subset of <a href="https://nodejs.org/api/fs.html">fs module from Node.js</a>.</p>
@@ -139,7 +139,7 @@ Functions</h2></td></tr>
 <div class="line"><span class="comment">// get file status</span></div>
 <div class="line">var props = fs.stat(<span class="stringliteral">&quot;fstest/test.txt&quot;</span>);</div>
 </div><!-- fragment --> </div><h2>Function Documentation</h2>
-<a class="anchor" id="af32e282ad8539bcf46fbb1e947e33c23"></a>
+<a class="anchor" id="ad134795cc3a926ca718257c28a77ac7b"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -152,7 +152,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">String&#160;</td>
+          <td class="paramtype">String|Array&#160;</td>
           <td class="paramname"><em>data</em>, </td>
         </tr>
         <tr>
@@ -178,7 +178,7 @@ Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">path</td><td><code>String</code> path to file </td></tr>
-    <tr><td class="paramname">data</td><td><code>String</code> data to append </td></tr>
+    <tr><td class="paramname">data</td><td><code>String|Array</code> data to write, can be a string or an array of strings; <code>options.delimiter</code> string is appended after every array element except the last one </td></tr>
     <tr><td class="paramname">options</td><td><code>Object|Undefined</code> configuration object, can be omitted, see possible options below </td></tr>
     <tr><td class="paramname">callback</td><td><code>Function|Undefined</code> callback to receive result or error </td></tr>
   </table>
@@ -187,7 +187,8 @@ Functions</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd><code>Undefined</code></dd></dl>
 <p><b>Options</b></p>
 <ul>
-<li><b>hex</b> <code>Boolean|Undefined</code> whether data is specified in hexadecimal encoding and needs to be converted to binary before appending it to file; <code>false</code> by default </li>
+<li><b>hex</b> <code>Boolean|Undefined</code> whether data is specified in hexadecimal encoding and needs to be converted to binary before appending it to file; <code>false</code> by default</li>
+<li><b>delimiter</b> <code>String|Undefined</code> string that is appended after every array element except the last one, default value: <code>\n</code> </li>
 </ul>
 
 </div>
@@ -671,7 +672,7 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a73dcb71a75a2a0895f928c30cf2d0fbb"></a>
+<a class="anchor" id="a69b49e867d31350aa03b9ee3d75f67e9"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -684,7 +685,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">String&#160;</td>
+          <td class="paramtype">String|Array&#160;</td>
           <td class="paramname"><em>data</em>, </td>
         </tr>
         <tr>
@@ -710,7 +711,7 @@ Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">path</td><td><code>String</code> path to file </td></tr>
-    <tr><td class="paramname">data</td><td><code>String</code> data to write </td></tr>
+    <tr><td class="paramname">data</td><td><code>String|Array</code> data to write, can be a string or an array of strings; <code>options.delimiter</code> string is appended after every array element except the last one </td></tr>
     <tr><td class="paramname">options</td><td><code>Object|Undefined</code> configuration object, can be omitted, see possible options below </td></tr>
     <tr><td class="paramname">callback</td><td><code>Function|Undefined</code> callback to receive result or error </td></tr>
   </table>
@@ -719,7 +720,8 @@ Functions</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd><code>Undefined</code></dd></dl>
 <p><b>Options</b></p>
 <ul>
-<li><b>hex</b> <code>Boolean|Undefined</code> whether data is specified in hexadecimal encoding and needs to be converted to binary before writing it to file; <code>false</code> by default </li>
+<li><b>hex</b> <code>Boolean|Undefined</code> whether data is specified in hexadecimal encoding and needs to be converted to binary before writing it to file; <code>false</code> by default</li>
+<li><b>delimiter</b> <code>String|Undefined</code> string that is appended after every array element except the last one, default value: <code>\n</code> </li>
 </ul>
 
 </div>
@@ -727,7 +729,7 @@ Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Apr 8 2018 13:57:30 for wilton.js by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Jun 20 2018 15:28:19 for wilton.js by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>

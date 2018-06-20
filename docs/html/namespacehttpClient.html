@@ -23,7 +23,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">wilton.js
-   &#160;<span id="projectnumber">v201804081</span>
+   &#160;<span id="projectnumber">v201806201</span>
    </div>
   </td>
  </tr>
@@ -99,17 +99,17 @@ Functions</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>This module allows to send HTTP requests.</p>
-<p>By default HTTP connections are cached into the single process-wide connection pool and can be reused from defferent threads.</p>
+<p>By default HTTP connections are cached into the single process-wide connection pool and can be reused from different threads.</p>
 <p>This module supports HTTPS and request with <code>X.509</code> client certificates.</p>
 <p>Usage example:</p>
 <div class="fragment"><div class="line"><span class="comment">// send GET request</span></div>
-<div class="line">var resp1 = httpClient.sendRequest(<span class="stringliteral">&quot;https://google.com&quot;</span>);</div>
+<div class="line">var resp1 = http.sendRequest(<span class="stringliteral">&quot;https://google.com&quot;</span>);</div>
 <div class="line"></div>
 <div class="line"><span class="comment">// send POST request</span></div>
 <div class="line">var resp2 = http.sendRequest(url, {</div>
 <div class="line">    <a class="code" href="namespaceRequest.html#a7d364df39cce65fa893ddc277778945d" title="Access request body.">data</a>: <span class="stringliteral">&quot;foo&quot;</span>,</div>
 <div class="line">    <a class="code" href="namespaceRequest.html#a35a013d33feb11c39be7900508b064db" title="Access request&#39;s metadata.">meta</a>: {</div>
-<div class="line">        method: POST</div>
+<div class="line">        method: <span class="stringliteral">&quot;POST&quot;</span></div>
 <div class="line">    }</div>
 <div class="line">});</div>
 <div class="line"></div>
@@ -191,7 +191,7 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Sends HTTP request to server, received response can be stored in-memory or in the specified file (in this case response will be written into file in streaming mode).</p>
+<p>Sends HTTP request to server, received response can be stored in-memory or in the specified file (in this case response will be written into the file in streaming mode).</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">url</td><td><code>String</code> URL of the HTTP server </td></tr>
@@ -205,6 +205,7 @@ Functions</h2></td></tr>
 <li><b>connectionSuccess</b> <code>Boolean</code> <code>true</code> if the connection to server was successful, <code>false</code> otherwise</li>
 <li><b>dataHex</b> <code>String</code> response data in hexadecimal encoding, use <code>wilton/hex</code>to decode it; response may contain code sequences that are not valid for <code>UTF-8</code> encoding</li>
 <li><b>data</b> <code>String</code> data decoded as a <code>String</code> with invalid <code>UTF-8</code> code sequences replaced with <code>0xFFFD</code></li>
+<li><b>json</b> <code>Function</code> parses the contents of <code>data</code> field as a JSON, resulting JSON object is cached for this response instance - the same object is returned for the following <code>json()</code> invocations</li>
 <li><b>headers</b> <code>Object</code> response headers in <code>"Header-Name": "value"</code> format</li>
 <li><b>effectiveUrl</b> <code>String</code> final URL (after possible redirection) that was used</li>
 <li><b>responseCode</b> <code>Number</code> HTTP response status code</li>
@@ -276,7 +277,7 @@ Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Apr 8 2018 13:57:30 for wilton.js by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Jun 20 2018 15:28:19 for wilton.js by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>

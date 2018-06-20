@@ -13,5 +13,6 @@ var searchData=
   ['replacenonprintable',['replaceNonPrintable',['../namespacehex.html#a6da815329e0d4c984b5dec616c3d9a11',1,'hex']]],
   ['resolvehostname',['resolveHostname',['../namespacenet.html#a44e6d3d06a8631b18965d33079f33438',1,'net']]],
   ['rmdir',['rmdir',['../namespacefs.html#a1fda3bed71a4ebad582773d8f9c0830f',1,'fs']]],
-  ['run',['run',['../namespacethread.html#a05ab54122ddd4e97414f5baaecbaab0c',1,'thread']]]
+  ['run',['run',['../namespacekiosk.html#a8ab01cc5b002ac4cbe02b46e3f9a61d1',1,'kiosk::run()'],['../namespacethread.html#a05ab54122ddd4e97414f5baaecbaab0c',1,'thread::run()']]],
+  ['rungc',['runGC',['../namespacemisc.html#a0a08513f1948887e4a7a57348604f559',1,'misc']]]
 ];

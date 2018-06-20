@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>wilton.js: dyload Namespace Reference</title>
+<title>wilton.js: web_httpClient Namespace Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -82,38 +82,49 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div class="summary">
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">dyload Namespace Reference</div>  </div>
+<div class="title">web_httpClient Namespace Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p><b>wilton/dyload</b> <br/>
- Load native shared library.  
+<p><b>wilton/web/httpClient</b> <br/>
+ HTTP client for web-browsers.  
 <a href="#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:aaac0bd9b38119c631f2d062d11290722"><td class="memItemLeft" align="right" valign="top">Undefined&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacedyload.html#aaac0bd9b38119c631f2d062d11290722">dyload</a> (Object options, Function|Undefined callback)</td></tr>
-<tr class="memdesc:aaac0bd9b38119c631f2d062d11290722"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load native shared library.  <a href="#aaac0bd9b38119c631f2d062d11290722"></a><br/></td></tr>
+<tr class="memitem:a2fa5ae0a70ab1df77d4aa46db6e67ce3"><td class="memItemLeft" align="right" valign="top">Object&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceweb__httpClient.html#a2fa5ae0a70ab1df77d4aa46db6e67ce3">sendRequest</a> (String url, Object options, Function|Undefined callback)</td></tr>
+<tr class="memdesc:a2fa5ae0a70ab1df77d4aa46db6e67ce3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send XHR request to server.  <a href="#a2fa5ae0a70ab1df77d4aa46db6e67ce3"></a><br/></td></tr>
 </table>
 <a name="details" id="details"></a><h2>Detailed Description</h2>
-<div class="textblock"><p>This module allows to load native shared libraries that provide additional <code>wiltoncall</code> functions.</p>
-<p>Library loading process is OS-specific. Function <code>wilton_module_init</code> is called on the native library immediately after load. This function must be available as a "public symbol" and should use <code>wiltoncall_register</code> (<code>C</code> API) or <code>wilton::support::register_wiltoncall</code> (<code>C++</code> API) to register native functions to be used from <code>JavaScript</code> through <code>wiltoncall</code> module.</p>
-<p>If library with this name is already loaded in current process, this function will do nothing.</p>
+<div class="textblock"><p>This module allows to use XHR requests in web-browsers with API similar to <code>wilton/httpClient</code></p>
 <p>Usage example:</p>
-<div class="fragment"><div class="line"><span class="comment">// load native lib from the current executable directory</span></div>
-<div class="line"><span class="comment">// `libwilton_db.so` or `wilton_db.dll` will be loaded</span></div>
-<div class="line"><span class="comment">// depending on platform</span></div>
-<div class="line"><a class="code" href="namespacedyload.html#aaac0bd9b38119c631f2d062d11290722" title="Load native shared library.">dyload</a>({</div>
-<div class="line">    <a class="code" href="namespaceChannel.html#ac362c825ae7b53f3c0faa6f0321991bc" title="Name of this channel.">name</a>: <span class="stringliteral">&quot;wilton_db&quot;</span></div>
+<div class="fragment"><div class="line"><span class="comment">// send GET request</span></div>
+<div class="line">http.sendRequest(<span class="stringliteral">&quot;https://google.com&quot;</span>, <span class="keyword">function</span>(err, resp) {</div>
+<div class="line">    console.log(resp.data);</div>
 <div class="line">});</div>
+<div class="line"></div>
+<div class="line"><span class="comment">// send POST request and allow error responses</span></div>
+<div class="line">var resp2 = http.sendRequest(url, {</div>
+<div class="line">    <a class="code" href="namespaceRequest.html#a7d364df39cce65fa893ddc277778945d" title="Access request body.">data</a>: <span class="stringliteral">&quot;foo&quot;</span>,</div>
+<div class="line">    <a class="code" href="namespaceRequest.html#a35a013d33feb11c39be7900508b064db" title="Access request&#39;s metadata.">meta</a>: {</div>
+<div class="line">        abortOnResponseError: <span class="keyword">false</span>,</div>
+<div class="line">        method: <span class="stringliteral">&quot;POST&quot;</span> <span class="comment">// optional, if data is specified</span></div>
+<div class="line">    }</div>
+<div class="line">}, <span class="keyword">function</span>(err, resp) { ... });</div>
 </div><!-- fragment --> </div><h2>Function Documentation</h2>
-<a class="anchor" id="aaac0bd9b38119c631f2d062d11290722"></a>
+<a class="anchor" id="a2fa5ae0a70ab1df77d4aa46db6e67ce3"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">Undefined dyload::dyload </td>
+          <td class="memname">Object web_httpClient::sendRequest </td>
           <td>(</td>
+          <td class="paramtype">String&#160;</td>
+          <td class="paramname"><em>url</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">Object&#160;</td>
           <td class="paramname"><em>options</em>, </td>
         </tr>
@@ -130,19 +141,34 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Loads native shared library at the specified path and calls <code>wilton_module_init</code> function on the loaded lib.</p>
+<p>Sends XHR request to server, call callback on response received or on timeout.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
+    <tr><td class="paramname">url</td><td><code>String</code> URL of the HTTP server </td></tr>
     <tr><td class="paramname">options</td><td><code>Object</code> configuration object, see possible options below </td></tr>
-    <tr><td class="paramname">callback</td><td><code>Function|Undefined</code> callback to receive result or error </td></tr>
+    <tr><td class="paramname">callback</td><td><code>Function|Undefined</code> callback to receive response or error, see response description below </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd><code>Undefined</code></dd></dl>
+<dl class="section return"><dt>Returns</dt><dd><code>Object</code> XHR object</dd></dl>
 <p><b>Options</b></p>
 <ul>
-<li><b>name</b> <code>String</code> "logical" library name, will be converted to platform-specific file name before load</li>
-<li><b>directory</b> <code>String|Undefined</code> directory to load library from, default value: current executable directory </li>
+<li><b>data</b> <code>String|Object|Undefined</code> data to send in request body, specified object will be converted to JSON</li>
+<li><b>meta</b>: <code>Object|Undefined</code> request metadata<ul>
+<li><b>headers</b> <code>Object|Undefined</code> request headers in <code>"Header-Name": "value"</code> format</li>
+<li><b>method</b> <code>String|Undefined</code> HTTP method to use for this request, default value is <code>GET</code>, if request <code>data</code> is not specified, <code>POST</code> otherwise</li>
+<li><b>abortOnResponseError</b> <code>Boolean|Undefined</code> whether to throw an <code>Error</code>, if response status code <code>&gt;=400</code> is returned, default value: <code>true</code></li>
+<li><b>timeoutMillis</b> <code>Number|Undefined</code> maximum time the request is allowed to take, in milliseconds, default value: <code>0</code></li>
+</ul>
+</li>
+</ul>
+<p><b>Response</b></p>
+<ul>
+<li><b>data</b> <code>String</code> data as a <code>String</code></li>
+<li><b>json</b> <code>Function</code> parses the contents of <code>data</code> field as a JSON, resulting JSON object is cached for this response instance - the same object is returned for the following <code>json()</code> invocations</li>
+<li><b>headers</b> <code>Object</code> response headers in <code>"Header-Name": "value"</code> format</li>
+<li><b>effectiveUrl</b> <code>String</code> final URL (after possible redirection) that was used</li>
+<li><b>responseCode</b> <code>Number</code> HTTP response status code </li>
 </ul>
 
 </div>
