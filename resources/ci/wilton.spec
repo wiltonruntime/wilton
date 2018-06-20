@@ -15,7 +15,7 @@
 # Fedora COPR spec file
 # https://copr.fedorainfracloud.org/coprs/wilton/wilton/
 
-%global wilton_version 201804081
+%global wilton_version 201806201
 %global wilton_release v%{wilton_version}
 %if ! 0%{?epel}
 %global wilton_build_flavour fedora
@@ -110,6 +110,7 @@ git submodule update --init deps/staticlib_tinydir
 git submodule update --init deps/tinydir
 git submodule update --init deps/staticlib_unzip
 git submodule update --init deps/staticlib_utils
+git submodule update --init deps/staticlib_websocket
 # js
 rm -rf js
 git clone --branch %{wilton_release} https://github.com/wilton-iot/js-libs-ci-monorepo.git js

@@ -783,9 +783,9 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "(windows|linux|macosx)_.+" )
             COMMENT "Running tests on ChakraCore JavaScript engine ..." )
 
     add_custom_target ( test_duktape
-#            COMMAND bin/wilton ${WILTON_DIR}/js/wilton/test/index.js -m ${WILTON_DIR}/js -j duktape
+            COMMAND bin/wilton ${WILTON_DIR}/js/wilton/test/index.js -m ${WILTON_DIR}/js -j duktape
             COMMAND bin/wilton ${WILTON_DIR}/js/test-runners/runNodeTests.js -m ${WILTON_DIR}/js -j duktape
-#            COMMAND bin/wilton ${WILTON_DIR}/js/test-runners/runMathJsTests.js -m ${WILTON_DIR}/js -j duktape
+            COMMAND bin/wilton ${WILTON_DIR}/js/test-runners/runMathJsTests.js -m ${WILTON_DIR}/js -j duktape
             COMMAND bin/wilton ${WILTON_DIR}/js/test-runners/runSanityTests.js -j duktape
             COMMAND bin/wilton ${WILTON_DIR}/js/test-runners/runSanityTests.js -m std.min.wlib -j duktape
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION} 
@@ -823,7 +823,7 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "(windows|linux|macosx)_.+" )
             COMMENT "Running tests on V8 JavaScript engine ..." )
 
     add_custom_target ( test_rhino
-#            COMMAND bin/wilton ${WILTON_DIR}/js/wilton/test/index.js -m ${WILTON_DIR}/js -j rhino
+            COMMAND bin/wilton ${WILTON_DIR}/js/wilton/test/index.js -m ${WILTON_DIR}/js -j rhino
             COMMAND bin/wilton ${WILTON_DIR}/js/test-runners/runNodeTests.js -m ${WILTON_DIR}/js -j rhino
             # requires rhino 1.7.7.2+
             # COMMAND bin/wilton ${WILTON_DIR}/js/test-runners/runMathJsTests.js -m ${WILTON_DIR}/js -j rhino

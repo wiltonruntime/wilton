@@ -67,6 +67,7 @@ git submodule update --init deps/staticlib_tinydir || exit /b 1
 git submodule update --init deps/tinydir || exit /b 1
 git submodule update --init deps/staticlib_unzip || exit /b 1
 git submodule update --init deps/staticlib_utils || exit /b 1
+git submodule update --init deps/staticlib_websocket || exit /b 1
 git submodule update --init deps/staticlib_winservice || exit /b 1
 rem jni
 git submodule update --init jni || exit /b 1

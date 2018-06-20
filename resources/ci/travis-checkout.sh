@@ -75,6 +75,7 @@ git submodule update --init deps/staticlib_tinydir
 git submodule update --init deps/tinydir
 git submodule update --init deps/staticlib_unzip
 git submodule update --init deps/staticlib_utils
+git submodule update --init deps/staticlib_websocket
 # jni
 git submodule update --init jni
 # js
