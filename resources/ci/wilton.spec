@@ -83,6 +83,7 @@ git submodule update --init deps/lookaside_curl
 git submodule update --init deps/external_chakracore
 git submodule update --init deps/external_duktape
 git submodule update --init deps/external_hpdf
+git submodule update --init deps/external_icu
 git submodule update --init deps/lookaside_libharu
 git submodule update --init deps/external_mozjs
 git submodule update --init deps/external_v8

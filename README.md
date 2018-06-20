@@ -153,6 +153,15 @@ This project is released under the [Apache License 2.0](http://www.apache.org/li
 Changelog
 ---------
 
+**2018-06-20**
+
+ * `v201806201`
+ * support for `v8`, `chakracore` and `mozjs` engines (only on Linux-x86_64)
+ * WebSocket suport in `wilton/Server`
+ * `witon/kiosk` desktop WebViews
+ * Linux ARMv7 support
+ * a number of JS modules added
+
 **2018-04-08**
 
  * `v201804081`
