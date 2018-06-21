@@ -15,8 +15,6 @@
 # Fedora COPR spec file
 # https://copr.fedorainfracloud.org/coprs/wilton/wilton/
 
-%global wilton_version 201806201
-%global wilton_release v%{wilton_version}
 %if ! 0%{?epel}
 %global wilton_build_flavour fedora
 %else
@@ -25,7 +23,7 @@
 %global debug_package %{nil}
 
 Name:           wilton
-Version:        %{wilton_version}
+Version:        v201806201
 Release:        1%{?dist}
 Summary:        JavaScript runtime
 Group:          Development/Languages
@@ -72,7 +70,7 @@ BuildRequires:  libharu-devel
 Multi-threaded JavaScript runtime environment with batteries included
 
 %prep
-git clone --branch %{wilton_release} https://github.com/wilton-iot/wilton.git
+git clone --branch %{version} https://github.com/wilton-iot/wilton.git
 cd wilton
 # core
 git submodule update --init core
@@ -114,7 +112,7 @@ git submodule update --init deps/staticlib_utils
 git submodule update --init deps/staticlib_websocket
 # js
 rm -rf js
-git clone --branch %{wilton_release} https://github.com/wilton-iot/js-libs-ci-monorepo.git js
+git clone --branch %{version} https://github.com/wilton-iot/js-libs-ci-monorepo.git js
 # jni
 git submodule update --init jni
 # engines
@@ -156,7 +154,7 @@ git submodule update --init tools/mvnrepo
 cd wilton
 mkdir build
 cd build
-cmake .. -DWILTON_BUILD_FLAVOUR=%{wilton_build_flavour} -DWILTON_RELEASE=%{wilton_release}
+cmake .. -DWILTON_BUILD_FLAVOUR=%{wilton_build_flavour} -DWILTON_RELEASE=%{version}
 make dist
 
 %check

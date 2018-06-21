@@ -29,7 +29,7 @@ else ( )
     string ( TIMESTAMP WILTON_VERSION_DAY "%d" )
     set ( WILTON_VERSION_BUILD "0" CACHE STRING "" )
 endif ( )
-set ( WILTON_VERSION ${WILTON_VERSION_YEAR}${WILTON_VERSION_MONTH}${WILTON_VERSION_DAY}${WILTON_VERSION_BUILD} CACHE STRING "" )
+set ( WILTON_VERSION v${WILTON_VERSION_YEAR}${WILTON_VERSION_MONTH}${WILTON_VERSION_DAY}${WILTON_VERSION_BUILD} CACHE STRING "" )
 set ( WILTON_VERSION_WIN ${WILTON_VERSION_YEAR_SHORT}.${WILTON_VERSION_MONTH}.${WILTON_VERSION_DAY}.${WILTON_VERSION_BUILD} CACHE STRING "" )
 set ( WILTON_VERSION_EXE ${WILTON_VERSION_YEAR_SHORT},${WILTON_VERSION_MONTH},${WILTON_VERSION_DAY},${WILTON_VERSION_BUILD} CACHE STRING "" )
 
@@ -47,6 +47,7 @@ if ( NOT DEFINED STATICLIB_TOOLCHAIN )
             set ( STATICLIB_TOOLCHAIN "windows_i386_msvc" CACHE STRING "" )
             set ( WILTON_INSTALLER_WIN64 "false" CACHE STRING "" )
             set ( WILTON_MSVCR_ARCH "x86" CACHE STRING "" )
+            set ( WILTON_WIN_ARCH_POSTFIX "_x86" CACHE STRING "" )
             if ( NOT DEFINED WILTON_BUILD_FLAVOUR )
                 set ( WILTON_BUILD_FLAVOUR "sdk71" CACHE STRING "" )
             endif ( )
@@ -551,7 +552,7 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "(windows|linux|macosx)_.+" )
             COMMENT "Building wilton_rhino.jar ..." )
     add_custom_target ( wilton_rhino_jar_build DEPENDS ${WILTON_DIR}/jni/target/wilton-android.jar )
     
-    add_custom_command ( OUTPUT wilton_rhino.jar            
+    add_custom_command ( OUTPUT wilton_rhino.jar
             COMMAND ${CMAKE_COMMAND} -E copy
                     ${WILTON_DIR}/jni/target/wilton-android.jar
                     wilton_rhino.jar
@@ -947,20 +948,20 @@ if ( STATICLIB_TOOLCHAIN MATCHES "windows_.+" )
             ${CMAKE_CURRENT_BINARY_DIR}/installer.json )
 
     add_custom_target ( installer
-            COMMAND ${CMAKE_COMMAND} -E remove wilton_${WILTON_VERSION}.wxs
+            COMMAND ${CMAKE_COMMAND} -E remove wilton_${WILTON_VERSION}${WILTON_WIN_ARCH_POSTFIX}.wxs
             COMMAND java
                     -XX:+UseSerialGC -XX:+TieredCompilation -XX:TieredStopAtLevel=1
                     -jar ${WILTON_DIR}/tools/windows/wixgen/wixgen.jar
-                    wilton_${WILTON_VERSION}
+                    wilton_${WILTON_VERSION}${WILTON_WIN_ARCH_POSTFIX}
                     -c installer.json
-                    -o wilton_${WILTON_VERSION}.wxs
-            COMMAND ${WILTON_DIR}/tools/windows/wix/bin/candle -v -nologo wilton_${WILTON_VERSION}.wxs
+                    -o wilton_${WILTON_VERSION}${WILTON_WIN_ARCH_POSTFIX}.wxs
+            COMMAND ${WILTON_DIR}/tools/windows/wix/bin/candle -v -nologo wilton_${WILTON_VERSION}${WILTON_WIN_ARCH_POSTFIX}.wxs
             COMMAND ${WILTON_DIR}/tools/windows/wix/bin/light
                     -v -nologo -sw1076 -sval -ext WixUIExtension -ext WixUtilExtension
-                    wilton_${WILTON_VERSION}.wixobj
+                    wilton_${WILTON_VERSION}${WILTON_WIN_ARCH_POSTFIX}.wixobj
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
             DEPENDS dist
-            COMMENT "Creating MSI at [${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION}.msi] ..." )
+            COMMENT "Creating MSI at [${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION}${WILTON_WIN_ARCH_POSTFIX}.msi] ..." )
 
 elseif ( STATICLIB_TOOLCHAIN MATCHES "linux_.+" )
 

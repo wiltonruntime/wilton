@@ -27,3 +27,21 @@ install:
 build_script:
   - echo "PR support is enabled for root repo"
   - cmd /c resources\ci\appveyor.bat
+
+artifacts:
+  - path: wilton_$(appveyor_build_version).msi
+    name: wilton_$(appveyor_build_version).msi
+  - path: wilton_$(appveyor_build_version)_x86.msi
+    name: wilton_$(appveyor_build_version)_x86.msi
+
+deploy:
+  description: $(appveyor_build_version)
+  provider: GitHub
+  auth_token:
+    secure: VShPexae/Ct8Y4Rn0YvHmiX/Sih1Xs+qGHfU2JEmuAuXVb/KVsc8B72MlG7TCw0e
+  artifact: wilton_$(appveyor_build_version).msi,wilton_$(appveyor_build_version)_x86.msi
+  draft: false
+  prerelease: false
+  on:
+    branch: master
+    appveyor_repo_tag: true 
