@@ -952,7 +952,7 @@ if ( STATICLIB_TOOLCHAIN MATCHES "windows_.+" )
             COMMAND java
                     -XX:+UseSerialGC -XX:+TieredCompilation -XX:TieredStopAtLevel=1
                     -jar ${WILTON_DIR}/tools/windows/wixgen/wixgen.jar
-                    wilton_${WILTON_VERSION}${WILTON_WIN_ARCH_POSTFIX}
+                    wilton_${WILTON_VERSION}
                     -c installer.json
                     -o wilton_${WILTON_VERSION}${WILTON_WIN_ARCH_POSTFIX}.wxs
             COMMAND ${WILTON_DIR}/tools/windows/wix/bin/candle -v -nologo wilton_${WILTON_VERSION}${WILTON_WIN_ARCH_POSTFIX}.wxs

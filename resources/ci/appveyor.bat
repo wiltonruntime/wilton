@@ -33,6 +33,7 @@ if errorlevel 1 (
     echo error, target: installer
     exit /b 1
 )
+
 echo test_js
 rem for some reason chakra segfaults when run from msbuild
 rem cmake --build . --config Release --target test_js > test_js.log
@@ -86,7 +87,7 @@ rem cleanup
 popd || exit /b 1
 rem copy release
 mkdir releases || exit /b 1
-robocopy build releases wilton_%APPVEYOR_BUILD_VERSION%.msi /ndl /njh /njs /nc /ns /np || true
+robocopy build releases wilton_%APPVEYOR_REPO_TAG_NAME%.msi /ndl /njh /njs /nc /ns /np || true
 rd /s /q build
 
 rem build x86 - WinXP
@@ -99,6 +100,7 @@ if errorlevel 1 (
     echo msbuild error, target: installer
     exit /b 1
 )
+
 echo test_js
 cmake --build . --config Release --target test_js > test_js.log
 if errorlevel 1 (
@@ -108,4 +110,4 @@ if errorlevel 1 (
 
 popd || exit /b 1
 rem copy release
-robocopy build releases wilton_%APPVEYOR_BUILD_VERSION%_x86.msi /ndl /njh /njs /nc /ns /np || true
+robocopy build releases wilton_%APPVEYOR_REPO_TAG_NAME%_x86.msi /ndl /njh /njs /nc /ns /np || true

@@ -1,5 +1,5 @@
 {
-  "appName": "Wilton v${WILTON_VERSION}",
+  "appName": "Wilton ${WILTON_VERSION}",
   "versionMajor": "${WILTON_VERSION_YEAR_SHORT}",
   "versionMinor": "${WILTON_VERSION_MONTH}",
   "versionMicro": "${WILTON_VERSION_DAY}",

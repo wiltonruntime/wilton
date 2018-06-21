@@ -74,8 +74,8 @@ git submodule update --init jni || exit /b 1
 rem js
 rd /s /q js
 git clone https://github.com/wilton-iot/js-libs-ci-monorepo.git js || exit /b 1
-pushd js-libs-ci-monorepo || exit /b 1
-git checkout %APPVEYOR_BUILD_VERSION% || true
+pushd js || exit /b 1
+git checkout %APPVEYOR_REPO_TAG_NAME% || true
 popd || exit /b 1
 rem engines
 git submodule update --init engines/wilton_chakra || exit /b 1

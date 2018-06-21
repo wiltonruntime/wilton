@@ -29,17 +29,17 @@ build_script:
   - cmd /c resources\ci\appveyor.bat
 
 artifacts:
-  - path: wilton_$(appveyor_build_version).msi
-    name: wilton_$(appveyor_build_version).msi
-  - path: wilton_$(appveyor_build_version)_x86.msi
-    name: wilton_$(appveyor_build_version)_x86.msi
+  - path: releases\wilton_$(appveyor_repo_tag_name).msi
+    name: wilton_$(appveyor_repo_tag_name).msi
+  - path: releases\wilton_$(appveyor_repo_tag_name)_x86.msi
+    name: wilton_$(appveyor_repo_tag_name)_x86.msi
 
 deploy:
-  description: $(appveyor_build_version)
+  description: $(appveyor_repo_tag_name)
   provider: GitHub
   auth_token:
     secure: VShPexae/Ct8Y4Rn0YvHmiX/Sih1Xs+qGHfU2JEmuAuXVb/KVsc8B72MlG7TCw0e
-  artifact: wilton_$(appveyor_build_version).msi,wilton_$(appveyor_build_version)_x86.msi
+  artifact: wilton_$(appveyor_repo_tag_name).msi,wilton_$(appveyor_repo_tag_name)_x86.msi
   draft: false
   prerelease: false
   on:
