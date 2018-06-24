@@ -27,7 +27,11 @@ rem build x86_64
 set PATH=%WILTON_DIR%/tools/windows/jdk8_64/bin;%PATH%
 mkdir build || exit /b 1
 pushd build || exit /b 1
-cmake .. -G "Visual Studio 12 2013 Win64" || exit /b 1
+if [%APPVEYOR_REPO_TAG_NAME%] == [] (
+    cmake .. -G "Visual Studio 12 2013 Win64" -DWILTON_RELEASE=%APPVEYOR_REPO_TAG_NAME% || exit /b 1
+) else (
+    cmake .. -G "Visual Studio 12 2013 Win64" || exit /b 1
+)
 cmake --build . --config Release --target installer
 if errorlevel 1 (
     echo error, target: installer
@@ -94,7 +98,11 @@ rem build x86 - WinXP
 rem set PATH=%WILTON_DIR%/tools/windows/jdk8/bin;%PATH%
 mkdir build || exit /b 1
 pushd build || exit /b 1
-cmake .. -G "Visual Studio 12 2013" -T v120_xp || exit /b 1
+if [%APPVEYOR_REPO_TAG_NAME%] == [] (
+    cmake .. -G "Visual Studio 12 2013" -T v120_xp -DWILTON_RELEASE=%APPVEYOR_REPO_TAG_NAME% || exit /b 1
+) else (
+    cmake .. -G "Visual Studio 12 2013" -T v120_xp || exit /b 1
+)
 cmake --build . --config Release --target installer
 if errorlevel 1 (
     echo msbuild error, target: installer
