@@ -91,6 +91,10 @@ Build:
     cmake .. -DWILTON_BUILD_FLAVOUR=xenial
     make dist
 
+To build for ARMv7 (`armhf`) arch use the following `cmake` args:
+
+    cmake .. -DWILTON_BUILD_FLAVOUR=xenial -DSTATICLIB_TOOLCHAIN=linux_armhf_gcc 
+
 ### CentOS 7
 
 Enable [EPEL repository](https://fedoraproject.org/wiki/EPEL):
@@ -152,6 +156,12 @@ This project is released under the [Apache License 2.0](http://www.apache.org/li
 
 Changelog
 ---------
+
+**2018-06-24**
+
+ * `v201806241`
+ * WebSocket fix for Firefox
+ * Windows CI releases setup
 
 **2018-06-20**
 
