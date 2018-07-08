@@ -610,3 +610,6 @@
 [submodule "deps/staticlib_websocket"]
 	path = deps/staticlib_websocket
 	url = https://github.com/staticlibs/staticlib_websocket.git
+[submodule "modules/wilton_service"]
+	path = modules/wilton_service
+	url = https://github.com/wilton-iot/wilton_service.git

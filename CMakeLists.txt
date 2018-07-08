@@ -146,6 +146,7 @@ staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_loader )
 staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_mustache )
 staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_pdf )
 staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_server )
+staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_service )
 staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_net )
 staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_thread )
 if ( STATICLIB_TOOLCHAIN MATCHES "android_.+" )
@@ -244,6 +245,7 @@ add_custom_target ( nativelibs DEPENDS
         wilton_process
         wilton_serial
         wilton_server
+        wilton_service
         wilton_signal
         wilton_thread
         wilton_usb
@@ -367,6 +369,10 @@ add_custom_target ( debuginfo
         COMMAND ${CMAKE_COMMAND} -E copy
                 ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_server${STATICLIB_DEBUGINFO_SHARED_SUFFIX}
                 wilton_${WILTON_VERSION}_debuginfo/
+        # service
+        COMMAND ${CMAKE_COMMAND} -E copy
+                ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_service${STATICLIB_DEBUGINFO_SHARED_SUFFIX}
+                wilton_${WILTON_VERSION}_debuginfo/
         # thread
         COMMAND ${CMAKE_COMMAND} -E copy
                 ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_thread${STATICLIB_DEBUGINFO_SHARED_SUFFIX}
@@ -475,6 +481,10 @@ if ( STATICLIB_TOOLCHAIN MATCHES "android_.+" )
             COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_server.so lib/${${PROJECT_NAME}_ANDROID_ARCH}/
             COMMAND ${CMAKE_STRIP} lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_server.so
             COMMAND jar uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_server.so
+            # service
+            COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_service.so lib/${${PROJECT_NAME}_ANDROID_ARCH}/
+            COMMAND ${CMAKE_STRIP} lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_service.so
+            COMMAND jar uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_service.so
             # thread
             COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_thread.so lib/${${PROJECT_NAME}_ANDROID_ARCH}/
             COMMAND ${CMAKE_STRIP} lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_thread.so
@@ -699,6 +709,13 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "(windows|linux|macosx)_.+" )
             COMMAND ${CMAKE_COMMAND} -E copy
                     ${WILTON_DIR}/modules/wilton_server/include/wilton/wilton_server.h
                     wilton_${WILTON_VERSION}/devel/include/wilton/wilton_server.h
+            # service
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_service${CMAKE_SHARED_LIBRARY_SUFFIX}
+                    wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_service${CMAKE_SHARED_LIBRARY_SUFFIX}
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    ${WILTON_DIR}/modules/wilton_service/include/wilton/wilton_service.h
+                    wilton_${WILTON_VERSION}/devel/include/wilton/wilton_service.h
             # thread
             COMMAND ${CMAKE_COMMAND} -E copy
                     ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_thread${CMAKE_SHARED_LIBRARY_SUFFIX}
