@@ -98,6 +98,7 @@ git submodule update --init modules/wilton_pdf || exit /b 1
 git submodule update --init modules/wilton_process || exit /b 1
 git submodule update --init modules/wilton_serial || exit /b 1
 git submodule update --init modules/wilton_server || exit /b 1
+git submodule update --init modules/wilton_service || exit /b 1
 git submodule update --init modules/wilton_signal || exit /b 1
 git submodule update --init modules/wilton_thread || exit /b 1
 git submodule update --init modules/wilton_usb || exit /b 1

@@ -106,6 +106,7 @@ git submodule update --init modules/wilton_pdf
 git submodule update --init modules/wilton_process
 git submodule update --init modules/wilton_serial
 git submodule update --init modules/wilton_server
+git submodule update --init modules/wilton_service
 git submodule update --init modules/wilton_signal
 git submodule update --init modules/wilton_thread
 git submodule update --init modules/wilton_usb
