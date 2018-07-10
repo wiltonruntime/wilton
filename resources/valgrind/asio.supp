@@ -34,3 +34,12 @@
     fun:tls_get_addr_tail
     ...
 }
+{
+    asio_dtv_entry
+    Memcheck:Leak
+    fun:malloc
+    fun:allocate_dtv_entry
+    fun:allocate_and_init
+    fun:tls_get_addr_tail
+    ...
+}

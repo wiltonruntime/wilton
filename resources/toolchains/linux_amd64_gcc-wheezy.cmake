@@ -78,6 +78,8 @@ set ( CMAKE_EXE_LINKER_FLAGS_LIST
         -Wl,origin )
 string ( REPLACE ";" " " CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS_LIST}" )
 set ( CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS}" CACHE INTERNAL "" )
+# http://cmake.3232098.n2.nabble.com/CMAKE-EXE-LINKER-FLAGS-for-shared-libraries-td7087564.html
+set ( CMAKE_SHARED_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS}" CACHE INTERNAL "" )
 set ( CMAKE_SKIP_RPATH TRUE CACHE INTERNAL "" )
 
 # variables for packages that are present, but do not have pkg-config support

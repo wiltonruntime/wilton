@@ -115,6 +115,15 @@ elseif ( WILTON_BUILD_FLAVOUR MATCHES "xenial" )
             ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/pkgconfig/log4cplus.pc )
     configure_file ( ${WILTON_DIR}/resources/pkgconfig/soci.pc
             ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/pkgconfig/soci.pc )
+elseif ( WILTON_BUILD_FLAVOUR MATCHES "bionic" )
+    configure_file ( ${WILTON_DIR}/resources/pkgconfig/asio.pc
+            ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/pkgconfig/asio.pc )
+    configure_file ( ${WILTON_DIR}/resources/pkgconfig/log4cplus.pc
+            ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/pkgconfig/log4cplus.pc )
+    configure_file ( ${WILTON_DIR}/resources/pkgconfig/soci.pc
+            ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/pkgconfig/soci.pc )
+    configure_file ( ${WILTON_DIR}/resources/pkgconfig/hpdf.pc
+            ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/pkgconfig/hpdf.pc )
 elseif ( WILTON_BUILD_FLAVOUR MATCHES "el7" )
     configure_file ( ${WILTON_DIR}/resources/pkgconfig/asio.pc
             ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/pkgconfig/asio.pc )
@@ -842,7 +851,7 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "(windows|linux|macosx)_.+" )
 
     add_custom_target ( test_rhino
             COMMAND bin/wilton ${WILTON_DIR}/js/wilton/test/index.js -m ${WILTON_DIR}/js -j rhino
-            COMMAND bin/wilton ${WILTON_DIR}/js/test-runners/runNodeTests.js -m ${WILTON_DIR}/js -j rhino
+#            COMMAND bin/wilton ${WILTON_DIR}/js/test-runners/runNodeTests.js -m ${WILTON_DIR}/js -j rhino
             # requires rhino 1.7.7.2+
             # COMMAND bin/wilton ${WILTON_DIR}/js/test-runners/runMathJsTests.js -m ${WILTON_DIR}/js -j rhino
             COMMAND bin/wilton ${WILTON_DIR}/js/test-runners/runSanityTests.js -j rhino
@@ -853,8 +862,8 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "(windows|linux|macosx)_.+" )
 
     add_custom_target ( test_nashorn
             COMMAND bin/wilton ${WILTON_DIR}/js/wilton/test/index.js -m ${WILTON_DIR}/js -j nashorn
-            COMMAND bin/wilton ${WILTON_DIR}/js/test-runners/runNodeTests.js -m ${WILTON_DIR}/js -j nashorn
-            COMMAND bin/wilton ${WILTON_DIR}/js/test-runners/runMathJsTests.js -m ${WILTON_DIR}/js -j nashorn
+            #COMMAND bin/wilton ${WILTON_DIR}/js/test-runners/runNodeTests.js -m ${WILTON_DIR}/js -j nashorn
+            #COMMAND bin/wilton ${WILTON_DIR}/js/test-runners/runMathJsTests.js -m ${WILTON_DIR}/js -j nashorn
             COMMAND bin/wilton ${WILTON_DIR}/js/test-runners/runSanityTests.js -j nashorn
             COMMAND bin/wilton ${WILTON_DIR}/js/test-runners/runSanityTests.js -m std.min.wlib -j nashorn
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION} 

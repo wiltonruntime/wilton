@@ -1,4 +1,4 @@
-# Copyright 2017, alex at staticlibs.net
+# Copyright 2018, alex at staticlibs.net
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -43,7 +43,7 @@ set ( CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS_RELEASE}" CACHE INTERNAL "" )
 
 # CMAKE_CXX_FLAGS
 set ( CMAKE_CXX_FLAGS_LIST
-        --std=c++17
+        --std=c++14
         -fPIC
         -Wall
         -Werror
@@ -56,6 +56,9 @@ set ( CMAKE_CXX_FLAGS_LIST
         # duktape
         -Wno-implicit-fallthrough
         -Wno-format-truncation
+        # pion: todo: fixme
+        #-Wno-noexcept-type
+        #-Wno-nonnull-compare
         # tinydir
         -Wno-deprecated-declarations
         # gtk-3.0
@@ -92,8 +95,9 @@ set ( CMAKE_SHARED_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS}" CACHE INTERNAL "" )
 set ( CMAKE_SKIP_RPATH TRUE CACHE INTERNAL "" )
 
 # variables for packages that are present, but do not have pkg-config support
-set ( WILTON_PKGCONFIG_LIBDIR "-L/usr/lib64/" CACHE INTERNAL "" )
-set ( WILTON_PKGCONFIG_INCLUDEDIR "-I/usr/include/ -I/usr/include/soci/" CACHE INTERNAL "" )
-set ( hpdf_VERSION "2.3.0-3" CACHE INTERNAL "" )
-set ( soci_VERSION "3.2.3-14" CACHE INTERNAL "" )
-set ( asio_VERSION "1.10.8-6" CACHE INTERNAL "" )
+set ( WILTON_PKGCONFIG_LIBDIR "-L/usr/lib/x86_64-linux-gnu/" CACHE INTERNAL "" )
+set ( WILTON_PKGCONFIG_INCLUDEDIR "-I/usr/include/ -I/usr/include/soci/ -I/usr/include/postgresql/" CACHE INTERNAL "" )
+set ( log4cplus_VERSION "1.1.2-3.2" CACHE INTERNAL "" )
+set ( asio_VERSION "1.10.8-1" CACHE INTERNAL "" )
+set ( soci_VERSION "3.2.3-2" CACHE INTERNAL "" )
+set ( hpdf_VERSION "2.3.0-1" CACHE INTERNAL "" )
