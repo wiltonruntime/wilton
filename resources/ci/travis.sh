@@ -68,9 +68,8 @@ if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
     set -e
     cmake ..
     make
-    # todo: fixme, hangs on (or before) math.js for some reason
-    # make test_js > test_js.log
-    make dist_unversioned
-    ./wilton_dist/bin/wilton -m ../js ../js/wilton/test/index.js -j jsc
+    make test_js > test_js.log
+    #make dist_unversioned
+    #./wilton_dist/bin/wilton -m ../js ../js/wilton/test/index.js -j jsc
     make test_duktape > test_duktape.log
 fi
