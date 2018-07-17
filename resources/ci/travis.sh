@@ -68,8 +68,9 @@ if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
     set -e
     cmake ..
     make
-    make test_js > test_js.log
-    #make dist_unversioned
-    #./wilton_dist/bin/wilton -m ../js ../js/wilton/test/index.js -j jsc
+    # hangs on ci
+    #make test_js > test_js.log
+    make dist_unversioned
+    ./wilton_dist/bin/wilton -m ../js ../js/wilton/test/index.js -j jsc
     make test_duktape > test_duktape.log
 fi
