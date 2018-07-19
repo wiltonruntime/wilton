@@ -23,7 +23,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">wilton.js
-   &#160;<span id="projectnumber">v201806241</span>
+   &#160;<span id="projectnumber">v201807191</span>
    </div>
   </td>
  </tr>
@@ -92,6 +92,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2><a name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:ae9308a3af5d39d2db7f587e8f744acf9"><td class="memItemLeft" align="right" valign="top">Boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemisc.html#ae9308a3af5d39d2db7f587e8f744acf9">isAndroid</a> (Function|Undefined callback)</td></tr>
+<tr class="memdesc:ae9308a3af5d39d2db7f587e8f744acf9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check whether current Wilton binary was compiled for Android.  <a href="#ae9308a3af5d39d2db7f587e8f744acf9"></a><br/></td></tr>
+<tr class="memitem:a9b38ce365b07cb3a1a1f163abcff5774"><td class="memItemLeft" align="right" valign="top">Boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemisc.html#a9b38ce365b07cb3a1a1f163abcff5774">isLinux</a> (Function|Undefined callback)</td></tr>
+<tr class="memdesc:a9b38ce365b07cb3a1a1f163abcff5774"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check whether current Wilton binary was compiled for Linux.  <a href="#a9b38ce365b07cb3a1a1f163abcff5774"></a><br/></td></tr>
+<tr class="memitem:a96acd7b05c62cda35a1f543be7b56554"><td class="memItemLeft" align="right" valign="top">Boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemisc.html#a96acd7b05c62cda35a1f543be7b56554">isMac</a> (Function|Undefined callback)</td></tr>
+<tr class="memdesc:a96acd7b05c62cda35a1f543be7b56554"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check whether current Wilton binary was compiled for macOS.  <a href="#a96acd7b05c62cda35a1f543be7b56554"></a><br/></td></tr>
+<tr class="memitem:a416cb8ec09aa7e6275be50a7ba3f46cd"><td class="memItemLeft" align="right" valign="top">Boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemisc.html#a416cb8ec09aa7e6275be50a7ba3f46cd">isWindows</a> (Function|Undefined callback)</td></tr>
+<tr class="memdesc:a416cb8ec09aa7e6275be50a7ba3f46cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check whether current Wilton binary was compiled for Windows.  <a href="#a416cb8ec09aa7e6275be50a7ba3f46cd"></a><br/></td></tr>
 <tr class="memitem:a0a08513f1948887e4a7a57348604f559"><td class="memItemLeft" align="right" valign="top">Undefined&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemisc.html#a0a08513f1948887e4a7a57348604f559">runGC</a> (Function|Undefined callback)</td></tr>
 <tr class="memdesc:a0a08513f1948887e4a7a57348604f559"><td class="mdescLeft">&#160;</td><td class="mdescRight">Run a garbage collector.  <a href="#a0a08513f1948887e4a7a57348604f559"></a><br/></td></tr>
 <tr class="memitem:a39e77b40bdeda050c4ae1495d7a52c4d"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemisc.html#a39e77b40bdeda050c4ae1495d7a52c4d">stdinReadline</a> (Function|Undefined callback)</td></tr>
@@ -104,6 +112,102 @@ Functions</h2></td></tr>
 <a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>This module provides miscelanous functionality that doesn't belong to separate modules. </p>
 </div><h2>Function Documentation</h2>
+<a class="anchor" id="ae9308a3af5d39d2db7f587e8f744acf9"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Boolean misc::isAndroid </td>
+          <td>(</td>
+          <td class="paramtype">Function|Undefined&#160;</td>
+          <td class="paramname"><em>callback</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Checks that <code>compileTimeOS</code> parameter of <code>wiltonConfig</code> is "android".</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">callback</td><td><code>Function|Undefined</code> callback to receive result or error </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><code>Boolean</code> <code>true</code> if current Wilton binary was compiled for Android, false otherwise </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a9b38ce365b07cb3a1a1f163abcff5774"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Boolean misc::isLinux </td>
+          <td>(</td>
+          <td class="paramtype">Function|Undefined&#160;</td>
+          <td class="paramname"><em>callback</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Checks that <code>compileTimeOS</code> parameter of <code>wiltonConfig</code> is "linux".</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">callback</td><td><code>Function|Undefined</code> callback to receive result or error </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><code>Boolean</code> <code>true</code> if current Wilton binary was compiled for Linux, false otherwise </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a96acd7b05c62cda35a1f543be7b56554"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Boolean misc::isMac </td>
+          <td>(</td>
+          <td class="paramtype">Function|Undefined&#160;</td>
+          <td class="paramname"><em>callback</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Checks that <code>compileTimeOS</code> parameter of <code>wiltonConfig</code> is "macos".</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">callback</td><td><code>Function|Undefined</code> callback to receive result or error </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><code>Boolean</code> <code>true</code> if current Wilton binary was compiled for macOS, false otherwise </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a416cb8ec09aa7e6275be50a7ba3f46cd"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Boolean misc::isWindows </td>
+          <td>(</td>
+          <td class="paramtype">Function|Undefined&#160;</td>
+          <td class="paramname"><em>callback</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Checks that <code>compileTimeOS</code> parameter of <code>wiltonConfig</code> is "windows".</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">callback</td><td><code>Function|Undefined</code> callback to receive result or error </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><code>Boolean</code> <code>true</code> if current Wilton binary was compiled for Windows, false otherwise </dd></dl>
+
+</div>
+</div>
 <a class="anchor" id="a0a08513f1948887e4a7a57348604f559"></a>
 <div class="memitem">
 <div class="memproto">
@@ -206,7 +310,7 @@ Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Jun 24 2018 20:58:48 for wilton.js by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Jul 19 2018 09:11:05 for wilton.js by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>
