@@ -77,11 +77,11 @@ Build:
     cmake .. -DWILTON_BUILD_FLAVOUR=fedora
     make dist
 
-### Ubuntu 16.04
+### Ubuntu 16.04 (also works for Debian Stretch)
 
 Install dependencies:
 
-    sudo apt install build-essential cmake pkg-config zip openjdk-8-jdk zlib1g-dev libjansson-dev liblog4cplus-dev libssl-dev libcurl4-openssl-dev libasio-dev libpopt-dev libsqlite3-dev libpq-dev libsoci-dev libpng12-dev libusb-1.0-0-dev libudev-dev libglib2.0-dev libjavascriptcoregtk-4.0-dev libgtk-3-dev libwebkit2gtk-4.0-dev
+    sudo apt install build-essential cmake pkg-config zip openjdk-8-jdk zlib1g-dev libjansson-dev liblog4cplus-dev libssl-dev libcurl4-openssl-dev libasio-dev libpopt-dev libsqlite3-dev libpq-dev libsoci-dev libpng-dev libusb-1.0-0-dev libudev-dev libglib2.0-dev libjavascriptcoregtk-4.0-dev libgtk-3-dev libwebkit2gtk-4.0-dev
 
 Build:
 
@@ -91,9 +91,13 @@ Build:
     cmake .. -DWILTON_BUILD_FLAVOUR=xenial
     make dist
 
-To build for ARMv7 (`armhf`) arch use the following `cmake` args:
+To build for ARMv7 (`armhf`) 32-bit arch use the following `cmake` args:
 
     cmake .. -DWILTON_BUILD_FLAVOUR=xenial -DSTATICLIB_TOOLCHAIN=linux_armhf_gcc 
+
+To build for ARMv8 (`aarch64`) 64-bit arch use the following `cmake` args:
+
+    cmake .. -DWILTON_BUILD_FLAVOUR=xenial -DSTATICLIB_TOOLCHAIN=linux_aarch64_gcc 
 
 ### Ubuntu 18.04
 
