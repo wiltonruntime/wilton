@@ -175,6 +175,20 @@ This project is released under the [Apache License 2.0](http://www.apache.org/li
 Changelog
 ---------
 
+**2018-09-06**
+
+ * `v201809061`
+ * dedicated PostgreSQL connection API
+ * sqlite crash fix and other DB fixes
+ * Debian Stretch AArch64 support
+
+**2018-07-19**
+
+ * `v201807191`
+ * serviceability JS API
+ * USB connect fix on Windows
+ * Ubuntu 18.04 support
+
 **2018-06-24**
 
  * `v201806241`
