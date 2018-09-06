@@ -7,7 +7,7 @@ var searchData=
   ['loadfont',['loadFont',['../namespacePDFDocument.html#a58f5bb6e5588bd455c7cfe20db355f09',1,'PDFDocument']]],
   ['loadmodulejson',['loadModuleJson',['../namespaceloader.html#ae8ca04831c4de603c6abe7c4ab059e71',1,'loader']]],
   ['loadmoduleresource',['loadModuleResource',['../namespaceloader.html#ac3c61aedef71ee801035eef8d43e40a6',1,'loader']]],
-  ['loadqueryfile',['loadQueryFile',['../namespaceDBConnection.html#ae8a22431181a6aa1965f13f9ada0aaa5',1,'DBConnection']]],
+  ['loadqueryfile',['loadQueryFile',['../namespaceDBConnection.html#a7f11ca91b893d06b3894e05b9c7539ce',1,'DBConnection']]],
   ['localecomparator',['localeComparator',['../namespaceutils.html#a5dc98f63e16fd34d9374f8b6accfb656',1,'utils']]],
   ['log',['log',['../namespaceLogger.html#a8ce5e4ce702911d4d66dcec8d64e3c02',1,'Logger']]],
   ['logger',['Logger',['../namespaceLogger.html',1,'Logger'],['../namespaceLogger.html#ae0d2e31ddd21695a14497123422d0a58',1,'Logger::Logger()']]],

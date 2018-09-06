@@ -23,7 +23,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">wilton.js
-   &#160;<span id="projectnumber">v201807191</span>
+   &#160;<span id="projectnumber">v201809061</span>
    </div>
   </td>
  </tr>
@@ -116,6 +116,8 @@ Functions</h2></td></tr>
 <tr class="memdesc:a1fda3bed71a4ebad582773d8f9c0830f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delete directory.  <a href="#a1fda3bed71a4ebad582773d8f9c0830f"></a><br/></td></tr>
 <tr class="memitem:abddacd3199c05eaf7e27a2dadc5892d5"><td class="memItemLeft" align="right" valign="top">Object&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacefs.html#abddacd3199c05eaf7e27a2dadc5892d5">stat</a> (String path, Function|Undefined callback)</td></tr>
 <tr class="memdesc:abddacd3199c05eaf7e27a2dadc5892d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read file or directory status.  <a href="#abddacd3199c05eaf7e27a2dadc5892d5"></a><br/></td></tr>
+<tr class="memitem:a74187d7c1fde6f3290dc17cf86467ddf"><td class="memItemLeft" align="right" valign="top">Undefined&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacefs.html#a74187d7c1fde6f3290dc17cf86467ddf">symlink</a> (String dest, String link, Function|Undefined callback)</td></tr>
+<tr class="memdesc:a74187d7c1fde6f3290dc17cf86467ddf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a symbolic link.  <a href="#a74187d7c1fde6f3290dc17cf86467ddf"></a><br/></td></tr>
 <tr class="memitem:a2bfb8be5b1936b9a3991921e2ed6e9b1"><td class="memItemLeft" align="right" valign="top">Undefined&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacefs.html#a2bfb8be5b1936b9a3991921e2ed6e9b1">unlink</a> (String path, Function|Undefined callback)</td></tr>
 <tr class="memdesc:a2bfb8be5b1936b9a3991921e2ed6e9b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delete file.  <a href="#a2bfb8be5b1936b9a3991921e2ed6e9b1"></a><br/></td></tr>
 <tr class="memitem:a69b49e867d31350aa03b9ee3d75f67e9"><td class="memItemLeft" align="right" valign="top">Undefined&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacefs.html#a69b49e867d31350aa03b9ee3d75f67e9">writeFile</a> (String path, String|Array data, Object|Undefined options, Function|Undefined callback)</td></tr>
@@ -637,6 +639,48 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a74187d7c1fde6f3290dc17cf86467ddf"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Undefined fs::symlink </td>
+          <td>(</td>
+          <td class="paramtype">String&#160;</td>
+          <td class="paramname"><em>dest</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">String&#160;</td>
+          <td class="paramname"><em>link</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Function|Undefined&#160;</td>
+          <td class="paramname"><em>callback</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Creates a symbolic link to file or directory.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">dest</td><td><code>String</code> destination path </td></tr>
+    <tr><td class="paramname">link</td><td><code>String</code> path to link to create </td></tr>
+    <tr><td class="paramname">callback</td><td><code>Function|Undefined</code> callback to receive result or error </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><code>Undefined</code> </dd></dl>
+
+</div>
+</div>
 <a class="anchor" id="a2bfb8be5b1936b9a3991921e2ed6e9b1"></a>
 <div class="memitem">
 <div class="memproto">
@@ -729,7 +773,7 @@ Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jul 19 2018 09:11:05 for wilton.js by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Sep 6 2018 15:24:41 for wilton.js by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>

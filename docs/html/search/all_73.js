@@ -22,5 +22,6 @@ var searchData=
   ['stat',['stat',['../namespacefs.html#abddacd3199c05eaf7e27a2dadc5892d5',1,'fs']]],
   ['stdinreadline',['stdinReadline',['../namespacemisc.html#a39e77b40bdeda050c4ae1495d7a52c4d',1,'misc']]],
   ['stop',['stop',['../namespaceCronTask.html#a1001f0b8d854d68f0cd6f6b1870f847c',1,'CronTask::stop()'],['../namespaceServer.html#a7e5acc0cd99523bb3460f71260a56b13',1,'Server::stop()']]],
+  ['symlink',['symlink',['../namespacefs.html#a74187d7c1fde6f3290dc17cf86467ddf',1,'fs']]],
   ['synchronize',['synchronize',['../namespaceChannel.html#aeb092b42096f8dc47eb2af240adcccb4',1,'Channel']]]
 ];
