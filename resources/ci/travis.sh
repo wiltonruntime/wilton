@@ -20,11 +20,10 @@ set -x
 if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
 
     # tools
-    git submodule update --init tools/gradle
     git submodule update --init tools/maven
-    git submodule update --init tools/linux/jdk8
-    git submodule update --init tools/android/android-ndk-r9d-arm-linux-androideabi-4.8
-    git submodule update --init tools/android/sdk
+    mkdir tools/linux
+    git clone https://github.com/wilton-iot/tools_linux_jdk8.git tools/linux/jdk8
+    git clone --recursive https://github.com/wilton-iot/android-tools-ci-repo.git tools/android
 
     # env
     export PATH=`pwd`/tools/linux/jdk8/bin:$PATH
@@ -53,7 +52,7 @@ if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
     mv build build-linux
     mkdir build
     pushd build
-    cmake .. -DSTATICLIB_TOOLCHAIN=android_armeabi_gcc -DANDROID_SDK_ENABLE_LIBC_PRELOAD=OFF
+    cmake .. -DSTATICLIB_TOOLCHAIN=android_armeabi_gcc
     cp ../build-linux/std.wlib .
     make
     make android_jar > android_jar.log

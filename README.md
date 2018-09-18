@@ -25,13 +25,21 @@ See platform-specific instructions below.
 
 ### Android
 
-Run on Linux `x86_64`:
+On Linux `x86_64`, get and setup [Java 8](https://github.com/ojdkbuild/contrib_jdk8u-ci/releases):
+
+    export JAVA_HOME=path/to/jdk
+    export PATH=$PATH:$JAVA_HOME/bin
+
+Get Android tools:
+
+    git clone --recursive https://github.com/wilton-iot/android-tools-ci-repo.git wilton/tools/android
+
+Build:
 
     cd wilton
-    . resources/scripts/env-linux.sh
     mkdir build
     cd build
-    cmake .. -DSTATICLIB_TOOLCHAIN=android_armeabi_gcc -DANDROID_SDK_ENABLE_LIBC_PRELOAD=OFF
+    cmake .. -DSTATICLIB_TOOLCHAIN=android_armeabi_gcc
     make android_apk
 
 Resulting APK can be tested in VirtualBox using [Android x86](http://www.android-x86.org/) image with [native bridge](https://stackoverflow.com/a/13005569/314015) enabled.
@@ -137,10 +145,19 @@ Install dependencies:
 
     sudo apt-get install build-essential pkg-config zip zlib1g-dev libjansson-dev liblog4cplus-dev libssl-dev libcurl4-openssl-dev libpopt-dev libsqlite3-dev libpq-dev libpng12-dev libusb-1.0-0-dev libudev-dev libglib2.0-dev libjavascriptcoregtk-3.0-dev libgtk-3-dev libwebkitgtk-3.0-dev
 
+Get and setup [Java 8](https://github.com/ojdkbuild/contrib_jdk8u-ci/releases):
+
+    export JAVA_HOME=path/to/jdk
+    export PATH=$PATH:$JAVA_HOME/bin
+
+Get and setup CMake:
+
+    git clone https://github.com/wilton-iot/tools_linux_cmake.git cmake
+    export PATH=$PATH:path/to/cmake/bin
+
 Build:
 
     cd wilton
-    . resources/scripts/env-linux.sh
     mkdir build
     cd build
     cmake .. -DWILTON_BUILD_FLAVOUR=wheezy

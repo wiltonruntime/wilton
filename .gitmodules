@@ -238,12 +238,6 @@
 [submodule "tools/maven"]
 	path = tools/maven
 	url = https://github.com/wilton-iot/tools_maven.git
-[submodule "tools/linux/cmake"]
-	path = tools/linux/cmake
-	url = https://github.com/wilton-iot/tools_linux_cmake.git
-[submodule "tools/linux/jdk8"]
-	path = tools/linux/jdk8
-	url = https://github.com/wilton-iot/tools_linux_jdk8.git
 [submodule "modules/wilton_serial"]
 	path = modules/wilton_serial
 	url = https://github.com/wilton-iot/wilton_serial.git
@@ -292,21 +286,9 @@
 [submodule "modules/wilton_loader"]
 	path = modules/wilton_loader
 	url = https://github.com/wilton-iot/wilton_loader.git
-[submodule "tools/android/android-ndk-r9d-arm-linux-androideabi-4.8"]
-	path = tools/android/android-ndk-r9d-arm-linux-androideabi-4.8
-	url = https://github.com/staticlibs/android-ndk-r9d-arm-linux-androideabi-4.8.git
 [submodule "android"]
 	path = android
 	url = https://github.com/wilton-iot/wilton_android.git
-[submodule "tools/android/libc6_2.15"]
-	path = tools/android/libc6_2.15
-	url = https://github.com/wilton-iot/tools_android_libc6_2.15.git
-[submodule "tools/gradle"]
-	path = tools/gradle
-	url = https://github.com/wilton-iot/tools_gradle.git
-[submodule "tools/android/sdk"]
-	path = tools/android/sdk
-	url = https://github.com/wilton-iot/tools_android_sdk.git
 [submodule "js/filesize"]
 	path = js/filesize
 	url = https://github.com/wilton-iot/filesize.js.git

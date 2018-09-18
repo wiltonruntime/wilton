@@ -65,7 +65,7 @@ if ( NOT DEFINED STATICLIB_TOOLCHAIN )
     endif ( )
 endif ( )
 if ( STATICLIB_TOOLCHAIN MATCHES "android_.+" )
-    option ( ANDROID_SDK_ENABLE_LIBC_PRELOAD "Use libc_2.15 in LD_LIBRARY_PATH for running Android SDK" ON )
+    option ( ANDROID_SDK_ENABLE_LIBC_PRELOAD "Use libc_2.15 in LD_LIBRARY_PATH for running Android SDK" OFF )
     if ( NOT DEFINED WILTON_BUILD_FLAVOUR )
         set ( WILTON_BUILD_FLAVOUR "r9d" CACHE STRING "" )
     endif ( )
@@ -530,7 +530,7 @@ if ( STATICLIB_TOOLCHAIN MATCHES "android_.+" )
             COMMAND cd ${WILTON_DIR}/android &&
                     ${${PROJECT_NAME}_LIBC_PRELOAD_CMD}
                     ANDROID_HOME=${WILTON_DIR}/tools/android/sdk
-                    ${WILTON_DIR}/tools/gradle/bin/gradle
+                    ${WILTON_DIR}/tools/android/gradle/bin/gradle
                     -Dorg.gradle.java.home=${WILTON_DIR}/tools/linux/jdk8
                     -Dorg.gradle.jvmargs=${${PROJECT_NAME}_GRADLE_JVM_ARGS}
                     -Dorg.gradle.parallel=false
