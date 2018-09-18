@@ -21,14 +21,14 @@ if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
 
     # tools
     git submodule update --init tools/maven
-    mkdir tools/linux
-    git clone https://github.com/wilton-iot/tools_linux_jdk8.git tools/linux/jdk8
-    git clone --recursive https://github.com/wilton-iot/android-tools-ci-repo.git tools/android
+    git clone https://github.com/wilton-iot/tools_linux_jdk8.git ../jdk8
+    git clone --recursive https://github.com/wilton-iot/android-tools-ci-repo.git ../android-tools
 
     # env
-    export PATH=`pwd`/tools/linux/jdk8/bin:$PATH
-    export JAVA_HOME=`pwd`/tools/linux/jdk8
+    export JAVA_HOME=`pwd`/../jdk8
+    export PATH=${JAVA_HOME}/bin:$PATH
     export M2_HOME=`pwd`/tools/maven
+    export WILTON_ANDROID_TOOLS=`pwd`/../android-tools
 
     # build linux
     mkdir build

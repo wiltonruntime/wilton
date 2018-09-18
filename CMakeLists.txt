@@ -404,7 +404,7 @@ if ( STATICLIB_TOOLCHAIN MATCHES "android_.+" )
     endif ( )
 
     if ( ANDROID_SDK_ENABLE_LIBC_PRELOAD )
-        set ( ${PROJECT_NAME}_LIBC_PRELOAD_CMD LD_LIBRARY_PATH=${WILTON_DIR}/tools/android/libc6_2.15/lib/x86_64-linux-gnu/ CACHE INTERNAL "" )
+        set ( ${PROJECT_NAME}_LIBC_PRELOAD_CMD LD_LIBRARY_PATH=$ENV{WILTON_ANDROID_TOOLS}/libc6_2.15/lib/x86_64-linux-gnu/ CACHE INTERNAL "" )
 
     endif ( )
 
@@ -529,9 +529,9 @@ if ( STATICLIB_TOOLCHAIN MATCHES "android_.+" )
                     ${WILTON_DIR}/android/app/src/main/assets/wilton.android/wilton.version
             COMMAND cd ${WILTON_DIR}/android &&
                     ${${PROJECT_NAME}_LIBC_PRELOAD_CMD}
-                    ANDROID_HOME=${WILTON_DIR}/tools/android/sdk
-                    ${WILTON_DIR}/tools/android/gradle/bin/gradle
-                    -Dorg.gradle.java.home=${WILTON_DIR}/tools/linux/jdk8
+                    ANDROID_HOME=$ENV{WILTON_ANDROID_TOOLS}/sdk
+                    $ENV{WILTON_ANDROID_TOOLS}/gradle/bin/gradle
+                    -Dorg.gradle.java.home=$ENV{JAVA_HOME}
                     -Dorg.gradle.jvmargs=${${PROJECT_NAME}_GRADLE_JVM_ARGS}
                     -Dorg.gradle.parallel=false
                     -Dorg.gradle.daemon=false
@@ -964,7 +964,7 @@ if ( STATICLIB_TOOLCHAIN MATCHES "windows_.+" )
     add_custom_target ( dist_windows_jre
             COMMAND if exist jre rd /s /q jre
             COMMAND ${CMAKE_COMMAND} -E copy_directory
-                    ${WILTON_DIR}/tools/windows/jdk8_64/jre
+                    $ENV{JAVA_HOME}/jre
                     jre
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION}
             DEPENDS dist )
@@ -1110,7 +1110,7 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "linux_.+" )
 
     add_custom_target ( dist_linux_jre
             COMMAND rm -f jre
-            COMMAND ln -s ${WILTON_DIR}/tools/linux/jdk8/jre
+            COMMAND ln -s $ENV{JAVA_HOME}/jre
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION}
             DEPENDS dist )
 

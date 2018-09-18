@@ -30,9 +30,10 @@ On Linux `x86_64`, get and setup [Java 8](https://github.com/ojdkbuild/contrib_j
     export JAVA_HOME=path/to/jdk
     export PATH=$PATH:$JAVA_HOME/bin
 
-Get Android tools:
+Get and setup Android tools:
 
-    git clone --recursive https://github.com/wilton-iot/android-tools-ci-repo.git wilton/tools/android
+    git clone --recursive https://github.com/wilton-iot/android-tools-ci-repo.git andoid-tools
+    export WILTON_ANDROID_TOOLS=path/to/android-tools
 
 Build:
 
