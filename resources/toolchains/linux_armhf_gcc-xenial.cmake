@@ -17,8 +17,9 @@ cmake_minimum_required ( VERSION 2.8.12 )
 set ( CMAKE_BUILD_TYPE "Release" CACHE STRING "Default build type" )
 
 set ( CMAKE_SYSTEM_NAME Linux )
-set ( CMAKE_C_COMPILER gcc )
-set ( CMAKE_CXX_COMPILER g++ )
+set ( CMAKE_C_COMPILER arm-linux-gnueabihf-gcc )
+set ( CMAKE_CXX_COMPILER arm-linux-gnueabihf-g++ )
+set ( PKG_CONFIG_EXECUTABLE arm-linux-gnueabihf-pkg-config CACHE INTERNAL "" )
 
 # CMAKE_C_FLAGS
 set ( CMAKE_C_FLAGS_LIST

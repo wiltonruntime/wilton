@@ -17,8 +17,9 @@ cmake_minimum_required ( VERSION 2.8.12 )
 set ( CMAKE_BUILD_TYPE "Release" CACHE STRING "Default build type" )
 
 set ( CMAKE_SYSTEM_NAME Linux )
-set ( CMAKE_C_COMPILER gcc )
-set ( CMAKE_CXX_COMPILER g++ )
+set ( CMAKE_C_COMPILER aarch64-linux-gnu-gcc )
+set ( CMAKE_CXX_COMPILER aarch64-linux-gnu-g++ )
+set ( PKG_CONFIG_EXECUTABLE aarch64-linux-gnu-pkg-config CACHE INTERNAL "" )
 
 # CMAKE_C_FLAGS
 set ( CMAKE_C_FLAGS_LIST
@@ -86,7 +87,7 @@ set ( CMAKE_SHARED_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS}" CACHE INTERNAL "" )
 set ( CMAKE_SKIP_RPATH TRUE CACHE INTERNAL "" )
 
 # variables for packages that are present, but do not have pkg-config support
-set ( WILTON_PKGCONFIG_LIBDIR "-L/usr/lib/arm-linux-gnueabihf/" CACHE INTERNAL "" )
+set ( WILTON_PKGCONFIG_LIBDIR "-L/usr/lib/aarch64-linux-gnu/" CACHE INTERNAL "" )
 set ( WILTON_PKGCONFIG_INCLUDEDIR "-I/usr/include/ -I/usr/include/soci/ -I/usr/include/postgresql/" CACHE INTERNAL "" )
 set ( log4cplus_VERSION "1.1.2-3" CACHE INTERNAL "" )
 set ( asio_VERSION "1.10.6-3" CACHE INTERNAL "" )
