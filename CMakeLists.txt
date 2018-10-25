@@ -567,7 +567,7 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "(windows|linux|macosx)_.+" )
     add_dependencies ( debuginfo debuginfo_launcher )
 
     add_custom_command ( OUTPUT ${WILTON_DIR}/jni/target/wilton-android.jar
-            COMMAND ${WILTON_DIR}/tools/maven/bin/mvn clean package -Dmaven.test.skip=true
+            COMMAND ${WILTON_DIR}/tools/maven/bin/mvn --batch-mode clean package -Dmaven.test.skip=true
             WORKING_DIRECTORY ${WILTON_DIR}/jni
             COMMENT "Building wilton_rhino.jar ..." )
     add_custom_target ( wilton_rhino_jar_build DEPENDS ${WILTON_DIR}/jni/target/wilton-android.jar )

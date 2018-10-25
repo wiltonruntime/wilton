@@ -19,17 +19,17 @@ task:
     container:
       image: wiltoniot/xenial-armhf
       cpu: 1
-      memory: 1
+      memory: 1G
 
     container:
       image: wiltoniot/stretch-aarch64
       cpu: 1
-      memory: 1
+      memory: 1G
 
     container:
       image: wiltoniot/bionic-amd64
       cpu: 1
-      memory: 1
+      memory: 1G
 
   environment:
     GITHUB_TOKEN: ENCRYPTED[fc2d92a8d5aa1d071f90e478de68cf4329d352a41e634736daff116c6362379e362b77e254c8a0fb4fe3a9b755bdc1c8]

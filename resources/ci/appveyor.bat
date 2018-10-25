@@ -68,11 +68,6 @@ if errorlevel 1 (
 echo duktape
 wilton_dist\bin\wilton.exe ../js/wilton/test/index.js -m ../js  -j duktape || exit /b 1
 wilton_dist\bin\wilton.exe ../js/test-runners/runSanityTests.js -m wilton_dist/std.min.wlib -j duktape || exit /b 1
-cmake --build . --config Release --target test_duktape > test_duktape.log
-if errorlevel 1 (
-    echo error, target: test_duktape
-    exit /b 1
-)
 
 echo jvm
 pushd "../jni" || exit /b 1
