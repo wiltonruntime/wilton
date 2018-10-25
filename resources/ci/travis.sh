@@ -17,12 +17,11 @@
 set -e
 set -x
 
-if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
+if [ "xlinux" = "x${TRAVIS_OS_NAME}" ] ; then
 
     # tools
-    git submodule update --init tools/maven
-    git clone https://github.com/wilton-iot/tools_linux_jdk8.git ../jdk8
-    git clone --recursive https://github.com/wilton-iot/android-tools-ci-repo.git ../android-tools
+    git clone --quiet https://github.com/wilton-iot/tools_linux_jdk8.git ../jdk8
+    git clone --quiet --recursive https://github.com/wilton-iot/android-tools-ci-repo.git ../android-tools
 
     # env
     export JAVA_HOME=`pwd`/../jdk8
@@ -30,46 +29,41 @@ if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
     export M2_HOME=`pwd`/tools/maven
     export WILTON_ANDROID_TOOLS=`pwd`/../android-tools
 
-    # build linux
+    # android
     mkdir build
     pushd build
-    cmake .. -DWILTON_BUILD_FLAVOUR=wheezy
-    make
-    # JSC is broken subtly on u1404
-    # make test_js > test_js.log
-    make test_duktape > test_duktape.log
-    make test_chakracore > test_chakracore.log
-    make test_mozjs > test_mozjs.log
-    make test_v8 > test_v8.log
-    make test_jvm > test_jvm.log
-    make dist_linux_jre
-    make test_rhino > test_rhino.log
-    make test_nashorn > test_nashorn.log
-    make valgrind
-    popd
-
-    # build android
-    mv build build-linux
-    mkdir build
-    pushd build
-    cmake .. -DSTATICLIB_TOOLCHAIN=android_armeabi_gcc
-    cp ../build-linux/std.wlib .
-    make
-    make android_jar > android_jar.log
-    make android_apk
+    if [ "x" = "x${TRAVIS_TAG}" ] ;  then
+        cmake .. -DSTATICLIB_TOOLCHAIN=android_armeabi_gcc
+    else
+        cmake .. -DSTATICLIB_TOOLCHAIN=android_armeabi_gcc -DWILTON_RELEASE=${TRAVIS_TAG}
+    fi
+    make -j 2
+    make android_apk > apk.log
 fi
 
-if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
+if [ "xosx" = "x${TRAVIS_OS_NAME}"  ] ; then
     set +e
-    mkdir /Users/travis/build/staticlibs
     mkdir build
     pushd build
     set -e
-    cmake ..
-    make
-    # hangs on ci
-    #make test_js > test_js.log
-    make dist_unversioned
-    ./wilton_dist/bin/wilton -m ../js ../js/wilton/test/index.js -j jsc
-    make test_duktape > test_duktape.log
+    if [ "x" = "x${TRAVIS_TAG}" ] ;  then
+        cmake ..
+    else
+        cmake .. -DWILTON_RELEASE=${TRAVIS_TAG}
+    fi
+    make -j 2
+    make dist_debug > dist_debug.log
+    make dist_unversioned  > dist_unversioned.log
+    echo jsc
+    ./wilton_dist/bin/wilton ../js/wilton/test/index.js -m ../js -j jsc
+    ./wilton_dist/bin/wilton ../js/test-runners/runSanityTests.js -m ./wilton_dist/std.min.wlib -j jsc
+    echo duktape
+    ./wilton_dist/bin/wilton ../js/wilton/test/index.js -m ../js -j duktape
+    ./wilton_dist/bin/wilton ../js/test-runners/runSanityTests.js -m ./wilton_dist/std.min.wlib -j duktape
+    if [ "x" != "x${TRAVIS_TAG}" ] ;  then
+        mv wilton_${TRAVIS_TAG} wilton_${TRAVIS_TAG}_macos
+        zip -qr9 wilton_${TRAVIS_TAG}_macos.zip wilton_${TRAVIS_TAG}_macos
+    fi
 fi
+
+echo WILTON_FINISH_SUCCESS

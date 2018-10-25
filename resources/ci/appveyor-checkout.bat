@@ -16,105 +16,104 @@ rem limitations under the License.
 @echo on
 
 rem core
-git submodule update --init core || exit /b 1
+git submodule update --quiet --init core || exit /b 1
 rem deps
-git submodule update --init deps/cmake || exit /b 1
-git submodule update --init deps/external_asio || exit /b 1
-git submodule update --init deps/lookaside_asio || exit /b 1
-git submodule update --init deps/external_curl || exit /b 1
-git submodule update --init deps/lookaside_curl || exit /b 1
-git submodule update --init deps/external_duktape || exit /b 1
-git submodule update --init deps/external_hpdf || exit /b 1
-git submodule update --init deps/lookaside_libharu || exit /b 1
-git submodule update --init deps/external_jansson || exit /b 1
-git submodule update --init deps/lookaside_jansson || exit /b 1
-git submodule update --init deps/external_libpng || exit /b 1
-git submodule update --init deps/lookaside_libpng || exit /b 1
-git submodule update --init deps/external_libpq || exit /b 1
-git submodule update --init deps/lookaside_postgresql || exit /b 1
-git submodule update --init deps/external_log4cplus || exit /b 1
-git submodule update --init deps/lookaside_log4cplus || exit /b 1
-git submodule update --init deps/external_openssl || exit /b 1
-git submodule update --init deps/lookaside_openssl || exit /b 1
-git submodule update --init deps/external_popt || exit /b 1
-git submodule update --init deps/lookaside_popt || exit /b 1
-git submodule update --init deps/external_soci || exit /b 1
-git submodule update --init deps/lookaside_soci || exit /b 1
-git submodule update --init deps/external_sqlite || exit /b 1
-git submodule update --init deps/external_utf8cpp || exit /b 1
-git submodule update --init deps/lookaside_utf8cpp || exit /b 1
-git submodule update --init deps/external_zlib || exit /b 1
-git submodule update --init deps/lookaside_zlib || exit /b 1
-git submodule update --init deps/staticlib_compress || exit /b 1
-git submodule update --init deps/staticlib_concurrent || exit /b 1
-git submodule update --init deps/staticlib_config || exit /b 1
-git submodule update --init deps/staticlib_cron || exit /b 1
-git submodule update --init deps/ccronexpr || exit /b 1
-git submodule update --init deps/staticlib_crypto || exit /b 1
-git submodule update --init deps/staticlib_endian || exit /b 1
-git submodule update --init deps/staticlib_http || exit /b 1
-git submodule update --init deps/staticlib_io || exit /b 1
-git submodule update --init deps/staticlib_jni || exit /b 1
-git submodule update --init deps/staticlib_json || exit /b 1
-git submodule update --init deps/staticlib_mustache || exit /b 1
-git submodule update --init deps/mstch_cpp11 || exit /b 1
-git submodule update --init deps/staticlib_orm || exit /b 1
-git submodule update --init deps/staticlib_pimpl || exit /b 1
-git submodule update --init deps/staticlib_pion || exit /b 1
-git submodule update --init deps/staticlib_ranges || exit /b 1
-git submodule update --init deps/staticlib_support || exit /b 1
-git submodule update --init deps/staticlib_tinydir || exit /b 1
-git submodule update --init deps/tinydir || exit /b 1
-git submodule update --init deps/staticlib_unzip || exit /b 1
-git submodule update --init deps/staticlib_utils || exit /b 1
-git submodule update --init deps/staticlib_websocket || exit /b 1
-git submodule update --init deps/staticlib_winservice || exit /b 1
+git submodule update --quiet --init deps/cmake || exit /b 1
+git submodule update --quiet --init deps/external_asio || exit /b 1
+git submodule update --quiet --init deps/lookaside_asio || exit /b 1
+git submodule update --quiet --init deps/external_curl || exit /b 1
+git submodule update --quiet --init deps/lookaside_curl || exit /b 1
+git submodule update --quiet --init deps/external_duktape || exit /b 1
+git submodule update --quiet --init deps/external_hpdf || exit /b 1
+git submodule update --quiet --init deps/lookaside_libharu || exit /b 1
+git submodule update --quiet --init deps/external_jansson || exit /b 1
+git submodule update --quiet --init deps/lookaside_jansson || exit /b 1
+git submodule update --quiet --init deps/external_libpng || exit /b 1
+git submodule update --quiet --init deps/lookaside_libpng || exit /b 1
+git submodule update --quiet --init deps/external_libpq || exit /b 1
+git submodule update --quiet --init deps/lookaside_postgresql || exit /b 1
+git submodule update --quiet --init deps/external_log4cplus || exit /b 1
+git submodule update --quiet --init deps/lookaside_log4cplus || exit /b 1
+git submodule update --quiet --init deps/external_openssl || exit /b 1
+git submodule update --quiet --init deps/lookaside_openssl || exit /b 1
+git submodule update --quiet --init deps/external_popt || exit /b 1
+git submodule update --quiet --init deps/lookaside_popt || exit /b 1
+git submodule update --quiet --init deps/external_soci || exit /b 1
+git submodule update --quiet --init deps/lookaside_soci || exit /b 1
+git submodule update --quiet --init deps/external_sqlite || exit /b 1
+git submodule update --quiet --init deps/external_utf8cpp || exit /b 1
+git submodule update --quiet --init deps/lookaside_utf8cpp || exit /b 1
+git submodule update --quiet --init deps/external_zlib || exit /b 1
+git submodule update --quiet --init deps/lookaside_zlib || exit /b 1
+git submodule update --quiet --init deps/staticlib_compress || exit /b 1
+git submodule update --quiet --init deps/staticlib_concurrent || exit /b 1
+git submodule update --quiet --init deps/staticlib_config || exit /b 1
+git submodule update --quiet --init deps/staticlib_cron || exit /b 1
+git submodule update --quiet --init deps/ccronexpr || exit /b 1
+git submodule update --quiet --init deps/staticlib_crypto || exit /b 1
+git submodule update --quiet --init deps/staticlib_endian || exit /b 1
+git submodule update --quiet --init deps/staticlib_http || exit /b 1
+git submodule update --quiet --init deps/staticlib_io || exit /b 1
+git submodule update --quiet --init deps/staticlib_jni || exit /b 1
+git submodule update --quiet --init deps/staticlib_json || exit /b 1
+git submodule update --quiet --init deps/staticlib_mustache || exit /b 1
+git submodule update --quiet --init deps/mstch_cpp11 || exit /b 1
+git submodule update --quiet --init deps/staticlib_orm || exit /b 1
+git submodule update --quiet --init deps/staticlib_pimpl || exit /b 1
+git submodule update --quiet --init deps/staticlib_pion || exit /b 1
+git submodule update --quiet --init deps/staticlib_ranges || exit /b 1
+git submodule update --quiet --init deps/staticlib_support || exit /b 1
+git submodule update --quiet --init deps/staticlib_tinydir || exit /b 1
+git submodule update --quiet --init deps/tinydir || exit /b 1
+git submodule update --quiet --init deps/staticlib_unzip || exit /b 1
+git submodule update --quiet --init deps/staticlib_utils || exit /b 1
+git submodule update --quiet --init deps/staticlib_websocket || exit /b 1
+git submodule update --quiet --init deps/staticlib_winservice || exit /b 1
 rem jni
-git submodule update --init jni || exit /b 1
+git submodule update --quiet --init jni || exit /b 1
 rem js
 rd /s /q js
-git clone https://github.com/wilton-iot/js-libs-ci-monorepo.git js || exit /b 1
-pushd js || exit /b 1
-git checkout %APPVEYOR_REPO_TAG_NAME% || true
-popd || exit /b 1
+git clone --quiet https://github.com/wilton-iot/js-libs-ci-monorepo.git js || exit /b 1
+if "x" NEQ "x%APPVEYOR_REPO_TAG_NAME%" (
+    pushd js || exit /b 1
+    git checkout %APPVEYOR_REPO_TAG_NAME% || exit /b 1
+    popd || exit /b 1
+)
 rem engines
-git submodule update --init engines/wilton_chakra || exit /b 1
-git submodule update --init engines/wilton_duktape || exit /b 1
-git submodule update --init engines/wilton_rhino || exit /b 1
+git submodule update --quiet --init engines/wilton_chakra || exit /b 1
+git submodule update --quiet --init engines/wilton_duktape || exit /b 1
+git submodule update --quiet --init engines/wilton_rhino || exit /b 1
 rem modules
-git submodule update --init modules/wilton_channel || exit /b 1
-git submodule update --init modules/wilton_cli || exit /b 1
-git submodule update --init modules/wilton_cron || exit /b 1
-git submodule update --init modules/wilton_crypto || exit /b 1
-git submodule update --init modules/wilton_db || exit /b 1
-git submodule update --init modules/wilton_fs || exit /b 1
-git submodule update --init modules/wilton_ghc || exit /b 1
-git submodule update --init modules/wilton_http || exit /b 1
-git submodule update --init modules/wilton_loader || exit /b 1
-git submodule update --init modules/wilton_logging || exit /b 1
-git submodule update --init modules/wilton_mustache || exit /b 1
-git submodule update --init modules/wilton_net || exit /b 1
-git submodule update --init modules/wilton_pdf || exit /b 1
-git submodule update --init modules/wilton_process || exit /b 1
-git submodule update --init modules/wilton_serial || exit /b 1
-git submodule update --init modules/wilton_server || exit /b 1
-git submodule update --init modules/wilton_service || exit /b 1
-git submodule update --init modules/wilton_signal || exit /b 1
-git submodule update --init modules/wilton_thread || exit /b 1
-git submodule update --init modules/wilton_usb || exit /b 1
-git submodule update --init modules/wilton_winservice || exit /b 1
-git submodule update --init modules/wilton_zip || exit /b 1
+git submodule update --quiet --init modules/wilton_channel || exit /b 1
+git submodule update --quiet --init modules/wilton_cli || exit /b 1
+git submodule update --quiet --init modules/wilton_cron || exit /b 1
+git submodule update --quiet --init modules/wilton_crypto || exit /b 1
+git submodule update --quiet --init modules/wilton_db || exit /b 1
+git submodule update --quiet --init modules/wilton_fs || exit /b 1
+git submodule update --quiet --init modules/wilton_ghc || exit /b 1
+git submodule update --quiet --init modules/wilton_http || exit /b 1
+git submodule update --quiet --init modules/wilton_loader || exit /b 1
+git submodule update --quiet --init modules/wilton_logging || exit /b 1
+git submodule update --quiet --init modules/wilton_mustache || exit /b 1
+git submodule update --quiet --init modules/wilton_net || exit /b 1
+git submodule update --quiet --init modules/wilton_pdf || exit /b 1
+git submodule update --quiet --init modules/wilton_process || exit /b 1
+git submodule update --quiet --init modules/wilton_serial || exit /b 1
+git submodule update --quiet --init modules/wilton_server || exit /b 1
+git submodule update --quiet --init modules/wilton_service || exit /b 1
+git submodule update --quiet --init modules/wilton_signal || exit /b 1
+git submodule update --quiet --init modules/wilton_thread || exit /b 1
+git submodule update --quiet --init modules/wilton_usb || exit /b 1
+git submodule update --quiet --init modules/wilton_winservice || exit /b 1
+git submodule update --quiet --init modules/wilton_zip || exit /b 1
 rem tools
-git submodule update --init tools/closure-compiler || exit /b 1
-git submodule update --init tools/convertion-scripts || exit /b 1
-git submodule update --init tools/maven || exit /b 1
-git submodule update --init tools/mvnrepo || exit /b 1
-git submodule update --init tools/windows/nasm || exit /b 1
-git submodule update --init tools/windows/perl520 || exit /b 1
-git submodule update --init tools/windows/pkgconfig || exit /b 1
-git submodule update --init tools/windows/wix || exit /b 1
-git submodule update --init tools/windows/wixgen || exit /b 1
-git submodule update --init tools/windows/zip || exit /b 1
-rem additional tools
-rem git clone https://github.com/wilton-iot/tools_windows_jdk8.git tools/windows/jdk8
-git clone https://github.com/wilton-iot/tools_windows_jdk8_64.git tools/windows/jdk8_64
+git submodule update --quiet --init tools/closure-compiler || exit /b 1
+git submodule update --quiet --init tools/convertion-scripts || exit /b 1
+git submodule update --quiet --init tools/maven || exit /b 1
+git submodule update --quiet --init tools/mvnrepo || exit /b 1
+git submodule update --quiet --init tools/windows/nasm || exit /b 1
+git submodule update --quiet --init tools/windows/perl520 || exit /b 1
+git submodule update --quiet --init tools/windows/pkgconfig || exit /b 1
+git submodule update --quiet --init tools/windows/wix || exit /b 1
+git submodule update --quiet --init tools/windows/wixgen || exit /b 1
+git submodule update --quiet --init tools/windows/zip || exit /b 1

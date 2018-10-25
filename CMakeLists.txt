@@ -108,7 +108,7 @@ elseif ( WILTON_BUILD_FLAVOUR MATCHES "fedora" )
             ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/pkgconfig/soci.pc )
     configure_file ( ${WILTON_DIR}/resources/pkgconfig/asio.pc
             ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/pkgconfig/asio.pc )
-elseif ( WILTON_BUILD_FLAVOUR MATCHES "xenial" )
+elseif ( WILTON_BUILD_FLAVOUR MATCHES "stretch" )
     configure_file ( ${WILTON_DIR}/resources/pkgconfig/asio.pc
             ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/pkgconfig/asio.pc )
     configure_file ( ${WILTON_DIR}/resources/pkgconfig/log4cplus.pc
@@ -411,7 +411,7 @@ if ( STATICLIB_TOOLCHAIN MATCHES "android_.+" )
     add_custom_command ( OUTPUT wilton-android.jar
             COMMAND ${CMAKE_COMMAND} -E remove wilton-android.jar
             COMMAND cd ${WILTON_DIR}/jni &&
-                    ${WILTON_DIR}/tools/maven/bin/mvn clean package -Dmaven.test.skip=true
+                    ${WILTON_DIR}/tools/maven/bin/mvn --batch-mode clean package -Dmaven.test.skip=true
             COMMAND ${CMAKE_COMMAND} -E copy
                     ${WILTON_DIR}/jni/target/wilton-android.jar
                     wilton-android.jar
@@ -535,6 +535,7 @@ if ( STATICLIB_TOOLCHAIN MATCHES "android_.+" )
                     -Dorg.gradle.jvmargs=${${PROJECT_NAME}_GRADLE_JVM_ARGS}
                     -Dorg.gradle.parallel=false
                     -Dorg.gradle.daemon=false
+                    --quiet
                     clean
                     assembleDebug
                     #--refresh-dependencies
@@ -797,86 +798,7 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "(windows|linux|macosx)_.+" )
             COMMAND bin/wilton ${WILTON_DIR}/js/test-runners/runSanityTests.js -m std.min.wlib
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION} 
             DEPENDS dist
-            COMMENT "Running tests on default JavaScript engine ..." )
-
-    add_custom_target ( test_chakracore
-            COMMAND bin/wilton ${WILTON_DIR}/js/wilton/test/index.js -m ${WILTON_DIR}/js -j chakracore
-            COMMAND bin/wilton ${WILTON_DIR}/js/test-runners/runNodeTests.js -m ${WILTON_DIR}/js -j chakracore
-            COMMAND bin/wilton ${WILTON_DIR}/js/test-runners/runMathJsTests.js -m ${WILTON_DIR}/js -j chakracore
-            COMMAND bin/wilton ${WILTON_DIR}/js/test-runners/runSanityTests.js -j chakracore
-            COMMAND bin/wilton ${WILTON_DIR}/js/test-runners/runSanityTests.js -m std.min.wlib -j chakracore
-            WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION} 
-            DEPENDS dist
-            COMMENT "Running tests on ChakraCore JavaScript engine ..." )
-
-    add_custom_target ( test_duktape
-            COMMAND bin/wilton ${WILTON_DIR}/js/wilton/test/index.js -m ${WILTON_DIR}/js -j duktape
-            COMMAND bin/wilton ${WILTON_DIR}/js/test-runners/runNodeTests.js -m ${WILTON_DIR}/js -j duktape
-            COMMAND bin/wilton ${WILTON_DIR}/js/test-runners/runMathJsTests.js -m ${WILTON_DIR}/js -j duktape
-            COMMAND bin/wilton ${WILTON_DIR}/js/test-runners/runSanityTests.js -j duktape
-            COMMAND bin/wilton ${WILTON_DIR}/js/test-runners/runSanityTests.js -m std.min.wlib -j duktape
-            WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION} 
-            DEPENDS dist
-            COMMENT "Running tests on Duktape JavaScript engine ..." )
-
-    add_custom_target ( test_jsc
-            COMMAND bin/wilton ${WILTON_DIR}/js/wilton/test/index.js -m ${WILTON_DIR}/js -j jsc
-            COMMAND bin/wilton ${WILTON_DIR}/js/test-runners/runNodeTests.js -m ${WILTON_DIR}/js -j jsc
-            COMMAND bin/wilton ${WILTON_DIR}/js/test-runners/runMathJsTests.js -m ${WILTON_DIR}/js -j jsc
-            COMMAND bin/wilton ${WILTON_DIR}/js/test-runners/runSanityTests.js -j jsc
-            COMMAND bin/wilton ${WILTON_DIR}/js/test-runners/runSanityTests.js -m std.min.wlib -j jsc
-            WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION} 
-            DEPENDS dist
-            COMMENT "Running tests on JSC JavaScript engine ..." )
-
-    add_custom_target ( test_mozjs
-            COMMAND bin/wilton ${WILTON_DIR}/js/wilton/test/index.js -m ${WILTON_DIR}/js -j mozjs
-            COMMAND bin/wilton ${WILTON_DIR}/js/test-runners/runNodeTests.js -m ${WILTON_DIR}/js -j mozjs
-            COMMAND bin/wilton ${WILTON_DIR}/js/test-runners/runMathJsTests.js -m ${WILTON_DIR}/js -j mozjs
-            COMMAND bin/wilton ${WILTON_DIR}/js/test-runners/runSanityTests.js -j mozjs
-            COMMAND bin/wilton ${WILTON_DIR}/js/test-runners/runSanityTests.js -m std.min.wlib -j mozjs
-            WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION} 
-            DEPENDS dist
-            COMMENT "Running tests on MozJS JavaScript engine ..." )
-
-    add_custom_target ( test_v8
-            COMMAND bin/wilton ${WILTON_DIR}/js/wilton/test/index.js -m ${WILTON_DIR}/js -j v8
-            COMMAND bin/wilton ${WILTON_DIR}/js/test-runners/runNodeTests.js -m ${WILTON_DIR}/js -j v8
-            COMMAND bin/wilton ${WILTON_DIR}/js/test-runners/runMathJsTests.js -m ${WILTON_DIR}/js -j v8
-            COMMAND bin/wilton ${WILTON_DIR}/js/test-runners/runSanityTests.js -j v8
-            COMMAND bin/wilton ${WILTON_DIR}/js/test-runners/runSanityTests.js -m std.min.wlib -j v8
-            WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION} 
-            DEPENDS dist
-            COMMENT "Running tests on V8 JavaScript engine ..." )
-
-    add_custom_target ( test_rhino
-            COMMAND bin/wilton ${WILTON_DIR}/js/wilton/test/index.js -m ${WILTON_DIR}/js -j rhino
-#            COMMAND bin/wilton ${WILTON_DIR}/js/test-runners/runNodeTests.js -m ${WILTON_DIR}/js -j rhino
-            # requires rhino 1.7.7.2+
-            # COMMAND bin/wilton ${WILTON_DIR}/js/test-runners/runMathJsTests.js -m ${WILTON_DIR}/js -j rhino
-            COMMAND bin/wilton ${WILTON_DIR}/js/test-runners/runSanityTests.js -j rhino
-            COMMAND bin/wilton ${WILTON_DIR}/js/test-runners/runSanityTests.js -m std.min.wlib -j rhino
-            WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION} 
-            DEPENDS dist
-            COMMENT "Running tests on Rhino JavaScript engine ..." )
-
-    add_custom_target ( test_nashorn
-            COMMAND bin/wilton ${WILTON_DIR}/js/wilton/test/index.js -m ${WILTON_DIR}/js -j nashorn
-            #COMMAND bin/wilton ${WILTON_DIR}/js/test-runners/runNodeTests.js -m ${WILTON_DIR}/js -j nashorn
-            #COMMAND bin/wilton ${WILTON_DIR}/js/test-runners/runMathJsTests.js -m ${WILTON_DIR}/js -j nashorn
-            COMMAND bin/wilton ${WILTON_DIR}/js/test-runners/runSanityTests.js -j nashorn
-            COMMAND bin/wilton ${WILTON_DIR}/js/test-runners/runSanityTests.js -m std.min.wlib -j nashorn
-            WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION} 
-            DEPENDS dist
-            COMMENT "Running tests on Nashorn JavaScript engine ..." )
-
-    add_custom_target ( test_jvm
-            COMMAND ${WILTON_DIR}/tools/maven/bin/mvn test
-            WORKING_DIRECTORY ${WILTON_DIR}/jni
-            DEPENDS dist
-            COMMENT "Running Java tests ..." )
-
-    add_custom_target ( test_all DEPENDS test_js test_duktape )
+            COMMENT "Running tests on a default JavaScript engine ..." )
 
 endif ( )
 
@@ -1107,20 +1029,6 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "linux_.+" )
     if ( STATICLIB_TOOLCHAIN MATCHES "linux_amd64_.+" )
         add_dependencies ( dist dist_linux_amd64 )
     endif ( )
-
-    add_custom_target ( dist_linux_jre
-            COMMAND rm -f jre
-            COMMAND ln -s $ENV{JAVA_HOME}/jre
-            WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION}
-            DEPENDS dist )
-
-    add_custom_target ( test_all_jvm DEPENDS test_all dist_linux_jre test_jvm test_rhino test_nashorn )
-    add_dependencies ( test_all test_chakracore )
-    add_dependencies ( test_all test_mozjs )
-    add_dependencies ( test_all test_v8 )
-    add_dependencies ( test_jvm dist_linux_jre )
-    add_dependencies ( test_rhino dist_linux_jre )
-    add_dependencies ( test_nashorn dist_linux_jre )
 
     add_custom_target ( docs
             COMMAND ${CMAKE_COMMAND} -E remove_directory doxy

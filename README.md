@@ -3,6 +3,8 @@ Wilton [work in progress]
 
 [![travis](https://travis-ci.org/wilton-iot/wilton.svg?branch=master)](https://travis-ci.org/wilton-iot/wilton)
 [![appveyor](https://ci.appveyor.com/api/projects/status/github/wilton-iot/wilton?svg=true)](https://ci.appveyor.com/project/wilton-iot/wilton)
+[![circle](https://circleci.com/gh/wilton-iot/wilton.svg?style=svg)](https://circleci.com/gh/wilton-iot/wilton)
+[![cirrus](https://api.cirrus-ci.com/github/wilton-iot/wilton.svg)](https://cirrus-ci.com/github/wilton-iot/wilton)
 
 TODO: description
 
@@ -11,179 +13,26 @@ Link to the [JavaScript API documentation](https://wilton-iot.github.io/wilton/d
 How to build
 ------------
 
-_Note: see [releases](https://github.com/wilton-iot/wilton/releases) for Windows binaries (MSI installer)_
+_Note: see [releases](https://github.com/wilton-iot/wilton/releases) for pre-built binaries_
 
-_Note: see [repo](https://copr.fedorainfracloud.org/coprs/wilton/wilton/) for CentOS 7 and Fedora binaries (RPM packages)_
+_Note: see [repo](https://copr.fedorainfracloud.org/coprs/wilton/wilton/) for CentOS 7 and Fedora RPM packages_
 
-Obtain sources and build tools:
+Get sources and build tools:
 
     git clone https://github.com/wilton-iot/wilton.git
     cd wilton
     git submodule update --init
 
-See platform-specific instructions below.
+Follow platform-specific instructions:
 
-### Android
-
-On Linux `x86_64`, get and setup [Java 8](https://github.com/ojdkbuild/contrib_jdk8u-ci/releases):
-
-    export JAVA_HOME=path/to/jdk
-    export PATH=$PATH:$JAVA_HOME/bin
-
-Get and setup Android tools:
-
-    git clone --recursive https://github.com/wilton-iot/android-tools-ci-repo.git andoid-tools
-    export WILTON_ANDROID_TOOLS=path/to/android-tools
-
-Build:
-
-    cd wilton
-    mkdir build
-    cd build
-    cmake .. -DSTATICLIB_TOOLCHAIN=android_armeabi_gcc
-    make android_apk
-
-Resulting APK can be tested in VirtualBox using [Android x86](http://www.android-x86.org/) image with [native bridge](https://stackoverflow.com/a/13005569/314015) enabled.
-
-### Windows
-
-Install dependencies:
-
- - [Visual Studio 2013 Update 5 Express for Windows Desktop](https://www.visualstudio.com/en-us/news/releasenotes/vs2013-update5-vs)
-([direct ISO link](https://go.microsoft.com/fwlink/?LinkId=532499&type=ISO))
- - [Windows Driver Kit Version 7.1.0](https://www.microsoft.com/en-us/download/details.aspx?id=11800)
- - [CMake](https://cmake.org/download/)
- - [OpenJDK 8](https://github.com/ojdkbuild/ojdkbuild#downloads-for-windows-x86_64).
-
-Prepare environment:
-
-    cd wilton
-    resources\scripts\windows-tools.bat
-    mkdir build
-    cd build
-    
-Build for `x86_64`:
-
-    cmake .. -G "Visual Studio 12 2013 Win64"
-    cmake --build . --config Release --target installer
-    
-Build for `x86` (compatible with Windows XP):
-
-    cmake .. -G "Visual Studio 12 2013" -T v120_xp
-    cmake --build . --config Release --target installer
-
-### Fedora 27+
-
-Install dependencies:
-
-    sudo dnf install gcc-c++ make cmake pkg-config zip java-1.8.0-openjdk-devel zlib-devel jansson-devel log4cplus-devel openssl-devel curl-devel asio-devel popt-devel sqlite-devel postgresql-devel soci-devel soci-sqlite3-devel soci-postgresql-devel libpng-devel libharu-devel systemd-devel libusbx-devel webkitgtk4-jsc-devel glib2-devel gtk3-devel webkitgtk4-devel
-
-Build:
-
-    cd wilton
-    mkdir build
-    cd build
-    cmake .. -DWILTON_BUILD_FLAVOUR=fedora
-    make dist
-
-### Ubuntu 16.04 (also works for Debian Stretch)
-
-Install dependencies:
-
-    sudo apt install build-essential cmake pkg-config zip openjdk-8-jdk-headless zlib1g-dev libjansson-dev liblog4cplus-dev libssl-dev libcurl4-openssl-dev libasio-dev libpopt-dev libsqlite3-dev libpq-dev libsoci-dev libpng-dev libusb-1.0-0-dev libudev-dev libglib2.0-dev libjavascriptcoregtk-4.0-dev libgtk-3-dev libwebkit2gtk-4.0-dev
-
-Build:
-
-    cd wilton
-    mkdir build
-    cd build
-    cmake .. -DWILTON_BUILD_FLAVOUR=xenial
-    make dist
-
-To build for ARMv7 (`armhf`) 32-bit arch use the following `cmake` args:
-
-    cmake .. -DWILTON_BUILD_FLAVOUR=xenial -DSTATICLIB_TOOLCHAIN=linux_armhf_gcc 
-
-To build for ARMv8 (`aarch64`) 64-bit arch use the following `cmake` args:
-
-    cmake .. -DWILTON_BUILD_FLAVOUR=xenial -DSTATICLIB_TOOLCHAIN=linux_aarch64_gcc 
-
-### Ubuntu 18.04
-
-Install dependencies:
-
-    sudo apt install build-essential cmake pkg-config zip openjdk-8-jdk-headless zlib1g-dev libjansson-dev liblog4cplus-dev libssl-dev libcurl4-openssl-dev libasio-dev libpopt-dev libsqlite3-dev libpq-dev libsoci-dev libpng-dev libhpdf-dev libusb-1.0-0-dev libudev-dev libglib2.0-dev libjavascriptcoregtk-4.0-dev libgtk-3-dev libwebkit2gtk-4.0-dev
-
-Build:
-
-    cd wilton
-    mkdir build
-    cd build
-    cmake .. -DWILTON_BUILD_FLAVOUR=bionic
-    make dist
-
-### CentOS 7
-
-Enable [EPEL repository](https://fedoraproject.org/wiki/EPEL):
-
-    sudo yum install epel-release
-
-Install dependencies:
-
-    sudo yum install gcc-c++ make cmake pkgconfig zip java-1.8.0-openjdk-devel zlib-devel jansson-devel log4cplus-devel openssl-devel asio-devel popt-devel sqlite-devel postgresql-devel soci-devel soci-sqlite3-devel soci-postgresql-devel libpng-devel systemd-devel libusbx-devel webkitgtk4-jsc-devel glib2-devel gtk3-devel webkitgtk4-devel
-
-Build:
-
-    cd wilton
-    mkdir build
-    cd build
-    cmake .. -DWILTON_BUILD_FLAVOUR=el7
-    make dist
-
-### Debian Wheezy (also works for Ubuntu 14.04)
-
-Install dependencies:
-
-    sudo apt-get install build-essential pkg-config zip zlib1g-dev libjansson-dev liblog4cplus-dev libssl-dev libcurl4-openssl-dev libpopt-dev libsqlite3-dev libpq-dev libpng12-dev libusb-1.0-0-dev libudev-dev libglib2.0-dev libjavascriptcoregtk-3.0-dev libgtk-3-dev libwebkitgtk-3.0-dev
-
-Get and setup [Java 8](https://github.com/ojdkbuild/contrib_jdk8u-ci/releases):
-
-    export JAVA_HOME=path/to/jdk
-    export PATH=$PATH:$JAVA_HOME/bin
-
-Get and setup CMake:
-
-    git clone https://github.com/wilton-iot/tools_linux_cmake.git cmake
-    export PATH=$PATH:path/to/cmake/bin
-
-Build:
-
-    cd wilton
-    mkdir build
-    cd build
-    cmake .. -DWILTON_BUILD_FLAVOUR=wheezy
-    make dist
-
-### Mac OS X
-
-Install Xcode, Xcode Command Line Tools and Java 8.
-
-Install build tools and dependencies:
-
-    brew install cmake pkg-config
-
-Setup environment:
-
-    export JAVA_HOME=path/to/jdk
-    export PATH=$PATH:$JAVA_HOME/bin
-
-Build:
-
-    cd wilton
-    mkdir build
-    cd build
-    cmake ..
-    make dist
+ - [Android](https://github.com/wilton-iot/wilton/wiki/BuildAndroid)
+ - [Windows](https://github.com/wilton-iot/wilton/wiki/BuildWindows)
+ - Linux:
+   - [CentOS](https://github.com/wilton-iot/wilton/wiki/BuildCentOS)
+   - [Debian](https://github.com/wilton-iot/wilton/wiki/BuildDebian)
+   - [Fedora](https://github.com/wilton-iot/wilton/wiki/BuildFedora)
+   - [Ubuntu](https://github.com/wilton-iot/wilton/wiki/BuildUbuntu)
+ - [MacOS](https://github.com/wilton-iot/wilton/wiki/BuildMacOS)
 
 License information
 -------------------

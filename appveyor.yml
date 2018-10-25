@@ -18,6 +18,14 @@ clone_folder: c:\projects\wilton
 
 build: off
 
+environment:
+  matrix:
+    - WILTON_WIN_ARCH: _x86
+    - WILTON_WIN_ARCH: ""
+
+matrix:
+  fast_finish: true
+
 install:
 #  - cd ..
 #  - git clone https://github.com/wilton-iot/wilton
@@ -26,20 +34,19 @@ install:
 
 build_script:
   - echo "PR support is enabled for root repo"
-  - cmd /c resources\ci\appveyor.bat
+  - cmd /c resources\ci\appveyor%WILTON_WIN_ARCH%.bat
+  - robocopy build c:/projects/test-ci/ wilton_%APPVEYOR_REPO_TAG_NAME%%WILTON_WIN_ARCH%.msi /ndl /njh /njs /nc /ns /np || true
 
 artifacts:
-  - path: releases\wilton_$(appveyor_repo_tag_name).msi
-    name: wilton_$(appveyor_repo_tag_name).msi
-  - path: releases\wilton_$(appveyor_repo_tag_name)_x86.msi
-    name: wilton_$(appveyor_repo_tag_name)_x86.msi
+  - path: wilton_%APPVEYOR_REPO_TAG_NAME%%WILTON_WIN_ARCH%.msi
+    name: wilton_%APPVEYOR_REPO_TAG_NAME%%WILTON_WIN_ARCH%.msi
 
 deploy:
-  description: $(appveyor_repo_tag_name)
+  description: "%APPVEYOR_REPO_TAG_NAME%"
   provider: GitHub
   auth_token:
     secure: VShPexae/Ct8Y4Rn0YvHmiX/Sih1Xs+qGHfU2JEmuAuXVb/KVsc8B72MlG7TCw0e
-  artifact: wilton_$(appveyor_repo_tag_name).msi,wilton_$(appveyor_repo_tag_name)_x86.msi
+  artifact: wilton_%APPVEYOR_REPO_TAG_NAME%%WILTON_WIN_ARCH%.msi
   draft: false
   prerelease: false
   on:

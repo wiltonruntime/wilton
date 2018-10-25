@@ -12,42 +12,31 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-language: cpp
 
-sudo: false
+task:
+  matrix:
 
-os:
-  - linux
-  - osx
+    container:
+      image: wiltoniot/xenial-armhf
+      cpu: 1
+      memory: 1
 
-osx_image: xcode9.2
+    container:
+      image: wiltoniot/stretch-aarch64
+      cpu: 1
+      memory: 1
 
-git:
-  submodules: false
+    container:
+      image: wiltoniot/bionic-amd64
+      cpu: 1
+      memory: 1
 
-addons:
-  apt:
-    packages:
-      - build-essential
-      - pkg-config
-      - zip
+  environment:
+    GITHUB_TOKEN: ENCRYPTED[fc2d92a8d5aa1d071f90e478de68cf4329d352a41e634736daff116c6362379e362b77e254c8a0fb4fe3a9b755bdc1c8]
 
-before_install:
-  - export CC=
-  - export CXX=
-
-install:
-#  - cd ..
-#  - git clone https://github.com/wilton-iot/wilton
-#  - cd wilton
-  - bash ./resources/ci/travis-checkout.sh
-
-before_script:
-  - echo "PR support is enabled for root repo"
-
-script:
-  - bash ./resources/ci/travis.sh
-
-notifications:
-  email:
-    on_success: always
+  script: |
+    # cd ..
+    # git clone --quiet https://github.com/wilton-iot/wilton
+    # cd wilton
+    bash ./resources/ci/cirrus-checkout.sh
+    bash ./resources/ci/cirrus.sh

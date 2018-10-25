@@ -21,7 +21,7 @@ set SCRIPT_DIR=%BAD_SLASH_SCRIPT_DIR:\=/%
 set WILTON_DIR=%SCRIPT_DIR%../..
 
 rem additional tools
-git clone --quiet https://github.com/wilton-iot/tools_windows_jdk8_64.git ../jdk8
+git clone --quiet https://github.com/wilton-iot/tools_windows_jdk8.git ../jdk8
 
 rem env
 call resources\scripts\windows-tools.bat
@@ -32,38 +32,19 @@ rem build
 mkdir build || exit /b 1
 pushd build || exit /b 1
 if "x" NEQ "x%APPVEYOR_REPO_TAG_NAME%" (
-    cmake .. -G "Visual Studio 12 2013 Win64" -DWILTON_RELEASE=%APPVEYOR_REPO_TAG_NAME% || exit /b 1
+    cmake .. -G "Visual Studio 12 2013" -T v120_xp -DWILTON_RELEASE=%APPVEYOR_REPO_TAG_NAME% || exit /b 1
 ) else (
-    cmake .. -G "Visual Studio 12 2013 Win64" || exit /b 1
+    cmake .. -G "Visual Studio 12 2013" -T v120_xp || exit /b 1
 )
 cmake --build . --config Release --target installer
 if errorlevel 1 (
-    echo error, target: installer
+    echo msbuild error, target: installer
     exit /b 1
 )
 
 rem test
 echo dist_unversioned
 cmake --build . --config Release --target dist_unversioned > dist_unversioned.log
-
-echo chakra
-echo chakra_wilton
-rem TODO
-rem wilton_dist\bin\wilton.exe ../js/wilton/test/index.js -m ../js -j chakra || exit /b 1
-echo chakra_sanity
-wilton_dist\bin\wilton.exe ../js/test-runners/runSanityTests.js -m wilton_dist/std.min.wlib -j chakra || exit /b 1
-echo chakra_stdlibs
-wilton_dist\bin\wilton.exe ../js/test-runners/runNodeTests.js -m ../js -j chakra > chakra_nodelibs.log
-if errorlevel 1 (
-    echo error: chakra_nodelibs
-    exit /b 1
-)
-echo chakra_math
-wilton_dist\bin\wilton.exe ../js/test-runners/runMathJsTests.js -m ../js -j chakra > chakra_math.log
-if errorlevel 1 (
-    echo error: chakra_math
-    exit /b 1
-)
 
 echo duktape
 wilton_dist\bin\wilton.exe ../js/wilton/test/index.js -m ../js  -j duktape || exit /b 1

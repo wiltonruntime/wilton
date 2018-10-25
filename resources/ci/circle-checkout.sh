@@ -17,8 +17,6 @@
 set -e
 set -x
 
-#android
-git submodule update --quiet --init android
 # core
 git submodule update --quiet --init core
 # deps
@@ -26,33 +24,20 @@ git submodule update --quiet --init deps/cmake
 git submodule update --quiet --init deps/external_asio
 git submodule update --quiet --init deps/lookaside_asio
 git submodule update --quiet --init deps/external_chakracore
-git submodule update --quiet --init deps/external_curl
-git submodule update --quiet --init deps/lookaside_curl
 git submodule update --quiet --init deps/external_duktape
 git submodule update --quiet --init deps/external_hpdf
 git submodule update --quiet --init deps/external_icu
 git submodule update --quiet --init deps/lookaside_libharu
-git submodule update --quiet --init deps/external_jansson
-git submodule update --quiet --init deps/lookaside_jansson
-git submodule update --quiet --init deps/external_libpng
-git submodule update --quiet --init deps/lookaside_libpng
 git submodule update --quiet --init deps/external_libpq
 git submodule update --quiet --init deps/lookaside_postgresql
 git submodule update --quiet --init deps/external_log4cplus
 git submodule update --quiet --init deps/lookaside_log4cplus
 git submodule update --quiet --init deps/external_mozjs
-git submodule update --quiet --init deps/external_openssl
-git submodule update --quiet --init deps/lookaside_openssl
-git submodule update --quiet --init deps/external_popt
-git submodule update --quiet --init deps/lookaside_popt
 git submodule update --quiet --init deps/external_soci
 git submodule update --quiet --init deps/lookaside_soci
-git submodule update --quiet --init deps/external_sqlite
 git submodule update --quiet --init deps/external_v8
 git submodule update --quiet --init deps/external_utf8cpp
 git submodule update --quiet --init deps/lookaside_utf8cpp
-git submodule update --quiet --init deps/external_zlib
-git submodule update --quiet --init deps/lookaside_zlib
 git submodule update --quiet --init deps/staticlib_compress
 git submodule update --quiet --init deps/staticlib_concurrent
 git submodule update --quiet --init deps/staticlib_config
@@ -81,9 +66,9 @@ git submodule update --quiet --init jni
 # js
 rm -rf js
 git clone --quiet https://github.com/wilton-iot/js-libs-ci-monorepo.git js
-if [ "x" != "x${TRAVIS_TAG}" ] ;  then
+if [ "x" != "x${CIRCLE_TAG}" ] ;  then
     pushd js
-    git checkout ${TRAVIS_TAG}
+    git checkout ${CIRCLE_TAG}
     popd
 fi
 # engines
