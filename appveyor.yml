@@ -35,7 +35,7 @@ install:
 build_script:
   - echo "PR support is enabled for root repo"
   - cmd /c resources\ci\appveyor%WILTON_WIN_ARCH%.bat
-  - robocopy build c:/projects/test-ci/ wilton_%APPVEYOR_REPO_TAG_NAME%%WILTON_WIN_ARCH%.msi /ndl /njh /njs /nc /ns /np || true
+  - robocopy build c:/projects/wilton/ wilton_%APPVEYOR_REPO_TAG_NAME%%WILTON_WIN_ARCH%.msi /ndl /njh /njs /nc /ns /np || true
 
 artifacts:
   - path: wilton_%APPVEYOR_REPO_TAG_NAME%%WILTON_WIN_ARCH%.msi
