@@ -53,11 +53,11 @@ if [ "xosx" = "x${TRAVIS_OS_NAME}"  ] ; then
     fi
     make -j 2
     make dist_debug > dist_debug.log
-    make dist_unversioned  > dist_unversioned.log
+    make dist_unversioned > dist_unversioned.log
     echo jsc
     ./wilton_dist/bin/wilton ../js/wilton/test/index.js -m ../js -j jsc
+    ./wilton_dist/bin/wilton ../js/test-runners/runStdLibTests.js ../js -j jsc > stdlib.log
     ./wilton_dist/bin/wilton ../js/test-runners/runSanityTests.js -m ./wilton_dist/std.min.wlib -j jsc
-    ./wilton_dist/bin/wilton ../js/test-runners/runStdLibTests.js -m ./wilton_dist/std.min.wlib -j jsc > stdlib.log
     echo duktape
     ./wilton_dist/bin/wilton ../js/wilton/test/index.js -m ../js -j duktape
     ./wilton_dist/bin/wilton ../js/test-runners/runSanityTests.js -m ./wilton_dist/std.min.wlib -j duktape

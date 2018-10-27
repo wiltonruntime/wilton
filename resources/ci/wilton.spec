@@ -161,7 +161,7 @@ make dist
 %check
 cd wilton
 cd build
-make test_js valgrind
+make test valgrind
 
 %install
 mkdir -p %{buildroot}/opt/wilton

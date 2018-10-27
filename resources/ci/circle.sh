@@ -76,6 +76,8 @@ popd
 echo jre
 ln -s ${JAVA_HOME}/jre ./wilton_dist/jre
 
+export JAVA_TOOL_OPTIONS="-XX:MaxRAM=512M -XX:+UseSerialGC -XX:+TieredCompilation -XX:TieredStopAtLevel=1"
+
 echo rhino
 ./wilton_dist/bin/wilton ../js/wilton/test/index.js -m ../js -j rhino
 ./wilton_dist/bin/wilton ../js/test-runners/runSanityTests.js -m ./wilton_dist/std.min.wlib -j rhino
@@ -83,5 +85,8 @@ echo rhino
 echo nashorn
 ./wilton_dist/bin/wilton ../js/wilton/test/index.js -m ../js -j nashorn
 ./wilton_dist/bin/wilton ../js/test-runners/runSanityTests.js -m ./wilton_dist/std.min.wlib -j nashorn
+
+echo valgrind
+make valgrind
 
 echo WILTON_FINISH_SUCCESS
