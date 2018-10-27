@@ -23,7 +23,7 @@
 %global debug_package %{nil}
 
 Name:           wilton
-Version:        v201809061
+Version:        v201810271
 Release:        1%{?dist}
 Summary:        JavaScript runtime
 Group:          Development/Languages
@@ -156,12 +156,13 @@ cd wilton
 mkdir build
 cd build
 cmake .. -DWILTON_BUILD_FLAVOUR=%{wilton_build_flavour} -DWILTON_RELEASE=%{version}
+make -j 2
 make dist
 
 %check
 cd wilton
 cd build
-make test valgrind
+make test_js valgrind
 
 %install
 mkdir -p %{buildroot}/opt/wilton

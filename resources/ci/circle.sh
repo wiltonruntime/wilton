@@ -43,11 +43,11 @@ make dist_debug > dist_debug.log
 make dist_unversioned > dist_unversioned.log
 
 echo jsc
-./wilton_dist/bin/wilton ../js/wilton/test/index.js -m ../js -j jsc
-./wilton_dist/bin/wilton ../js/test-runners/runSanityTests.js -m ./wilton_dist/std.min.wlib -j jsc
 if [ "xfedora" = "x${WILTON_BUILD_FLAVOUR}" ] ; then
+    ./wilton_dist/bin/wilton ../js/wilton/test/index.js -m ../js -j jsc
     ./wilton_dist/bin/wilton ../js/test-runners/runStdLibTests.js -m ../js -j jsc > jsc_stdlib.log
 fi
+./wilton_dist/bin/wilton ../js/test-runners/runSanityTests.js -m ./wilton_dist/std.min.wlib -j jsc
 
 echo duktape
 ./wilton_dist/bin/wilton ../js/wilton/test/index.js -m ../js -j duktape

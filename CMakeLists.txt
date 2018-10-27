@@ -14,11 +14,6 @@
 
 cmake_minimum_required ( VERSION 2.8.12 )
 
-# policy for 'make test'
-if ( POLICY CMP0037 )
-  cmake_policy ( SET CMP0037 OLD )
-endif ( )
-
 # versioning
 if ( DEFINED WILTON_RELEASE )
     # git describe --exact-match --tags HEAD : vYYYYMMDDB
@@ -795,7 +790,7 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "(windows|linux|macosx)_.+" )
             DEPENDS dist
             COMMENT "Creaing unversioned distribution ..." )
 
-    add_custom_target ( test
+    add_custom_target ( test_js
             COMMAND bin/wilton ${WILTON_DIR}/js/wilton/test/index.js -m ${WILTON_DIR}/js -j duktape
             COMMAND bin/wilton ${WILTON_DIR}/js/test-runners/runSanityTests.js
             COMMAND bin/wilton ${WILTON_DIR}/js/test-runners/runSanityTests.js -m std.min.wlib
