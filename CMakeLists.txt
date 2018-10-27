@@ -14,6 +14,11 @@
 
 cmake_minimum_required ( VERSION 2.8.12 )
 
+# policy for 'make test'
+if ( POLICY CMP0037 )
+  cmake_policy ( SET CMP0037 OLD )
+endif ( )
+
 # versioning
 if ( DEFINED WILTON_RELEASE )
     # git describe --exact-match --tags HEAD : vYYYYMMDDB

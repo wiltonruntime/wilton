@@ -56,7 +56,7 @@ if [ "xosx" = "x${TRAVIS_OS_NAME}"  ] ; then
     make dist_unversioned > dist_unversioned.log
     echo jsc
     ./wilton_dist/bin/wilton ../js/wilton/test/index.js -m ../js -j jsc
-    ./wilton_dist/bin/wilton ../js/test-runners/runStdLibTests.js ../js -j jsc > stdlib.log
+    ./wilton_dist/bin/wilton ../js/test-runners/runStdLibTests.js -m ../js -j jsc > stdlib.log
     ./wilton_dist/bin/wilton ../js/test-runners/runSanityTests.js -m ./wilton_dist/std.min.wlib -j jsc
     echo duktape
     ./wilton_dist/bin/wilton ../js/wilton/test/index.js -m ../js -j duktape
