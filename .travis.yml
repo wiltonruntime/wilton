@@ -67,4 +67,4 @@ deploy:
 #    - ${ARTIFACT_PATH}.sha256 
   on:
     repo: wilton-iot/wilton
-tags: true
+    tags: true
