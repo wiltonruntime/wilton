@@ -45,9 +45,8 @@ make dist_unversioned > dist_unversioned.log
 echo jsc
 ./wilton_dist/bin/wilton ../js/wilton/test/index.js -m ../js -j jsc
 ./wilton_dist/bin/wilton ../js/test-runners/runSanityTests.js -m ./wilton_dist/std.min.wlib -j jsc
-./wilton_dist/bin/wilton ../js/test-runners/runNodeTests.js -m ../js -j jsc > jsc_nodelibs.log
 if [ "xfedora" = "x${WILTON_BUILD_FLAVOUR}" ] ; then
-    ./wilton_dist/bin/wilton ../js/test-runners/runMathJsTests.js -m ../js -j jsc > jsc_math.log
+    ./wilton_dist/bin/wilton ../js/test-runners/runStdLibTests.js -m ../js -j jsc > jsc_stdlib.log
 fi
 
 echo duktape
@@ -57,20 +56,17 @@ echo duktape
 echo chakracore
 ./wilton_dist/bin/wilton ../js/wilton/test/index.js -m ../js -j chakracore
 ./wilton_dist/bin/wilton ../js/test-runners/runSanityTests.js -m ./wilton_dist/std.min.wlib -j chakracore
-./wilton_dist/bin/wilton ../js/test-runners/runNodeTests.js -m ../js -j chakracore > chakracore_nodelibs.log
-./wilton_dist/bin/wilton ../js/test-runners/runMathJsTests.js -m ../js -j chakracore > chakracore_math.log
+./wilton_dist/bin/wilton ../js/test-runners/runStdLibJsTests.js -m ../js -j chakracore > chakracore_stdlib.log
 
 echo mozjs
 ./wilton_dist/bin/wilton ../js/wilton/test/index.js -m ../js -j mozjs
 ./wilton_dist/bin/wilton ../js/test-runners/runSanityTests.js -m ./wilton_dist/std.min.wlib -j mozjs
-./wilton_dist/bin/wilton ../js/test-runners/runNodeTests.js -m ../js -j mozjs > mozjs_nodelibs.log
-./wilton_dist/bin/wilton ../js/test-runners/runMathJsTests.js -m ../js -j mozjs > mozjs_math.log
+./wilton_dist/bin/wilton ../js/test-runners/runStdLibJsTests.js -m ../js -j mozjs > mozjs_stdlib.log
 
 echo v8
 ./wilton_dist/bin/wilton ../js/wilton/test/index.js -m ../js -j v8
 ./wilton_dist/bin/wilton ../js/test-runners/runSanityTests.js -m ./wilton_dist/std.min.wlib -j v8
-./wilton_dist/bin/wilton ../js/test-runners/runNodeTests.js -m ../js -j v8 > v8_nodelibs.log
-./wilton_dist/bin/wilton ../js/test-runners/runMathJsTests.js -m ../js -j v8 > v8_nodelibs.log
+./wilton_dist/bin/wilton ../js/test-runners/runStdLibJsTests.js -m ../js -j v8 > v8_stdlib.log
 
 echo jvm
 pushd ../jni

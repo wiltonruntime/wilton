@@ -36,7 +36,12 @@ if "x" NEQ "x%APPVEYOR_REPO_TAG_NAME%" (
 ) else (
     cmake .. -G "Visual Studio 12 2013" -T v120_xp || exit /b 1
 )
-cmake --build . --config Release --target installer
+cmake --build . --config Release
+if errorlevel 1 (
+    echo msbuild error, target: build
+    exit /b 1
+)
+cmake --build . --config Release --target installer > installer.log
 if errorlevel 1 (
     echo msbuild error, target: installer
     exit /b 1

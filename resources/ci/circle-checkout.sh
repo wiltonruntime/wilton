@@ -17,6 +17,16 @@
 set -e
 set -x
 
+# update packages
+if [ "xwheezy" = "x${WILTON_BUILD_FLAVOUR}" ] ; then
+    apt-get update
+    apt-get upgrade -y
+fi
+
+if [ "xfedora" = "x${WILTON_BUILD_FLAVOUR}" ] ; then
+    dnf update -y
+fi
+
 # core
 git submodule update --quiet --init core
 # deps

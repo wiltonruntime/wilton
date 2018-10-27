@@ -1,0 +1,47 @@
+@echo off
+rem Copyright 2018, alex at staticlibs.net
+rem
+rem Licensed under the Apache License, Version 2.0 (the "License");
+rem you may not use this file except in compliance with the License.
+rem You may obtain a copy of the License at
+rem
+rem http://www.apache.org/licenses/LICENSE-2.0
+rem
+rem Unless required by applicable law or agreed to in writing, software
+rem distributed under the License is distributed on an "AS IS" BASIS,
+rem WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+rem See the License for the specific language governing permissions and
+rem limitations under the License.
+
+@echo on
+rem core
+pushd core && git checkout master && git pull --quiet && popd || exit /b 1
+rem jni
+pushd jni && git checkout master && git pull --quiet && popd || exit /b 1
+rem engines
+pushd engines/wilton_chakra && git checkout master && git pull --quiet && popd || exit /b 1
+pushd engines/wilton_duktape && git checkout master && git pull --quiet && popd || exit /b 1
+pushd engines/wilton_rhino && git checkout master && git pull --quiet && popd || exit /b 1
+rem modules
+pushd engines/wilton_channel && git checkout master && git pull --quiet && popd || exit /b 1
+pushd engines/wilton_cli && git checkout master && git pull --quiet && popd || exit /b 1
+pushd engines/wilton_cron && git checkout master && git pull --quiet && popd || exit /b 1
+pushd engines/wilton_crypto && git checkout master && git pull --quiet && popd || exit /b 1
+pushd engines/wilton_db && git checkout master && git pull --quiet && popd || exit /b 1
+pushd engines/wilton_fs && git checkout master && git pull --quiet && popd || exit /b 1
+pushd engines/wilton_ghc && git checkout master && git pull --quiet && popd || exit /b 1
+pushd engines/wilton_http && git checkout master && git pull --quiet && popd || exit /b 1
+pushd engines/wilton_loader && git checkout master && git pull --quiet && popd || exit /b 1
+pushd engines/wilton_logging && git checkout master && git pull --quiet && popd || exit /b 1
+pushd engines/wilton_mustache && git checkout master && git pull --quiet && popd || exit /b 1
+pushd engines/wilton_net && git checkout master && git pull --quiet && popd || exit /b 1
+pushd engines/wilton_pdf && git checkout master && git pull --quiet && popd || exit /b 1
+pushd engines/wilton_process && git checkout master && git pull --quiet && popd || exit /b 1
+pushd engines/wilton_serial && git checkout master && git pull --quiet && popd || exit /b 1
+pushd engines/wilton_server && git checkout master && git pull --quiet && popd || exit /b 1
+pushd engines/wilton_service && git checkout master && git pull --quiet && popd || exit /b 1
+pushd engines/wilton_signal && git checkout master && git pull --quiet && popd || exit /b 1
+pushd engines/wilton_thread && git checkout master && git pull --quiet && popd || exit /b 1
+pushd engines/wilton_usb && git checkout master && git pull --quiet && popd || exit /b 1
+pushd engines/wilton_winservice && git checkout master && git pull --quiet && popd || exit /b 1
+pushd engines/wilton_zip && git checkout master && git pull --quiet && popd || exit /b 1

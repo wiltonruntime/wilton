@@ -36,7 +36,12 @@ if "x" NEQ "x%APPVEYOR_REPO_TAG_NAME%" (
 ) else (
     cmake .. -G "Visual Studio 12 2013 Win64" || exit /b 1
 )
-cmake --build . --config Release --target installer
+cmake --build . --config Release
+if errorlevel 1 (
+    echo msbuild error, target: build
+    exit /b 1
+)
+cmake --build . --config Release --target installer > installer.log
 if errorlevel 1 (
     echo error, target: installer
     exit /b 1
@@ -52,16 +57,10 @@ rem TODO
 rem wilton_dist\bin\wilton.exe ../js/wilton/test/index.js -m ../js -j chakra || exit /b 1
 echo chakra_sanity
 wilton_dist\bin\wilton.exe ../js/test-runners/runSanityTests.js -m wilton_dist/std.min.wlib -j chakra || exit /b 1
-echo chakra_stdlibs
-wilton_dist\bin\wilton.exe ../js/test-runners/runNodeTests.js -m ../js -j chakra > chakra_nodelibs.log
+echo chakra_stdlib
+wilton_dist\bin\wilton.exe ../js/test-runners/runStdLibTests.js -m ../js -j chakra > chakra_stdlib.log
 if errorlevel 1 (
-    echo error: chakra_nodelibs
-    exit /b 1
-)
-echo chakra_math
-wilton_dist\bin\wilton.exe ../js/test-runners/runMathJsTests.js -m ../js -j chakra > chakra_math.log
-if errorlevel 1 (
-    echo error: chakra_math
+    echo error: chakra_stdlib
     exit /b 1
 )
 

@@ -17,6 +17,10 @@
 set -e
 set -x
 
+# update packages
+apt-get update
+apt-get upgrade -y
+
 # core
 git submodule update --quiet --init core
 # deps

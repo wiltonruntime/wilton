@@ -790,10 +790,8 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "(windows|linux|macosx)_.+" )
             DEPENDS dist
             COMMENT "Creaing unversioned distribution ..." )
 
-    add_custom_target ( test_js
-            COMMAND bin/wilton ${WILTON_DIR}/js/wilton/test/index.js -m ${WILTON_DIR}/js
-            COMMAND bin/wilton ${WILTON_DIR}/js/test-runners/runNodeTests.js -m ${WILTON_DIR}/js
-            COMMAND bin/wilton ${WILTON_DIR}/js/test-runners/runMathJsTests.js -m ${WILTON_DIR}/js
+    add_custom_target ( test
+            COMMAND bin/wilton ${WILTON_DIR}/js/wilton/test/index.js -m ${WILTON_DIR}/js -j duktape
             COMMAND bin/wilton ${WILTON_DIR}/js/test-runners/runSanityTests.js
             COMMAND bin/wilton ${WILTON_DIR}/js/test-runners/runSanityTests.js -m std.min.wlib
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION} 
