@@ -57,6 +57,7 @@ if [ "xosx" = "x${TRAVIS_OS_NAME}"  ] ; then
     echo jsc
     ./wilton_dist/bin/wilton ../js/wilton/test/index.js -m ../js -j jsc
     ./wilton_dist/bin/wilton ../js/test-runners/runSanityTests.js -m ./wilton_dist/std.min.wlib -j jsc
+    ./wilton_dist/bin/wilton ../js/test-runners/runStdLibTests.js -m ./wilton_dist/std.min.wlib -j jsc > stdlib.log
     echo duktape
     ./wilton_dist/bin/wilton ../js/wilton/test/index.js -m ../js -j duktape
     ./wilton_dist/bin/wilton ../js/test-runners/runSanityTests.js -m ./wilton_dist/std.min.wlib -j duktape

@@ -53,8 +53,7 @@ cmake --build . --config Release --target dist_unversioned > dist_unversioned.lo
 
 echo chakra
 echo chakra_wilton
-rem TODO
-rem wilton_dist\bin\wilton.exe ../js/wilton/test/index.js -m ../js -j chakra || exit /b 1
+wilton_dist\bin\wilton.exe ../js/wilton/test/index.js -m ../js -j chakra || exit /b 1
 echo chakra_sanity
 wilton_dist\bin\wilton.exe ../js/test-runners/runSanityTests.js -m wilton_dist/std.min.wlib -j chakra || exit /b 1
 echo chakra_stdlib

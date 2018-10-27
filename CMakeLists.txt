@@ -796,7 +796,7 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "(windows|linux|macosx)_.+" )
             COMMAND bin/wilton ${WILTON_DIR}/js/test-runners/runSanityTests.js -m std.min.wlib
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION} 
             DEPENDS dist
-            COMMENT "Running tests on a default JavaScript engine ..." )
+            COMMENT "Running JavaScript tests ..." )
 
 endif ( )
 

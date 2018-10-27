@@ -71,7 +71,7 @@ if [ "xbionic" = "x${WILTON_BUILD_FLAVOUR}" ] ; then
 echo jsc
 ./wilton_dist/bin/wilton ../js/wilton/test/index.js -m ../js -j jsc
 ./wilton_dist/bin/wilton ../js/test-runners/runSanityTests.js -m ./wilton_dist/std.min.wlib -j jsc
-./wilton_dist/bin/wilton ../js/test-runners/runStdLibJsTests.js -m ../js -j jsc > jsc_stdlib.log
+./wilton_dist/bin/wilton ../js/test-runners/runStdLibTests.js -m ../js -j jsc > jsc_stdlib.log
 
 echo duktape
 ./wilton_dist/bin/wilton ../js/wilton/test/index.js -m ../js -j duktape
@@ -80,17 +80,17 @@ echo duktape
 echo chakracore
 ./wilton_dist/bin/wilton ../js/wilton/test/index.js -m ../js -j chakracore
 ./wilton_dist/bin/wilton ../js/test-runners/runSanityTests.js -m ./wilton_dist/std.min.wlib -j chakracore
-./wilton_dist/bin/wilton ../js/test-runners/runStdLibJsTests.js -m ../js -j chakracore > chakracore_stdlib.log
+./wilton_dist/bin/wilton ../js/test-runners/runStdLibTests.js -m ../js -j chakracore > chakracore_stdlib.log
 
 echo mozjs
 ./wilton_dist/bin/wilton ../js/wilton/test/index.js -m ../js -j mozjs
 ./wilton_dist/bin/wilton ../js/test-runners/runSanityTests.js -m ./wilton_dist/std.min.wlib -j mozjs
-./wilton_dist/bin/wilton ../js/test-runners/runStdLibJsTests.js -m ../js -j mozjs > mozjs_stdlib.log
+./wilton_dist/bin/wilton ../js/test-runners/runStdLibTests.js -m ../js -j mozjs > mozjs_stdlib.log
 
 echo v8
 ./wilton_dist/bin/wilton ../js/wilton/test/index.js -m ../js -j v8
 ./wilton_dist/bin/wilton ../js/test-runners/runSanityTests.js -m ./wilton_dist/std.min.wlib -j v8
-./wilton_dist/bin/wilton ../js/test-runners/runStdLibJsTests.js -m ../js -j v8 > v8_stdlib.log
+./wilton_dist/bin/wilton ../js/test-runners/runStdLibTests.js -m ../js -j v8 > v8_stdlib.log
 
 echo jvm
 pushd ../jni
