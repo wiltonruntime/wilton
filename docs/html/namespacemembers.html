@@ -23,7 +23,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">wilton.js
-   &#160;<span id="projectnumber">v201809061</span>
+   &#160;<span id="projectnumber">v201810281</span>
    </div>
   </td>
  </tr>
@@ -246,11 +246,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </li>
 <li>execute()
 : <a class="el" href="namespaceDBConnection.html#a9c47c632dc600528a3da720ac7241b08">DBConnection</a>
-, <a class="el" href="namespacepgsql.html#a78db29d66ca13e5ac7ed82abebc59ee0">pgsql</a>
 </li>
 <li>executeFile()
-: <a class="el" href="namespacepgsql.html#ac899b455470969ddf65c438043113c5a">pgsql</a>
-, <a class="el" href="namespaceDBConnection.html#a003195d78e12bd06d03b2b6f2b03420f">DBConnection</a>
+: <a class="el" href="namespaceDBConnection.html#a003195d78e12bd06d03b2b6f2b03420f">DBConnection</a>
 </li>
 <li>exists()
 : <a class="el" href="namespacefs.html#a0ed8576532a7fcf39e73c94658905809">fs</a>
@@ -318,6 +316,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </li>
 <li>initialize()
 : <a class="el" href="namespaceLogger.html#ac0deeb9edff5165bad2f288734f9460a">Logger</a>
+</li>
+<li>insertFile()
+: <a class="el" href="namespacefs.html#ac5c9a875f0ebb99efda23efa2568500a">fs</a>
 </li>
 <li>isAndroid()
 : <a class="el" href="namespacemisc.html#ae9308a3af5d39d2db7f587e8f744acf9">misc</a>
@@ -418,8 +419,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li>peek()
 : <a class="el" href="namespaceChannel.html#a48a32acc60df4ea478ba03fc0659dc63">Channel</a>
 </li>
-<li>PGconnection()
-: <a class="el" href="namespacepgsql.html#a3c2337b22b6d3720d5c41d1b3b788b80">pgsql</a>
+<li>PGConnection()
+: <a class="el" href="namespacePGConnection.html#a31a1aacbc4e55f2199e1a9adfefaf917">PGConnection</a>
 </li>
 <li>poll()
 : <a class="el" href="namespaceChannel.html#af3f31c5cce070639fe7b59e3597869bd">Channel</a>
@@ -441,8 +442,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 : <a class="el" href="namespaceRequest.html#a697131623d08fe426dfdcc8a4ccac360">Request</a>
 </li>
 <li>queryList()
-: <a class="el" href="namespacepgsql.html#a2c93092dd57677bf7179416743c99dd2">pgsql</a>
-, <a class="el" href="namespaceDBConnection.html#aae348d6ada352dcd72b5524ea5e4310d">DBConnection</a>
+: <a class="el" href="namespaceDBConnection.html#aae348d6ada352dcd72b5524ea5e4310d">DBConnection</a>
 </li>
 <li>queryObject()
 : <a class="el" href="namespaceDBConnection.html#a5ee96009478bced4ea4451d5c83054bb">DBConnection</a>
@@ -487,6 +487,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li>replaceNonPrintable()
 : <a class="el" href="namespacehex.html#a6da815329e0d4c984b5dec616c3d9a11">hex</a>
 </li>
+<li>resizeFile()
+: <a class="el" href="namespacefs.html#a67d3af9ed5554b855ca186db628395a3">fs</a>
+</li>
 <li>resolveHostname()
 : <a class="el" href="namespacenet.html#a44e6d3d06a8631b18965d33079f33438">net</a>
 </li>
@@ -494,8 +497,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 : <a class="el" href="namespacefs.html#a1fda3bed71a4ebad582773d8f9c0830f">fs</a>
 </li>
 <li>run()
-: <a class="el" href="namespacekiosk.html#a8ab01cc5b002ac4cbe02b46e3f9a61d1">kiosk</a>
-, <a class="el" href="namespacethread.html#a05ab54122ddd4e97414f5baaecbaab0c">thread</a>
+: <a class="el" href="namespacethread.html#a05ab54122ddd4e97414f5baaecbaab0c">thread</a>
+, <a class="el" href="namespacekiosk.html#a8ab01cc5b002ac4cbe02b46e3f9a61d1">kiosk</a>
 </li>
 <li>runGC()
 : <a class="el" href="namespacemisc.html#a0a08513f1948887e4a7a57348604f559">misc</a>
@@ -516,6 +519,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </li>
 <li>sendFile()
 : <a class="el" href="namespacehttpClient.html#a5f77a8a2e7d12423cc8a789184a37413">httpClient</a>
+</li>
+<li>sendFileByParts()
+: <a class="el" href="namespacehttpClient.html#ac82f88752875ab16dfc95db6d26c6122">httpClient</a>
 </li>
 <li>sendMustache()
 : <a class="el" href="namespaceRequest.html#a574fe938e31444d4ddef382c3b471987">Request</a>
@@ -643,7 +649,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Sep 6 2018 15:24:41 for wilton.js by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Oct 28 2018 20:49:50 for wilton.js by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>

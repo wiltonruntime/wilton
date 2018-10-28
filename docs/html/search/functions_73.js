@@ -4,6 +4,7 @@ var searchData=
   ['select',['select',['../namespaceChannel.html#ab8962af43e16bb954939344409adebd2',1,'Channel']]],
   ['send',['send',['../namespaceChannel.html#a34a4755dec89788a09d3a75046eaca97',1,'Channel::send()'],['../namespaceDelayedResponse.html#a262353fdc452f5c0e31ae9568d6d2d8b',1,'DelayedResponse::send()']]],
   ['sendfile',['sendFile',['../namespacehttpClient.html#a5f77a8a2e7d12423cc8a789184a37413',1,'httpClient']]],
+  ['sendfilebyparts',['sendFileByParts',['../namespacehttpClient.html#ac82f88752875ab16dfc95db6d26c6122',1,'httpClient']]],
   ['sendmustache',['sendMustache',['../namespaceRequest.html#a574fe938e31444d4ddef382c3b471987',1,'Request']]],
   ['sendredirect',['sendRedirect',['../namespaceRequest.html#a8aff8bb58ae8ac06c1d6c637775718c6',1,'Request']]],
   ['sendrequest',['sendRequest',['../namespacehttpClient.html#a33cb20df4470da7e266e580d082064e8',1,'httpClient::sendRequest()'],['../namespaceweb__httpClient.html#a2fa5ae0a70ab1df77d4aa46db6e67ce3',1,'web_httpClient::sendRequest()']]],

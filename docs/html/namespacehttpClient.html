@@ -23,7 +23,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">wilton.js
-   &#160;<span id="projectnumber">v201809061</span>
+   &#160;<span id="projectnumber">v201810281</span>
    </div>
   </td>
  </tr>
@@ -94,6 +94,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 Functions</h2></td></tr>
 <tr class="memitem:a5f77a8a2e7d12423cc8a789184a37413"><td class="memItemLeft" align="right" valign="top">Object&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehttpClient.html#a5f77a8a2e7d12423cc8a789184a37413">sendFile</a> (String url, Object options, Function|Undefined callback)</td></tr>
 <tr class="memdesc:a5f77a8a2e7d12423cc8a789184a37413"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send specified file to server.  <a href="#a5f77a8a2e7d12423cc8a789184a37413"></a><br/></td></tr>
+<tr class="memitem:ac82f88752875ab16dfc95db6d26c6122"><td class="memItemLeft" align="right" valign="top">Object&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehttpClient.html#ac82f88752875ab16dfc95db6d26c6122">sendFileByParts</a> (String url, Object options, Function|Undefined callback)</td></tr>
+<tr class="memdesc:ac82f88752875ab16dfc95db6d26c6122"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send specified file to server by parts.  <a href="#ac82f88752875ab16dfc95db6d26c6122"></a><br/></td></tr>
 <tr class="memitem:a33cb20df4470da7e266e580d082064e8"><td class="memItemLeft" align="right" valign="top">Object&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehttpClient.html#a33cb20df4470da7e266e580d082064e8">sendRequest</a> (String url, Object options, Function|Undefined callback)</td></tr>
 <tr class="memdesc:a33cb20df4470da7e266e580d082064e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send HTTP request to server.  <a href="#a33cb20df4470da7e266e580d082064e8"></a><br/></td></tr>
 </table>
@@ -159,6 +161,59 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><code>Object</code> response object, see details in <code><a class="el" href="namespacehttpClient.html#a33cb20df4470da7e266e580d082064e8" title="Send HTTP request to server.">sendRequest()</a></code> function </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ac82f88752875ab16dfc95db6d26c6122"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Object httpClient::sendFileByParts </td>
+          <td>(</td>
+          <td class="paramtype">String&#160;</td>
+          <td class="paramname"><em>url</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Object&#160;</td>
+          <td class="paramname"><em>options</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Function|Undefined&#160;</td>
+          <td class="paramname"><em>callback</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Sends specified file to server using <code>POST</code> request method by default. File splitted into parts.</p>
+<p>Specified file is read in streaming mode without loading the whole file into memory.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">url</td><td><code>String</code> URL of the HTTP server </td></tr>
+    <tr><td class="paramname">options</td><td><code>Object</code> configuration object, see details in <code><a class="el" href="namespacehttpClient.html#a33cb20df4470da7e266e580d082064e8" title="Send HTTP request to server.">sendRequest()</a></code> function and also sendOptions <code>Object</code> configuration object, see possible options below. </td></tr>
+    <tr><td class="paramname">callback</td><td><code>Function|Undefined</code> callback to receive result or error </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><code>Object</code> response object, see details below</dd></dl>
+<p><b>0</b> <code>Array</code> Array of <code>response objects, see details in</code><a class="el" href="namespacehttpClient.html#a33cb20df4470da7e266e580d082064e8" title="Send HTTP request to server.">sendRequest()</a><code>function | strings with error messages</code> <b>1</b> <code>Array</code> ... <b>2</b> <code>Array</code> ... ...</p>
+<p><b>sendOptions</b></p>
+<ul>
+<li><b>fileName</b> <code>String</code> name of file that will be created on server to store sended data</li>
+<li><b>fullTimeoutMillis</b> Number|Undefined<code>consumer threads wakeup timeout, in milliseconds, default value:</code>10000<code>, equal to 10 seconds.</code></li>
+<li><code>__maxChunkSize__</code>Number<code>maximum size of sent chunk</code></li>
+<li><code>__fileSize__</code>Number|Undefined<code>the size of the file being sent</code></li>
+<li><code>__filePath__</code>String|Undefined<code>path to file that will be sent.</code></li>
+<li><code>__url__</code>String|Undefined` URL of the HTTP server </li>
+</ul>
 
 </div>
 </div>
@@ -277,7 +332,7 @@ Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Sep 6 2018 15:24:41 for wilton.js by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Oct 28 2018 20:49:50 for wilton.js by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>

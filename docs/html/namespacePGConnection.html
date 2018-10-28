@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>wilton.js: pgsql Namespace Reference</title>
+<title>wilton.js: PGConnection Namespace Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -23,7 +23,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">wilton.js
-   &#160;<span id="projectnumber">v201809061</span>
+   &#160;<span id="projectnumber">v201810281</span>
    </div>
   </td>
  </tr>
@@ -82,24 +82,18 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div class="summary">
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">pgsql Namespace Reference</div>  </div>
+<div class="title">PGConnection Namespace Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p><b>wilton/PGconnection</b> <br/>
+<p><b>wilton/PGConnection</b> <br/>
  Connect to PostgreSQL database.  
 <a href="#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a78db29d66ca13e5ac7ed82abebc59ee0"><td class="memItemLeft" align="right" valign="top">Undefined&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacepgsql.html#a78db29d66ca13e5ac7ed82abebc59ee0">execute</a> (String sql, Object|Undefined params, Function|Undefined callback)</td></tr>
-<tr class="memdesc:a78db29d66ca13e5ac7ed82abebc59ee0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Execute specified SQL query.  <a href="#a78db29d66ca13e5ac7ed82abebc59ee0"></a><br/></td></tr>
-<tr class="memitem:ac899b455470969ddf65c438043113c5a"><td class="memItemLeft" align="right" valign="top">Number&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacepgsql.html#ac899b455470969ddf65c438043113c5a">executeFile</a> (String filePath, Function|Undefined callback)</td></tr>
-<tr class="memdesc:ac899b455470969ddf65c438043113c5a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Execute all queries from file.  <a href="#ac899b455470969ddf65c438043113c5a"></a><br/></td></tr>
-<tr class="memitem:a3c2337b22b6d3720d5c41d1b3b788b80"><td class="memItemLeft" align="right" valign="top">Object&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacepgsql.html#a3c2337b22b6d3720d5c41d1b3b788b80">PGconnection</a> (String url, Function|Undefined callback)</td></tr>
-<tr class="memdesc:a3c2337b22b6d3720d5c41d1b3b788b80"><td class="mdescLeft">&#160;</td><td class="mdescRight">Open connection to database.  <a href="#a3c2337b22b6d3720d5c41d1b3b788b80"></a><br/></td></tr>
-<tr class="memitem:a2c93092dd57677bf7179416743c99dd2"><td class="memItemLeft" align="right" valign="top">Array&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacepgsql.html#a2c93092dd57677bf7179416743c99dd2">queryList</a> (String sql, Object|Undefined params, Function|Undefined callback)</td></tr>
-<tr class="memdesc:a2c93092dd57677bf7179416743c99dd2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Execute <code>select</code> query returning result as a list.  <a href="#a2c93092dd57677bf7179416743c99dd2"></a><br/></td></tr>
+<tr class="memitem:a31a1aacbc4e55f2199e1a9adfefaf917"><td class="memItemLeft" align="right" valign="top">Object&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacePGConnection.html#a31a1aacbc4e55f2199e1a9adfefaf917">PGConnection</a> (String url, Function|Undefined callback)</td></tr>
+<tr class="memdesc:a31a1aacbc4e55f2199e1a9adfefaf917"><td class="mdescLeft">&#160;</td><td class="mdescRight">Open connection to database.  <a href="#a31a1aacbc4e55f2199e1a9adfefaf917"></a><br/></td></tr>
 </table>
 <a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>This module allows to work with PostgreSQL database.</p>
@@ -107,7 +101,7 @@ Functions</h2></td></tr>
 <p>Postgres connection can be closed manually to release system resource, otherwise it will be closed during the shutdown.</p>
 <p>Usage example:</p>
 <div class="fragment"><div class="line"><span class="comment">// open connection</span></div>
-<div class="line">var conn = <span class="keyword">new</span> <a class="code" href="namespacepgsql.html#a3c2337b22b6d3720d5c41d1b3b788b80" title="Open connection to database.">PGconnection</a>(<span class="stringliteral">&quot;postgresql://host=127.0.0.1 port=5432 dbname=test user=test password=test&quot;</span>);</div>
+<div class="line">var conn = <span class="keyword">new</span> <a class="code" href="namespacePGConnection.html#a31a1aacbc4e55f2199e1a9adfefaf917" title="Open connection to database.">PGConnection</a>(<span class="stringliteral">&quot;postgresql://host=127.0.0.1 port=5432 dbname=test user=test password=test&quot;</span>);</div>
 <div class="line"></div>
 <div class="line"><span class="comment">// execute DDL</span></div>
 <div class="line">conn.execute(<span class="stringliteral">&quot;create table t1 (foo varchar, bar int)&quot;</span>);</div>
@@ -129,89 +123,12 @@ Functions</h2></td></tr>
 <div class="line"><span class="comment">// close connection</span></div>
 <div class="line">conn.close();</div>
 </div><!-- fragment --> </div><h2>Function Documentation</h2>
-<a class="anchor" id="a78db29d66ca13e5ac7ed82abebc59ee0"></a>
+<a class="anchor" id="a31a1aacbc4e55f2199e1a9adfefaf917"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">Undefined pgsql::execute </td>
-          <td>(</td>
-          <td class="paramtype">String&#160;</td>
-          <td class="paramname"><em>sql</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Object|Undefined&#160;</td>
-          <td class="paramname"><em>params</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Function|Undefined&#160;</td>
-          <td class="paramname"><em>callback</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">sql</td><td><code>String</code> SQL query </td></tr>
-    <tr><td class="paramname">params</td><td><code>Object|Undefined</code> query parameters object </td></tr>
-    <tr><td class="paramname">callback</td><td><code>Function|Undefined</code> callback to receive result or error </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd><code>Undefined</code> </dd></dl>
-
-</div>
-</div>
-<a class="anchor" id="ac899b455470969ddf65c438043113c5a"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">Number pgsql::executeFile </td>
-          <td>(</td>
-          <td class="paramtype">String&#160;</td>
-          <td class="paramname"><em>filePath</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Function|Undefined&#160;</td>
-          <td class="paramname"><em>callback</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Queries are parsed from file splitting it by <code>;</code> symbols and then executed one by one.</p>
-<p>Comment-only lines are ignored;</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">filePath</td><td><code>String</code> path to SQL file </td></tr>
-    <tr><td class="paramname">callback</td><td><code>Function|Undefined</code> callback to receive result or error </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd><code>Number</code> number of queries executed </dd></dl>
-
-</div>
-</div>
-<a class="anchor" id="a3c2337b22b6d3720d5c41d1b3b788b80"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">Object pgsql::PGconnection </td>
+          <td class="memname">Object PGConnection::PGConnection </td>
           <td>(</td>
           <td class="paramtype">String&#160;</td>
           <td class="paramname"><em>url</em>, </td>
@@ -241,52 +158,10 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a2c93092dd57677bf7179416743c99dd2"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">Array pgsql::queryList </td>
-          <td>(</td>
-          <td class="paramtype">String&#160;</td>
-          <td class="paramname"><em>sql</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Object|Undefined&#160;</td>
-          <td class="paramname"><em>params</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Function|Undefined&#160;</td>
-          <td class="paramname"><em>callback</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Executes <code>select</code> query and returns its result as a list.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">sql</td><td><code>String</code> SQL query </td></tr>
-    <tr><td class="paramname">params</td><td><code>Object|Undefined</code> query parameters object </td></tr>
-    <tr><td class="paramname">callback</td><td><code>Function|Undefined</code> callback to receive result or error </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd><code>Array</code> list of objects, one object per returned row </dd></dl>
-
-</div>
-</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Sep 6 2018 15:24:41 for wilton.js by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Oct 28 2018 20:49:50 for wilton.js by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>

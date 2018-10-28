@@ -23,7 +23,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">wilton.js
-   &#160;<span id="projectnumber">v201809061</span>
+   &#160;<span id="projectnumber">v201810281</span>
    </div>
   </td>
  </tr>
@@ -100,6 +100,8 @@ Functions</h2></td></tr>
 <tr class="memdesc:a1ffff491daba7a970f0b7691ebe4d286"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy a file.  <a href="#a1ffff491daba7a970f0b7691ebe4d286"></a><br/></td></tr>
 <tr class="memitem:a0ed8576532a7fcf39e73c94658905809"><td class="memItemLeft" align="right" valign="top">Boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacefs.html#a0ed8576532a7fcf39e73c94658905809">exists</a> (String path, Function|Undefined callback)</td></tr>
 <tr class="memdesc:a0ed8576532a7fcf39e73c94658905809"><td class="mdescLeft">&#160;</td><td class="mdescRight">Test whether or not the given path exists by checking with the file system.  <a href="#a0ed8576532a7fcf39e73c94658905809"></a><br/></td></tr>
+<tr class="memitem:ac5c9a875f0ebb99efda23efa2568500a"><td class="memItemLeft" align="right" valign="top">Undefined&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacefs.html#ac5c9a875f0ebb99efda23efa2568500a">insertFile</a> (String sourcePath, String destPath, Number offset, Function|Undefined callback)</td></tr>
+<tr class="memdesc:ac5c9a875f0ebb99efda23efa2568500a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes the contents from one file to another.  <a href="#ac5c9a875f0ebb99efda23efa2568500a"></a><br/></td></tr>
 <tr class="memitem:a1cc765acc0bcf6ec7a67548a05fad3a0"><td class="memItemLeft" align="right" valign="top">Undefined&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacefs.html#a1cc765acc0bcf6ec7a67548a05fad3a0">mkdir</a> (String path, Undefined mode, Function|Undefined callback)</td></tr>
 <tr class="memdesc:a1cc765acc0bcf6ec7a67548a05fad3a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a directory.  <a href="#a1cc765acc0bcf6ec7a67548a05fad3a0"></a><br/></td></tr>
 <tr class="memitem:a15afc2e890ad668f9842536e3baafaad"><td class="memItemLeft" align="right" valign="top">Array&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacefs.html#a15afc2e890ad668f9842536e3baafaad">readdir</a> (String path, Undefined options, Function|Undefined callback)</td></tr>
@@ -112,6 +114,8 @@ Functions</h2></td></tr>
 <tr class="memdesc:a82b63dc149c659a439232bc46eaa7c32"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert relative path into absolute one.  <a href="#a82b63dc149c659a439232bc46eaa7c32"></a><br/></td></tr>
 <tr class="memitem:a732ee8601bf54bf7ae7cf75fd96c442c"><td class="memItemLeft" align="right" valign="top">Undefined&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacefs.html#a732ee8601bf54bf7ae7cf75fd96c442c">rename</a> (String oldPath, String newPath, Function|Undefined callback)</td></tr>
 <tr class="memdesc:a732ee8601bf54bf7ae7cf75fd96c442c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rename (move) file or directory.  <a href="#a732ee8601bf54bf7ae7cf75fd96c442c"></a><br/></td></tr>
+<tr class="memitem:a67d3af9ed5554b855ca186db628395a3"><td class="memItemLeft" align="right" valign="top">Undefined&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacefs.html#a67d3af9ed5554b855ca186db628395a3">resizeFile</a> (String path, Number size, Function|Undefined callback)</td></tr>
+<tr class="memdesc:a67d3af9ed5554b855ca186db628395a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resizes file.  <a href="#a67d3af9ed5554b855ca186db628395a3"></a><br/></td></tr>
 <tr class="memitem:a1fda3bed71a4ebad582773d8f9c0830f"><td class="memItemLeft" align="right" valign="top">Undefined&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacefs.html#a1fda3bed71a4ebad582773d8f9c0830f">rmdir</a> (String path, Function|Undefined callback)</td></tr>
 <tr class="memdesc:a1fda3bed71a4ebad582773d8f9c0830f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Delete directory.  <a href="#a1fda3bed71a4ebad582773d8f9c0830f"></a><br/></td></tr>
 <tr class="memitem:abddacd3199c05eaf7e27a2dadc5892d5"><td class="memItemLeft" align="right" valign="top">Object&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacefs.html#abddacd3199c05eaf7e27a2dadc5892d5">stat</a> (String path, Function|Undefined callback)</td></tr>
@@ -311,6 +315,55 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><code>Boolean</code> <code>true</code> if specified path exists, false otherwise </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ac5c9a875f0ebb99efda23efa2568500a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Undefined fs::insertFile </td>
+          <td>(</td>
+          <td class="paramtype">String&#160;</td>
+          <td class="paramname"><em>sourcePath</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">String&#160;</td>
+          <td class="paramname"><em>destPath</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Number&#160;</td>
+          <td class="paramname"><em>offset</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Function|Undefined&#160;</td>
+          <td class="paramname"><em>callback</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Writes the contents of the specified source file to destination file, starts from offset.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">sourcePath</td><td><code>String</code> path to source file </td></tr>
+    <tr><td class="paramname">destPath</td><td><code>String</code> path to destination file </td></tr>
+    <tr><td class="paramname">offset</td><td><code>Number</code> offset from destination file write position </td></tr>
+    <tr><td class="paramname">callback</td><td><code>Function|Undefined</code> callback to receive result or error </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><code>Undefined</code> </dd></dl>
 
 </div>
 </div>
@@ -564,6 +617,48 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a67d3af9ed5554b855ca186db628395a3"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Undefined fs::resizeFile </td>
+          <td>(</td>
+          <td class="paramtype">String&#160;</td>
+          <td class="paramname"><em>path</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Number&#160;</td>
+          <td class="paramname"><em>size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Function|Undefined&#160;</td>
+          <td class="paramname"><em>callback</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Resizes existing file or creates file with specified size</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">path</td><td><code>String</code> path to file </td></tr>
+    <tr><td class="paramname">size</td><td><code>Number</code> offset from current target file write position </td></tr>
+    <tr><td class="paramname">callback</td><td><code>Function|Undefined</code> callback to receive result or error </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><code>Undefined</code> </dd></dl>
+
+</div>
+</div>
 <a class="anchor" id="a1fda3bed71a4ebad582773d8f9c0830f"></a>
 <div class="memitem">
 <div class="memproto">
@@ -773,7 +868,7 @@ Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Sep 6 2018 15:24:41 for wilton.js by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Oct 28 2018 20:49:50 for wilton.js by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>
