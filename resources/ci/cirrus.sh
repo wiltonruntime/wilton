@@ -122,7 +122,7 @@ if [ "x" != "x${CIRRUS_TAG}" ] ;  then
     export IMAGE=wilton_${CIRRUS_TAG}_${WILTON_ARCH}_${WILTON_IMAGE_POSTFIX}
     mv ./wilton_${CIRRUS_TAG} ${IMAGE}
     zip -qyr9 ${IMAGE}.zip ${IMAGE}
-    ../../ghr/ghr -t ${GITHUB_TOKEN} -u wilton-iot -r test-ci -c ${CIRRUS_CHANGE_IN_REPO} ${CIRRUS_TAG} ${IMAGE}.zip
+    ../../ghr/ghr -t ${GITHUB_TOKEN} -u wilton-iot -r wilton -c ${CIRRUS_CHANGE_IN_REPO} ${CIRRUS_TAG} ${IMAGE}.zip
 fi
 
 echo WILTON_FINISH_SUCCESS
