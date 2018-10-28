@@ -20,8 +20,8 @@ build: off
 
 environment:
   matrix:
-    - WILTON_WIN_ARCH: _x86
-    - WILTON_WIN_ARCH: ""
+    - WILTON_WIN_ARCH: _x86.
+    - WILTON_WIN_ARCH: .
 
 matrix:
   fast_finish: true
@@ -34,19 +34,19 @@ install:
 
 build_script:
   - echo "PR support is enabled for root repo"
-  - cmd /c resources\ci\appveyor%WILTON_WIN_ARCH%.bat
-  - robocopy build c:/projects/wilton/ wilton_%APPVEYOR_REPO_TAG_NAME%%WILTON_WIN_ARCH%.msi /ndl /njh /njs /nc /ns /np || true
+  - cmd /c resources\ci\appveyor%WILTON_WIN_ARCH%bat
+  - robocopy build c:/projects/wilton/ wilton_%APPVEYOR_REPO_TAG_NAME%%WILTON_WIN_ARCH%msi /ndl /njh /njs /nc /ns /np || true
 
 artifacts:
-  - path: wilton_%APPVEYOR_REPO_TAG_NAME%%WILTON_WIN_ARCH%.msi
-    name: wilton_%APPVEYOR_REPO_TAG_NAME%%WILTON_WIN_ARCH%.msi
+  - path: wilton_%APPVEYOR_REPO_TAG_NAME%%WILTON_WIN_ARCH%msi
+    name: wilton_%APPVEYOR_REPO_TAG_NAME%%WILTON_WIN_ARCH%msi
 
 deploy:
   description: "%APPVEYOR_REPO_TAG_NAME%"
   provider: GitHub
   auth_token:
     secure: VShPexae/Ct8Y4Rn0YvHmiX/Sih1Xs+qGHfU2JEmuAuXVb/KVsc8B72MlG7TCw0e
-  artifact: wilton_%APPVEYOR_REPO_TAG_NAME%%WILTON_WIN_ARCH%.msi
+  artifact: wilton_%APPVEYOR_REPO_TAG_NAME%%WILTON_WIN_ARCH%msi
   draft: false
   prerelease: false
   on:

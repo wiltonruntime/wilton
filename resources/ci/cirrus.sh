@@ -60,7 +60,7 @@ if [ "x" = "x${CIRRUS_TAG}" ] ;  then
 else
     cmake .. -DSTATICLIB_TOOLCHAIN=linux_${WILTON_ARCH}_gcc -DWILTON_BUILD_FLAVOUR=${WILTON_BUILD_FLAVOUR} -DWILTON_RELEASE=${CIRRUS_TAG}
 fi
-make #-j 2
+make -j 2
 make dist_debug > dist_debug.log
 
 # test
@@ -120,7 +120,7 @@ fi
 
 if [ "x" != "x${CIRRUS_TAG}" ] ;  then
     export IMAGE=wilton_${CIRRUS_TAG}_${WILTON_ARCH}_${WILTON_IMAGE_POSTFIX}
-    mv ./build/wilton_${CIRRUS_TAG} ${IMAGE}
+    mv ./wilton_${CIRRUS_TAG} ${IMAGE}
     zip -qyr9 ${IMAGE}.zip ${IMAGE}
     ../ghr/ghr -t ${GITHUB_TOKEN} -u wilton-iot -r test-ci -c ${CIRRUS_CHANGE_IN_REPO} ${CIRRUS_TAG} ${IMAGE}.zip
 fi
