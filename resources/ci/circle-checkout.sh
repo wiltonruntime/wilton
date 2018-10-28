@@ -24,7 +24,7 @@ if [ "xwheezy" = "x${WILTON_BUILD_FLAVOUR}" ] ; then
 fi
 
 if [ "xfedora" = "x${WILTON_BUILD_FLAVOUR}" ] ; then
-    dnf update -y
+    dnf update -y || true # Failed to synchronize cache for repo 'updates'
 fi
 
 # core

@@ -60,7 +60,7 @@ if [ "x" = "x${CIRRUS_TAG}" ] ;  then
 else
     cmake .. -DSTATICLIB_TOOLCHAIN=linux_${WILTON_ARCH}_gcc -DWILTON_BUILD_FLAVOUR=${WILTON_BUILD_FLAVOUR} -DWILTON_RELEASE=${CIRRUS_TAG}
 fi
-make -j 2
+make #-j 2
 make dist_debug > dist_debug.log
 
 # test

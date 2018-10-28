@@ -17,14 +17,18 @@
 set -e
 set -x
 
-echo core >> repos.list
-echo jni >> repos.list
-echo `ls ./engines` >> repos.list
-echo `ls ./modules` >> repos.list
+echo ./core >> repos.list
+echo ./jni >> repos.list
+for rpe in `ls ./engines` ; do
+    echo ./engines/$rpe >> repos.list
+done
+for rpm in `ls ./modules` ; do
+    echo ./modules/$rpm >> repos.list
+done
 
 for repo in `cat ./repos.list` ; do
     count=`ls $repo | wc -l`
-    if [ "x0" != "xcount" ] ; then
+    if [ "x0" != "x$count" ] ; then
         pushd $repo
         git checkout master
         git pull --quiet

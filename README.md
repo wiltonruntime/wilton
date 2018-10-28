@@ -44,6 +44,13 @@ Changelog
 
 **2018-09-06**
 
+ * `v201810281`
+ * http file file send with partial re-send support
+ * inspector support in `wilton/kiosk`
+ * `wilton/Server`, `PGConnection`, `wilton/usb` and `pwdauth` fixes
+
+**2018-09-06**
+
  * `v201809061`
  * dedicated PostgreSQL connection API
  * sqlite crash fix and other DB fixes
