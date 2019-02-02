@@ -58,9 +58,9 @@ git submodule update --quiet --init jni
 # js
 rm -rf js
 git clone --quiet https://github.com/wilton-iot/js-libs-ci-monorepo.git js
-if [ "x" != "x${CIRCLE_TAG}" ] ;  then
+if [ "x" != "x${CIRRUS_TAG}" ] ;  then
     pushd js
-    git checkout ${CIRCLE_TAG}
+    git checkout ${CIRRUS_TAG}
     popd
 fi
 # engines
