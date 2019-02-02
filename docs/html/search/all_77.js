@@ -4,6 +4,7 @@ var searchData=
   ['waitfortcpconnection',['waitForTcpConnection',['../namespacenet.html#ac4f9c3a88c53ee741cb5438c356f04cc',1,'net']]],
   ['warn',['warn',['../namespaceLogger.html#a7a8918203e80277b198e9c6d54f5a527',1,'Logger']]],
   ['web_5fhttpclient',['web_httpClient',['../namespaceweb__httpClient.html',1,'']]],
+  ['web_5fwsclient',['web_wsClient',['../namespaceweb__wsClient.html',1,'']]],
   ['wiltoncall',['wiltoncall',['../namespacewiltoncall.html',1,'wiltoncall'],['../namespacewiltoncall.html#a80621568403a56f3217f42bd129585e2',1,'wiltoncall::wiltoncall()']]],
   ['wiltonconfig',['wiltonConfig',['../namespacemisc.html#a0ec198a58759fe92757cd6316037be2a',1,'misc']]],
   ['write',['write',['../namespaceSocket.html#af194b5dedb2dd6ddc645ce73734eccf7',1,'Socket']]],

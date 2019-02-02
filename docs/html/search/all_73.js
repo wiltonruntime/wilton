@@ -2,7 +2,7 @@ var searchData=
 [
   ['savetofile',['saveToFile',['../namespacePDFDocument.html#abec433b98c94d117f454fa534adb6f78',1,'PDFDocument']]],
   ['select',['select',['../namespaceChannel.html#ab8962af43e16bb954939344409adebd2',1,'Channel']]],
-  ['send',['send',['../namespaceChannel.html#a34a4755dec89788a09d3a75046eaca97',1,'Channel::send()'],['../namespaceDelayedResponse.html#a262353fdc452f5c0e31ae9568d6d2d8b',1,'DelayedResponse::send()']]],
+  ['send',['send',['../namespaceChannel.html#a34a4755dec89788a09d3a75046eaca97',1,'Channel::send()'],['../namespaceDelayedResponse.html#a262353fdc452f5c0e31ae9568d6d2d8b',1,'DelayedResponse::send()'],['../namespaceweb__wsClient.html#a0db91d05daaca2e0989f5baed88880f0',1,'web_wsClient::send()']]],
   ['sendfile',['sendFile',['../namespacehttpClient.html#a5f77a8a2e7d12423cc8a789184a37413',1,'httpClient']]],
   ['sendfilebyparts',['sendFileByParts',['../namespacehttpClient.html#ac82f88752875ab16dfc95db6d26c6122',1,'httpClient']]],
   ['sendmustache',['sendMustache',['../namespaceRequest.html#a574fe938e31444d4ddef382c3b471987',1,'Request']]],
@@ -23,6 +23,7 @@ var searchData=
   ['stat',['stat',['../namespacefs.html#abddacd3199c05eaf7e27a2dadc5892d5',1,'fs']]],
   ['stdinreadline',['stdinReadline',['../namespacemisc.html#a39e77b40bdeda050c4ae1495d7a52c4d',1,'misc']]],
   ['stop',['stop',['../namespaceCronTask.html#a1001f0b8d854d68f0cd6f6b1870f847c',1,'CronTask::stop()'],['../namespaceServer.html#a7e5acc0cd99523bb3460f71260a56b13',1,'Server::stop()']]],
+  ['subscribe',['subscribe',['../namespaceweb__wsClient.html#a45d0164af62298894a9fa8877404758a',1,'web_wsClient']]],
   ['symlink',['symlink',['../namespacefs.html#a74187d7c1fde6f3290dc17cf86467ddf',1,'fs']]],
   ['synchronize',['synchronize',['../namespaceChannel.html#aeb092b42096f8dc47eb2af240adcccb4',1,'Channel']]]
 ];
