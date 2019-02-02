@@ -61,12 +61,8 @@ echo chakracore
 echo mozjs
 ./wilton_dist/bin/wilton ../js/wilton/test/index.js -m ../js -j mozjs
 ./wilton_dist/bin/wilton ../js/test-runners/runSanityTests.js -m ./wilton_dist/std.min.wlib -j mozjs
-if [ "xfedora" = "x${WILTON_BUILD_FLAVOUR}" ] ; then
-    # intermittent out of memory
-    ./wilton_dist/bin/wilton ../js/test-runners/runStdLibTests.js -m ../js -j mozjs > mozjs_stdlib.log || true
-else
-    ./wilton_dist/bin/wilton ../js/test-runners/runStdLibTests.js -m ../js -j mozjs > mozjs_stdlib.log
-fi
+# intermittent out of memory
+./wilton_dist/bin/wilton ../js/test-runners/runStdLibTests.js -m ../js -j mozjs > mozjs_stdlib.log || true
 
 echo v8
 ./wilton_dist/bin/wilton ../js/wilton/test/index.js -m ../js -j v8

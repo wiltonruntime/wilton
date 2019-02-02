@@ -42,10 +42,17 @@ This project is released under the [Apache License 2.0](http://www.apache.org/li
 Changelog
 ---------
 
+**2019-02-02**
+
+ * `v201902021`
+ * `PGConnection` and `pwdauth` fixes
+ * `OpenSSL` and `cURL` updates
+ * CI setup enhancements
+
 **2018-09-06**
 
  * `v201810281`
- * http file file send with partial re-send support
+ * http file send with partial re-send support
  * inspector support in `wilton/kiosk`
  * `wilton/Server`, `PGConnection`, `wilton/usb` and `pwdauth` fixes
 
