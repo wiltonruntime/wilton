@@ -42,6 +42,13 @@ This project is released under the [Apache License 2.0](http://www.apache.org/li
 Changelog
 ---------
 
+**2019-02-21**
+
+ * `v201902211`
+ * `PGConnection` fix
+ * `wilton_process` and `wilton_cron` minor fixes
+ * `lodash` updated to v4.17.11
+
 **2019-02-02**
 
  * `v201902021`
