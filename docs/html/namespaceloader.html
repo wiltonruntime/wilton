@@ -23,7 +23,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">wilton.js
-   &#160;<span id="projectnumber">v201902021</span>
+   &#160;<span id="projectnumber">v201902211</span>
    </div>
   </td>
  </tr>
@@ -92,8 +92,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2><a name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:a47a280eee3d7e43158849d601974d4e8"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceloader.html#a47a280eee3d7e43158849d601974d4e8">findModuleDirectory</a> (String modname, Function|Undefined callback)</td></tr>
+<tr class="memdesc:a47a280eee3d7e43158849d601974d4e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find out the full path to the specified module direcotory.  <a href="#a47a280eee3d7e43158849d601974d4e8"></a><br/></td></tr>
 <tr class="memitem:a1f1acda6a7e200c29eafabf49aa34bf2"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceloader.html#a1f1acda6a7e200c29eafabf49aa34bf2">findModulePath</a> (String modname, Function|Undefined callback)</td></tr>
-<tr class="memdesc:a1f1acda6a7e200c29eafabf49aa34bf2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find the full path to the specified module.  <a href="#a1f1acda6a7e200c29eafabf49aa34bf2"></a><br/></td></tr>
+<tr class="memdesc:a1f1acda6a7e200c29eafabf49aa34bf2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find out the full path to the specified module.  <a href="#a1f1acda6a7e200c29eafabf49aa34bf2"></a><br/></td></tr>
 <tr class="memitem:ac71a90841800ec09612ffe012f14d5b1"><td class="memItemLeft" align="right" valign="top">Object&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceloader.html#ac71a90841800ec09612ffe012f14d5b1">loadAppConfig</a> (Function|Undefined callback)</td></tr>
 <tr class="memdesc:ac71a90841800ec09612ffe012f14d5b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load <code>config.json</code> file from <code>appdir/conf/</code> directory.  <a href="#ac71a90841800ec09612ffe012f14d5b1"></a><br/></td></tr>
 <tr class="memitem:ae8ca04831c4de603c6abe7c4ab059e71"><td class="memItemLeft" align="right" valign="top">Object&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceloader.html#ae8ca04831c4de603c6abe7c4ab059e71">loadModuleJson</a> (String modname, Function|Undefined callback)</td></tr>
@@ -117,6 +119,41 @@ Functions</h2></td></tr>
 <div class="line"><span class="comment">// load application config from `appdir/conf/` directory</span></div>
 <div class="line">var conf = loader.loadAppConfig();</div>
 </div><!-- fragment --> </div><h2>Function Documentation</h2>
+<a class="anchor" id="a47a280eee3d7e43158849d601974d4e8"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">String loader::findModuleDirectory </td>
+          <td>(</td>
+          <td class="paramtype">String&#160;</td>
+          <td class="paramname"><em>modname</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Function|Undefined&#160;</td>
+          <td class="paramname"><em>callback</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Finds out directory where resides file of the specified module.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">modname</td><td><code>String</code> module ID </td></tr>
+    <tr><td class="paramname">callback</td><td><code>Function|Undefined</code> callback to receive result or error </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><code>String</code> path to module directory </dd></dl>
+
+</div>
+</div>
 <a class="anchor" id="a1f1acda6a7e200c29eafabf49aa34bf2"></a>
 <div class="memitem">
 <div class="memproto">
@@ -141,9 +178,10 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Returns the full path to the specified module. Returned path may point either to file system or to ZIP path.</p>
+<p>Note, that to get the path to module file in FS input module ID must include the file extension, example: <code>module.id + ".js"</code>.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">modname</td><td><code>String</code> </td></tr>
+    <tr><td class="paramname">modname</td><td><code>String</code> module ID </td></tr>
     <tr><td class="paramname">callback</td><td><code>Function|Undefined</code> callback to receive result or error </td></tr>
   </table>
   </dd>
@@ -260,7 +298,7 @@ Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Feb 2 2019 22:55:06 for wilton.js by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Feb 21 2019 15:05:02 for wilton.js by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>
