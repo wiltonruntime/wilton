@@ -30,14 +30,18 @@ git submodule update --quiet --init deps/external_curl
 git submodule update --quiet --init deps/lookaside_curl
 git submodule update --quiet --init deps/external_duktape
 git submodule update --quiet --init deps/external_hpdf
-git submodule update --quiet --init deps/external_icu
 git submodule update --quiet --init deps/lookaside_libharu
+git submodule update --quiet --init deps/external_icu
 git submodule update --quiet --init deps/external_jansson
 git submodule update --quiet --init deps/lookaside_jansson
+git submodule update --quiet --init deps/external_libgit2
+git submodule update --quiet --init deps/lookaside_libgit2
 git submodule update --quiet --init deps/external_libpng
 git submodule update --quiet --init deps/lookaside_libpng
 git submodule update --quiet --init deps/external_libpq
 git submodule update --quiet --init deps/lookaside_postgresql
+git submodule update --quiet --init deps/external_libssh2
+git submodule update --quiet --init deps/lookaside_libssh2
 git submodule update --quiet --init deps/external_log4cplus
 git submodule update --quiet --init deps/lookaside_log4cplus
 git submodule update --quiet --init deps/external_mozjs
@@ -101,6 +105,7 @@ git submodule update --quiet --init modules/wilton_crypto
 git submodule update --quiet --init modules/wilton_db
 git submodule update --quiet --init modules/wilton_fs
 git submodule update --quiet --init modules/wilton_ghc
+git submodule update --quiet --init modules/wilton_git
 git submodule update --quiet --init modules/wilton_http
 git submodule update --quiet --init modules/wilton_kiosk
 git submodule update --quiet --init modules/wilton_loader

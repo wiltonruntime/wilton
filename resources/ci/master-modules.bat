@@ -30,6 +30,7 @@ pushd "modules/wilton_crypto" && git checkout master && git pull --quiet && popd
 pushd "modules/wilton_db" && git checkout master && git pull --quiet && popd || exit /b 1
 pushd "modules/wilton_fs" && git checkout master && git pull --quiet && popd || exit /b 1
 pushd "modules/wilton_ghc" && git checkout master && git pull --quiet && popd || exit /b 1
+pushd "modules/wilton_git" && git checkout master && git pull --quiet && popd || exit /b 1
 pushd "modules/wilton_http" && git checkout master && git pull --quiet && popd || exit /b 1
 pushd "modules/wilton_loader" && git checkout master && git pull --quiet && popd || exit /b 1
 pushd "modules/wilton_logging" && git checkout master && git pull --quiet && popd || exit /b 1

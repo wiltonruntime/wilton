@@ -595,3 +595,18 @@
 [submodule "modules/wilton_service"]
 	path = modules/wilton_service
 	url = https://github.com/wilton-iot/wilton_service.git
+[submodule "deps/lookaside_libssh2"]
+	path = deps/lookaside_libssh2
+	url = https://github.com/staticlibs/lookaside_libssh2.git
+[submodule "deps/external_libssh2"]
+	path = deps/external_libssh2
+	url = https://github.com/staticlibs/external_libssh2.git
+[submodule "deps/lookaside_libgit2"]
+	path = deps/lookaside_libgit2
+	url = https://github.com/staticlibs/lookaside_libgit2.git
+[submodule "deps/external_libgit2"]
+	path = deps/external_libgit2
+	url = https://github.com/staticlibs/external_libgit2.git
+[submodule "modules/wilton_git"]
+	path = modules/wilton_git
+	url = https://github.com/wilton-iot/wilton_git.git

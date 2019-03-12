@@ -63,6 +63,7 @@ BuildRequires:  webkitgtk4-devel
 
 %if ! 0%{?epel}
 BuildRequires:  curl-devel
+BuildRequires:  libgit2-devel
 BuildRequires:  libharu-devel
 %endif
 
@@ -81,8 +82,10 @@ git submodule update --init deps/lookaside_curl
 git submodule update --init deps/external_chakracore
 git submodule update --init deps/external_duktape
 git submodule update --init deps/external_hpdf
-git submodule update --init deps/external_icu
 git submodule update --init deps/lookaside_libharu
+git submodule update --init deps/external_libgit2
+git submodule update --init deps/lookaside_libgit2
+git submodule update --init deps/external_icu
 git submodule update --init deps/external_mozjs
 git submodule update --init deps/external_v8
 git submodule update --init deps/external_utf8cpp
@@ -130,6 +133,7 @@ git submodule update --init modules/wilton_crypto
 git submodule update --init modules/wilton_db
 git submodule update --init modules/wilton_fs
 git submodule update --init modules/wilton_ghc
+git submodule update --init modules/wilton_git
 git submodule update --init modules/wilton_http
 git submodule update --init modules/wilton_kiosk
 git submodule update --init modules/wilton_loader

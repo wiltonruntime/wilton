@@ -28,10 +28,14 @@ git submodule update --quiet --init deps/external_hpdf || exit /b 1
 git submodule update --quiet --init deps/lookaside_libharu || exit /b 1
 git submodule update --quiet --init deps/external_jansson || exit /b 1
 git submodule update --quiet --init deps/lookaside_jansson || exit /b 1
+git submodule update --quiet --init deps/external_libgit2 || exit /b 1
+git submodule update --quiet --init deps/lookaside_libgit2 || exit /b 1
 git submodule update --quiet --init deps/external_libpng || exit /b 1
 git submodule update --quiet --init deps/lookaside_libpng || exit /b 1
 git submodule update --quiet --init deps/external_libpq || exit /b 1
 git submodule update --quiet --init deps/lookaside_postgresql || exit /b 1
+git submodule update --quiet --init deps/external_libssh2 || exit /b 1
+git submodule update --quiet --init deps/lookaside_libssh2 || exit /b 1
 git submodule update --quiet --init deps/external_log4cplus || exit /b 1
 git submodule update --quiet --init deps/lookaside_log4cplus || exit /b 1
 git submodule update --quiet --init deps/external_openssl || exit /b 1
@@ -91,6 +95,7 @@ git submodule update --quiet --init modules/wilton_crypto || exit /b 1
 git submodule update --quiet --init modules/wilton_db || exit /b 1
 git submodule update --quiet --init modules/wilton_fs || exit /b 1
 git submodule update --quiet --init modules/wilton_ghc || exit /b 1
+git submodule update --quiet --init modules/wilton_git || exit /b 1
 git submodule update --quiet --init modules/wilton_http || exit /b 1
 git submodule update --quiet --init modules/wilton_loader || exit /b 1
 git submodule update --quiet --init modules/wilton_logging || exit /b 1

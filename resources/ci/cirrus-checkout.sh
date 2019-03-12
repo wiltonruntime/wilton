@@ -28,6 +28,8 @@ git submodule update --quiet --init deps/cmake
 git submodule update --quiet --init deps/external_duktape
 git submodule update --quiet --init deps/external_hpdf
 git submodule update --quiet --init deps/lookaside_libharu
+git submodule update --quiet --init deps/external_libgit2
+git submodule update --quiet --init deps/lookaside_libgit2
 git submodule update --quiet --init deps/external_utf8cpp
 git submodule update --quiet --init deps/lookaside_utf8cpp
 git submodule update --quiet --init deps/staticlib_compress
@@ -75,6 +77,7 @@ git submodule update --quiet --init modules/wilton_crypto
 git submodule update --quiet --init modules/wilton_db
 git submodule update --quiet --init modules/wilton_fs
 git submodule update --quiet --init modules/wilton_ghc
+git submodule update --quiet --init modules/wilton_git
 git submodule update --quiet --init modules/wilton_http
 git submodule update --quiet --init modules/wilton_kiosk
 git submodule update --quiet --init modules/wilton_loader
