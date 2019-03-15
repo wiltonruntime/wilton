@@ -1088,6 +1088,7 @@ if ( STATICLIB_TOOLCHAIN MATCHES "(linux|macosx)_.+" )
     set ( ${PROJECT_NAME}_VGOPTS 
             --leak-check=yes --show-reachable=yes --track-origins=yes --error-exitcode=42 --track-fds=yes
             --suppressions=${WILTON_DIR}/resources/valgrind/asio.supp
+            --suppressions=${WILTON_DIR}/resources/valgrind/gcrypt.supp
             --suppressions=${WILTON_DIR}/resources/valgrind/openssl.supp
             --suppressions=${WILTON_DIR}/resources/valgrind/popt.supp 
             --suppressions=${WILTON_DIR}/resources/valgrind/wilton_dyload.supp 

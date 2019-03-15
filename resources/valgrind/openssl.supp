@@ -13,6 +13,13 @@
     ...
 }
 {
+    OpenSSL_CRYPTO_realloc
+    Memcheck:Leak
+    fun:realloc
+    fun:CRYPTO_realloc
+    ...
+}
+{
     OpenSSL_CRYPTO_THREADID_current
     Memcheck:Leak
     ...

@@ -56,6 +56,7 @@ BuildRequires:  libpng-devel
 BuildRequires:  systemd-devel
 BuildRequires:  libusbx-devel
 BuildRequires:  webkitgtk4-jsc-devel
+BuildRequires:  libgit2-devel
 # kiosk
 BuildRequires:  glib2-devel
 BuildRequires:  gtk3-devel
@@ -63,7 +64,6 @@ BuildRequires:  webkitgtk4-devel
 
 %if ! 0%{?epel}
 BuildRequires:  curl-devel
-BuildRequires:  libgit2-devel
 BuildRequires:  libharu-devel
 %endif
 
