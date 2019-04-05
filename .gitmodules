@@ -610,3 +610,6 @@
 [submodule "modules/wilton_git"]
 	path = modules/wilton_git
 	url = https://github.com/wilton-iot/wilton_git.git
+[submodule "js/vue-require"]
+	path = js/vue-require
+	url = https://github.com/wilton-iot/vue-require.git
