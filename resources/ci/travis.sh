@@ -39,9 +39,10 @@ if [ "xlinux" = "x${TRAVIS_OS_NAME}" ] ; then
     else
         cmake .. -DSTATICLIB_TOOLCHAIN=android_armeabi_gcc -DWILTON_RELEASE=${TRAVIS_TAG}
     fi
-    make -j 2
-    make android_apk > apk.log
-    if [ "x" = "x${TRAVIS_TAG}" ] ;  then
+    # todo: uncomment me
+    #make -j 2
+    #make android_apk > apk.log
+    if [ "x" != "x${TRAVIS_TAG}" ] ;  then
         mv wilton_${TRAVIS_TAG}.apk ../
     fi
     popd
@@ -49,7 +50,7 @@ if [ "xlinux" = "x${TRAVIS_OS_NAME}" ] ; then
     # raspberry
     rm -rf build
     mkdir build
-    if [ "x" != "x${TRAVIS_TAG}" ] ;  then
+    if [ "x" = "x${TRAVIS_TAG}" ] ;  then
         cmake .. -DRASPBIAN_TOOLCHAIN_DIR=${WILTON_RPI_TOOLCHAIN} -DSTATICLIB_TOOLCHAIN=linux_armhf_gcc -DWILTON_BUILD_FLAVOUR=raspbian_stretch
     else
         cmake .. -DRASPBIAN_TOOLCHAIN_DIR=${WILTON_RPI_TOOLCHAIN} -DSTATICLIB_TOOLCHAIN=linux_armhf_gcc -DWILTON_BUILD_FLAVOUR=raspbian_stretch -DWILTON_RELEASE=${TRAVIS_TAG}
