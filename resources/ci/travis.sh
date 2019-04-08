@@ -39,9 +39,8 @@ if [ "xlinux" = "x${TRAVIS_OS_NAME}" ] ; then
     else
         cmake .. -DSTATICLIB_TOOLCHAIN=android_armeabi_gcc -DWILTON_RELEASE=${TRAVIS_TAG}
     fi
-    # todo: uncomment me
-    #make -j 2
-    #make android_apk > apk.log
+    make -j 2
+    make android_apk > apk.log
     if [ "x" != "x${TRAVIS_TAG}" ] ;  then
         mv wilton_${TRAVIS_TAG}.apk ../
     fi
@@ -68,6 +67,7 @@ if [ "xlinux" = "x${TRAVIS_OS_NAME}" ] ; then
     export LD_LIBRARY_PATH=${WILTON_RPI_TOOLCHAIN}/arm-linux-gnueabihf/sysroot/usr/lib/arm-linux-gnueabihf/
     qemu-arm-static -L ${WILTON_RPI_TOOLCHAIN}/arm-linux-gnueabihf/sysroot/ ./wilton_dist/bin/wilton ../js/wilton/test/LoggerTest.js -m ../js -j duktape -l
     qemu-arm-static -L ${WILTON_RPI_TOOLCHAIN}/arm-linux-gnueabihf/sysroot/ ./wilton_dist/bin/wilton ../js/wilton/test/fsTest.js -m ../js -j duktape -l
+    qemu-arm-static -L ${WILTON_RPI_TOOLCHAIN}/arm-linux-gnueabihf/sysroot/ ./wilton_dist/bin/wilton ../js/wilton/test/gitTest.js -m ../js -j duktape -l
     qemu-arm-static -L ${WILTON_RPI_TOOLCHAIN}/arm-linux-gnueabihf/sysroot/ ./wilton_dist/bin/wilton ../js/wilton/test/threadTest.js -m ../js -j duktape -l
     qemu-arm-static -L ${WILTON_RPI_TOOLCHAIN}/arm-linux-gnueabihf/sysroot/ ./wilton_dist/bin/wilton ../js/wilton/test/zipTest.js -m ../js -j duktape -l
     qemu-arm-static -L ${WILTON_RPI_TOOLCHAIN}/arm-linux-gnueabihf/sysroot/ ./wilton_dist/bin/wilton ../js/test-runners/runSanityTests.js -m ./wilton_dist/std.min.wlib -j duktape
