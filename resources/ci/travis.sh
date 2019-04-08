@@ -50,6 +50,7 @@ if [ "xlinux" = "x${TRAVIS_OS_NAME}" ] ; then
     # raspberry
     rm -rf build
     mkdir build
+    pushd build
     if [ "x" = "x${TRAVIS_TAG}" ] ;  then
         cmake .. -DRASPBIAN_TOOLCHAIN_DIR=${WILTON_RPI_TOOLCHAIN} -DSTATICLIB_TOOLCHAIN=linux_armhf_gcc -DWILTON_BUILD_FLAVOUR=raspbian_stretch
     else
