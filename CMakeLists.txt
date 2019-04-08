@@ -131,6 +131,9 @@ elseif ( WILTON_BUILD_FLAVOUR MATCHES "el7" )
             ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/pkgconfig/popt.pc )
     configure_file ( ${WILTON_DIR}/resources/pkgconfig/soci.pc
             ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/pkgconfig/soci.pc )
+elseif ( WILTON_BUILD_FLAVOUR MATCHES "raspbian_stretch" )
+    configure_file ( ${WILTON_DIR}/resources/pkgconfig/asio.pc
+            ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/pkgconfig/asio.pc )
 endif ( )
 
 # core

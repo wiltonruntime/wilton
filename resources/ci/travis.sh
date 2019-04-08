@@ -22,12 +22,14 @@ if [ "xlinux" = "x${TRAVIS_OS_NAME}" ] ; then
     # tools
     git clone --quiet https://github.com/wilton-iot/tools_linux_jdk8.git ../jdk8
     git clone --quiet --recursive https://github.com/wilton-iot/android-tools-ci-repo.git ../android-tools
+    git clone --quiet https://github.com/wilton-iot/arm-rpi-4.9.3-linux-gnueabihf.git ../arm-rpi-4.9.3-linux-gnueabihf
 
     # env
     export JAVA_HOME=`pwd`/../jdk8
     export PATH=${JAVA_HOME}/bin:$PATH
     export M2_HOME=`pwd`/tools/maven
     export WILTON_ANDROID_TOOLS=`pwd`/../android-tools
+    export WILTON_RPI_TOOLCHAIN=`pwd`/../arm-rpi-4.9.3-linux-gnueabihf/
 
     # android
     mkdir build
@@ -39,6 +41,34 @@ if [ "xlinux" = "x${TRAVIS_OS_NAME}" ] ; then
     fi
     make -j 2
     make android_apk > apk.log
+    if [ "x" = "x${TRAVIS_TAG}" ] ;  then
+        mv wilton_${TRAVIS_TAG}.apk ../
+    fi
+    popd
+
+    # raspberry
+    rm -rf build
+    mkdir build
+    if [ "x" != "x${TRAVIS_TAG}" ] ;  then
+        cmake .. -DRASPBIAN_TOOLCHAIN_DIR=${WILTON_RPI_TOOLCHAIN} -DSTATICLIB_TOOLCHAIN=linux_armhf_gcc -DWILTON_BUILD_FLAVOUR=raspbian_stretch
+    else
+        cmake .. -DRASPBIAN_TOOLCHAIN_DIR=${WILTON_RPI_TOOLCHAIN} -DSTATICLIB_TOOLCHAIN=linux_armhf_gcc -DWILTON_BUILD_FLAVOUR=raspbian_stretch -DWILTON_RELEASE=${TRAVIS_TAG}
+    fi
+    make -j 2
+    make dist_debug > dist_debug.log
+    make dist_unversioned > dist_unversioned.log
+    if [ "x" != "x${TRAVIS_TAG}" ] ;  then
+        mv wilton_${TRAVIS_TAG} wilton_${TRAVIS_TAG}_rpi
+        zip -qr9 wilton_${TRAVIS_TAG}_rpi.zip wilton_${TRAVIS_TAG}_rpi
+    fi
+
+    # raspberry test runs
+    export LD_LIBRARY_PATH=${WILTON_RPI_TOOLCHAIN}/arm-linux-gnueabihf/sysroot/usr/lib/arm-linux-gnueabihf/
+    qemu-arm-static -L ${WILTON_RPI_TOOLCHAIN}/arm-linux-gnueabihf/sysroot/ ./wilton_dist/bin/wilton ../js/wilton/test/LoggerTest.js -m ../js -j duktape -l
+    qemu-arm-static -L ${WILTON_RPI_TOOLCHAIN}/arm-linux-gnueabihf/sysroot/ ./wilton_dist/bin/wilton ../js/wilton/test/fsTest.js -m ../js -j duktape -l
+    qemu-arm-static -L ${WILTON_RPI_TOOLCHAIN}/arm-linux-gnueabihf/sysroot/ ./wilton_dist/bin/wilton ../js/wilton/test/threadTest.js -m ../js -j duktape -l
+    qemu-arm-static -L ${WILTON_RPI_TOOLCHAIN}/arm-linux-gnueabihf/sysroot/ ./wilton_dist/bin/wilton ../js/wilton/test/zipTest.js -m ../js -j duktape -l
+    qemu-arm-static -L ${WILTON_RPI_TOOLCHAIN}/arm-linux-gnueabihf/sysroot/ ./wilton_dist/bin/wilton ../js/test-runners/runSanityTests.js -m ./wilton_dist/std.min.wlib -j duktape
 fi
 
 if [ "xosx" = "x${TRAVIS_OS_NAME}"  ] ; then

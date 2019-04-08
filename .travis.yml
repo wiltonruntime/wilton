@@ -31,6 +31,7 @@ addons:
       - build-essential
       - pkg-config
       - zip
+      - qemu-user-static
 
 before_install:
   - export CC=
@@ -49,7 +50,7 @@ script:
   - bash ./resources/ci/travis.sh
   - if [ "x" != "x${TRAVIS_TAG}" ] ; then
       if [ "xlinux" = "x${TRAVIS_OS_NAME}" ] ; then
-          export ARTIFACT_PATH=`pwd`/build/wilton_${TRAVIS_TAG}.apk ;
+          export ARTIFACT_PATH="[`pwd`/wilton_${TRAVIS_TAG}.apk, `pwd`/build/wilton_${TRAVIS_TAG}_rpi.zip]" ;
           sha256sum ${ARTIFACT_PATH} > ${ARTIFACT_PATH}.sha256 ;
       else
           export ARTIFACT_PATH=`pwd`/build/wilton_${TRAVIS_TAG}_macos.zip ;
