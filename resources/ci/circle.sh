@@ -21,7 +21,7 @@ if [ "xwheezy" = "x${WILTON_BUILD_FLAVOUR}" ] ; then
     git clone --quiet https://github.com/wilton-iot/tools_linux_jdk8.git ../jdk8
     export JAVA_HOME=`pwd`/../jdk8
     git clone --quiet https://github.com/wilton-iot/tools_linux_cmake.git ../cmake
-    export PATH=${JAVA_HOME}/bin:`pwd`/../cmake/bin:${PATH}
+    export PATH=`pwd`/../cmake/bin:${PATH}
 fi
 
 if [ "xfedora" = "x${WILTON_BUILD_FLAVOUR}" ] ; then
@@ -73,9 +73,6 @@ echo jvm
 pushd ../jni
 ../tools/maven/bin/mvn --batch-mode clean test
 popd
-
-echo jre
-ln -s ${JAVA_HOME}/jre ./wilton_dist/jre
 
 export JAVA_TOOL_OPTIONS="-XX:MaxRAM=512M -XX:+UseSerialGC -XX:+TieredCompilation -XX:TieredStopAtLevel=1"
 

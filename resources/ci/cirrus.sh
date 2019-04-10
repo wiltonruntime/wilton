@@ -98,9 +98,6 @@ pushd ../jni
 ../tools/maven/bin/mvn --batch-mode clean test
 popd
 
-echo jre
-ln -s ${JAVA_HOME}/jre ./wilton_dist/jre
-
 export JAVA_TOOL_OPTIONS="-XX:MaxRAM=512M -XX:+UseSerialGC -XX:+TieredCompilation -XX:TieredStopAtLevel=1"
 
 echo rhino

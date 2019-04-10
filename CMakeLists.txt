@@ -267,7 +267,7 @@ add_custom_target ( nativelibs DEPENDS
 
 add_custom_command ( OUTPUT std.wlib
         COMMAND ${CMAKE_COMMAND} -E remove_directory js
-        COMMAND jjs
+        COMMAND $ENV{JAVA_HOME}/bin/jjs
                 -J-XX:+UseSerialGC -J-XX:+TieredCompilation -J-XX:TieredStopAtLevel=1
                 -cp ${WILTON_DIR}/tools/closure-compiler/closure-compiler.jar
                 ${WILTON_DIR}/tools/convertion-scripts/bundle-stdlib-modules.js
@@ -282,7 +282,7 @@ add_custom_command ( OUTPUT std.wlib
 
 add_custom_command ( OUTPUT std.min.wlib
         COMMAND ${CMAKE_COMMAND} -E remove_directory js
-        COMMAND jjs
+        COMMAND $ENV{JAVA_HOME}/bin/jjs
                 -J-XX:+UseSerialGC -J-XX:+TieredCompilation -J-XX:TieredStopAtLevel=1
                 -cp ${WILTON_DIR}/tools/closure-compiler/closure-compiler.jar
                 ${WILTON_DIR}/tools/convertion-scripts/bundle-stdlib-modules.js
@@ -901,21 +901,13 @@ if ( STATICLIB_TOOLCHAIN MATCHES "windows_.+" )
     add_dependencies ( debuginfo debuginfo_windows )
     add_dependencies ( dist dist_windows )
 
-    add_custom_target ( dist_windows_jre
-            COMMAND if exist jre rd /s /q jre
-            COMMAND ${CMAKE_COMMAND} -E copy_directory
-                    $ENV{JAVA_HOME}/jre
-                    jre
-            WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION}
-            DEPENDS dist )
-
     configure_file ( 
             ${WILTON_DIR}/resources/installer/installer.json
             ${CMAKE_CURRENT_BINARY_DIR}/installer.json )
 
     add_custom_target ( installer
             COMMAND ${CMAKE_COMMAND} -E remove wilton_${WILTON_VERSION}${WILTON_WIN_ARCH_POSTFIX}.wxs
-            COMMAND java
+            COMMAND $ENV{JAVA_HOME}/bin/java
                     -XX:+UseSerialGC -XX:+TieredCompilation -XX:TieredStopAtLevel=1
                     -jar ${WILTON_DIR}/tools/windows/wixgen/wixgen.jar
                     wilton_${WILTON_VERSION}
@@ -1052,7 +1044,7 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "linux_.+" )
             COMMAND ${CMAKE_COMMAND} -E remove_directory doxy
             COMMAND ${CMAKE_COMMAND} -E remove_directory docs
             COMMAND ${CMAKE_COMMAND} -E make_directory docs
-            COMMAND jjs
+            COMMAND $ENV{JAVA_HOME}/bin/jjs
                     -J-XX:+UseSerialGC -J-XX:+TieredCompilation -J-XX:TieredStopAtLevel=1
                     ${WILTON_DIR}/resources/doxygen/generate-doxy.js
                     ${WILTON_DIR}/js/wilton doxy

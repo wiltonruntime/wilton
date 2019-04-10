@@ -26,7 +26,6 @@ git clone --quiet https://github.com/wilton-iot/tools_windows_jdk8_64.git ../jdk
 rem env
 call resources\scripts\windows-tools.bat
 set JAVA_HOME=%WILTON_DIR%/../jdk8
-set PATH=%WILTON_DIR%/../jdk8/bin;%PATH%
 
 rem build
 mkdir build || exit /b 1
@@ -71,9 +70,6 @@ echo jvm
 pushd "../jni" || exit /b 1
 cmd /c %WILTON_DIR%/tools/maven/bin/mvn --batch-mode clean test || exit /b 1
 popd || exit /b 1
-
-echo jre
-robocopy %JAVA_HOME%/jre wilton_dist/jre /e /nfl /ndl /njh /njs /nc /ns /np || true
 
 echo rhino
 wilton_dist\bin\wilton.exe ../js/wilton/test/index.js -m ../js  -j rhino || exit /b 1

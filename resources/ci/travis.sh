@@ -26,7 +26,6 @@ if [ "xlinux" = "x${TRAVIS_OS_NAME}" ] ; then
 
     # env
     export JAVA_HOME=`pwd`/../jdk8
-    export PATH=${JAVA_HOME}/bin:$PATH
     export M2_HOME=`pwd`/tools/maven
     export WILTON_ANDROID_TOOLS=`pwd`/../android-tools
     export WILTON_RPI_TOOLCHAIN=`pwd`/../arm-rpi-4.9.3-linux-gnueabihf/
