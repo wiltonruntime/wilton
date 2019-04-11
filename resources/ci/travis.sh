@@ -73,6 +73,11 @@ if [ "xlinux" = "x${TRAVIS_OS_NAME}" ] ; then
 fi
 
 if [ "xosx" = "x${TRAVIS_OS_NAME}"  ] ; then
+ 
+    # env
+    export JAVA_HOME=$(/usr/libexec/java_home)
+
+    # build
     set +e
     mkdir build
     pushd build

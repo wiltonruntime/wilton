@@ -430,91 +430,91 @@ if ( STATICLIB_TOOLCHAIN MATCHES "android_.+" )
             # gnustl
             COMMAND ${CMAKE_COMMAND} -E copy ${ANDROID_GNUSTL_SHARED_PATH}/libgnustl_shared.so lib/${${PROJECT_NAME}_ANDROID_ARCH}/
             COMMAND ${CMAKE_STRIP} lib/${${PROJECT_NAME}_ANDROID_ARCH}/libgnustl_shared.so
-            COMMAND jar uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libgnustl_shared.so
+            COMMAND $ENV{JAVA_HOME}/bin/jar uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libgnustl_shared.so
             # core
             COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_core.so lib/${${PROJECT_NAME}_ANDROID_ARCH}/
             COMMAND ${CMAKE_STRIP} lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_core.so
-            COMMAND jar uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_core.so
+            COMMAND $ENV{JAVA_HOME}/bin/jar uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_core.so
 
             # engines
             # duktape
             COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_duktape.so lib/${${PROJECT_NAME}_ANDROID_ARCH}/
             COMMAND ${CMAKE_STRIP} lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_duktape.so
-            COMMAND jar uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_duktape.so
+            COMMAND $ENV{JAVA_HOME}/bin/jar uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_duktape.so
             # rhino
             COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_rhino.so lib/${${PROJECT_NAME}_ANDROID_ARCH}/
             COMMAND ${CMAKE_STRIP} lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_rhino.so
-            COMMAND jar uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_rhino.so
+            COMMAND $ENV{JAVA_HOME}/bin/jar uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_rhino.so
  
             # modules
             # db
             COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_db.so lib/${${PROJECT_NAME}_ANDROID_ARCH}/
             COMMAND ${CMAKE_STRIP} lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_db.so
-            COMMAND jar uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_db.so
+            COMMAND $ENV{JAVA_HOME}/bin/jar uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_db.so
             # channel
             COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_channel.so lib/${${PROJECT_NAME}_ANDROID_ARCH}/
             COMMAND ${CMAKE_STRIP} lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_channel.so
-            COMMAND jar uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_channel.so
+            COMMAND $ENV{JAVA_HOME}/bin/jar uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_channel.so
             # cron
             COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_cron.so lib/${${PROJECT_NAME}_ANDROID_ARCH}/
             COMMAND ${CMAKE_STRIP} lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_cron.so
-            COMMAND jar uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_cron.so
+            COMMAND $ENV{JAVA_HOME}/bin/jar uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_cron.so
             # crypto
             COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_crypto.so lib/${${PROJECT_NAME}_ANDROID_ARCH}/
             COMMAND ${CMAKE_STRIP} lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_crypto.so
-            COMMAND jar uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_crypto.so
+            COMMAND $ENV{JAVA_HOME}/bin/jar uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_crypto.so
             # fs
             COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_fs.so lib/${${PROJECT_NAME}_ANDROID_ARCH}/
             COMMAND ${CMAKE_STRIP} lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_fs.so
-            COMMAND jar uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_fs.so
+            COMMAND $ENV{JAVA_HOME}/bin/jar uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_fs.so
             # ghc
             COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_ghc.so lib/${${PROJECT_NAME}_ANDROID_ARCH}/
             COMMAND ${CMAKE_STRIP} lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_ghc.so
-            COMMAND jar uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_ghc.so
+            COMMAND $ENV{JAVA_HOME}/bin/jar uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_ghc.so
             # git
             COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_git.so lib/${${PROJECT_NAME}_ANDROID_ARCH}/
             COMMAND ${CMAKE_STRIP} lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_git.so
-            COMMAND jar uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_git.so
+            COMMAND $ENV{JAVA_HOME}/bin/jar uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_git.so
             # http
             COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_http.so lib/${${PROJECT_NAME}_ANDROID_ARCH}/
             COMMAND ${CMAKE_STRIP} lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_http.so
-            COMMAND jar uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_http.so
+            COMMAND $ENV{JAVA_HOME}/bin/jar uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_http.so
             # loader
             COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_loader.so lib/${${PROJECT_NAME}_ANDROID_ARCH}/
             COMMAND ${CMAKE_STRIP} lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_loader.so
-            COMMAND jar uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_loader.so
+            COMMAND $ENV{JAVA_HOME}/bin/jar uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_loader.so
             # logging
             COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_logging.so lib/${${PROJECT_NAME}_ANDROID_ARCH}/
             COMMAND ${CMAKE_STRIP} lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_logging.so
-            COMMAND jar uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_logging.so
+            COMMAND $ENV{JAVA_HOME}/bin/jar uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_logging.so
             # mustache
             COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_mustache.so lib/${${PROJECT_NAME}_ANDROID_ARCH}/
             COMMAND ${CMAKE_STRIP} lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_mustache.so
-            COMMAND jar uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_mustache.so
+            COMMAND $ENV{JAVA_HOME}/bin/jar uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_mustache.so
             # net
             COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_net.so lib/${${PROJECT_NAME}_ANDROID_ARCH}/
             COMMAND ${CMAKE_STRIP} lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_net.so
-            COMMAND jar uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_net.so
+            COMMAND $ENV{JAVA_HOME}/bin/jar uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_net.so
             # pdf
             COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_pdf.so lib/${${PROJECT_NAME}_ANDROID_ARCH}/
             COMMAND ${CMAKE_STRIP} lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_pdf.so
-            COMMAND jar uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_pdf.so
+            COMMAND $ENV{JAVA_HOME}/bin/jar uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_pdf.so
             # server
             COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_server.so lib/${${PROJECT_NAME}_ANDROID_ARCH}/
             COMMAND ${CMAKE_STRIP} lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_server.so
-            COMMAND jar uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_server.so
+            COMMAND $ENV{JAVA_HOME}/bin/jar uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_server.so
             # service
             COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_service.so lib/${${PROJECT_NAME}_ANDROID_ARCH}/
             COMMAND ${CMAKE_STRIP} lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_service.so
-            COMMAND jar uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_service.so
+            COMMAND $ENV{JAVA_HOME}/bin/jar uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_service.so
             # thread
             COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_thread.so lib/${${PROJECT_NAME}_ANDROID_ARCH}/
             COMMAND ${CMAKE_STRIP} lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_thread.so
-            COMMAND jar uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_thread.so
+            COMMAND $ENV{JAVA_HOME}/bin/jar uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_thread.so
             # zip
             COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_zip.so lib/${${PROJECT_NAME}_ANDROID_ARCH}/
             COMMAND ${CMAKE_STRIP} lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_zip.so
-            COMMAND jar uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_zip.so
+            COMMAND $ENV{JAVA_HOME}/bin/jar uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_zip.so
 
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
             DEPENDS nativelibs
@@ -594,7 +594,7 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "(windows|linux|macosx)_.+" )
             COMMAND ${CMAKE_COMMAND} -E copy
                     ${WILTON_DIR}/jni/src/main/java/wilton/support/fx/FxApp.class
                     wilton/support/fx/FxApp.class
-            COMMAND jar uf wilton_rhino.jar wilton/support/fx/FxApp.class
+            COMMAND $ENV{JAVA_HOME}/bin/jar uf wilton_rhino.jar wilton/support/fx/FxApp.class
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
             DEPENDS wilton_rhino_jar_build
             COMMENT "Bundling wilton_rhino.jar ..." )
