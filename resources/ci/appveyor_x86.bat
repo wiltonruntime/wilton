@@ -21,7 +21,7 @@ set SCRIPT_DIR=%BAD_SLASH_SCRIPT_DIR:\=/%
 set WILTON_DIR=%SCRIPT_DIR%../..
 
 rem additional tools
-git clone --quiet https://github.com/wilton-iot/tools_windows_jdk8.git ../jdk8
+git clone --quiet https://github.com/wilton-iot/tools_windows_jdk8u201_x86.git ../jdk8
 
 rem env
 call resources\scripts\windows-tools.bat
