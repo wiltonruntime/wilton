@@ -827,6 +827,10 @@ if ( STATICLIB_TOOLCHAIN MATCHES "windows_.+" )
 
     add_custom_target ( debuginfo_windows_generic
             COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}_debuginfo
+            # wiltonw
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/wiltonw.pdb
+                    wilton_${WILTON_VERSION}_debuginfo/
             # serial
             COMMAND ${CMAKE_COMMAND} -E copy
                     ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/wilton_serial.pdb
@@ -840,11 +844,15 @@ if ( STATICLIB_TOOLCHAIN MATCHES "windows_.+" )
                     ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/wilton_winservice.pdb
                     wilton_${WILTON_VERSION}_debuginfo/
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-            DEPENDS wilton_serial wilton_usb wilton_winservice )
+            DEPENDS wiltonw wilton_serial wilton_usb wilton_winservice )
 
     add_custom_target ( dist_windows_generic
             COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}
             COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}/bin
+            # wiltonw
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/wiltonw${CMAKE_EXECUTABLE_SUFFIX}
+                    wilton_${WILTON_VERSION}/bin/wiltonw${CMAKE_EXECUTABLE_SUFFIX}
             # serial
             COMMAND ${CMAKE_COMMAND} -E copy
                     ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_serial${CMAKE_SHARED_LIBRARY_SUFFIX}
@@ -861,8 +869,8 @@ if ( STATICLIB_TOOLCHAIN MATCHES "windows_.+" )
                     wilton_${WILTON_VERSION}/devel/include/wilton/wilton_usb.h
             # winservice
             COMMAND ${CMAKE_COMMAND} -E copy
-                ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/wilton_winservice.exe
-                wilton_${WILTON_VERSION}/bin/wilton_winservice.exe
+                ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/wilton_winservice${CMAKE_EXECUTABLE_SUFFIX}
+                wilton_${WILTON_VERSION}/bin/wilton_winservice${CMAKE_EXECUTABLE_SUFFIX}
             COMMAND ${CMAKE_COMMAND} -E copy
                 ${WILTON_MSVCR_DIR}/${WILTON_MSVCR_ARCH}/Microsoft.VC120.CRT/msvcr120.dll
                 wilton_${WILTON_VERSION}/bin/msvcr120.dll
@@ -871,10 +879,10 @@ if ( STATICLIB_TOOLCHAIN MATCHES "windows_.+" )
                 wilton_${WILTON_VERSION}/bin/msvcp120.dll
             # todo: think about import libs for other modules
             COMMAND ${CMAKE_COMMAND} -E copy
-                ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/wilton_core.lib
-                wilton_${WILTON_VERSION}/devel/wilton_core.lib
+            ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/wilton_core${CMAKE_STATIC_LIBRARY_SUFFIX}
+                wilton_${WILTON_VERSION}/devel/wilton_core${CMAKE_STATIC_LIBRARY_SUFFIX}
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-            DEPENDS wilton_serial wilton_usb wilton_winservice debuginfo_windows_generic )
+            DEPENDS debuginfo_windows_generic )
 
     add_custom_target ( debuginfo_windows_amd64
             # chakra
