@@ -25,7 +25,7 @@ if [ "xwheezy" = "x${WILTON_BUILD_FLAVOUR}" ] ; then
 fi
 
 if [ "xfedora" = "x${WILTON_BUILD_FLAVOUR}" ] ; then
-    export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk
+    export JAVA_HOME=$(readlink -f /usr/bin/javac | sed "s:/bin/javac::")
 fi
 
 # build

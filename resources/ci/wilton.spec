@@ -156,6 +156,7 @@ git submodule update --init tools/maven
 git submodule update --init tools/mvnrepo
 
 %build
+export JAVA_HOME=$(readlink -f /usr/bin/javac | sed "s:/bin/javac::")
 cd wilton
 mkdir build
 cd build

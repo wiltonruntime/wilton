@@ -50,7 +50,7 @@ if [ "x2" = "x${VERSION_BIONIC}" ] ; then
     git submodule update --quiet --init engines/wilton_v8
 fi
 
-export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-amd64
+export JAVA_HOME=$(readlink -f /usr/bin/javac | sed "s:/bin/javac::")
 
 # build
 mkdir build
