@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>wilton.js: wiltoncall Namespace Reference</title>
+<title>wilton.js: backendcall Namespace Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -79,66 +79,24 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 </div><!-- top -->
 <div class="header">
-  <div class="summary">
-<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">wiltoncall Namespace Reference</div>  </div>
+<div class="title">backendcall Namespace Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p><b>wilton/wiltoncall</b> <br/>
- Call native function.  
+<p><b>wilton/backendcall</b> <br/>
+ Process remote calls over WebSocket.  
 <a href="#details">More...</a></p>
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2><a name="func-members"></a>
-Functions</h2></td></tr>
-<tr class="memitem:a80621568403a56f3217f42bd129585e2"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacewiltoncall.html#a80621568403a56f3217f42bd129585e2">wiltoncall</a> (String name, String|Object|Undefined data)</td></tr>
-</table>
 <a name="details" id="details"></a><h2>Detailed Description</h2>
-<div class="textblock"><p>This module allows to call native functions, that were added to "wiltoncall registry" using <code>wiltoncall_register</code> (<code>C</code> API) or <code>wilton::support::register_wiltoncall</code> (<code>C++</code> API).</p>
-<p>All interaction from <code>wilton.js</code> to the native code it done through this module.</p>
+<div class="textblock"><p>This module allows to call RequireJS modules with a messages received over WebSocket in conjunction with <code><a class="el" href="namespaceweb__wsClient.html" title="wilton/web/wsClient   WebSocket client for web-browsers.">web_wsClient</a></code> module</p>
 <p>Usage example:</p>
-<div class="fragment"><div class="line"><span class="comment">// read file contents using &quot;wiltoncall&quot; directly</span></div>
-<div class="line"><span class="comment">// the same can be done using &quot;wilton/fs&quot;</span></div>
-<div class="line">var contents = <a class="code" href="namespacewiltoncall.html#a80621568403a56f3217f42bd129585e2">wiltoncall</a>(<span class="stringliteral">&quot;fs_read_file&quot;</span>, {</div>
-<div class="line">    path: <span class="stringliteral">&quot;path/to/file.txt&quot;</span></div>
-<div class="line">});</div>
-</div><!-- fragment --> </div><h2>Function Documentation</h2>
-<a class="anchor" id="a80621568403a56f3217f42bd129585e2"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">String wiltoncall::wiltoncall </td>
-          <td>(</td>
-          <td class="paramtype">String&#160;</td>
-          <td class="paramname"><em>name</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">String|Object|Undefined&#160;</td>
-          <td class="paramname"><em>data</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">name</td><td><code>String</code> name that was used to register native function at wilton registry </td></tr>
-    <tr><td class="paramname">data</td><td><code>String|Object|Undefined</code> input data for native function </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd><code>String</code> output of the native function </dd></dl>
-
-</div>
-</div>
-</div><!-- contents -->
+<div class="fragment"><div class="line"><span class="comment">// inside the WebSocket view handler</span></div>
+<div class="line">WSMESSAGE: <span class="keyword">function</span>(req) {</div>
+<div class="line">   logger.info(<span class="stringliteral">&quot;WebSocket message received, data: [&quot;</span> + req.data() + <span class="stringliteral">&quot;]&quot;</span>);</div>
+<div class="line">   var resp = backendcall(req.data());</div>
+<div class="line">   req.sendWebSocket(resp);</div>
+<div class="line">}</div>
+</div><!-- fragment --> </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated on Sat Apr 20 2019 16:45:28 for wilton.js by &#160;<a href="http://www.doxygen.org/index.html">

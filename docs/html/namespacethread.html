@@ -23,7 +23,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">wilton.js
-   &#160;<span id="projectnumber">v201902211</span>
+   &#160;<span id="projectnumber">v201904201</span>
    </div>
   </td>
  </tr>
@@ -152,9 +152,10 @@ Functions</h2></td></tr>
 <li><b>callbackScript</b> <code>Object</code> module path and function name to run from background thread<ul>
 <li><b>module</b> <code>String</code> full name of JavaScript module to load</li>
 <li><b>func</b> <code>String|Undefined</code> name of the function contained in the specified module, if function is not specified, only module will be loaded (its top-level code will be executed)</li>
-<li><b>args</b> <code>Array|Undefined</code> optional list of arguments, that will be passed to specified function </li>
+<li><b>args</b> <code>Array|Undefined</code> optional list of arguments, that will be passed to specified function</li>
 </ul>
 </li>
+<li><b>capabilities</b> <code>Array|Undefined</code> list of the <code>wiltoncall</code> calls names allowed to be used from the spawned thread; if this parameter is not specified, then capabilities checks are not performed for the spawned thread </li>
 </ul>
 
 </div>
@@ -197,7 +198,7 @@ Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Feb 21 2019 15:05:02 for wilton.js by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Apr 20 2019 16:45:28 for wilton.js by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>

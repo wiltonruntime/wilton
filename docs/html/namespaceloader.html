@@ -23,7 +23,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">wilton.js
-   &#160;<span id="projectnumber">v201902211</span>
+   &#160;<span id="projectnumber">v201904201</span>
    </div>
   </td>
  </tr>
@@ -96,8 +96,8 @@ Functions</h2></td></tr>
 <tr class="memdesc:a47a280eee3d7e43158849d601974d4e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find out the full path to the specified module direcotory.  <a href="#a47a280eee3d7e43158849d601974d4e8"></a><br/></td></tr>
 <tr class="memitem:a1f1acda6a7e200c29eafabf49aa34bf2"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceloader.html#a1f1acda6a7e200c29eafabf49aa34bf2">findModulePath</a> (String modname, Function|Undefined callback)</td></tr>
 <tr class="memdesc:a1f1acda6a7e200c29eafabf49aa34bf2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find out the full path to the specified module.  <a href="#a1f1acda6a7e200c29eafabf49aa34bf2"></a><br/></td></tr>
-<tr class="memitem:ac71a90841800ec09612ffe012f14d5b1"><td class="memItemLeft" align="right" valign="top">Object&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceloader.html#ac71a90841800ec09612ffe012f14d5b1">loadAppConfig</a> (Function|Undefined callback)</td></tr>
-<tr class="memdesc:ac71a90841800ec09612ffe012f14d5b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load <code>config.json</code> file from <code>appdir/conf/</code> directory.  <a href="#ac71a90841800ec09612ffe012f14d5b1"></a><br/></td></tr>
+<tr class="memitem:ae8dcaff5604278d0f6b64212689d0e67"><td class="memItemLeft" align="right" valign="top">Object&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceloader.html#ae8dcaff5604278d0f6b64212689d0e67">loadAppConfig</a> (Object|Undefined startupModule, Function|Undefined callback)</td></tr>
+<tr class="memdesc:ae8dcaff5604278d0f6b64212689d0e67"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load <code>config.json</code> file from <code>appdir/conf/</code> directory.  <a href="#ae8dcaff5604278d0f6b64212689d0e67"></a><br/></td></tr>
 <tr class="memitem:ae8ca04831c4de603c6abe7c4ab059e71"><td class="memItemLeft" align="right" valign="top">Object&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceloader.html#ae8ca04831c4de603c6abe7c4ab059e71">loadModuleJson</a> (String modname, Function|Undefined callback)</td></tr>
 <tr class="memdesc:ae8ca04831c4de603c6abe7c4ab059e71"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load JSON file using logical module path.  <a href="#ae8ca04831c4de603c6abe7c4ab059e71"></a><br/></td></tr>
 <tr class="memitem:ac3c61aedef71ee801035eef8d43e40a6"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceloader.html#ac3c61aedef71ee801035eef8d43e40a6">loadModuleResource</a> (String modname, Function|Undefined callback)</td></tr>
@@ -105,7 +105,7 @@ Functions</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>This module allows to load resource files that are stored inside the JavaScript source tree in file system directories on inside ZIP files.</p>
-<p>Additonally it contains <code><a class="el" href="namespaceloader.html#ac71a90841800ec09612ffe012f14d5b1" title="Load config.json file from appdir/conf/ directory.">loadAppConfig()</a></code> function that loads <code>config.json</code> file from its expected location inside <code>appdir/conf/</code> directory.</p>
+<p>Additonally it contains <code><a class="el" href="namespaceloader.html#ae8dcaff5604278d0f6b64212689d0e67" title="Load config.json file from appdir/conf/ directory.">loadAppConfig()</a></code> function that loads <code>config.json</code> file from its expected location inside <code>appdir/conf/</code> directory.</p>
 <p>Usage example:</p>
 <div class="fragment"><div class="line"><span class="comment">// full path to the &quot;foo/bar&quot; module, may point to file system or ZIP path</span></div>
 <div class="line">var path = loader.findModulePath(<span class="stringliteral">&quot;foo/bar&quot;</span>);</div>
@@ -190,32 +190,44 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ac71a90841800ec09612ffe012f14d5b1"></a>
+<a class="anchor" id="ae8dcaff5604278d0f6b64212689d0e67"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">Object loader::loadAppConfig </td>
           <td>(</td>
-          <td class="paramtype">Function|Undefined&#160;</td>
-          <td class="paramname"><em>callback</em></td><td>)</td>
+          <td class="paramtype">Object|Undefined&#160;</td>
+          <td class="paramname"><em>startupModule</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">Function|Undefined&#160;</td>
+          <td class="paramname"><em>callback</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 <p>This method expects that application is running using the "standard" directory structure:</p>
 <ul>
 <li><code>appdir</code>: application directory, can have arbitrary name<ul>
-<li><code>bin</code>: contains executables and libraries</li>
+<li><code>bin</code>: (optional) contains executables and libraries</li>
 <li><code>conf</code>: contains <code>config.json</code></li>
 <li><code>log</code>: contains log output files</li>
 <li><code>work</code>: contains temporary files</li>
+<li><code>index.js</code>: startup module</li>
 </ul>
 </li>
 </ul>
 <p>Loaded file contents are preprocessed replacing references to <code>{{{appdir}}}</code> with an actual path to application directory.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
+    <tr><td class="paramname">startupModule</td><td><code>Object|Undefined</code> RequireJS startup module </td></tr>
     <tr><td class="paramname">callback</td><td><code>Function|Undefined</code> callback to receive result or error </td></tr>
   </table>
   </dd>
@@ -298,7 +310,7 @@ Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Feb 21 2019 15:05:02 for wilton.js by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Apr 20 2019 16:45:28 for wilton.js by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>

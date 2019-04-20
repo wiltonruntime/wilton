@@ -23,7 +23,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">wilton.js
-   &#160;<span id="projectnumber">v201902211</span>
+   &#160;<span id="projectnumber">v201904201</span>
    </div>
   </td>
  </tr>
@@ -100,6 +100,8 @@ Functions</h2></td></tr>
 <tr class="memdesc:a5155c6ca03dee9b918aa3f9820b20d9c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check whether object has all specified properties.  <a href="#a5155c6ca03dee9b918aa3f9820b20d9c"></a><br/></td></tr>
 <tr class="memitem:a0d6147b425118822ef5dfff0ebc91472"><td class="memItemLeft" align="right" valign="top">Undefined&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceutils.html#a0d6147b425118822ef5dfff0ebc91472">checkPropertyType</a> (Object obj, String prop, String type)</td></tr>
 <tr class="memdesc:a0d6147b425118822ef5dfff0ebc91472"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check whether object has a specified property with a specified type.  <a href="#a0d6147b425118822ef5dfff0ebc91472"></a><br/></td></tr>
+<tr class="memitem:a200916e3ffc96b1d982db3b9916cec52"><td class="memItemLeft" align="right" valign="top">Undefined&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceutils.html#a200916e3ffc96b1d982db3b9916cec52">checkRootModuleName</a> (Object mod, String expected)</td></tr>
+<tr class="memdesc:a200916e3ffc96b1d982db3b9916cec52"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check that root module name is configured as expected.  <a href="#a200916e3ffc96b1d982db3b9916cec52"></a><br/></td></tr>
 <tr class="memitem:aec152927c3a40ebc534e0db1dcfc5cd4"><td class="memItemLeft" align="right" valign="top">Object&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceutils.html#aec152927c3a40ebc534e0db1dcfc5cd4">cloneObject</a> (Object obj)</td></tr>
 <tr class="memdesc:aec152927c3a40ebc534e0db1dcfc5cd4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deep clone object.  <a href="#aec152927c3a40ebc534e0db1dcfc5cd4"></a><br/></td></tr>
 <tr class="memitem:a6bb893565c557922e047cc753cbfcbfd"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceutils.html#a6bb893565c557922e047cc753cbfcbfd">defaultJson</a> (Any data)</td></tr>
@@ -282,6 +284,41 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><code>Undefined</code> throws <code>Error</code> on check fail </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a200916e3ffc96b1d982db3b9916cec52"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Undefined utils::checkRootModuleName </td>
+          <td>(</td>
+          <td class="paramtype">Object&#160;</td>
+          <td class="paramname"><em>mod</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">String&#160;</td>
+          <td class="paramname"><em>expected</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Checks that root module name is configured as expected. Throws an <code>Error</code> if module name does not match.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mod</td><td><code>Object</code> RequireJS <code>Module</code> object </td></tr>
+    <tr><td class="paramname">expected</td><td><code>String</code> expected module name </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><code>Undefined</code> </dd></dl>
 
 </div>
 </div>
@@ -664,7 +701,7 @@ Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Feb 21 2019 15:05:02 for wilton.js by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Apr 20 2019 16:45:28 for wilton.js by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>

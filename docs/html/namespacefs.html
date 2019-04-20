@@ -23,7 +23,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">wilton.js
-   &#160;<span id="projectnumber">v201902211</span>
+   &#160;<span id="projectnumber">v201904201</span>
    </div>
   </td>
  </tr>
@@ -102,6 +102,10 @@ Functions</h2></td></tr>
 <tr class="memdesc:a0ed8576532a7fcf39e73c94658905809"><td class="mdescLeft">&#160;</td><td class="mdescRight">Test whether or not the given path exists by checking with the file system.  <a href="#a0ed8576532a7fcf39e73c94658905809"></a><br/></td></tr>
 <tr class="memitem:ac5c9a875f0ebb99efda23efa2568500a"><td class="memItemLeft" align="right" valign="top">Undefined&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacefs.html#ac5c9a875f0ebb99efda23efa2568500a">insertFile</a> (String sourcePath, String destPath, Number offset, Function|Undefined callback)</td></tr>
 <tr class="memdesc:ac5c9a875f0ebb99efda23efa2568500a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes the contents from one file to another.  <a href="#ac5c9a875f0ebb99efda23efa2568500a"></a><br/></td></tr>
+<tr class="memitem:a262b9e84819fd02e094227aafe468cf6"><td class="memItemLeft" align="right" valign="top">Boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacefs.html#a262b9e84819fd02e094227aafe468cf6">isDirectory</a> (String path, Function|Undefined callback)</td></tr>
+<tr class="memdesc:a262b9e84819fd02e094227aafe468cf6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check whether path is a directory.  <a href="#a262b9e84819fd02e094227aafe468cf6"></a><br/></td></tr>
+<tr class="memitem:a8ccf7785367fbdd1a76bc80847a52dfd"><td class="memItemLeft" align="right" valign="top">Boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacefs.html#a8ccf7785367fbdd1a76bc80847a52dfd">isFile</a> (String path, Function|Undefined callback)</td></tr>
+<tr class="memdesc:a8ccf7785367fbdd1a76bc80847a52dfd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check whether path is an ordinary file.  <a href="#a8ccf7785367fbdd1a76bc80847a52dfd"></a><br/></td></tr>
 <tr class="memitem:a1cc765acc0bcf6ec7a67548a05fad3a0"><td class="memItemLeft" align="right" valign="top">Undefined&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacefs.html#a1cc765acc0bcf6ec7a67548a05fad3a0">mkdir</a> (String path, Undefined mode, Function|Undefined callback)</td></tr>
 <tr class="memdesc:a1cc765acc0bcf6ec7a67548a05fad3a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a directory.  <a href="#a1cc765acc0bcf6ec7a67548a05fad3a0"></a><br/></td></tr>
 <tr class="memitem:a15afc2e890ad668f9842536e3baafaad"><td class="memItemLeft" align="right" valign="top">Array&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacefs.html#a15afc2e890ad668f9842536e3baafaad">readdir</a> (String path, Undefined options, Function|Undefined callback)</td></tr>
@@ -364,6 +368,76 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><code>Undefined</code> </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a262b9e84819fd02e094227aafe468cf6"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Boolean fs::isDirectory </td>
+          <td>(</td>
+          <td class="paramtype">String&#160;</td>
+          <td class="paramname"><em>path</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Function|Undefined&#160;</td>
+          <td class="paramname"><em>callback</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Checks whether specified path is a directory. Uses <code>stat(...).isDirectory</code>.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">path</td><td><code>String</code> </td></tr>
+    <tr><td class="paramname">callback</td><td><code>Function|Undefined</code> callback to receive result or error </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><code>Boolean</code> <code>true</code> if specified path is a directory, false otherwise </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a8ccf7785367fbdd1a76bc80847a52dfd"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Boolean fs::isFile </td>
+          <td>(</td>
+          <td class="paramtype">String&#160;</td>
+          <td class="paramname"><em>path</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Function|Undefined&#160;</td>
+          <td class="paramname"><em>callback</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Checks whether specified path is an ordinary file. Uses <code>stat(...).isFile</code>.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">path</td><td><code>String</code> </td></tr>
+    <tr><td class="paramname">callback</td><td><code>Function|Undefined</code> callback to receive result or error </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><code>Boolean</code> <code>true</code> if specified path is an ordinary file, false otherwise </dd></dl>
 
 </div>
 </div>
@@ -868,7 +942,7 @@ Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Feb 21 2019 15:05:02 for wilton.js by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Apr 20 2019 16:45:28 for wilton.js by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>
