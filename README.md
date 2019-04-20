@@ -31,6 +31,7 @@ Follow platform-specific instructions:
    - [CentOS](https://github.com/wilton-iot/wilton/wiki/BuildCentOS)
    - [Debian](https://github.com/wilton-iot/wilton/wiki/BuildDebian)
    - [Fedora](https://github.com/wilton-iot/wilton/wiki/BuildFedora)
+   - [Raspbian](https://github.com/wilton-iot/wilton/wiki/BuildRaspbian)
    - [Ubuntu](https://github.com/wilton-iot/wilton/wiki/BuildUbuntu)
  - [MacOS](https://github.com/wilton-iot/wilton/wiki/BuildMacOS)
 
@@ -41,6 +42,20 @@ This project is released under the [Apache License 2.0](http://www.apache.org/li
 
 Changelog
 ---------
+
+**2019-04-20**
+
+ * `v201904201`
+ * Raspbian Linux support including RaspberryPi Zero
+ * `wilton/git` JS API over `libgit2`
+ * `wilton/thread` capabilities support for `wiltoncall`s from JS
+ * `wilton/kiosk` Windows support (requires `OpenJFX`)
+ * `wilton/fs` support deleting read-only files on Windows
+ * `wilton/cli` minor enhancements
+ * support `JAVA_HOME` for `rhino` and `nashorn` engines
+ * `wiltonw` "headful" launcher for Windows
+ * handle registry shutdown behaviour fixes
+ * `kiosk` GUI app example, refresh `vueapp` web app example
 
 **2019-02-21**
 
