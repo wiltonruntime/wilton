@@ -91,12 +91,9 @@ if [ "x" != "x${TRAVIS_TAG}" ] ;  then
     popd
 fi
 # engines
-git submodule update --quiet --init engines/wilton_chakracore
 git submodule update --quiet --init engines/wilton_duktape
 git submodule update --quiet --init engines/wilton_jsc
-git submodule update --quiet --init engines/wilton_mozjs
 git submodule update --quiet --init engines/wilton_rhino
-git submodule update --quiet --init engines/wilton_v8
 # modules
 git submodule update --quiet --init modules/wilton_channel
 git submodule update --quiet --init modules/wilton_cli

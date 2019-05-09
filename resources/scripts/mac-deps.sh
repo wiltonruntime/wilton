@@ -17,7 +17,6 @@
 otool -L $1 | grep '.*libwilton_.*\.dylib ' | awk '{print $1}' | while read entry
 do
     libname=$(basename -- $entry)
-    echo install_name_tool -change $entry @executable_path/$libname $1
     install_name_tool -change $entry @executable_path/$libname $1
 done
 

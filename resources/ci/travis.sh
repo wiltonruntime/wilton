@@ -93,6 +93,9 @@ if [ "xosx" = "x${TRAVIS_OS_NAME}"  ] ; then
     # test
     make dist_unversioned > dist_unversioned.log
 
+    # drop original bin dir to make sure deps from dist are used
+    rm -rf ./bin
+
     echo jsc
     ./wilton_dist/bin/wilton ../js/wilton/test/index.js -m ../js -j jsc
     # hangs on CI
