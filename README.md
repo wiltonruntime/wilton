@@ -43,6 +43,14 @@ This project is released under the [Apache License 2.0](http://www.apache.org/li
 Changelog
 ---------
 
+**2019-05-12**
+
+ * `v201905121`
+ * Android launcher app (first version)
+ * Raspbian file logging fix
+ * MacOS native libs dep paths fix
+ * `wilton/backendcall` responses fix
+
 **2019-04-20**
 
  * `v201904201`
