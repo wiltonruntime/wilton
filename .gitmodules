@@ -613,3 +613,6 @@
 [submodule "js/vue-require"]
 	path = js/vue-require
 	url = https://github.com/wilton-iot/vue-require.git
+[submodule "js/android-launcher"]
+	path = js/android-launcher
+	url = https://github.com/wilton-iot/android-launcher.git
