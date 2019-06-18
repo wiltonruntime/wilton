@@ -527,9 +527,8 @@ if ( STATICLIB_TOOLCHAIN MATCHES "android_.+" )
             COMMAND ${CMAKE_COMMAND} -E remove_directory ${WILTON_DIR}/android/build
             COMMAND ${CMAKE_COMMAND} -E remove_directory ${WILTON_DIR}/android/app/build
             COMMAND ${CMAKE_COMMAND} -E copy
-#                    std.min.wlib
-                    std.wlib
-                    ${WILTON_DIR}/android/app/src/main/assets/wilton.android/std.wlib
+                    std.min.wlib
+                    ${WILTON_DIR}/android/app/src/main/assets/std.wlib
             COMMAND cd ${WILTON_DIR}/android &&
                     ${${PROJECT_NAME}_LIBC_PRELOAD_CMD}
                     ANDROID_HOME=$ENV{WILTON_ANDROID_TOOLS}/sdk
