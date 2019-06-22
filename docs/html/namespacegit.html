@@ -23,7 +23,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">wilton.js
-   &#160;<span id="projectnumber">v201905121</span>
+   &#160;<span id="projectnumber">v201906221</span>
    </div>
   </td>
  </tr>
@@ -94,6 +94,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 Functions</h2></td></tr>
 <tr class="memitem:aa9b3dfc4b38409f0b4eeba59a5d980e3"><td class="memItemLeft" align="right" valign="top">Undefined&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegit.html#aa9b3dfc4b38409f0b4eeba59a5d980e3">clone</a> (String url, String repo, Object|Undefined options, Function|Undefined callback)</td></tr>
 <tr class="memdesc:aa9b3dfc4b38409f0b4eeba59a5d980e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clone remote Git repository.  <a href="#aa9b3dfc4b38409f0b4eeba59a5d980e3"></a><br/></td></tr>
+<tr class="memitem:ac2864fd2184115e4e7aa057b36c691a2"><td class="memItemLeft" align="right" valign="top">Undefined&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegit.html#ac2864fd2184115e4e7aa057b36c691a2">pull</a> (String repo, Object|Undefined options, Function|Undefined callback)</td></tr>
+<tr class="memdesc:ac2864fd2184115e4e7aa057b36c691a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pulls a branch from a remote Git repository.  <a href="#ac2864fd2184115e4e7aa057b36c691a2"></a><br/></td></tr>
 </table>
 <a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>This module allows to work with remote and local Git repositories.</p>
@@ -101,16 +103,28 @@ Functions</h2></td></tr>
 <div class="fragment"><div class="line"><span class="comment">// clone local repo</span></div>
 <div class="line">git.clone(<span class="stringliteral">&quot;file://path/to/my/repo&quot;</span>, <span class="stringliteral">&quot;path/to/dest&quot;</span>);</div>
 <div class="line"></div>
-<div class="line"><span class="comment">// clone over SSH</span></div>
+<div class="line"><span class="comment">// clone over SSH using password auth</span></div>
+<div class="line">git.clone(<span class="stringliteral">&quot;git+ssh://androiddev@127.0.0.1/home/androiddev/app&quot;</span>, repo, {</div>
+<div class="line">        password: <span class="stringliteral">&quot;mypwd&quot;</span></div>
+<div class="line">    });</div>
+<div class="line"></div>
+<div class="line"><span class="comment">// clone over SSH using key auth</span></div>
 <div class="line">git.clone(<span class="stringliteral">&quot;git+ssh://androiddev@127.0.0.1/home/androiddev/app&quot;</span>, repo, {</div>
 <div class="line">        sshPublicKeyPath: <span class="stringliteral">&quot;/home/alex/.ssh/id_rsa.pub&quot;</span>,</div>
 <div class="line">        sshPrivateKeyPath: <span class="stringliteral">&quot;/home/alex/.ssh/id_rsa&quot;</span></div>
 <div class="line">    });</div>
 <div class="line"></div>
-<div class="line"><span class="comment">// clone over HTTPS</span></div>
+<div class="line"><span class="comment">// clone over HTTPS using passord auth</span></div>
 <div class="line">git.clone(<span class="stringliteral">&quot;https://bitbucket.org/orgid/repo.git&quot;</span>, <span class="stringliteral">&quot;path/to/dest&quot;</span>, {</div>
-<div class="line">        httpsUser: <span class="stringliteral">&quot;myuser&quot;</span>,</div>
-<div class="line">        httpsPassword: <span class="stringliteral">&quot;mypwd&quot;</span></div>
+<div class="line">        username: <span class="stringliteral">&quot;myuser&quot;</span>,</div>
+<div class="line">        password: <span class="stringliteral">&quot;mypwd&quot;</span></div>
+<div class="line">    });</div>
+<div class="line"></div>
+<div class="line"><span class="comment">// pull remote branch</span></div>
+<div class="line">git.pull(<span class="stringliteral">&quot;path/to/dest&quot;</span>, {</div>
+<div class="line">        username: <span class="stringliteral">&quot;myuser&quot;</span>,</div>
+<div class="line">        password: <span class="stringliteral">&quot;mypwd&quot;</span>,</div>
+<div class="line">        branch: <span class="stringliteral">&quot;master&quot;</span></div>
 <div class="line">    });</div>
 </div><!-- fragment --> </div><h2>Function Documentation</h2>
 <a class="anchor" id="aa9b3dfc4b38409f0b4eeba59a5d980e3"></a>
@@ -150,7 +164,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>Clones repote Git repository to the specified path, supports <code>Local</code>, <code>SSH</code> and <code>HTTPS(S)</code> transport protocols.</p>
 <p>For SSH authentication username must be specified as a part of the URL, example: <code>git+ssh://myuser@127.0.0.1/path/to/my/app</code></p>
-<p>For Git authentication over HTTPS username may be spacified either in URL or as a <code>httpsUser</code> option; if both variants are used at the same time - <code>httpUser</code> takes preference.</p>
+<p>Username may be specified either in URL or as a <code>username</code> option; if both variants are used at the same time - URL takes preference.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">url</td><td><code>String</code> URL of the remote Git repository, must have one of the supported protocol prfixes: <code><a href="file://">file://</a></code>, <code>git+ssh://</code>, <code><a href="http://">http://</a></code>, <code><a href="https://">https://</a></code> </td></tr>
@@ -163,11 +177,65 @@ Functions</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd><code>Undefined</code></dd></dl>
 <p><b>Options</b></p>
 <ul>
+<li><b>branch</b> <code>String|Undefined</code> Git branch to checkout after the clone, default value: <code>master</code></li>
+<li><b>username</b> <code>String|Undefined</code> user name that should be used for Git authentication over SSH or HTTPS</li>
+<li><b>password</b> <code>String|Undefined</code> password that should be used for Git authentication over SSH or HTTPS</li>
 <li><b>sshPublicKeyPath</b> <code>String|Undefined</code> path to the public SSH key file that should be used for authentication with the SSH server</li>
 <li><b>sshPrivateKeyPath</b> <code>String|Undefined</code> path to the private SSH key file that should be used for authentication with the SSH server</li>
-<li><b>httpsCheckCertificate</b> <code>Boolean|Undefined</code> whether HTTPS certificate of the Git server should be checked for validness, default value: <code>true</code></li>
-<li><b>httpsUser</b> <code>String|Undefined</code> user name that should be used for Git authentication over HTTPS</li>
-<li><b>httpsPassword</b> <code>String|Undefined</code> password that should be used for Git authentication over HTTPS </li>
+<li><b>httpsCheckCertificate</b> <code>Boolean|Undefined</code> whether HTTPS certificate of the Git server should be checked for validness, default value: <code>true</code> </li>
+</ul>
+
+</div>
+</div>
+<a class="anchor" id="ac2864fd2184115e4e7aa057b36c691a2"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Undefined git::pull </td>
+          <td>(</td>
+          <td class="paramtype">String&#160;</td>
+          <td class="paramname"><em>repo</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Object|Undefined&#160;</td>
+          <td class="paramname"><em>options</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Function|Undefined&#160;</td>
+          <td class="paramname"><em>callback</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Fetches changes from the <code>origin</code> remote repository and checkouts the specified remote branch.</p>
+<p>Uses <code>origin</code> remote record from the specified git repo.</p>
+<p>See <code><a class="el" href="namespacegit.html#aa9b3dfc4b38409f0b4eeba59a5d980e3" title="Clone remote Git repository.">clone()</a></code> for the details about the protocols and authentication.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">repo</td><td><code>String</code> path to the local repository </td></tr>
+    <tr><td class="paramname">options</td><td><code>Object|Undefined</code> configuration object, can be omitted, see possible options below </td></tr>
+    <tr><td class="paramname">callback</td><td><code>Function|Undefined</code> callback to receive result or error </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><code>Undefined</code></dd></dl>
+<p><b>Options</b></p>
+<ul>
+<li><b>branch</b> <code>String|Undefined</code> Git branch to checkout after the fetch, default value: <code>master</code></li>
+<li><b>username</b> <code>String|Undefined</code> user name that should be used for Git authentication over SSH or HTTPS</li>
+<li><b>password</b> <code>String|Undefined</code> password that should be used for Git authentication over SSH or HTTPS</li>
+<li><b>sshPublicKeyPath</b> <code>String|Undefined</code> path to the public SSH key file that should be used for authentication with the SSH server</li>
+<li><b>sshPrivateKeyPath</b> <code>String|Undefined</code> path to the private SSH key file that should be used for authentication with the SSH server</li>
+<li><b>httpsCheckCertificate</b> <code>Boolean|Undefined</code> whether HTTPS certificate of the Git server should be checked for validness, default value: <code>true</code> </li>
 </ul>
 
 </div>
@@ -175,7 +243,7 @@ Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun May 12 2019 22:34:00 for wilton.js by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Jun 22 2019 21:50:14 for wilton.js by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>
