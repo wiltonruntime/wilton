@@ -43,6 +43,15 @@ This project is released under the [Apache License 2.0](http://www.apache.org/li
 Changelog
 ---------
 
+**2019-06-22**
+
+ * `v201906221`
+ * CRLF empty strings fix in `wilton/fs#readLines`
+ * SSH by password support in `wilton/git`
+ * 'pull' support in `wilton/git`
+ * Android launcher app is fully functional
+ * test-suite FS use cleanup (for clean Android runs)
+
 **2019-05-12**
 
  * `v201905121`
