@@ -616,3 +616,6 @@
 [submodule "js/android-launcher"]
 	path = js/android-launcher
 	url = https://github.com/wilton-iot/android-launcher.git
+[submodule "js/wilton-newproject"]
+	path = js/wilton-newproject
+	url = https://github.com/wilton-iot/wilton-newproject.git
