@@ -43,6 +43,13 @@ This project is released under the [Apache License 2.0](http://www.apache.org/li
 Changelog
 ---------
 
+**2019-07-24**
+
+ * `v201907241`
+ * `--new-project` option for generating projects boilerplate
+ * automatic re-open of WebSocket connections for `backendcall`
+ * Android enhancements
+
 **2019-06-22**
 
  * `v201906221`
