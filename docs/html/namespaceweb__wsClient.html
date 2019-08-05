@@ -23,7 +23,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">wilton.js
-   &#160;<span id="projectnumber">v201906221</span>
+   &#160;<span id="projectnumber">v201907241</span>
    </div>
   </td>
  </tr>
@@ -94,6 +94,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 Functions</h2></td></tr>
 <tr class="memitem:a83fa06e7ba519748e3cb2dd591020db1"><td class="memItemLeft" align="right" valign="top">Undefined&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceweb__wsClient.html#a83fa06e7ba519748e3cb2dd591020db1">close</a> (Object socket)</td></tr>
 <tr class="memdesc:a83fa06e7ba519748e3cb2dd591020db1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Close WebSocket connection.  <a href="#a83fa06e7ba519748e3cb2dd591020db1"></a><br/></td></tr>
+<tr class="memitem:aaff8d92144e06da732205319df6afcf3"><td class="memItemLeft" align="right" valign="top">Undefined&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceweb__wsClient.html#aaff8d92144e06da732205319df6afcf3">isOpen</a> (Object socket)</td></tr>
+<tr class="memdesc:aaff8d92144e06da732205319df6afcf3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check whether WebSocket connnection is open.  <a href="#aaff8d92144e06da732205319df6afcf3"></a><br/></td></tr>
 <tr class="memitem:a9a7f2f55ba84b066190bb357f45a7d36"><td class="memItemLeft" align="right" valign="top">Undefined&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceweb__wsClient.html#a9a7f2f55ba84b066190bb357f45a7d36">open</a> (String url, Object|Undefined options, Function|Undefined callback)</td></tr>
 <tr class="memdesc:a9a7f2f55ba84b066190bb357f45a7d36"><td class="mdescLeft">&#160;</td><td class="mdescRight">Open WebSocket connection to server.  <a href="#a9a7f2f55ba84b066190bb357f45a7d36"></a><br/></td></tr>
 <tr class="memitem:a0db91d05daaca2e0989f5baed88880f0"><td class="memItemLeft" align="right" valign="top">Undefined&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceweb__wsClient.html#a0db91d05daaca2e0989f5baed88880f0">send</a> (Object socket, Object|Array|String message, Function|Undefined callback)</td></tr>
@@ -150,6 +152,30 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Closes WebSocket connection.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">socket</td><td><code>Object</code> <code><a class="el" href="namespaceSocket.html" title="wilton/Socket   Networking sockets.">Socket</a></code> previously opened with <code><a class="el" href="namespaceweb__wsClient.html#a9a7f2f55ba84b066190bb357f45a7d36" title="Open WebSocket connection to server.">open()</a></code> </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><code>Undefined</code> </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="aaff8d92144e06da732205319df6afcf3"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Undefined web_wsClient::isOpen </td>
+          <td>(</td>
+          <td class="paramtype">Object&#160;</td>
+          <td class="paramname"><em>socket</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Checks whether WebSocket connection is not in 'CLOSED' or 'CLOSING' state.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">socket</td><td><code>Object</code> <code><a class="el" href="namespaceSocket.html" title="wilton/Socket   Networking sockets.">Socket</a></code> previously opened with <code><a class="el" href="namespaceweb__wsClient.html#a9a7f2f55ba84b066190bb357f45a7d36" title="Open WebSocket connection to server.">open()</a></code> </td></tr>
@@ -296,7 +322,7 @@ Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Jun 22 2019 21:50:15 for wilton.js by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Aug 5 2019 21:08:02 for wilton.js by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>
