@@ -23,7 +23,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">wilton.js
-   &#160;<span id="projectnumber">v201907241</span>
+   &#160;<span id="projectnumber">v201909021</span>
    </div>
   </td>
  </tr>
@@ -96,6 +96,8 @@ Functions</h2></td></tr>
 <tr class="memdesc:aa9b3dfc4b38409f0b4eeba59a5d980e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clone remote Git repository.  <a href="#aa9b3dfc4b38409f0b4eeba59a5d980e3"></a><br/></td></tr>
 <tr class="memitem:ac2864fd2184115e4e7aa057b36c691a2"><td class="memItemLeft" align="right" valign="top">Undefined&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegit.html#ac2864fd2184115e4e7aa057b36c691a2">pull</a> (String repo, Object|Undefined options, Function|Undefined callback)</td></tr>
 <tr class="memdesc:ac2864fd2184115e4e7aa057b36c691a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pulls a branch from a remote Git repository.  <a href="#ac2864fd2184115e4e7aa057b36c691a2"></a><br/></td></tr>
+<tr class="memitem:a81c75e0c5fc8a31bc31913b77425c6ab"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegit.html#a81c75e0c5fc8a31bc31913b77425c6ab">revparseHead</a> (String repo, Function|Undefined callback)</td></tr>
+<tr class="memdesc:a81c75e0c5fc8a31bc31913b77425c6ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read the revision ID of the repo HEAD.  <a href="#a81c75e0c5fc8a31bc31913b77425c6ab"></a><br/></td></tr>
 </table>
 <a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>This module allows to work with remote and local Git repositories.</p>
@@ -126,6 +128,9 @@ Functions</h2></td></tr>
 <div class="line">        password: <span class="stringliteral">&quot;mypwd&quot;</span>,</div>
 <div class="line">        branch: <span class="stringliteral">&quot;master&quot;</span></div>
 <div class="line">    });</div>
+<div class="line">    </div>
+<div class="line"><span class="comment">// get current HEAD revision</span></div>
+<div class="line">var sha1 = git.revparseHead(<span class="stringliteral">&quot;path/to/repo&quot;</span>);</div>
 </div><!-- fragment --> </div><h2>Function Documentation</h2>
 <a class="anchor" id="aa9b3dfc4b38409f0b4eeba59a5d980e3"></a>
 <div class="memitem">
@@ -240,10 +245,45 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a81c75e0c5fc8a31bc31913b77425c6ab"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">String git::revparseHead </td>
+          <td>(</td>
+          <td class="paramtype">String&#160;</td>
+          <td class="paramname"><em>repo</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Function|Undefined&#160;</td>
+          <td class="paramname"><em>callback</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Reads the revision ID of the repo HEAD</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">repo</td><td><code>String</code> path to the local repository </td></tr>
+    <tr><td class="paramname">callback</td><td><code>Function|Undefined</code> callback to receive result or error </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><code>String</code> 40 symbols revision ID SHA1 </dd></dl>
+
+</div>
+</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Aug 5 2019 21:08:02 for wilton.js by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Sep 2 2019 09:02:28 for wilton.js by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>

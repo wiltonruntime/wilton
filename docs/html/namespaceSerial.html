@@ -23,7 +23,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">wilton.js
-   &#160;<span id="projectnumber">v201907241</span>
+   &#160;<span id="projectnumber">v201909021</span>
    </div>
   </td>
  </tr>
@@ -106,7 +106,7 @@ Functions</h2></td></tr>
 <tr class="memdesc:a13abf179e3dfbd83fc7aba3a57786021"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write specifed string to device.  <a href="#a13abf179e3dfbd83fc7aba3a57786021"></a><br/></td></tr>
 </table>
 <a name="details" id="details"></a><h2>Detailed Description</h2>
-<div class="textblock"><p>This module allows to intract with hardware devices using <code>RS232</code> protocol.</p>
+<div class="textblock"><p>This module allows to interact with hardware devices using <code>RS232</code> protocol.</p>
 <p>Responses from device are returned encoded in hexadecimal encoding, use <code>wilton/hex</code> for decoding.</p>
 <p>Underlying serial connection can be closed manually using <code><a class="el" href="namespaceSerial.html#a90ec0cfab6fc7d2bc1af9dc9057d4b99" title="Close connection to device.">close()</a></code> method or it will be closed during the shutdown.</p>
 <p>Usage example:</p>
@@ -177,7 +177,7 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Tries to read a specified amount of data from the device. Returned result can conntains less data than requested. Returns empty result if no data is available and timeout is exceeded.</p>
+<p>Tries to read a specified amount of data from the device. Returned result can contain less data than requested. Returns empty string if no data is available and timeout is exceeded.</p>
 <p>Uses <code>timeoutMillis</code> parameter (specified in constructor) as a timeout.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -204,7 +204,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Tries to read a data from the device until line ending (<code>\n</code> or <code>\r\n</code>) will be read or timeout happens. Line ending is not included into result.</p>
-<p>Returned result can conntains less data than requested. Returns empty result if no data is available and timeout is exceeded.</p>
+<p>Returned result can contain less data than requested. Returns empty result if no data is available and timeout is exceeded.</p>
 <p>Uses <code>timeoutMillis</code> parameter (specified in constructor) as a timeout.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -250,7 +250,7 @@ Functions</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd><code>Object</code> <code><a class="el" href="namespaceSerial.html" title="wilton/Serial   Connect to hardware devices using serial protocol.">Serial</a></code> instance</dd></dl>
 <p><b>Options</b></p>
 <ul>
-<li><b>port</b> <code>String</code> serial port address (OS-dependent), examples: <code>/dev/ttyUSB1</code>, <code>COM4</code></li>
+<li><b>port</b> <code>String</code> serial port address (OS-dependent), examples: <code>/dev/ttyUSB1</code>, <code>COM4</code>, <code>vid:pid</code></li>
 <li><b>baudRate</b> <code>Number</code> connection baud rate</li>
 <li><b>parity</b> <code>String</code> enables parity checking, supported values: <code>NONE</code>, <code>EVEN</code>, <code>ODD</code>, <code>MARK</code>, <code>SPACE</code></li>
 <li><b>byteSize</b> <code>Number</code> number of data bits</li>
@@ -336,7 +336,7 @@ Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Aug 5 2019 21:08:02 for wilton.js by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Sep 2 2019 09:02:28 for wilton.js by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>

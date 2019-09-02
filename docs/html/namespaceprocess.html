@@ -23,7 +23,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">wilton.js
-   &#160;<span id="projectnumber">v201907241</span>
+   &#160;<span id="projectnumber">v201909021</span>
    </div>
   </td>
  </tr>
@@ -92,6 +92,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2><a name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:aef6c4d129d4ddd5c5912c2a0e6d7ef92"><td class="memItemLeft" align="right" valign="top">Number&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceprocess.html#aef6c4d129d4ddd5c5912c2a0e6d7ef92">currentPid</a> (Function|Undefined callback)</td></tr>
+<tr class="memdesc:aef6c4d129d4ddd5c5912c2a0e6d7ef92"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the PID of the current process.  <a href="#aef6c4d129d4ddd5c5912c2a0e6d7ef92"></a><br/></td></tr>
+<tr class="memitem:a675688324e3e3def40cca9e761992282"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceprocess.html#a675688324e3e3def40cca9e761992282">killByPid</a> (Number pid, Function|Undefined callback)</td></tr>
+<tr class="memdesc:a675688324e3e3def40cca9e761992282"><td class="mdescLeft">&#160;</td><td class="mdescRight">Kill the process with the specified PID.  <a href="#a675688324e3e3def40cca9e761992282"></a><br/></td></tr>
 <tr class="memitem:a5105167174690025411effc0a5970ed5"><td class="memItemLeft" align="right" valign="top">Number&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceprocess.html#a5105167174690025411effc0a5970ed5">spawn</a> (Object options, Function|Undefined callback)</td></tr>
 <tr class="memdesc:a5105167174690025411effc0a5970ed5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Spawn new OS-level process.  <a href="#a5105167174690025411effc0a5970ed5"></a><br/></td></tr>
 </table>
@@ -113,7 +117,72 @@ Functions</h2></td></tr>
 <div class="line">    outputFile: path/to/out/file,</div>
 <div class="line">    awaitExit: <span class="keyword">true</span></div>
 <div class="line">});</div>
+<div class="line"></div>
+<div class="line"><span class="comment">// get pid of the current process</span></div>
+<div class="line">var pid = process.currentPid();</div>
+<div class="line"></div>
+<div class="line"><span class="comment">// kill process by pid</span></div>
+<div class="line">process.killByPid(pid);</div>
 </div><!-- fragment --> </div><h2>Function Documentation</h2>
+<a class="anchor" id="aef6c4d129d4ddd5c5912c2a0e6d7ef92"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Number process::currentPid </td>
+          <td>(</td>
+          <td class="paramtype">Function|Undefined&#160;</td>
+          <td class="paramname"><em>callback</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Returns the PID of the current process. Not supported on Android.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">callback</td><td><code>Function|Undefined</code> callback to receive result or error </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><code>Number</code> PID of the current process </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a675688324e3e3def40cca9e761992282"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">String process::killByPid </td>
+          <td>(</td>
+          <td class="paramtype">Number&#160;</td>
+          <td class="paramname"><em>pid</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Function|Undefined&#160;</td>
+          <td class="paramname"><em>callback</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Teminates the process with the specified PID. Target process cannot prevent its termination. Not supported on Android.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pid</td><td><code>Number</code> PID of the process to terminate </td></tr>
+    <tr><td class="paramname">callback</td><td><code>Function|Undefined</code> callback to receive result or error </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><code>String</code> Empty string on successfull termination, error message otherwise. </dd></dl>
+
+</div>
+</div>
 <a class="anchor" id="a5105167174690025411effc0a5970ed5"></a>
 <div class="memitem">
 <div class="memproto">
@@ -148,7 +217,7 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd><code>Number</code> <code>pid</code> of started process or its exit code, if <code>awaitExit</code> is used</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd><code>Number</code> PID of started process or its exit code, if <code>awaitExit</code> is used</dd></dl>
 <p><b>Options</b></p>
 <ul>
 <li><b>executable</b> <code>String</code> path to the executable file</li>
@@ -162,7 +231,7 @@ Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Aug 5 2019 21:08:02 for wilton.js by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Sep 2 2019 09:02:28 for wilton.js by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>
