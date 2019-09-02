@@ -43,6 +43,15 @@ This project is released under the [Apache License 2.0](http://www.apache.org/li
 Changelog
 ---------
 
+**2019-09-02**
+
+ * `v201909021`
+ * complete `wilton/Serial` impl on Android
+ * `wilton/Socket` API rework
+ * `wilton/git` revparse support
+ * `wilton/process` enhancements
+ * `wilton/Serial` and `wilton/USB` minor fixes
+
 **2019-07-24**
 
  * `v201907241`
