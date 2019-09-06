@@ -619,3 +619,6 @@
 [submodule "js/wilton-newproject"]
 	path = js/wilton-newproject
 	url = https://github.com/wilton-iot/wilton-newproject.git
+[submodule "modules/wilton_systemd"]
+	path = modules/wilton_systemd
+	url = https://github.com/wilton-iot/wilton_systemd.git
