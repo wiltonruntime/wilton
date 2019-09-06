@@ -947,12 +947,6 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "linux_.+" )
             COMMAND ${CMAKE_COMMAND} -E copy
                     ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_serial${STATICLIB_DEBUGINFO_SHARED_SUFFIX}
                     wilton_${WILTON_VERSION}_debuginfo/
-            if ( NOT WILTON_BUILD_FLAVOUR MATCHES "wheezy" )
-                # systemd
-                COMMAND ${CMAKE_COMMAND} -E copy
-                        ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_systemd${STATICLIB_DEBUGINFO_SHARED_SUFFIX}
-                        wilton_${WILTON_VERSION}_debuginfo/
-            endif ( )
             # usb
             COMMAND ${CMAKE_COMMAND} -E copy
                     ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_usb${STATICLIB_DEBUGINFO_SHARED_SUFFIX}
@@ -960,7 +954,8 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "linux_.+" )
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
             DEPENDS wilton_jsc wilton_kiosk wilton_serial wilton_systemd wilton_usb )
     add_dependencies ( debuginfo debuginfo_linux )
-    add_custom_target ( debuginfo_linux_amd64 
+
+    add_custom_target ( debuginfo_linux_amd64
             # chakracore
             COMMAND ${CMAKE_COMMAND} -E copy
                     ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_chakracore${STATICLIB_DEBUGINFO_SHARED_SUFFIX}
@@ -977,6 +972,15 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "linux_.+" )
             DEPENDS wilton_chakracore wilton_mozjs wilton_v8 debuginfo_linux )
     if ( STATICLIB_TOOLCHAIN MATCHES "linux_amd64_.+" )
         add_dependencies ( debuginfo debuginfo_linux_amd64 )
+    endif ( )
+
+    add_custom_target ( debuginfo_linux_systemd
+            # systemd
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_systemd${STATICLIB_DEBUGINFO_SHARED_SUFFIX}
+                    wilton_${WILTON_VERSION}_debuginfo/ )
+    if ( NOT WILTON_BUILD_FLAVOUR MATCHES "wheezy" )
+        add_dependencies ( debuginfo debuginfo_linux_systemd )
     endif ( )
 
     add_custom_target ( dist_linux
@@ -1002,12 +1006,6 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "linux_.+" )
             COMMAND ${CMAKE_COMMAND} -E copy
                     ${WILTON_DIR}/modules/wilton_serial/include/wilton/wilton_serial.h
                     wilton_${WILTON_VERSION}/devel/include/wilton/wilton_serial.h
-            if ( NOT WILTON_BUILD_FLAVOUR MATCHES "wheezy" )
-                # systemd
-                COMMAND ${CMAKE_COMMAND} -E copy
-                        ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_systemd${CMAKE_SHARED_LIBRARY_SUFFIX}
-                        wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_systemd${CMAKE_SHARED_LIBRARY_SUFFIX}
-            endif ( )
             # usb
             COMMAND ${CMAKE_COMMAND} -E copy
                     ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_usb${CMAKE_SHARED_LIBRARY_SUFFIX}
@@ -1058,6 +1056,15 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "linux_.+" )
             DEPENDS wilton_chakracore wilton_mozjs wilton_v8 dist_linux )
     if ( STATICLIB_TOOLCHAIN MATCHES "linux_amd64_.+" )
         add_dependencies ( dist dist_linux_amd64 )
+    endif ( )
+
+    add_custom_target ( dist_linux_systemd
+            # systemd
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_systemd${CMAKE_SHARED_LIBRARY_SUFFIX}
+                    wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_systemd${CMAKE_SHARED_LIBRARY_SUFFIX} )
+    if ( NOT WILTON_BUILD_FLAVOUR MATCHES "wheezy" )
+        add_dependencies ( dist dist_linux_systemd )
     endif ( )
 
     add_custom_target ( docs
