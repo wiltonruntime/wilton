@@ -115,6 +115,7 @@ git submodule update --quiet --init modules/wilton_serial
 git submodule update --quiet --init modules/wilton_server
 git submodule update --quiet --init modules/wilton_service
 git submodule update --quiet --init modules/wilton_signal
+git submodule update --quiet --init modules/wilton_systemd
 git submodule update --quiet --init modules/wilton_thread
 git submodule update --quiet --init modules/wilton_usb
 git submodule update --quiet --init modules/wilton_zip

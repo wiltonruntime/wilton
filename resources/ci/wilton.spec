@@ -57,6 +57,7 @@ BuildRequires:  systemd-devel
 BuildRequires:  libusbx-devel
 BuildRequires:  webkitgtk4-jsc-devel
 BuildRequires:  libgit2-devel
+BuildRequires:  systemd-devel
 # kiosk
 BuildRequires:  glib2-devel
 BuildRequires:  gtk3-devel
