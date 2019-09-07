@@ -622,3 +622,9 @@
 [submodule "modules/wilton_systemd"]
 	path = modules/wilton_systemd
 	url = https://github.com/wilton-iot/wilton_systemd.git
+[submodule "js/windows-1251"]
+	path = js/windows-1251
+	url = https://github.com/wilton-iot/windows-1251.git
+[submodule "js/windows-1252"]
+	path = js/windows-1252
+	url = https://github.com/wilton-iot/windows-1252.git
