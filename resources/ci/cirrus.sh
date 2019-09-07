@@ -30,7 +30,7 @@ if [ "x2" = "x${VERSION_XENIAL}" ] ; then
     export WILTON_IMAGE_POSTFIX=xenial
     export LANG=C
 fi
-if [ "x2" = "x${VERSION_STRETCH}" ] ; then
+if [ "x3" = "x${VERSION_STRETCH}" ] ; then
     export WILTON_BUILD_FLAVOUR=stretch
     export WILTON_ARCH=aarch64
     export WILTON_QEMU_ARCH=aarch64
