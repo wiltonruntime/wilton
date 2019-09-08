@@ -25,5 +25,6 @@ var searchData=
   ['stop',['stop',['../namespaceCronTask.html#a1001f0b8d854d68f0cd6f6b1870f847c',1,'CronTask::stop()'],['../namespaceServer.html#a7e5acc0cd99523bb3460f71260a56b13',1,'Server::stop()']]],
   ['subscribe',['subscribe',['../namespaceweb__wsClient.html#a45d0164af62298894a9fa8877404758a',1,'web_wsClient']]],
   ['symlink',['symlink',['../namespacefs.html#a74187d7c1fde6f3290dc17cf86467ddf',1,'fs']]],
-  ['synchronize',['synchronize',['../namespaceChannel.html#aeb092b42096f8dc47eb2af240adcccb4',1,'Channel']]]
+  ['synchronize',['synchronize',['../namespaceChannel.html#aeb092b42096f8dc47eb2af240adcccb4',1,'Channel']]],
+  ['systemdnotify',['systemdNotify',['../namespacemisc.html#ae85a2637a805fdf3d037a15180811c66',1,'misc']]]
 ];
