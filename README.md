@@ -43,6 +43,14 @@ This project is released under the [Apache License 2.0](http://www.apache.org/li
 Changelog
 ---------
 
+**2019-09-08**
+
+ * `v201909081`
+ * `wilton/systemd` api for systemd services
+ * support `CLASSPATH` env var when run on Rhino
+ * `windows-1251` and `windows-1252` encoding JS API
+ * `--new-project` templates update
+
 **2019-09-02**
 
  * `v201909021`
