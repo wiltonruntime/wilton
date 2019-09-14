@@ -628,3 +628,6 @@
 [submodule "js/windows-1252"]
 	path = js/windows-1252
 	url = https://github.com/wilton-iot/windows-1252.git
+[submodule "modules/wilton_kvstore"]
+	path = modules/wilton_kvstore
+	url = https://github.com/wilton-iot/wilton_kvstore.git

@@ -105,6 +105,7 @@ git submodule update --quiet --init modules/wilton_ghc
 git submodule update --quiet --init modules/wilton_git
 git submodule update --quiet --init modules/wilton_http
 git submodule update --quiet --init modules/wilton_kiosk
+git submodule update --quiet --init modules/wilton_kvstore
 git submodule update --quiet --init modules/wilton_loader
 git submodule update --quiet --init modules/wilton_logging
 git submodule update --quiet --init modules/wilton_mustache

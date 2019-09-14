@@ -155,6 +155,7 @@ staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_fs )
 staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_ghc )
 staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_git )
 staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_http )
+staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_kvstore )
 staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_loader )
 staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_mustache )
 staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_pdf )
@@ -259,6 +260,7 @@ add_custom_target ( nativelibs DEPENDS
         wilton_git
         wilton_http
         wilton_kiosk
+        wilton_kvstore
         wilton_loader
         wilton_logging
         wilton_net
@@ -371,6 +373,10 @@ add_custom_target ( debuginfo
         # http
         COMMAND ${CMAKE_COMMAND} -E copy
                 ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_http${STATICLIB_DEBUGINFO_SHARED_SUFFIX}
+                wilton_${WILTON_VERSION}_debuginfo/
+        # kvstore
+        COMMAND ${CMAKE_COMMAND} -E copy
+                ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_kvstore${STATICLIB_DEBUGINFO_SHARED_SUFFIX}
                 wilton_${WILTON_VERSION}_debuginfo/
         # loader
         COMMAND ${CMAKE_COMMAND} -E copy
@@ -488,6 +494,10 @@ if ( STATICLIB_TOOLCHAIN MATCHES "android_.+" )
             COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_http.so lib/${${PROJECT_NAME}_ANDROID_ARCH}/
             COMMAND ${CMAKE_STRIP} lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_http.so
             COMMAND $ENV{JAVA_HOME}/bin/jar uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_http.so
+            # kvstore
+            COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_kvstore.so lib/${${PROJECT_NAME}_ANDROID_ARCH}/
+            COMMAND ${CMAKE_STRIP} lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_kvstore.so
+            COMMAND $ENV{JAVA_HOME}/bin/jar uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_kvstore.so
             # loader
             COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_loader.so lib/${${PROJECT_NAME}_ANDROID_ARCH}/
             COMMAND ${CMAKE_STRIP} lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_loader.so
@@ -684,6 +694,13 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "(windows|linux|macosx)_.+" )
             COMMAND ${CMAKE_COMMAND} -E copy
                     ${WILTON_DIR}/modules/wilton_http/include/wilton/wilton_http.h
                     wilton_${WILTON_VERSION}/devel/include/wilton/wilton_http.h
+            # kvstore
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_kvstore${CMAKE_SHARED_LIBRARY_SUFFIX}
+                    wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_kvstore${CMAKE_SHARED_LIBRARY_SUFFIX}
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    ${WILTON_DIR}/modules/wilton_kvstore/include/wilton/wilton_kvstore.h
+                    wilton_${WILTON_VERSION}/devel/include/wilton/wilton_kvstore.h
             # loader
             COMMAND ${CMAKE_COMMAND} -E copy
                     ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_loader${CMAKE_SHARED_LIBRARY_SUFFIX}

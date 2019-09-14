@@ -97,6 +97,7 @@ git submodule update --quiet --init modules/wilton_fs || exit /b 1
 git submodule update --quiet --init modules/wilton_ghc || exit /b 1
 git submodule update --quiet --init modules/wilton_git || exit /b 1
 git submodule update --quiet --init modules/wilton_http || exit /b 1
+git submodule update --quiet --init modules/wilton_kvstore || exit /b 1
 git submodule update --quiet --init modules/wilton_loader || exit /b 1
 git submodule update --quiet --init modules/wilton_logging || exit /b 1
 git submodule update --quiet --init modules/wilton_mustache || exit /b 1
