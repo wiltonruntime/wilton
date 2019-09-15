@@ -7,6 +7,8 @@ var searchData=
   ['readlines',['readLines',['../namespacefs.html#aaacdf8e24182b67d331788516139bd9b',1,'fs']]],
   ['realpath',['realpath',['../namespacefs.html#a82b63dc149c659a439232bc46eaa7c32',1,'fs']]],
   ['receive',['receive',['../namespaceChannel.html#a4d4b52abcbf5a3ceb2ce56c25f8dbc96',1,'Channel']]],
+  ['remove',['remove',['../namespaceKVStore.html#a1bf7b2799945bd5bc9bdd98e755560d4',1,'KVStore']]],
+  ['removebatch',['removeBatch',['../namespaceKVStore.html#aa8d43dfb6f352da9acd8b9ed95476218',1,'KVStore']]],
   ['rename',['rename',['../namespacefs.html#a732ee8601bf54bf7ae7cf75fd96c442c',1,'fs']]],
   ['render',['render',['../namespacemustache.html#a12f67126eba5a120014ced171ed5cc1e',1,'mustache']]],
   ['renderfile',['renderFile',['../namespacemustache.html#a4092e44f93b1e730e49ffebbe8e49386',1,'mustache']]],

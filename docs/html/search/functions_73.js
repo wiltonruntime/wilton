@@ -15,6 +15,7 @@ var searchData=
   ['serial',['Serial',['../namespaceSerial.html#acfa0dda40dbc7a1f6254fd9cd2d6f4ab',1,'Serial']]],
   ['server',['Server',['../namespaceServer.html#a86c9ec71adb138c242dee20c68cb2530',1,'Server']]],
   ['shutdown',['shutdown',['../namespaceLogger.html#a316a5356ad3c47b5d42c2c60c56a2b17',1,'Logger']]],
+  ['size',['size',['../namespaceKVStore.html#a589790bbd3a36cc7639a99323ccb7d06',1,'KVStore']]],
   ['sleepmillis',['sleepMillis',['../namespacethread.html#a0e89aba0a6d011bbc1f178a29902b78f',1,'thread']]],
   ['socket',['Socket',['../namespaceSocket.html#add303d16e7288aa757ffced40288f9cf',1,'Socket']]],
   ['spawn',['spawn',['../namespaceprocess.html#a5105167174690025411effc0a5970ed5',1,'process']]],
