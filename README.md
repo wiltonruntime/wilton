@@ -43,6 +43,12 @@ This project is released under the [Apache License 2.0](http://www.apache.org/li
 Changelog
 ---------
 
+**2019-09-15**
+
+ * `v201909151`
+ * `wilton/KVStore` API for in-memory shared key-value storage
+ * authentication support in `--new-project` server template (based on `pwdauth`)
+
 **2019-09-08**
 
  * `v201909081`
