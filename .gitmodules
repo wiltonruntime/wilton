@@ -307,9 +307,6 @@
 [submodule "js/weak-map"]
 	path = js/weak-map
 	url = https://github.com/wilton-iot/weak-map.git
-[submodule "js/collections"]
-	path = js/collections
-	url = https://github.com/wilton-iot/collections.git
 [submodule "js/tinycolor"]
 	path = js/tinycolor
 	url = https://github.com/wilton-iot/TinyColor.git
@@ -631,3 +628,9 @@
 [submodule "modules/wilton_kvstore"]
 	path = modules/wilton_kvstore
 	url = https://github.com/wilton-iot/wilton_kvstore.git
+[submodule "js/stringmap"]
+	path = js/stringmap
+	url = https://github.com/wilton-iot/stringmap.git
+[submodule "js/buckets"]
+	path = js/buckets
+	url = https://github.com/wilton-iot/buckets.git
