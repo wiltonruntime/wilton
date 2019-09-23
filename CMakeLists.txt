@@ -90,9 +90,6 @@ if ( STATICLIB_TOOLCHAIN MATCHES "windows_.+" )
     endif ( )
 endif ( )
 
-# version file
-configure_file ( ${WILTON_DIR}/resources/buildres/wilton.version
-        ${CMAKE_CURRENT_BINARY_DIR}/wilton.version )
 # doxygen file
 configure_file ( ${WILTON_DIR}/resources/doxygen/Doxyfile
         ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile )
@@ -801,9 +798,6 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "(windows|linux|macosx)_.+" )
             COMMAND ${CMAKE_COMMAND} -E copy
                     ${WILTON_DIR}/resources/installer/.keep
                     wilton_${WILTON_VERSION}/work/.keep
-            COMMAND ${CMAKE_COMMAND} -E copy
-                    wilton.version
-                    wilton_${WILTON_VERSION}/conf/wilton.version  
             COMMAND ${CMAKE_COMMAND} -E copy
                     ${WILTON_DIR}/resources/buildres/logo.png
                     wilton_${WILTON_VERSION}/conf/logo.png
