@@ -23,7 +23,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">wilton.js
-   &#160;<span id="projectnumber">v201909151</span>
+   &#160;<span id="projectnumber">v201909231</span>
    </div>
   </td>
  </tr>
@@ -92,10 +92,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a83b5b1ddd0f00a7b3aed812d581ad17d"><td class="memItemLeft" align="right" valign="top">Undefined&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceutils.html#a83b5b1ddd0f00a7b3aed812d581ad17d">callOrIgnore</a> (Function|Undefined onSuccess, Any|Undefined params)</td></tr>
-<tr class="memdesc:a83b5b1ddd0f00a7b3aed812d581ad17d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Call specified function (if it is not <code>Undefined</code>).  <a href="#a83b5b1ddd0f00a7b3aed812d581ad17d"></a><br/></td></tr>
-<tr class="memitem:a855bef575b561837683c853d6f72d25e"><td class="memItemLeft" align="right" valign="top">Any&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceutils.html#a855bef575b561837683c853d6f72d25e">callOrThrow</a> (Function|Undefined onFailure, Error e, Any|Undefined res)</td></tr>
-<tr class="memdesc:a855bef575b561837683c853d6f72d25e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Call specified callback or throw specified <code>Error</code> if callback is <code>Undefined</code>.  <a href="#a855bef575b561837683c853d6f72d25e"></a><br/></td></tr>
+<tr class="memitem:aee46d344c396ae8f60de65c9d9656c68"><td class="memItemLeft" align="right" valign="top">Any&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceutils.html#aee46d344c396ae8f60de65c9d9656c68">callOrIgnore</a> (Function|Undefined onSuccess, Any|Undefined params)</td></tr>
+<tr class="memdesc:aee46d344c396ae8f60de65c9d9656c68"><td class="mdescLeft">&#160;</td><td class="mdescRight">Call specified function (if it is not <code>Undefined</code>).  <a href="#aee46d344c396ae8f60de65c9d9656c68"></a><br/></td></tr>
+<tr class="memitem:a14eaee100dfd3da6a6b658e32782919c"><td class="memItemLeft" align="right" valign="top">Any&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceutils.html#a14eaee100dfd3da6a6b658e32782919c">callOrThrow</a> (Function|Undefined onFailure, Error e)</td></tr>
+<tr class="memdesc:a14eaee100dfd3da6a6b658e32782919c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Call specified callback or throw specified <code>Error</code> if callback is <code>Undefined</code>.  <a href="#a14eaee100dfd3da6a6b658e32782919c"></a><br/></td></tr>
 <tr class="memitem:a5155c6ca03dee9b918aa3f9820b20d9c"><td class="memItemLeft" align="right" valign="top">Undefined&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceutils.html#a5155c6ca03dee9b918aa3f9820b20d9c">checkProperties</a> (Object obj, Array props)</td></tr>
 <tr class="memdesc:a5155c6ca03dee9b918aa3f9820b20d9c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check whether object has all specified properties.  <a href="#a5155c6ca03dee9b918aa3f9820b20d9c"></a><br/></td></tr>
 <tr class="memitem:a0d6147b425118822ef5dfff0ebc91472"><td class="memItemLeft" align="right" valign="top">Undefined&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceutils.html#a0d6147b425118822ef5dfff0ebc91472">checkPropertyType</a> (Object obj, String prop, String type)</td></tr>
@@ -133,12 +133,12 @@ Functions</h2></td></tr>
 <div class="textblock"><p>This module contains a set of utility function that are used by <code>wilton.js</code> internally.</p>
 <p>It is suggested to use <a href="https://lodash.com/docs/">Lodash library</a> (that is shipped with <code>wilton</code> distribution) instead of this module for the general-use utilities. </p>
 </div><h2>Function Documentation</h2>
-<a class="anchor" id="a83b5b1ddd0f00a7b3aed812d581ad17d"></a>
+<a class="anchor" id="aee46d344c396ae8f60de65c9d9656c68"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">Undefined utils::callOrIgnore </td>
+          <td class="memname">Any utils::callOrIgnore </td>
           <td>(</td>
           <td class="paramtype">Function|Undefined&#160;</td>
           <td class="paramname"><em>onSuccess</em>, </td>
@@ -164,11 +164,11 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd><code>Undefined</code> </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd><code>Any</code> result of <code>onSuccess</code> call (if it is specified); <code>params</code> (if it is specified, but <code>onSuccess</code> - not); <code>undefined</code> otherwise </dd></dl>
 
 </div>
 </div>
-<a class="anchor" id="a855bef575b561837683c853d6f72d25e"></a>
+<a class="anchor" id="a14eaee100dfd3da6a6b658e32782919c"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -182,13 +182,7 @@ Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">Error&#160;</td>
-          <td class="paramname"><em>e</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Any|Undefined&#160;</td>
-          <td class="paramname"><em>res</em>&#160;</td>
+          <td class="paramname"><em>e</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -202,7 +196,6 @@ Functions</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">onFailure</td><td><code>Function|Undefined</code> callback to handle the specified <code>Error</code> </td></tr>
     <tr><td class="paramname">e</td><td><code>Error</code> error to pass to callback or throw </td></tr>
-    <tr><td class="paramname">res</td><td><code>Any|Undefined</code> result value to return from this function if callback call was successfull </td></tr>
   </table>
   </dd>
 </dl>
@@ -701,7 +694,7 @@ Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 15 2019 20:22:51 for wilton.js by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Sep 23 2019 10:58:12 for wilton.js by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>

@@ -23,7 +23,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">wilton.js
-   &#160;<span id="projectnumber">v201909151</span>
+   &#160;<span id="projectnumber">v201909231</span>
    </div>
   </td>
  </tr>
@@ -125,7 +125,40 @@ Functions</h2></td></tr>
 <div class="textblock"><p>Key-value store (linked hash multimap) that lives in shared memory and can be safely accessed from multiple threads.</p>
 <p>Can be optionally created over the persistent file on disk. In that case file contents are read on store creation and saved on store destroy (for example, on application shutdown) or on a <code><a class="el" href="namespaceKVStore.html#a3d1999ddd46c81c09a6cacd0cc307eab" title="Save all contents to file.">persist()</a></code> call.</p>
 <p>Usage example:</p>
-<div class="fragment"><div class="line">TODO</div>
+<div class="fragment"><div class="line"><span class="comment">// create transient (non-persistent store)</span></div>
+<div class="line">var st1 = <span class="keyword">new</span> <a class="code" href="namespaceKVStore.html#a0c919efde91eb07d387a1463e6c0bbb1" title="Create KVStore instance.">KVStore</a>();</div>
+<div class="line"></div>
+<div class="line"><span class="comment">// create persistent store over a file</span></div>
+<div class="line">var st = <span class="keyword">new</span> <a class="code" href="namespaceKVStore.html#a0c919efde91eb07d387a1463e6c0bbb1" title="Create KVStore instance.">KVStore</a>(<span class="stringliteral">&quot;path/to/my.json&quot;</span>);</div>
+<div class="line"></div>
+<div class="line"><span class="comment">// put entries into store</span></div>
+<div class="line">st.put(<span class="stringliteral">&quot;foo&quot;</span>, <span class="stringliteral">&quot;bar&quot;</span>);</div>
+<div class="line">st.put(<span class="stringliteral">&quot;baz&quot;</span>: [42, 43]);</div>
+<div class="line"></div>
+<div class="line"><span class="comment">// append values to existing entry</span></div>
+<div class="line"><span class="comment">// existing value must be an array</span></div>
+<div class="line">st.append(<span class="stringliteral">&quot;baz&quot;</span>, [44, 45, 46];</div>
+<div class="line"></div>
+<div class="line"><span class="comment">// remove entry</span></div>
+<div class="line">st.remove(<span class="stringliteral">&quot;foo&quot;</span>);</div>
+<div class="line"></div>
+<div class="line"><span class="comment">// share store with other threads</span></div>
+<div class="line">var chan = <span class="keyword">new</span> <a class="code" href="namespaceChannel.html#a31e912ae66edd06a075e1fd28d27a943" title="Create Channel instance.">Channel</a>(<span class="stringliteral">&quot;my/channel/name&quot;</span>, 1);</div>
+<div class="line">chan.send({</div>
+<div class="line">    kvstoreHandle: st.handle</div>
+<div class="line">});</div>
+<div class="line"></div>
+<div class="line"><span class="comment">// access store from other thread</span></div>
+<div class="line">var channel = <a class="code" href="namespaceChannel.html#a31e912ae66edd06a075e1fd28d27a943" title="Create Channel instance.">Channel</a>.lookup(<span class="stringliteral">&quot;my/channel/name&quot;</span>);</div>
+<div class="line">var handle = channel.peek().kvstoreHandle;</div>
+<div class="line">var st = <span class="keyword">new</span> <a class="code" href="namespaceKVStore.html#a0c919efde91eb07d387a1463e6c0bbb1" title="Create KVStore instance.">KVStore</a>(handle);</div>
+<div class="line"></div>
+<div class="line"><span class="comment">// persist store to file</span></div>
+<div class="line">st.persist();</div>
+<div class="line"></div>
+<div class="line"><span class="comment">// destroy store, persisting it to file</span></div>
+<div class="line"><span class="comment">// and de-allocating native resources</span></div>
+<div class="line">st.destroy()</div>
 </div><!-- fragment --> </div><h2>Function Documentation</h2>
 <a class="anchor" id="ac427698a360bb0d556310d8a94151e5b"></a>
 <div class="memitem">
@@ -572,7 +605,7 @@ Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Sep 15 2019 20:22:51 for wilton.js by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Sep 23 2019 10:58:12 for wilton.js by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>
