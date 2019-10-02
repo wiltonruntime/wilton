@@ -43,6 +43,14 @@ This project is released under the [Apache License 2.0](http://www.apache.org/li
 Changelog
 ---------
 
+**2019-09-23**
+
+ * `v201909231`
+ * `collections` lib removed
+ * `buckets` and `stringmap` libs added
+ * `lodash`, `moment` and `vue` libs updated
+ * version output support in command line launcher
+
 **2019-09-15**
 
  * `v201909151`
