@@ -73,9 +73,6 @@
 [submodule "deps/staticlib_mustache"]
 	path = deps/staticlib_mustache
 	url = https://github.com/staticlibs/staticlib_mustache.git
-[submodule "deps/staticlib_winservice"]
-	path = deps/staticlib_winservice
-	url = https://github.com/staticlibs/staticlib_winservice.git
 [submodule "js/argparse"]
 	path = js/argparse
 	url = https://github.com/wilton-iot/argparse.git
@@ -211,9 +208,6 @@
 [submodule "modules/wilton_cli"]
 	path = modules/wilton_cli
 	url = https://github.com/wilton-iot/wilton_cli.git
-[submodule "modules/wilton_winservice"]
-	path = modules/wilton_winservice
-	url = https://github.com/wilton-iot/wilton_winservice.git
 [submodule "modules/wilton_db"]
 	path = modules/wilton_db
 	url = https://github.com/wilton-iot/wilton_db.git
@@ -634,3 +628,6 @@
 [submodule "js/buckets"]
 	path = js/buckets
 	url = https://github.com/wilton-iot/buckets.git
+[submodule "modules/wilton_winscm"]
+	path = modules/wilton_winscm
+	url = https://github.com/wilton-iot/wilton_winscm.git

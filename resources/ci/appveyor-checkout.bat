@@ -72,7 +72,6 @@ git submodule update --quiet --init deps/tinydir || exit /b 1
 git submodule update --quiet --init deps/staticlib_unzip || exit /b 1
 git submodule update --quiet --init deps/staticlib_utils || exit /b 1
 git submodule update --quiet --init deps/staticlib_websocket || exit /b 1
-git submodule update --quiet --init deps/staticlib_winservice || exit /b 1
 rem jni
 git submodule update --quiet --init jni || exit /b 1
 rem js
@@ -110,7 +109,7 @@ git submodule update --quiet --init modules/wilton_service || exit /b 1
 git submodule update --quiet --init modules/wilton_signal || exit /b 1
 git submodule update --quiet --init modules/wilton_thread || exit /b 1
 git submodule update --quiet --init modules/wilton_usb || exit /b 1
-git submodule update --quiet --init modules/wilton_winservice || exit /b 1
+git submodule update --quiet --init modules/wilton_winscm || exit /b 1
 git submodule update --quiet --init modules/wilton_zip || exit /b 1
 rem tools
 git submodule update --quiet --init tools/closure-compiler || exit /b 1

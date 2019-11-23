@@ -174,7 +174,7 @@ if ( STATICLIB_TOOLCHAIN MATCHES "android_.+" )
     add_custom_target ( wilton_signal )
     add_custom_target ( wilton_systemd )
     add_custom_target ( wilton_usb )
-    add_custom_target ( wilton_winservice )
+    add_custom_target ( wilton_winscm )
 endif ( )
 if ( STATICLIB_TOOLCHAIN MATCHES "(windows|linux|macosx)_.+" )
     staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_cli )
@@ -197,7 +197,7 @@ if ( STATICLIB_TOOLCHAIN MATCHES "windows_.+" )
     staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_serial )
     add_custom_target ( wilton_systemd )
     staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_usb )
-    staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_winservice )
+    staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_winscm )
 endif ( )
 
 if ( STATICLIB_TOOLCHAIN MATCHES "linux_.+" )
@@ -221,7 +221,7 @@ if ( STATICLIB_TOOLCHAIN MATCHES "linux_.+" )
         add_custom_target ( wilton_systemd )
     endif ( )
     staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_usb )
-    add_custom_target ( wilton_winservice )
+    add_custom_target ( wilton_winscm )
 endif ( )
 if ( STATICLIB_TOOLCHAIN MATCHES "macosx_.+" )
     # engines
@@ -234,7 +234,7 @@ if ( STATICLIB_TOOLCHAIN MATCHES "macosx_.+" )
     add_custom_target ( wilton_serial )
     add_custom_target ( wilton_systemd )
     add_custom_target ( wilton_usb )
-    add_custom_target ( wilton_winservice )
+    add_custom_target ( wilton_winscm )
 endif ( )
 
 add_custom_target ( nativelibs DEPENDS
@@ -271,6 +271,7 @@ add_custom_target ( nativelibs DEPENDS
         wilton_systemd
         wilton_thread
         wilton_usb
+        wilton_winscm
         wilton_zip )
 
 add_custom_command ( OUTPUT std.wlib
@@ -787,9 +788,6 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "(windows|linux|macosx)_.+" )
                     ${WILTON_DIR}/modules/wilton_cli/resources/one-liner-template.js
                     wilton_${WILTON_VERSION}/conf/one-liner-template.js
             COMMAND ${CMAKE_COMMAND} -E copy
-                    ${WILTON_DIR}/js/examples/winservice/config.json
-                    wilton_${WILTON_VERSION}/conf/config.json
-            COMMAND ${CMAKE_COMMAND} -E copy
                     ${WILTON_DIR}/resources/toolchains/${STATICLIB_TOOLCHAIN}-${WILTON_BUILD_FLAVOUR}.cmake
                     wilton_${WILTON_VERSION}/devel/${STATICLIB_TOOLCHAIN}.cmake
             COMMAND ${CMAKE_COMMAND} -E copy
@@ -848,12 +846,11 @@ if ( STATICLIB_TOOLCHAIN MATCHES "windows_.+" )
             COMMAND ${CMAKE_COMMAND} -E copy
                     ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/wilton_usb.pdb
                     wilton_${WILTON_VERSION}_debuginfo/
-            # winservice
+            # winscm
             COMMAND ${CMAKE_COMMAND} -E copy
-                    ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/wilton_winservice.pdb
+                    ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/wilton_winscm.pdb
                     wilton_${WILTON_VERSION}_debuginfo/
-            WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-            DEPENDS wiltonw wilton_serial wilton_usb wilton_winservice )
+            DEPENDS wiltonw wilton_serial wilton_usb wilton_winscm )
 
     add_custom_target ( dist_windows_generic
             COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}
@@ -876,10 +873,11 @@ if ( STATICLIB_TOOLCHAIN MATCHES "windows_.+" )
             COMMAND ${CMAKE_COMMAND} -E copy
                     ${WILTON_DIR}/modules/wilton_usb/include/wilton/wilton_usb.h
                     wilton_${WILTON_VERSION}/devel/include/wilton/wilton_usb.h
-            # winservice
+            # winscm
             COMMAND ${CMAKE_COMMAND} -E copy
-                ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/wilton_winservice${CMAKE_EXECUTABLE_SUFFIX}
-                wilton_${WILTON_VERSION}/bin/wilton_winservice${CMAKE_EXECUTABLE_SUFFIX}
+                    ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_winscm${CMAKE_SHARED_LIBRARY_SUFFIX}
+                    wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_winscm${CMAKE_SHARED_LIBRARY_SUFFIX}
+            # libc
             COMMAND ${CMAKE_COMMAND} -E copy
                 ${WILTON_MSVCR_DIR}/${WILTON_MSVCR_ARCH}/Microsoft.VC120.CRT/msvcr120.dll
                 wilton_${WILTON_VERSION}/bin/msvcr120.dll
