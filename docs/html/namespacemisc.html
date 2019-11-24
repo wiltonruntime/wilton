@@ -23,7 +23,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">wilton.js
-   &#160;<span id="projectnumber">v201909231</span>
+   &#160;<span id="projectnumber">v201911241</span>
    </div>
   </td>
  </tr>
@@ -110,6 +110,8 @@ Functions</h2></td></tr>
 <tr class="memdesc:adb7cfdcc68e9a1b6a69943fb18006baf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wait for <code>Ctrl-C</code>.  <a href="#adb7cfdcc68e9a1b6a69943fb18006baf"></a><br/></td></tr>
 <tr class="memitem:a0ec198a58759fe92757cd6316037be2a"><td class="memItemLeft" align="right" valign="top">Object&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemisc.html#a0ec198a58759fe92757cd6316037be2a">wiltonConfig</a> (Function|Undefined callback)</td></tr>
 <tr class="memdesc:a0ec198a58759fe92757cd6316037be2a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Access <code>wilton</code> configuration.  <a href="#a0ec198a58759fe92757cd6316037be2a"></a><br/></td></tr>
+<tr class="memitem:a3fbc9359dbdf2e2b08d03900181df3cf"><td class="memItemLeft" align="right" valign="top">Undefined&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemisc.html#a3fbc9359dbdf2e2b08d03900181df3cf">winscmStartDispatcher</a> (String name, Function|Undefined callback)</td></tr>
+<tr class="memdesc:a3fbc9359dbdf2e2b08d03900181df3cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Connect the main thread of a wilton process to SCM.  <a href="#a3fbc9359dbdf2e2b08d03900181df3cf"></a><br/></td></tr>
 </table>
 <a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>This module provides miscelanous functionality that doesn't belong to separate modules. </p>
@@ -349,10 +351,45 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a3fbc9359dbdf2e2b08d03900181df3cf"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Undefined misc::winscmStartDispatcher </td>
+          <td>(</td>
+          <td class="paramtype">String&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Function|Undefined&#160;</td>
+          <td class="paramname"><em>callback</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Connects the main thread of a wilton process to the Windos Service Control Manager. Call return after the SCM service is stopped.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td><code>String</code> name of the SCM service </td></tr>
+    <tr><td class="paramname">callback</td><td><code>Function|Undefined</code> callback to receive result or error </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><code>Undefined</code> </dd></dl>
+
+</div>
+</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Sep 23 2019 10:58:12 for wilton.js by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Nov 24 2019 22:54:54 for wilton.js by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>
