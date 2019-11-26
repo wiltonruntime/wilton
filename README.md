@@ -43,6 +43,15 @@ This project is released under the [Apache License 2.0](http://www.apache.org/li
 Changelog
 ---------
 
+**2019-11-24**
+
+ * `v201911241`
+ * updated `cURL` and `OpenSSL` libs
+ * native calls support in `wilton/kiosk`
+ * CLI launcher enhancements
+ * drop `wilton_winservice`executable
+ * add `wilton_winscm` module with JS API
+
 **2019-09-23**
 
  * `v201909231`
