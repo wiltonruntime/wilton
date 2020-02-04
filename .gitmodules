@@ -631,3 +631,6 @@
 [submodule "modules/wilton_winscm"]
 	path = modules/wilton_winscm
 	url = https://github.com/wilton-iot/wilton_winscm.git
+[submodule "js/wilton-mobile"]
+	path = js/wilton-mobile
+	url = https://github.com/wilton-iot/wilton-mobile.git
