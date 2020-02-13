@@ -23,7 +23,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">wilton.js
-   &#160;<span id="projectnumber">v201911241</span>
+   &#160;<span id="projectnumber">v202002131</span>
    </div>
   </td>
  </tr>
@@ -104,8 +104,12 @@ Functions</h2></td></tr>
 <tr class="memdesc:a9c47c632dc600528a3da720ac7241b08"><td class="mdescLeft">&#160;</td><td class="mdescRight">Execute DML (<code>insert</code> or <code>update</code>) or DDL (<code>create</code> or <code>drop</code>) query.  <a href="#a9c47c632dc600528a3da720ac7241b08"></a><br/></td></tr>
 <tr class="memitem:a003195d78e12bd06d03b2b6f2b03420f"><td class="memItemLeft" align="right" valign="top">Number&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceDBConnection.html#a003195d78e12bd06d03b2b6f2b03420f">executeFile</a> (String filePath, Function|Undefined callback)</td></tr>
 <tr class="memdesc:a003195d78e12bd06d03b2b6f2b03420f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Execute all queries from file.  <a href="#a003195d78e12bd06d03b2b6f2b03420f"></a><br/></td></tr>
+<tr class="memitem:a791fc0d38deb39b582ef564899c31b6d"><td class="memItemLeft" align="right" valign="top">Number&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceDBConnection.html#a791fc0d38deb39b582ef564899c31b6d">executeModuleResource</a> (String moduleId, Function|Undefined callback)</td></tr>
+<tr class="memdesc:a791fc0d38deb39b582ef564899c31b6d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Execute all queries from RequireJS module.  <a href="#a791fc0d38deb39b582ef564899c31b6d"></a><br/></td></tr>
 <tr class="memitem:a7f11ca91b893d06b3894e05b9c7539ce"><td class="memItemLeft" align="right" valign="top">static Object&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceDBConnection.html#a7f11ca91b893d06b3894e05b9c7539ce">loadQueryFile</a> (String path, Function|Undefined callback)</td></tr>
-<tr class="memdesc:a7f11ca91b893d06b3894e05b9c7539ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load queries froma an SQL file.  <a href="#a7f11ca91b893d06b3894e05b9c7539ce"></a><br/></td></tr>
+<tr class="memdesc:a7f11ca91b893d06b3894e05b9c7539ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load queries from an SQL file.  <a href="#a7f11ca91b893d06b3894e05b9c7539ce"></a><br/></td></tr>
+<tr class="memitem:a0dfd9b0c8ff67090ea13fa50edb2031f"><td class="memItemLeft" align="right" valign="top">static Object&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceDBConnection.html#a0dfd9b0c8ff67090ea13fa50edb2031f">loadQueryModuleResource</a> (String moduleId, Function|Undefined callback)</td></tr>
+<tr class="memdesc:a0dfd9b0c8ff67090ea13fa50edb2031f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load queries from an SQL module.  <a href="#a0dfd9b0c8ff67090ea13fa50edb2031f"></a><br/></td></tr>
 <tr class="memitem:aae348d6ada352dcd72b5524ea5e4310d"><td class="memItemLeft" align="right" valign="top">Array&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceDBConnection.html#aae348d6ada352dcd72b5524ea5e4310d">queryList</a> (String sql, Object|Undefined params, Function|Undefined callback)</td></tr>
 <tr class="memdesc:aae348d6ada352dcd72b5524ea5e4310d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Execute <code>select</code> query returning result as a list.  <a href="#aae348d6ada352dcd72b5524ea5e4310d"></a><br/></td></tr>
 <tr class="memitem:a5ee96009478bced4ea4451d5c83054bb"><td class="memItemLeft" align="right" valign="top">Object&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceDBConnection.html#a5ee96009478bced4ea4451d5c83054bb">queryObject</a> (String sql, Object|Undefined params, Function|Undefined callback)</td></tr>
@@ -355,6 +359,42 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a791fc0d38deb39b582ef564899c31b6d"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Number DBConnection::executeModuleResource </td>
+          <td>(</td>
+          <td class="paramtype">String&#160;</td>
+          <td class="paramname"><em>moduleId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Function|Undefined&#160;</td>
+          <td class="paramname"><em>callback</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Queries are parsed from module splitting it by <code>;</code> symbols and then executed one by one.</p>
+<p>Comment-only lines are ignored;</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">moduleId</td><td><code>String</code> module ID that points to SQL file </td></tr>
+    <tr><td class="paramname">callback</td><td><code>Function|Undefined</code> callback to receive result or error </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><code>Number</code> number of queries executed </dd></dl>
+
+</div>
+</div>
 <a class="anchor" id="a7f11ca91b893d06b3894e05b9c7539ce"></a>
 <div class="memitem">
 <div class="memproto">
@@ -391,7 +431,52 @@ Functions</h2></td></tr>
 <p>Lines with comments are preserved, empty lines are ignored.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">path</td><td><code>String</code> path to file with data </td></tr>
+    <tr><td class="paramname">path</td><td><code>String</code> path to file with queries </td></tr>
+    <tr><td class="paramname">callback</td><td><code>Function|Undefined</code> callback to receive result or error </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><code>Object</code> loaded queries. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a0dfd9b0c8ff67090ea13fa50edb2031f"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static Object DBConnection::loadQueryModuleResource </td>
+          <td>(</td>
+          <td class="paramtype">String&#160;</td>
+          <td class="paramname"><em>moduleId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Function|Undefined&#160;</td>
+          <td class="paramname"><em>callback</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Parses a module with SQL queries as <code>query_name: sql</code> object.</p>
+<p>Each query must start with <code>/** myQuery STAR/</code> header.</p>
+<p>Lines with comments are preserved, empty lines are ignored.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">moduleId</td><td><code>String</code> module ID that points to file with queries </td></tr>
     <tr><td class="paramname">callback</td><td><code>Function|Undefined</code> callback to receive result or error </td></tr>
   </table>
   </dd>
@@ -488,7 +573,7 @@ Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Nov 24 2019 22:54:54 for wilton.js by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Feb 13 2020 19:21:48 for wilton.js by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>

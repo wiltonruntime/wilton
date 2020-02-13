@@ -23,7 +23,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">wilton.js
-   &#160;<span id="projectnumber">v201911241</span>
+   &#160;<span id="projectnumber">v202002131</span>
    </div>
   </td>
  </tr>
@@ -118,13 +118,12 @@ Functions</h2></td></tr>
 <p><code><a class="el" href="namespaceLogger.html" title="wilton/Logger   Log messages to console or log file.">Logger</a></code> instances are effectively "stateless" (only state is a logger name) - they don't hold additional native resources through handles.</p>
 <p>Usage example:</p>
 <div class="fragment"><div class="line"><span class="comment">// init logging once at app startup</span></div>
-<div class="line">var appdir = misc.wiltonConfig().applicationDirectory;</div>
 <div class="line"><a class="code" href="namespaceLogger.html#ae0d2e31ddd21695a14497123422d0a58" title="Create Logger instance.">Logger</a>.initialize({</div>
 <div class="line">    appenders: [</div>
 <div class="line">        {</div>
 <div class="line">            appenderType: <span class="stringliteral">&quot;DAILY_ROLLING_FILE&quot;</span>,</div>
 <div class="line">            thresholdLevel: <span class="stringliteral">&quot;DEBUG&quot;</span>,</div>
-<div class="line">            filePath: appdir + <span class="stringliteral">&quot;log/myapp_log.txt&quot;</span></div>
+<div class="line">            filePath: <span class="stringliteral">&quot;path/to/log/myapp_log.txt&quot;</span></div>
 <div class="line">        },</div>
 <div class="line">        {</div>
 <div class="line">            appenderType: <span class="stringliteral">&quot;CONSOLE&quot;</span>,</div>
@@ -501,7 +500,7 @@ Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Nov 24 2019 22:54:54 for wilton.js by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Feb 13 2020 19:21:49 for wilton.js by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>

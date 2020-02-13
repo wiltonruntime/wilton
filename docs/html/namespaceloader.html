@@ -23,7 +23,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">wilton.js
-   &#160;<span id="projectnumber">v201911241</span>
+   &#160;<span id="projectnumber">v202002131</span>
    </div>
   </td>
  </tr>
@@ -96,16 +96,16 @@ Functions</h2></td></tr>
 <tr class="memdesc:a5ba26c1ab4c13d94d9be00f41aeb6a9a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find out the full path to the specified module direcotory.  <a href="#a5ba26c1ab4c13d94d9be00f41aeb6a9a"></a><br/></td></tr>
 <tr class="memitem:aca5a8dbb84193c03f54d981ced5abffd"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceloader.html#aca5a8dbb84193c03f54d981ced5abffd">findModulePath</a> (Object|String module, Function|Undefined callback)</td></tr>
 <tr class="memdesc:aca5a8dbb84193c03f54d981ced5abffd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find out the full path to the specified module.  <a href="#aca5a8dbb84193c03f54d981ced5abffd"></a><br/></td></tr>
-<tr class="memitem:ae8dcaff5604278d0f6b64212689d0e67"><td class="memItemLeft" align="right" valign="top">Object&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceloader.html#ae8dcaff5604278d0f6b64212689d0e67">loadAppConfig</a> (Object|Undefined startupModule, Function|Undefined callback)</td></tr>
-<tr class="memdesc:ae8dcaff5604278d0f6b64212689d0e67"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load <code>config.json</code> file from <code>appdir/conf/</code> directory.  <a href="#ae8dcaff5604278d0f6b64212689d0e67"></a><br/></td></tr>
+<tr class="memitem:a95a0ee6d5b5b9be8fa558a88b13edf54"><td class="memItemLeft" align="right" valign="top">Object&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceloader.html#a95a0ee6d5b5b9be8fa558a88b13edf54">loadAppConfig</a> (Object startupModule, Function|Undefined callback)</td></tr>
+<tr class="memdesc:a95a0ee6d5b5b9be8fa558a88b13edf54"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load <code>config.json</code> file from <code>appdir/conf/</code> directory.  <a href="#a95a0ee6d5b5b9be8fa558a88b13edf54"></a><br/></td></tr>
 <tr class="memitem:ae8ca04831c4de603c6abe7c4ab059e71"><td class="memItemLeft" align="right" valign="top">Object&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceloader.html#ae8ca04831c4de603c6abe7c4ab059e71">loadModuleJson</a> (String modname, Function|Undefined callback)</td></tr>
 <tr class="memdesc:ae8ca04831c4de603c6abe7c4ab059e71"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load JSON file using logical module path.  <a href="#ae8ca04831c4de603c6abe7c4ab059e71"></a><br/></td></tr>
-<tr class="memitem:ac3c61aedef71ee801035eef8d43e40a6"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceloader.html#ac3c61aedef71ee801035eef8d43e40a6">loadModuleResource</a> (String modname, Function|Undefined callback)</td></tr>
-<tr class="memdesc:ac3c61aedef71ee801035eef8d43e40a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load resource file using logical module path.  <a href="#ac3c61aedef71ee801035eef8d43e40a6"></a><br/></td></tr>
+<tr class="memitem:a5717465a7bd4a871ff2d5bffe49e3318"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceloader.html#a5717465a7bd4a871ff2d5bffe49e3318">loadModuleResource</a> (String modname, Object|Undefined options, Function|Undefined callback)</td></tr>
+<tr class="memdesc:a5717465a7bd4a871ff2d5bffe49e3318"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load resource file using logical module path.  <a href="#a5717465a7bd4a871ff2d5bffe49e3318"></a><br/></td></tr>
 </table>
 <a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>This module allows to load resource files that are stored inside the JavaScript source tree in file system directories on inside ZIP files.</p>
-<p>Additonally it contains <code><a class="el" href="namespaceloader.html#ae8dcaff5604278d0f6b64212689d0e67" title="Load config.json file from appdir/conf/ directory.">loadAppConfig()</a></code> function that loads <code>config.json</code> file from its expected location inside <code>appdir/conf/</code> directory.</p>
+<p>Additonally it contains <code><a class="el" href="namespaceloader.html#a95a0ee6d5b5b9be8fa558a88b13edf54" title="Load config.json file from appdir/conf/ directory.">loadAppConfig()</a></code> function that loads <code>config.json</code> file from its expected location inside <code>appdir/conf/</code> directory.</p>
 <p>Usage example:</p>
 <div class="fragment"><div class="line"><span class="comment">// full path to the &quot;foo/bar&quot; module, may point to file system or ZIP path</span></div>
 <div class="line">var path = loader.findModulePath(<span class="stringliteral">&quot;foo/bar&quot;</span>);</div>
@@ -190,14 +190,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ae8dcaff5604278d0f6b64212689d0e67"></a>
+<a class="anchor" id="a95a0ee6d5b5b9be8fa558a88b13edf54"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">Object loader::loadAppConfig </td>
           <td>(</td>
-          <td class="paramtype">Object|Undefined&#160;</td>
+          <td class="paramtype">Object&#160;</td>
           <td class="paramname"><em>startupModule</em>, </td>
         </tr>
         <tr>
@@ -227,7 +227,7 @@ Functions</h2></td></tr>
 <p>Loaded file contents are preprocessed replacing references to <code>{{{appdir}}}</code> with an actual path to application directory.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">startupModule</td><td><code>Object|Undefined</code> RequireJS startup module </td></tr>
+    <tr><td class="paramname">startupModule</td><td><code>Object</code> RequireJS startup module </td></tr>
     <tr><td class="paramname">callback</td><td><code>Function|Undefined</code> callback to receive result or error </td></tr>
   </table>
   </dd>
@@ -272,7 +272,7 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ac3c61aedef71ee801035eef8d43e40a6"></a>
+<a class="anchor" id="a5717465a7bd4a871ff2d5bffe49e3318"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -281,6 +281,12 @@ Functions</h2></td></tr>
           <td>(</td>
           <td class="paramtype">String&#160;</td>
           <td class="paramname"><em>modname</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Object|Undefined&#160;</td>
+          <td class="paramname"><em>options</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -299,18 +305,23 @@ Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">modname</td><td><code>String</code> logical module path to the resource file </td></tr>
+    <tr><td class="paramname">options</td><td><code>Object|Undefined</code> configuration object, can be omitted, see possible options below </td></tr>
     <tr><td class="paramname">callback</td><td><code>Function|Undefined</code> callback to receive result or error </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd><code>String</code> contents of the specified file </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd><code>String</code> contents of the specified file</dd></dl>
+<p><b>Options</b></p>
+<ul>
+<li><b>hex</b> <code>Boolean</code> whether data read from specified resources needs to be converted to HEX format before returning it to caller; <code>false</code> by default </li>
+</ul>
 
 </div>
 </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Nov 24 2019 22:54:54 for wilton.js by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Feb 13 2020 19:21:48 for wilton.js by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>
