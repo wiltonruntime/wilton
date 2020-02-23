@@ -43,6 +43,13 @@ This project is released under the [Apache License 2.0](http://www.apache.org/li
 Changelog
 ---------
 
+**2020-02-13**
+
+ * `v202002131`
+ * support encrypted `.wlib` modules
+ * remove `applicationDirectory` parameter from config
+ * resource loader support in `wilton/Server`
+
 **2019-11-24**
 
  * `v201911241`
