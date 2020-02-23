@@ -23,7 +23,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">wilton.js
-   &#160;<span id="projectnumber">v202002131</span>
+   &#160;<span id="projectnumber">v202002231</span>
    </div>
   </td>
  </tr>
@@ -262,6 +262,8 @@ Functions</h2></td></tr>
 <li><b>dirPath</b> <code>String|Undefined</code> path to file-system directory to serve files from</li>
 <li><b>zipPath</b> <code>String|Undefined</code> path to ZIP file to server files from</li>
 <li><b>zipInnerPrefix</b><code>String|Undefined</code> prefix to strip from ZIP paths when serving files from ZIP</li>
+<li><b>useResourceLoader</b><code>Boolean|Undefined</code> whether to load response resources through <code>wilton_loader</code>; default value: false</li>
+<li><b>resourceLoaderPrefix</b><code>String|Undefined</code> prefix (absolute path to WLIB file and optional internal path) to prepend to resources paths</li>
 <li><b>cacheMaxAgeSeconds</b> <code>Number|Undefined</code> value for <code>Cache-Control</code>'s <code>max-age</code> field to use for files server from this <code>documentRoot</code>, in seconds, default value: <code>604800</code></li>
 <li><b>mimeTypes</b> <code>Array|Undefined</code> list of MIME types mapping for this <code>documentRoot</code><ul>
 <li><b>extension</b> <code>String</code> file extension (<code>CSS</code>, <code>JS</code> etc)</li>
@@ -312,7 +314,7 @@ Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Feb 13 2020 19:21:49 for wilton.js by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Feb 23 2020 23:12:24 for wilton.js by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>
