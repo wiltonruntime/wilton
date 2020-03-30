@@ -23,7 +23,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">wilton.js
-   &#160;<span id="projectnumber">v202002231</span>
+   &#160;<span id="projectnumber">v202003291</span>
    </div>
   </td>
  </tr>
@@ -98,6 +98,8 @@ Functions</h2></td></tr>
 <tr class="memdesc:a675688324e3e3def40cca9e761992282"><td class="mdescLeft">&#160;</td><td class="mdescRight">Kill the process with the specified PID.  <a href="#a675688324e3e3def40cca9e761992282"></a><br/></td></tr>
 <tr class="memitem:a5105167174690025411effc0a5970ed5"><td class="memItemLeft" align="right" valign="top">Number&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceprocess.html#a5105167174690025411effc0a5970ed5">spawn</a> (Object options, Function|Undefined callback)</td></tr>
 <tr class="memdesc:a5105167174690025411effc0a5970ed5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Spawn new OS-level process.  <a href="#a5105167174690025411effc0a5970ed5"></a><br/></td></tr>
+<tr class="memitem:a5cfc8949e46ca4862731dec8e79ecb36"><td class="memItemLeft" align="right" valign="top">Number&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceprocess.html#a5cfc8949e46ca4862731dec8e79ecb36">spawnShell</a> (Array commands, Function|Undefined callback)</td></tr>
+<tr class="memdesc:a5cfc8949e46ca4862731dec8e79ecb36"><td class="mdescLeft">&#160;</td><td class="mdescRight">Spawn new OS-level shell process.  <a href="#a5cfc8949e46ca4862731dec8e79ecb36"></a><br/></td></tr>
 </table>
 <a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>This module currently provides only one function: <code><a class="el" href="namespaceprocess.html#a5105167174690025411effc0a5970ed5" title="Spawn new OS-level process.">spawn()</a></code> .</p>
@@ -223,15 +225,52 @@ Functions</h2></td></tr>
 <li><b>executable</b> <code>String</code> path to the executable file</li>
 <li><b>args</b> <code>Array</code> list of the arguments to provide to the executable</li>
 <li><b>outputFile</b> <code>String</code> path to the file for the combined <code>STDOUT</code> and <code>STDERR</code>output</li>
+<li><b>directory</b> <code>String|Undefined</code> path to the working directory for the process, default value: the same working directory as parent process</li>
 <li><b>awaitExit</b> <code>Boolean</code> whether to wait for the spawned process to exit, <code>false</code> by default </li>
 </ul>
+
+</div>
+</div>
+<a class="anchor" id="a5cfc8949e46ca4862731dec8e79ecb36"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Number process::spawnShell </td>
+          <td>(</td>
+          <td class="paramtype">Array&#160;</td>
+          <td class="paramname"><em>commands</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Function|Undefined&#160;</td>
+          <td class="paramname"><em>callback</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Spawns an OS-level shell process launching OS-specific shell processor and waits for it to exit.</p>
+<p>Note: use <code>spawn</code> instead of <code>spawnShell</code> whether possible.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">commands</td><td><code>Array</code> list of commands to pass to OS shell processor </td></tr>
+    <tr><td class="paramname">callback</td><td><code>Function|Undefined</code> callback to receive result or error </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><code>Number</code> OS-specific output code </dd></dl>
 
 </div>
 </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Feb 23 2020 23:12:24 for wilton.js by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Mar 30 2020 22:20:45 for wilton.js by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>

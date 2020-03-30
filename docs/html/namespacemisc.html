@@ -23,7 +23,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">wilton.js
-   &#160;<span id="projectnumber">v202002231</span>
+   &#160;<span id="projectnumber">v202003291</span>
    </div>
   </td>
  </tr>
@@ -100,6 +100,8 @@ Functions</h2></td></tr>
 <tr class="memdesc:a96acd7b05c62cda35a1f543be7b56554"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check whether current Wilton binary was compiled for macOS.  <a href="#a96acd7b05c62cda35a1f543be7b56554"></a><br/></td></tr>
 <tr class="memitem:a416cb8ec09aa7e6275be50a7ba3f46cd"><td class="memItemLeft" align="right" valign="top">Boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemisc.html#a416cb8ec09aa7e6275be50a7ba3f46cd">isWindows</a> (Function|Undefined callback)</td></tr>
 <tr class="memdesc:a416cb8ec09aa7e6275be50a7ba3f46cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check whether current Wilton binary was compiled for Windows.  <a href="#a416cb8ec09aa7e6275be50a7ba3f46cd"></a><br/></td></tr>
+<tr class="memitem:ad9a801f292b93672f512e401ee27763f"><td class="memItemLeft" align="right" valign="top">Array&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemisc.html#ad9a801f292b93672f512e401ee27763f">listRegisteredCalls</a> (Function|Undefined callback)</td></tr>
+<tr class="memdesc:ad9a801f292b93672f512e401ee27763f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a list of registered Wilton calls.  <a href="#ad9a801f292b93672f512e401ee27763f"></a><br/></td></tr>
 <tr class="memitem:a0a08513f1948887e4a7a57348604f559"><td class="memItemLeft" align="right" valign="top">Undefined&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemisc.html#a0a08513f1948887e4a7a57348604f559">runGC</a> (Function|Undefined callback)</td></tr>
 <tr class="memdesc:a0a08513f1948887e4a7a57348604f559"><td class="mdescLeft">&#160;</td><td class="mdescRight">Run a garbage collector.  <a href="#a0a08513f1948887e4a7a57348604f559"></a><br/></td></tr>
 <tr class="memitem:a39e77b40bdeda050c4ae1495d7a52c4d"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemisc.html#a39e77b40bdeda050c4ae1495d7a52c4d">stdinReadline</a> (Function|Undefined callback)</td></tr>
@@ -209,6 +211,30 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><code>Boolean</code> <code>true</code> if current Wilton binary was compiled for Windows, false otherwise </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ad9a801f292b93672f512e401ee27763f"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Array misc::listRegisteredCalls </td>
+          <td>(</td>
+          <td class="paramtype">Function|Undefined&#160;</td>
+          <td class="paramname"><em>callback</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Returns a list of call names, that can be used with <code>wiltoncall</code> function.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">callback</td><td><code>Function|Undefined</code> callback to receive result or error </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><code>Array</code> list of registered Wilton calls </dd></dl>
 
 </div>
 </div>
@@ -389,7 +415,7 @@ Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Feb 23 2020 23:12:24 for wilton.js by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Mar 30 2020 22:20:45 for wilton.js by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>

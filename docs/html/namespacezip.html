@@ -23,7 +23,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">wilton.js
-   &#160;<span id="projectnumber">v202002231</span>
+   &#160;<span id="projectnumber">v202003291</span>
    </div>
   </td>
  </tr>
@@ -96,8 +96,12 @@ Functions</h2></td></tr>
 <tr class="memdesc:a8edfaef98b0750a0ef391e940f050a05"><td class="mdescLeft">&#160;</td><td class="mdescRight">List all the entries names from a ZIP file.  <a href="#a8edfaef98b0750a0ef391e940f050a05"></a><br/></td></tr>
 <tr class="memitem:a299906c9ac1b86772cb2b6d79666a93a"><td class="memItemLeft" align="right" valign="top">Object&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacezip.html#a299906c9ac1b86772cb2b6d79666a93a">readFile</a> (String path, Object|Undefined options, Function|Undefined callback)</td></tr>
 <tr class="memdesc:a299906c9ac1b86772cb2b6d79666a93a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read the entire contents of a ZIP file.  <a href="#a299906c9ac1b86772cb2b6d79666a93a"></a><br/></td></tr>
-<tr class="memitem:a7eafc2c188f4a6f614b2cb88586fb600"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacezip.html#a7eafc2c188f4a6f614b2cb88586fb600">readFile</a> (String path, String entry, Object|Undefined options, Function|Undefined callback)</td></tr>
-<tr class="memdesc:a7eafc2c188f4a6f614b2cb88586fb600"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read the contents of a specified entry from a ZIP file.  <a href="#a7eafc2c188f4a6f614b2cb88586fb600"></a><br/></td></tr>
+<tr class="memitem:aa7e4081fd7767660ad1b1229bd66d3ac"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacezip.html#aa7e4081fd7767660ad1b1229bd66d3ac">readFileEntry</a> (String path, String entry, Object|Undefined options, Function|Undefined callback)</td></tr>
+<tr class="memdesc:aa7e4081fd7767660ad1b1229bd66d3ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read the contents of a specified entry from a ZIP file.  <a href="#aa7e4081fd7767660ad1b1229bd66d3ac"></a><br/></td></tr>
+<tr class="memitem:add765c8bec6cd271a1039b264b267e1a"><td class="memItemLeft" align="right" valign="top">Undefined&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacezip.html#add765c8bec6cd271a1039b264b267e1a">unzipFile</a> (String path, String destPath, Function|Undefined callback)</td></tr>
+<tr class="memdesc:add765c8bec6cd271a1039b264b267e1a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unzip ZIP file into FS.  <a href="#add765c8bec6cd271a1039b264b267e1a"></a><br/></td></tr>
+<tr class="memitem:a3bbddb47785d76b142afb53ed28a7aa6"><td class="memItemLeft" align="right" valign="top">Undefined&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacezip.html#a3bbddb47785d76b142afb53ed28a7aa6">unzipFileEntries</a> (String path, Object entries, Function|Undefined callback)</td></tr>
+<tr class="memdesc:a3bbddb47785d76b142afb53ed28a7aa6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unzip the specified ZIP entries into FS.  <a href="#a3bbddb47785d76b142afb53ed28a7aa6"></a><br/></td></tr>
 <tr class="memitem:a8010c2bf5552be444858e9bd7b11c2f6"><td class="memItemLeft" align="right" valign="top">Undefined&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacezip.html#a8010c2bf5552be444858e9bd7b11c2f6">writeFile</a> (String path, Object entries, Object|Undefined options, Function|Undefined callback)</td></tr>
 <tr class="memdesc:a8010c2bf5552be444858e9bd7b11c2f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write the specified set of entries into ZIP file.  <a href="#a8010c2bf5552be444858e9bd7b11c2f6"></a><br/></td></tr>
 </table>
@@ -200,12 +204,12 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a7eafc2c188f4a6f614b2cb88586fb600"></a>
+<a class="anchor" id="aa7e4081fd7767660ad1b1229bd66d3ac"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">String zip::readFile </td>
+          <td class="memname">String zip::readFileEntry </td>
           <td>(</td>
           <td class="paramtype">String&#160;</td>
           <td class="paramname"><em>path</em>, </td>
@@ -250,6 +254,90 @@ Functions</h2></td></tr>
 <ul>
 <li><b>hex</b> <code>Boolean</code> whether data read from specified ZIP entry needs to be converted to HEX format before returning it to caller; <code>false</code> by default </li>
 </ul>
+
+</div>
+</div>
+<a class="anchor" id="add765c8bec6cd271a1039b264b267e1a"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Undefined zip::unzipFile </td>
+          <td>(</td>
+          <td class="paramtype">String&#160;</td>
+          <td class="paramname"><em>path</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">String&#160;</td>
+          <td class="paramname"><em>destPath</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Function|Undefined&#160;</td>
+          <td class="paramname"><em>callback</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Unzips all entries from the specified ZIP file into filesystem.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">path</td><td><code>String</code> path to file </td></tr>
+    <tr><td class="paramname">destPath</td><td><code>String</code> path to the directory that will correspond to the root entry of the ZIP file </td></tr>
+    <tr><td class="paramname">callback</td><td><code>Function|Undefined</code> callback to receive result or error </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><code>Undefined</code> </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a3bbddb47785d76b142afb53ed28a7aa6"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Undefined zip::unzipFileEntries </td>
+          <td>(</td>
+          <td class="paramtype">String&#160;</td>
+          <td class="paramname"><em>path</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Object&#160;</td>
+          <td class="paramname"><em>entries</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Function|Undefined&#160;</td>
+          <td class="paramname"><em>callback</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Takes the mapping of <code>src_path_in_zip</code> -&gt; <code>dest_path_in_fs</code> and decompresses the specified entries to specifieed filesystems paths.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">path</td><td><code>String</code> path to file </td></tr>
+    <tr><td class="paramname">entries</td><td><code>Object</code> <code>src_path_in_zip</code> -&gt; <code>dest_path_in_fs</code> </td></tr>
+    <tr><td class="paramname">callback</td><td><code>Function|Undefined</code> callback to receive result or error </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><code>Undefined</code> </dd></dl>
 
 </div>
 </div>
@@ -311,7 +399,7 @@ Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Feb 23 2020 23:12:24 for wilton.js by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Mar 30 2020 22:20:45 for wilton.js by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>
