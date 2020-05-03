@@ -43,6 +43,16 @@ This project is released under the [Apache License 2.0](http://www.apache.org/li
 Changelog
 ---------
 
+**2020-03-29**
+
+ * `v202003291`
+ * `wilton/process` and `wilton/zip` enhancements
+
+**2020-02-23**
+
+ * `v202002231`
+ * `wilton/kiosk` enhancements
+
 **2020-02-13**
 
  * `v202002131`
