@@ -43,6 +43,12 @@ This project is released under the [Apache License 2.0](http://www.apache.org/li
 Changelog
 ---------
 
+**2020-05-05**
+
+ * `v202005051`
+ * `wilton/mobile` JS API
+ * fix the build on latest Fedora 
+
 **2020-03-29**
 
  * `v202003291`
