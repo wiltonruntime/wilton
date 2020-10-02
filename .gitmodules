@@ -640,3 +640,9 @@
 [submodule "engines/wilton_quickjs"]
 	path = engines/wilton_quickjs
 	url = https://github.com/wilton-iot/wilton_quickjs.git
+[submodule "deps/lookaside_libjpeg-turbo"]
+	path = deps/lookaside_libjpeg-turbo
+	url = https://github.com/staticlibs/lookaside_libjpeg-turbo.git
+[submodule "deps/external_libjpeg-turbo"]
+	path = deps/external_libjpeg-turbo
+	url = https://github.com/staticlibs/external_libjpeg-turbo.git

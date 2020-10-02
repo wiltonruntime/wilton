@@ -23,7 +23,7 @@
 %global debug_package %{nil}
 
 Name:           wilton
-Version:        v202005051
+Version:        v202009291
 Release:        1%{?dist}
 Summary:        JavaScript runtime
 Group:          Development/Languages
