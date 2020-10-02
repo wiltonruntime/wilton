@@ -36,6 +36,8 @@ git submodule update --quiet --init deps/external_jansson
 git submodule update --quiet --init deps/lookaside_jansson
 git submodule update --quiet --init deps/external_libgit2
 git submodule update --quiet --init deps/lookaside_libgit2
+git submodule update --quiet --init deps/external_libjpeg-turbo
+git submodule update --quiet --init deps/lookaside_libjpeg-turbo
 git submodule update --quiet --init deps/external_libpng
 git submodule update --quiet --init deps/lookaside_libpng
 git submodule update --quiet --init deps/external_libpq

@@ -30,6 +30,8 @@ git submodule update --quiet --init deps/external_jansson || exit /b 1
 git submodule update --quiet --init deps/lookaside_jansson || exit /b 1
 git submodule update --quiet --init deps/external_libgit2 || exit /b 1
 git submodule update --quiet --init deps/lookaside_libgit2 || exit /b 1
+git submodule update --quiet --init deps/external_libjpeg-turbo || exit /b 1
+git submodule update --quiet --init deps/lookaside_libjpeg-turbo || exit /b 1
 git submodule update --quiet --init deps/external_libpng || exit /b 1
 git submodule update --quiet --init deps/lookaside_libpng || exit /b 1
 git submodule update --quiet --init deps/external_libpq || exit /b 1

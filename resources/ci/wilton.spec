@@ -52,6 +52,7 @@ BuildRequires:  postgresql-devel
 BuildRequires:  soci-devel
 BuildRequires:  soci-sqlite3-devel
 BuildRequires:  soci-postgresql-devel
+BuildRequires:  libjpeg-turbo-devel
 BuildRequires:  libpng-devel
 BuildRequires:  systemd-devel
 BuildRequires:  libusbx-devel
@@ -88,6 +89,7 @@ git submodule update --init deps/external_libgit2
 git submodule update --init deps/lookaside_libgit2
 git submodule update --init deps/external_icu
 git submodule update --init deps/external_mozjs
+git submodule update --init deps/external_quickjs
 git submodule update --init deps/external_v8
 git submodule update --init deps/external_utf8cpp
 git submodule update --init deps/lookaside_utf8cpp
@@ -124,6 +126,7 @@ git submodule update --init engines/wilton_chakracore
 git submodule update --init engines/wilton_duktape
 git submodule update --init engines/wilton_jsc
 git submodule update --init engines/wilton_mozjs
+git submodule update --init engines/wilton_quickjs
 git submodule update --init engines/wilton_rhino
 git submodule update --init engines/wilton_v8
 # modules

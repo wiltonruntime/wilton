@@ -45,6 +45,7 @@ git submodule update --quiet --init deps/lookaside_postgresql
 git submodule update --quiet --init deps/external_log4cplus
 git submodule update --quiet --init deps/lookaside_log4cplus
 git submodule update --quiet --init deps/external_mozjs
+git submodule update --quiet --init deps/external_quickjs
 git submodule update --quiet --init deps/external_soci
 git submodule update --quiet --init deps/lookaside_soci
 git submodule update --quiet --init deps/external_v8
@@ -88,6 +89,7 @@ git submodule update --quiet --init engines/wilton_chakracore
 git submodule update --quiet --init engines/wilton_duktape
 git submodule update --quiet --init engines/wilton_jsc
 git submodule update --quiet --init engines/wilton_mozjs
+git submodule update --quiet --init engines/wilton_quickjs
 git submodule update --quiet --init engines/wilton_rhino
 git submodule update --quiet --init engines/wilton_v8
 # modules
