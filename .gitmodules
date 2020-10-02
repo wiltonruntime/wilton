@@ -634,3 +634,9 @@
 [submodule "js/wilton-mobile"]
 	path = js/wilton-mobile
 	url = https://github.com/wilton-iot/wilton-mobile.git
+[submodule "deps/external_quickjs"]
+	path = deps/external_quickjs
+	url = https://github.com/staticlibs/external_quickjs.git
+[submodule "engines/wilton_quickjs"]
+	path = engines/wilton_quickjs
+	url = https://github.com/wilton-iot/wilton_quickjs.git
