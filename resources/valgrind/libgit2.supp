@@ -1,0 +1,18 @@
+{
+    libgit2_pcre_malloc1
+    Memcheck:Leak
+    fun:malloc
+    ...
+    fun:pcre2_match_data_create_8
+    ...
+    fun:git_remote_create_with_opts
+    ...
+}
+{
+    libgit2_pcre_malloc2
+    Memcheck:Leak
+    fun:malloc
+    ...
+    fun:git_remote_lookup
+    ...
+}
