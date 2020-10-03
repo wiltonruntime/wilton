@@ -48,6 +48,7 @@ if [ "x2" = "x${VERSION_BIONIC}" ] ; then
     git submodule update --quiet --init deps/external_v8
     git submodule update --quiet --init engines/wilton_chakracore
     git submodule update --quiet --init engines/wilton_mozjs
+    git submodule update --quiet --init engines/wilton_quickjs
     git submodule update --quiet --init engines/wilton_v8
 fi
 
