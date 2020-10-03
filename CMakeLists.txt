@@ -98,6 +98,8 @@ configure_file ( ${WILTON_DIR}/resources/doxygen/Doxyfile
 if ( WILTON_BUILD_FLAVOUR MATCHES "wheezy" )
     configure_file ( ${WILTON_DIR}/resources/pkgconfig/log4cplus.pc
             ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/pkgconfig/log4cplus.pc )
+    configure_file ( ${WILTON_DIR}/resources/pkgconfig/libjpeg.pc
+            ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/pkgconfig/libjpeg.pc )
 elseif ( WILTON_BUILD_FLAVOUR MATCHES "fedora" )
     configure_file ( ${WILTON_DIR}/resources/pkgconfig/hpdf.pc
             ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/pkgconfig/hpdf.pc )
