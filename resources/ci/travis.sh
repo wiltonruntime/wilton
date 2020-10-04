@@ -64,12 +64,20 @@ if [ "xlinux" = "x${TRAVIS_OS_NAME}" ] ; then
 
     # raspberry test runs
     export LD_LIBRARY_PATH=${WILTON_RPI_TOOLCHAIN}/arm-linux-gnueabihf/sysroot/usr/lib/arm-linux-gnueabihf/
+    # duktape
     qemu-arm-static -L ${WILTON_RPI_TOOLCHAIN}/arm-linux-gnueabihf/sysroot/ ./wilton_dist/bin/wilton ../js/wilton/test/LoggerTest.js -m ../js -j duktape -l
     qemu-arm-static -L ${WILTON_RPI_TOOLCHAIN}/arm-linux-gnueabihf/sysroot/ ./wilton_dist/bin/wilton ../js/wilton/test/fsTest.js -m ../js -j duktape -l
     qemu-arm-static -L ${WILTON_RPI_TOOLCHAIN}/arm-linux-gnueabihf/sysroot/ ./wilton_dist/bin/wilton ../js/wilton/test/gitTest.js -m ../js -j duktape -l
     qemu-arm-static -L ${WILTON_RPI_TOOLCHAIN}/arm-linux-gnueabihf/sysroot/ ./wilton_dist/bin/wilton ../js/wilton/test/threadTest.js -m ../js -j duktape -l
     qemu-arm-static -L ${WILTON_RPI_TOOLCHAIN}/arm-linux-gnueabihf/sysroot/ ./wilton_dist/bin/wilton ../js/wilton/test/zipTest.js -m ../js -j duktape -l
     qemu-arm-static -L ${WILTON_RPI_TOOLCHAIN}/arm-linux-gnueabihf/sysroot/ ./wilton_dist/bin/wilton ../js/test-runners/runSanityTests.js -m ./wilton_dist/std.min.wlib -j duktape
+    # quickjs
+    qemu-arm-static -L ${WILTON_RPI_TOOLCHAIN}/arm-linux-gnueabihf/sysroot/ ./wilton_dist/bin/wilton ../js/wilton/test/LoggerTest.js -m ../js -j quickjs -l
+    qemu-arm-static -L ${WILTON_RPI_TOOLCHAIN}/arm-linux-gnueabihf/sysroot/ ./wilton_dist/bin/wilton ../js/wilton/test/fsTest.js -m ../js -j quickjs -l
+    qemu-arm-static -L ${WILTON_RPI_TOOLCHAIN}/arm-linux-gnueabihf/sysroot/ ./wilton_dist/bin/wilton ../js/wilton/test/gitTest.js -m ../js -j quickjs -l
+    qemu-arm-static -L ${WILTON_RPI_TOOLCHAIN}/arm-linux-gnueabihf/sysroot/ ./wilton_dist/bin/wilton ../js/wilton/test/threadTest.js -m ../js -j quickjs -l
+    qemu-arm-static -L ${WILTON_RPI_TOOLCHAIN}/arm-linux-gnueabihf/sysroot/ ./wilton_dist/bin/wilton ../js/wilton/test/zipTest.js -m ../js -j quickjs -l
+    qemu-arm-static -L ${WILTON_RPI_TOOLCHAIN}/arm-linux-gnueabihf/sysroot/ ./wilton_dist/bin/wilton ../js/test-runners/runSanityTests.js -m ./wilton_dist/std.min.wlib -j quickjs 
 fi
 
 if [ "xosx" = "x${TRAVIS_OS_NAME}"  ] ; then
@@ -105,6 +113,7 @@ if [ "xosx" = "x${TRAVIS_OS_NAME}"  ] ; then
     echo duktape
     ./wilton_dist/bin/wilton ../js/wilton/test/index.js -m ../js -j duktape
     ./wilton_dist/bin/wilton ../js/test-runners/runSanityTests.js -m ./wilton_dist/std.min.wlib -j duktape
+
     if [ "x" != "x${TRAVIS_TAG}" ] ;  then
         mv wilton_${TRAVIS_TAG} wilton_${TRAVIS_TAG}_macos
         zip -qr9 wilton_${TRAVIS_TAG}_macos.zip wilton_${TRAVIS_TAG}_macos

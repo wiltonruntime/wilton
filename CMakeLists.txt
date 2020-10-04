@@ -207,15 +207,14 @@ endif ( )
 if ( STATICLIB_TOOLCHAIN MATCHES "linux_.+" )
     # engines
     staticlib_add_subdirectory ( ${WILTON_DIR}/engines/wilton_jsc )
+    staticlib_add_subdirectory ( ${WILTON_DIR}/engines/wilton_quickjs )
     if ( STATICLIB_TOOLCHAIN MATCHES "linux_amd64_.+" )
         staticlib_add_subdirectory ( ${WILTON_DIR}/engines/wilton_chakracore )
         staticlib_add_subdirectory ( ${WILTON_DIR}/engines/wilton_mozjs )
-        staticlib_add_subdirectory ( ${WILTON_DIR}/engines/wilton_quickjs )
         staticlib_add_subdirectory ( ${WILTON_DIR}/engines/wilton_v8 )
     else ( )
         add_custom_target ( wilton_chakracore )
         add_custom_target ( wilton_mozjs )
-        add_custom_target ( wilton_quickjs )
         add_custom_target ( wilton_v8 )
     endif ( )
     # modules
@@ -825,7 +824,7 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "(windows|linux|macosx)_.+" )
                     wilton_${WILTON_VERSION}
                     wilton_dist
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-            DEPENDS dist
+            DEPENDS dist_debug
             COMMENT "Creaing unversioned distribution ..." )
 
     add_custom_target ( test_js
@@ -956,6 +955,10 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "linux_.+" )
             COMMAND ${CMAKE_COMMAND} -E copy
                     ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_jsc${STATICLIB_DEBUGINFO_SHARED_SUFFIX}
                     wilton_${WILTON_VERSION}_debuginfo/
+            # quickjs
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_quickjs${STATICLIB_DEBUGINFO_SHARED_SUFFIX}
+                    wilton_${WILTON_VERSION}_debuginfo/
             # modules
             # kiosk
             COMMAND ${CMAKE_COMMAND} -E copy
@@ -970,7 +973,7 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "linux_.+" )
                     ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_usb${STATICLIB_DEBUGINFO_SHARED_SUFFIX}
                     wilton_${WILTON_VERSION}_debuginfo/
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-            DEPENDS wilton_jsc wilton_kiosk wilton_serial wilton_usb )
+            DEPENDS wilton_jsc wilton_quickjs wilton_kiosk wilton_serial wilton_usb )
     add_dependencies ( debuginfo debuginfo_linux )
 
     add_custom_target ( debuginfo_linux_amd64
@@ -982,16 +985,12 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "linux_.+" )
             COMMAND ${CMAKE_COMMAND} -E copy
                     ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_mozjs${STATICLIB_DEBUGINFO_SHARED_SUFFIX}
                     wilton_${WILTON_VERSION}_debuginfo/
-            # quickjs
-            COMMAND ${CMAKE_COMMAND} -E copy
-                    ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_quickjs${STATICLIB_DEBUGINFO_SHARED_SUFFIX}
-                    wilton_${WILTON_VERSION}_debuginfo/
             # v8 
             COMMAND ${CMAKE_COMMAND} -E copy
                     ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_v8${STATICLIB_DEBUGINFO_SHARED_SUFFIX}
                     wilton_${WILTON_VERSION}_debuginfo/
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-            DEPENDS wilton_chakracore wilton_mozjs wilton_quickjs wilton_v8 debuginfo_linux )
+            DEPENDS wilton_chakracore wilton_mozjs wilton_v8 debuginfo_linux )
     if ( STATICLIB_TOOLCHAIN MATCHES "linux_amd64_.+" )
         add_dependencies ( debuginfo debuginfo_linux_amd64 )
     endif ( )
@@ -1015,6 +1014,10 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "linux_.+" )
             COMMAND ${CMAKE_COMMAND} -E copy
                     ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_jsc${CMAKE_SHARED_LIBRARY_SUFFIX}
                     wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_jsc${CMAKE_SHARED_LIBRARY_SUFFIX}
+            # quickjs
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_quickjs${CMAKE_SHARED_LIBRARY_SUFFIX}
+                    wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_quickjs${CMAKE_SHARED_LIBRARY_SUFFIX}
             # modules
             # kiosk
             COMMAND ${CMAKE_COMMAND} -E copy
@@ -1063,10 +1066,6 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "linux_.+" )
             COMMAND ${CMAKE_COMMAND} -E copy
                     ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_mozjs${CMAKE_SHARED_LIBRARY_SUFFIX}
                     wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_mozjs${CMAKE_SHARED_LIBRARY_SUFFIX}
-            # quickjs
-            COMMAND ${CMAKE_COMMAND} -E copy
-                    ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_quickjs${CMAKE_SHARED_LIBRARY_SUFFIX}
-                    wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_quickjs${CMAKE_SHARED_LIBRARY_SUFFIX}
             # v8
             COMMAND ${CMAKE_COMMAND} -E copy
                     ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}v8${CMAKE_SHARED_LIBRARY_SUFFIX}
@@ -1081,7 +1080,7 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "linux_.+" )
                     ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_v8${CMAKE_SHARED_LIBRARY_SUFFIX}
                     wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_v8${CMAKE_SHARED_LIBRARY_SUFFIX}
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-            DEPENDS wilton_chakracore wilton_mozjs wilton_quickjs wilton_v8 dist_linux )
+            DEPENDS wilton_chakracore wilton_mozjs wilton_v8 dist_linux )
     if ( STATICLIB_TOOLCHAIN MATCHES "linux_amd64_.+" )
         add_dependencies ( dist dist_linux_amd64 )
     endif ( )
@@ -1152,8 +1151,12 @@ if ( STATICLIB_TOOLCHAIN MATCHES "(linux|macosx)_.+" )
                     ./bin/wilton ./examples/binaryModule.js -b ./examples/binmod.wlib -j duktape
             COMMAND valgrind ${${PROJECT_NAME}_VGOPTS}
                     ./bin/wilton ${WILTON_DIR}/js/wilton/test/index.js -m ../../js -j duktape
+            COMMAND valgrind ${${PROJECT_NAME}_VGOPTS}
+                    ./bin/wilton ./examples/binaryModule.js -b ./examples/binmod.wlib -j quickjs
+            COMMAND valgrind ${${PROJECT_NAME}_VGOPTS}
+                    ./bin/wilton ${WILTON_DIR}/js/wilton/test/index.js -m ../../js -j quickjs
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION} 
-            DEPENDS dist
+            DEPENDS dist_debug
             COMMENT "Running valgrind ..." )
 endif ( )
 

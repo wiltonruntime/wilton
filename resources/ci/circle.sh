@@ -53,6 +53,10 @@ echo duktape
 ./wilton_dist/bin/wilton ../js/wilton/test/index.js -m ../js -j duktape
 ./wilton_dist/bin/wilton ../js/test-runners/runSanityTests.js -m ./wilton_dist/std.min.wlib -j duktape
 
+echo quickjs
+./wilton_dist/bin/wilton ../js/wilton/test/index.js -m ../js -j quickjs
+./wilton_dist/bin/wilton ../js/test-runners/runSanityTests.js -m ./wilton_dist/std.min.wlib -j quickjs
+
 echo chakracore
 ./wilton_dist/bin/wilton ../js/wilton/test/index.js -m ../js -j chakracore
 ./wilton_dist/bin/wilton ../js/test-runners/runSanityTests.js -m ./wilton_dist/std.min.wlib -j chakracore
