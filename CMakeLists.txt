@@ -167,7 +167,7 @@ if ( STATICLIB_TOOLCHAIN MATCHES "android_.+" )
     add_custom_target ( wilton_chakracore )
     add_custom_target ( wilton_jsc )
     add_custom_target ( wilton_mozjs )
-    add_custom_target ( wilton_quickjs )
+    staticlib_add_subdirectory ( ${WILTON_DIR}/engines/wilton_quickjs )
     add_custom_target ( wilton_v8 )
     # modules
     add_custom_target ( wilton_cli )
@@ -233,7 +233,7 @@ if ( STATICLIB_TOOLCHAIN MATCHES "macosx_.+" )
     add_custom_target ( wilton_chakracore )
     staticlib_add_subdirectory ( ${WILTON_DIR}/engines/wilton_jsc )
     add_custom_target ( wilton_mozjs )
-    add_custom_target ( wilton_quickjs )
+    staticlib_add_subdirectory ( ${WILTON_DIR}/engines/wilton_quickjs )
     add_custom_target ( wilton_v8 )
     # modules
     add_custom_target ( wilton_kiosk )
@@ -461,6 +461,10 @@ if ( STATICLIB_TOOLCHAIN MATCHES "android_.+" )
             COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_duktape.so lib/${${PROJECT_NAME}_ANDROID_ARCH}/
             COMMAND ${CMAKE_STRIP} lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_duktape.so
             COMMAND $ENV{JAVA_HOME}/bin/jar uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_duktape.so
+            # quickjs
+            COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_quickjs.so lib/${${PROJECT_NAME}_ANDROID_ARCH}/
+            COMMAND ${CMAKE_STRIP} lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_quickjs.so
+            COMMAND $ENV{JAVA_HOME}/bin/jar uf wilton-android.jar lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_quickjs.so
             # rhino
             COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libwilton_rhino.so lib/${${PROJECT_NAME}_ANDROID_ARCH}/
             COMMAND ${CMAKE_STRIP} lib/${${PROJECT_NAME}_ANDROID_ARCH}/libwilton_rhino.so
@@ -1118,18 +1122,27 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "macosx_.+" )
             COMMAND ${CMAKE_COMMAND} -E copy
                     ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_jsc${STATICLIB_DEBUGINFO_SHARED_SUFFIX}
                     wilton_${WILTON_VERSION}_debuginfo/
+            # quickjs
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_quickjs${STATICLIB_DEBUGINFO_SHARED_SUFFIX}
+                    wilton_${WILTON_VERSION}_debuginfo/
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-            DEPENDS wilton_jsc )
+            DEPENDS wilton_jsc wilton_quickjs )
     add_dependencies ( debuginfo debuginfo_macosx )
 
     add_custom_target ( dist_macosx
             COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}
             COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}/bin
+            # jsc
             COMMAND ${CMAKE_COMMAND} -E copy
                     ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_jsc${CMAKE_SHARED_LIBRARY_SUFFIX}
                     wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_jsc${CMAKE_SHARED_LIBRARY_SUFFIX}
+            # quickjs
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_quickjs${CMAKE_SHARED_LIBRARY_SUFFIX}
+                    wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_quickjs${CMAKE_SHARED_LIBRARY_SUFFIX}
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-            DEPENDS wilton_jsc debuginfo_macosx )
+            DEPENDS wilton_jsc wilton_quickjs debuginfo_macosx )
     add_dependencies ( dist dist_macosx )
 
 endif ( )

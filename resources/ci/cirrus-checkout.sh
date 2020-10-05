@@ -30,6 +30,7 @@ git submodule update --quiet --init deps/external_hpdf
 git submodule update --quiet --init deps/lookaside_libharu
 git submodule update --quiet --init deps/external_libgit2
 git submodule update --quiet --init deps/lookaside_libgit2
+git submodule update --quiet --init deps/external_quickjs
 git submodule update --quiet --init deps/external_utf8cpp
 git submodule update --quiet --init deps/lookaside_utf8cpp
 git submodule update --quiet --init deps/staticlib_compress
@@ -68,6 +69,7 @@ fi
 # engines
 git submodule update --quiet --init engines/wilton_duktape
 git submodule update --quiet --init engines/wilton_jsc
+git submodule update --quiet --init engines/wilton_quickjs
 git submodule update --quiet --init engines/wilton_rhino
 # modules
 git submodule update --quiet --init modules/wilton_channel
