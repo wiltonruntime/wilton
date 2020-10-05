@@ -51,6 +51,7 @@ git submodule update --quiet --init deps/external_openssl
 git submodule update --quiet --init deps/lookaside_openssl
 git submodule update --quiet --init deps/external_popt
 git submodule update --quiet --init deps/lookaside_popt
+git submodule update --quiet --init deps/external_quickjs
 git submodule update --quiet --init deps/external_soci
 git submodule update --quiet --init deps/lookaside_soci
 git submodule update --quiet --init deps/external_sqlite
@@ -95,6 +96,7 @@ fi
 # engines
 git submodule update --quiet --init engines/wilton_duktape
 git submodule update --quiet --init engines/wilton_jsc
+git submodule update --quiet --init engines/wilton_quickjs
 git submodule update --quiet --init engines/wilton_rhino
 # modules
 git submodule update --quiet --init modules/wilton_channel
