@@ -40,6 +40,7 @@ git submodule update --quiet --init deps/external_libssh2 || exit /b 1
 git submodule update --quiet --init deps/lookaside_libssh2 || exit /b 1
 git submodule update --quiet --init deps/external_log4cplus || exit /b 1
 git submodule update --quiet --init deps/lookaside_log4cplus || exit /b 1
+git submodule update --quiet --init deps/external_quickjs || exit /b 1
 git submodule update --quiet --init deps/external_openssl || exit /b 1
 git submodule update --quiet --init deps/lookaside_openssl || exit /b 1
 git submodule update --quiet --init deps/external_popt || exit /b 1
@@ -87,6 +88,7 @@ if "x" NEQ "x%APPVEYOR_REPO_TAG_NAME%" (
 rem engines
 git submodule update --quiet --init engines/wilton_chakra || exit /b 1
 git submodule update --quiet --init engines/wilton_duktape || exit /b 1
+git submodule update --quiet --init engines/wilton_quickjs || exit /b 1
 git submodule update --quiet --init engines/wilton_rhino || exit /b 1
 rem modules
 git submodule update --quiet --init modules/wilton_channel || exit /b 1
