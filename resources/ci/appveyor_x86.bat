@@ -54,6 +54,10 @@ echo duktape
 wilton_dist\bin\wilton.exe ../js/wilton/test/index.js -m ../js  -j duktape || exit /b 1
 wilton_dist\bin\wilton.exe ../js/test-runners/runSanityTests.js -m wilton_dist/std.min.wlib -j duktape || exit /b 1
 
+echo quickjs
+wilton_dist\bin\wilton.exe ../js/wilton/test/index.js -m ../js  -j quickjs || exit /b 1
+wilton_dist\bin\wilton.exe ../js/test-runners/runSanityTests.js -m wilton_dist/std.min.wlib -j quickjs || exit /b 1
+
 echo jvm
 pushd "../jni" || exit /b 1
 cmd /c %WILTON_DIR%/tools/maven/bin/mvn --batch-mode clean test || exit /b 1

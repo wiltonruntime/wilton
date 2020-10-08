@@ -114,6 +114,10 @@ if [ "xosx" = "x${TRAVIS_OS_NAME}"  ] ; then
     ./wilton_dist/bin/wilton ../js/wilton/test/index.js -m ../js -j duktape
     ./wilton_dist/bin/wilton ../js/test-runners/runSanityTests.js -m ./wilton_dist/std.min.wlib -j duktape
 
+    echo quickjs
+    ./wilton_dist/bin/wilton ../js/wilton/test/index.js -m ../js -j quickjs
+    ./wilton_dist/bin/wilton ../js/test-runners/runSanityTests.js -m ./wilton_dist/std.min.wlib -j quickjs
+
     if [ "x" != "x${TRAVIS_TAG}" ] ;  then
         mv wilton_${TRAVIS_TAG} wilton_${TRAVIS_TAG}_macos
         zip -qr9 wilton_${TRAVIS_TAG}_macos.zip wilton_${TRAVIS_TAG}_macos

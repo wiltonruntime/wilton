@@ -555,9 +555,11 @@ if ( STATICLIB_TOOLCHAIN MATCHES "android_.+" )
             COMMAND ${CMAKE_COMMAND} -E remove_directory ${WILTON_DIR}/android/build
             COMMAND ${CMAKE_COMMAND} -E remove_directory ${WILTON_DIR}/android/app/build
             COMMAND ${CMAKE_COMMAND} -E copy
-#                    std.min.wlib # todo: fixme
                     std.wlib
                     ${WILTON_DIR}/android/app/src/main/assets/std.wlib
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    std.min.wlib
+                    ${WILTON_DIR}/android/app/src/main/assets/std.min.wlib
             COMMAND cd ${WILTON_DIR}/android &&
                     ${${PROJECT_NAME}_LIBC_PRELOAD_CMD}
                     ANDROID_HOME=$ENV{WILTON_ANDROID_TOOLS}/sdk
@@ -832,7 +834,7 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "(windows|linux|macosx)_.+" )
             COMMENT "Creaing unversioned distribution ..." )
 
     add_custom_target ( test_js
-            COMMAND bin/wilton ${WILTON_DIR}/js/wilton/test/index.js -m ${WILTON_DIR}/js -j duktape
+            COMMAND bin/wilton ${WILTON_DIR}/js/wilton/test/index.js -m ${WILTON_DIR}/js -j quickjs
             COMMAND bin/wilton ${WILTON_DIR}/js/test-runners/runSanityTests.js
             COMMAND bin/wilton ${WILTON_DIR}/js/test-runners/runSanityTests.js -m std.min.wlib
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION} 
