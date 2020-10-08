@@ -194,7 +194,7 @@ if ( STATICLIB_TOOLCHAIN MATCHES "windows_.+" )
     add_custom_target ( wilton_chakracore )
     add_custom_target ( wilton_jsc )
     add_custom_target ( wilton_mozjs )
-    add_custom_target ( wilton_quickjs )
+    staticlib_add_subdirectory ( ${WILTON_DIR}/engines/wilton_quickjs )
     add_custom_target ( wilton_v8 )
     # modules
     add_custom_target ( wilton_kiosk )
@@ -845,6 +845,13 @@ if ( STATICLIB_TOOLCHAIN MATCHES "windows_.+" )
 
     add_custom_target ( debuginfo_windows_generic
             COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}_debuginfo
+            # quickjs
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/wilton_quickjs.pdb
+                    wilton_${WILTON_VERSION}_debuginfo/
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/quickjs.dll.debug
+                    wilton_${WILTON_VERSION}_debuginfo/
             # wiltonw
             COMMAND ${CMAKE_COMMAND} -E copy
                     ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/wiltonw.pdb
@@ -861,11 +868,18 @@ if ( STATICLIB_TOOLCHAIN MATCHES "windows_.+" )
             COMMAND ${CMAKE_COMMAND} -E copy
                     ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/wilton_winscm.pdb
                     wilton_${WILTON_VERSION}_debuginfo/
-            DEPENDS wiltonw wilton_serial wilton_usb wilton_winscm )
+            DEPENDS wiltonw wilton_quickjs wilton_serial wilton_usb wilton_winscm )
 
     add_custom_target ( dist_windows_generic
             COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}
             COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}/bin
+            # quickjs
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_quickjs${CMAKE_SHARED_LIBRARY_SUFFIX}
+                    wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_quickjs${CMAKE_SHARED_LIBRARY_SUFFIX}
+            COMMAND ${CMAKE_COMMAND} -E copy
+                   ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}quickjs${CMAKE_SHARED_LIBRARY_SUFFIX}
+                    wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}quickjs${CMAKE_SHARED_LIBRARY_SUFFIX}
             # wiltonw
             COMMAND ${CMAKE_COMMAND} -E copy
                     ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/wiltonw${CMAKE_EXECUTABLE_SUFFIX}
@@ -917,6 +931,14 @@ if ( STATICLIB_TOOLCHAIN MATCHES "windows_.+" )
                     wilton_${WILTON_VERSION}/bin/wilton_chakra.dll
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
             DEPENDS wilton_chakra dist_windows_generic debuginfo_windows_amd64 )
+            
+    add_custom_target ( dist_windows_i386
+            # quickjs_libgcc
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libgcc_s_sjlj-1.dll
+                    wilton_${WILTON_VERSION}/bin/libgcc_s_sjlj-1.dll
+            WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+            DEPENDS wilton_quickjs dist_windows_generic )
 
     add_custom_target ( debuginfo_windows DEPENDS debuginfo_windows_generic )
     add_custom_target ( dist_windows DEPENDS dist_windows_generic debuginfo_windows )
@@ -925,6 +947,8 @@ if ( STATICLIB_TOOLCHAIN MATCHES "windows_.+" )
     if ( STATICLIB_TOOLCHAIN MATCHES "windows_amd64_.+" )
         add_dependencies ( debuginfo_windows debuginfo_windows_amd64 )
         add_dependencies ( dist_windows dist_windows_amd64 )
+    elseif ( STATICLIB_TOOLCHAIN MATCHES "windows_i386_.+" )
+        add_dependencies ( dist_windows dist_windows_i386 )
     endif ( )
 
     add_dependencies ( debuginfo debuginfo_windows )
