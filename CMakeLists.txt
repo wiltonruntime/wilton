@@ -1187,10 +1187,6 @@ if ( STATICLIB_TOOLCHAIN MATCHES "(linux|macosx)_.+" )
 
     add_custom_target ( valgrind
             COMMAND valgrind ${${PROJECT_NAME}_VGOPTS}
-                    ./bin/wilton ./examples/binaryModule.js -b ./examples/binmod.wlib -j duktape
-            COMMAND valgrind ${${PROJECT_NAME}_VGOPTS}
-                    ./bin/wilton ${WILTON_DIR}/js/wilton/test/index.js -m ../../js -j duktape
-            COMMAND valgrind ${${PROJECT_NAME}_VGOPTS}
                     ./bin/wilton ./examples/binaryModule.js -b ./examples/binmod.wlib -j quickjs
             COMMAND valgrind ${${PROJECT_NAME}_VGOPTS}
                     ./bin/wilton ${WILTON_DIR}/js/wilton/test/index.js -m ../../js -j quickjs

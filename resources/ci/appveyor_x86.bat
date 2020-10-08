@@ -22,10 +22,12 @@ set WILTON_DIR=%SCRIPT_DIR%../..
 
 rem additional tools
 git clone --quiet https://github.com/wilton-iot/tools_windows_jdk8u201_x86.git ../jdk8
+git clone --quiet https://github.com/wilton-iot/mingw-i686-6.4.0-release-win32-sjlj-rt_v5-rev0.git mingw32
 
 rem env
 call resources\scripts\windows-tools.bat
 set JAVA_HOME=%WILTON_DIR%/../jdk8
+set MINGW_HOME=%WILTON_DIR%/../mingw32
 
 rem build
 mkdir build || exit /b 1
