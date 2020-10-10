@@ -941,12 +941,12 @@ if ( STATICLIB_TOOLCHAIN MATCHES "windows_.+" )
             COMMAND ${CMAKE_COMMAND} -E remove wilton_${WILTON_VERSION}${WILTON_WIN_ARCH_POSTFIX}.wxs
             COMMAND $ENV{JAVA_HOME}/bin/java
                     -XX:+UseSerialGC -XX:+TieredCompilation -XX:TieredStopAtLevel=1
-                    -jar ${WILTON_WINDOWS_BUILD_TOOLS_HOME}/wixgen/wixgen.jar
+                    -jar $ENV{WILTON_WINDOWS_BUILD_TOOLS_HOME}/wixgen/wixgen.jar
                     wilton_${WILTON_VERSION}
                     -c installer.json
                     -o wilton_${WILTON_VERSION}${WILTON_WIN_ARCH_POSTFIX}.wxs
-            COMMAND ${WILTON_WINDOWS_BUILD_TOOLS_HOME}/wix/bin/candle -v -nologo wilton_${WILTON_VERSION}${WILTON_WIN_ARCH_POSTFIX}.wxs
-            COMMAND ${WILTON_WINDOWS_BUILD_TOOLS_HOME}/wix/bin/light
+            COMMAND $ENV{WILTON_WINDOWS_BUILD_TOOLS_HOME}/wix/bin/candle -v -nologo wilton_${WILTON_VERSION}${WILTON_WIN_ARCH_POSTFIX}.wxs
+            COMMAND $ENV{WILTON_WINDOWS_BUILD_TOOLS_HOME}/wix/bin/light
                     -v -nologo -sw1076 -sval -ext WixUIExtension -ext WixUtilExtension
                     wilton_${WILTON_VERSION}${WILTON_WIN_ARCH_POSTFIX}.wixobj
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
