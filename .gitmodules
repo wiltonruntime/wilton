@@ -178,33 +178,12 @@
 [submodule "js/wilton-requirejs"]
 	path = js/wilton-requirejs
 	url = https://github.com/wilton-iot/wilton-requirejs.git
-[submodule "tools/closure-compiler"]
-	path = tools/closure-compiler
-	url = https://github.com/wilton-iot/tools_closure-compiler.git
 [submodule "core"]
 	path = core
 	url = https://github.com/wilton-iot/wilton_core.git
-[submodule "tools/convertion-scripts"]
-	path = tools/convertion-scripts
-	url = https://github.com/wilton-iot/tools_convertion-scripts.git
-[submodule "tools/windows/nasm"]
-	path = tools/windows/nasm
-	url = https://github.com/wilton-iot/tools_windows_nasm.git
-[submodule "tools/windows/pkgconfig"]
-	path = tools/windows/pkgconfig
-	url = https://github.com/wilton-iot/tools_windows_pkgconfig.git
-[submodule "tools/windows/zip"]
-	path = tools/windows/zip
-	url = https://github.com/wilton-iot/tools_windows_zip.git
 [submodule "js/examples"]
 	path = js/examples
 	url = https://github.com/wilton-iot/examples.git
-[submodule "tools/windows/wixgen"]
-	path = tools/windows/wixgen
-	url = https://github.com/wilton-iot/tools_windows_wixgen.git
-[submodule "tools/windows/wix"]
-	path = tools/windows/wix
-	url = https://github.com/wilton-iot/tools_windows_wix.git
 [submodule "modules/wilton_cli"]
 	path = modules/wilton_cli
 	url = https://github.com/wilton-iot/wilton_cli.git
@@ -295,9 +274,6 @@
 [submodule "js/cuint"]
 	path = js/cuint
 	url = https://github.com/wilton-iot/js-cuint.git
-[submodule "js/mime-db"]
-	path = js/mime-db
-	url = https://github.com/wilton-iot/mime-db.git
 [submodule "js/weak-map"]
 	path = js/weak-map
 	url = https://github.com/wilton-iot/weak-map.git
@@ -406,27 +382,6 @@
 [submodule "js/spark-md5"]
 	path = js/spark-md5
 	url = https://github.com/wilton-iot/js-spark-md5.git
-[submodule "bench"]
-	path = bench
-	url = https://github.com/wilton-iot/wilton_bench.git
-[submodule "tools/ant"]
-	path = tools/ant
-	url = https://github.com/wilton-iot/tools_ant.git
-[submodule "tools/windows/perl520"]
-	path = tools/windows/perl520
-	url = https://github.com/wilton-iot/tools_windows_perl520.git
-[submodule "tools/bench/wrk"]
-	path = tools/bench/wrk
-	url = https://github.com/wilton-iot/wrk.git
-[submodule "tools/bench/FlameGraph"]
-	path = tools/bench/FlameGraph
-	url = https://github.com/wilton-iot/FlameGraph.git
-[submodule "tools/bench/nmon"]
-	path = tools/bench/nmon
-	url = https://github.com/wilton-iot/nmon.git
-[submodule "tools/bench/nmonvisualizer"]
-	path = tools/bench/nmonvisualizer
-	url = https://github.com/wilton-iot/nmonvisualizer.git
 [submodule "modules/wilton_examples"]
 	path = modules/wilton_examples
 	url = https://github.com/wilton-iot/wilton_examples.git

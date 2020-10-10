@@ -119,7 +119,5 @@ git submodule update --quiet --init modules/wilton_thread
 git submodule update --quiet --init modules/wilton_usb
 git submodule update --quiet --init modules/wilton_zip
 # tools
-git submodule update --quiet --init tools/closure-compiler
-git submodule update --quiet --init tools/convertion-scripts
 git submodule update --quiet --init tools/maven
 git submodule update --quiet --init tools/mvnrepo

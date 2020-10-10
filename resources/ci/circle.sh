@@ -42,35 +42,36 @@ make dist_debug > dist_debug.log
 # test
 make dist_unversioned > dist_unversioned.log
 
+echo quickjs
+./wilton_dist/bin/wilton ../js/wilton/test/index.js -m ../js
+./wilton_dist/bin/wilton ../js/test-runners/runSanityTests.js
+./wilton_dist/bin/wilton ../js/test-runners/runStdLibTests.js -m ../js > quickjs_stdlib.log
+
 echo jsc
 if [ "xfedora" = "x${WILTON_BUILD_FLAVOUR}" ] ; then
     ./wilton_dist/bin/wilton ../js/wilton/test/index.js -m ../js -j jsc
     ./wilton_dist/bin/wilton ../js/test-runners/runStdLibTests.js -m ../js -j jsc > jsc_stdlib.log
 fi
-./wilton_dist/bin/wilton ../js/test-runners/runSanityTests.js -m ./wilton_dist/std.min.wlib -j jsc
+./wilton_dist/bin/wilton ../js/test-runners/runSanityTests.js -j jsc
 
 echo duktape
 ./wilton_dist/bin/wilton ../js/wilton/test/index.js -m ../js -j duktape
-./wilton_dist/bin/wilton ../js/test-runners/runSanityTests.js -m ./wilton_dist/std.min.wlib -j duktape
-
-echo quickjs
-./wilton_dist/bin/wilton ../js/wilton/test/index.js -m ../js -j quickjs
-./wilton_dist/bin/wilton ../js/test-runners/runSanityTests.js -m ./wilton_dist/std.min.wlib -j quickjs
+./wilton_dist/bin/wilton ../js/test-runners/runSanityTests.js -j duktape
 
 echo chakracore
 ./wilton_dist/bin/wilton ../js/wilton/test/index.js -m ../js -j chakracore
-./wilton_dist/bin/wilton ../js/test-runners/runSanityTests.js -m ./wilton_dist/std.min.wlib -j chakracore
+./wilton_dist/bin/wilton ../js/test-runners/runSanityTests.js -j chakracore
 ./wilton_dist/bin/wilton ../js/test-runners/runStdLibTests.js -m ../js -j chakracore > chakracore_stdlib.log
 
 echo mozjs
 ./wilton_dist/bin/wilton ../js/wilton/test/index.js -m ../js -j mozjs
-./wilton_dist/bin/wilton ../js/test-runners/runSanityTests.js -m ./wilton_dist/std.min.wlib -j mozjs
+./wilton_dist/bin/wilton ../js/test-runners/runSanityTests.js -j mozjs
 # intermittent out of memory
 ./wilton_dist/bin/wilton ../js/test-runners/runStdLibTests.js -m ../js -j mozjs > mozjs_stdlib.log || true
 
 echo v8
 ./wilton_dist/bin/wilton ../js/wilton/test/index.js -m ../js -j v8
-./wilton_dist/bin/wilton ../js/test-runners/runSanityTests.js -m ./wilton_dist/std.min.wlib -j v8
+./wilton_dist/bin/wilton ../js/test-runners/runSanityTests.js -j v8
 ./wilton_dist/bin/wilton ../js/test-runners/runStdLibTests.js -m ../js -j v8 > v8_stdlib.log
 
 echo jvm
@@ -82,11 +83,7 @@ export JAVA_TOOL_OPTIONS="-XX:MaxRAM=512M -XX:+UseSerialGC -XX:+TieredCompilatio
 
 echo rhino
 ./wilton_dist/bin/wilton ../js/wilton/test/index.js -m ../js -j rhino
-./wilton_dist/bin/wilton ../js/test-runners/runSanityTests.js -m ./wilton_dist/std.min.wlib -j rhino
-
-echo nashorn
-./wilton_dist/bin/wilton ../js/wilton/test/index.js -m ../js -j nashorn
-./wilton_dist/bin/wilton ../js/test-runners/runSanityTests.js -m ./wilton_dist/std.min.wlib -j nashorn
+./wilton_dist/bin/wilton ../js/test-runners/runSanityTests.js -j rhino
 
 echo valgrind
 make valgrind

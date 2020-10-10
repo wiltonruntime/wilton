@@ -116,13 +116,6 @@ git submodule update --quiet --init modules/wilton_usb || exit /b 1
 git submodule update --quiet --init modules/wilton_winscm || exit /b 1
 git submodule update --quiet --init modules/wilton_zip || exit /b 1
 rem tools
-git submodule update --quiet --init tools/closure-compiler || exit /b 1
-git submodule update --quiet --init tools/convertion-scripts || exit /b 1
 git submodule update --quiet --init tools/maven || exit /b 1
 git submodule update --quiet --init tools/mvnrepo || exit /b 1
-git submodule update --quiet --init tools/windows/nasm || exit /b 1
-git submodule update --quiet --init tools/windows/perl520 || exit /b 1
-git submodule update --quiet --init tools/windows/pkgconfig || exit /b 1
-git submodule update --quiet --init tools/windows/wix || exit /b 1
-git submodule update --quiet --init tools/windows/wixgen || exit /b 1
-git submodule update --quiet --init tools/windows/zip || exit /b 1
+git clone --quiet -recursive https://github.com/wilton-iot/windows_build_tools.git ../tools

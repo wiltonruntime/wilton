@@ -285,9 +285,8 @@ add_custom_command ( OUTPUT std.wlib
         COMMAND ${CMAKE_COMMAND} -E remove_directory js
         COMMAND $ENV{JAVA_HOME}/bin/jjs
                 -J-XX:+UseSerialGC -J-XX:+TieredCompilation -J-XX:TieredStopAtLevel=1
-                -cp ${WILTON_DIR}/tools/closure-compiler/closure-compiler.jar
-                ${WILTON_DIR}/tools/convertion-scripts/bundle-stdlib-modules.js
-                -- ${WILTON_DIR}/js js
+                ${WILTON_DIR}/resources/scripts/bundle-stdlib-modules.js
+                ${WILTON_DIR}/js js
         COMMAND cd js && zip -qr9 js.zip *
         COMMAND ${CMAKE_COMMAND} -E rename
                 ${CMAKE_CURRENT_BINARY_DIR}/js/js.zip
@@ -296,22 +295,7 @@ add_custom_command ( OUTPUT std.wlib
         DEPENDS nativelibs # just to preserve ordering
         COMMENT "Preparing JavaScript modules bundle ..." )
 
-add_custom_command ( OUTPUT std.min.wlib
-        COMMAND ${CMAKE_COMMAND} -E remove_directory js
-        COMMAND $ENV{JAVA_HOME}/bin/jjs
-                -J-XX:+UseSerialGC -J-XX:+TieredCompilation -J-XX:TieredStopAtLevel=1
-                -cp ${WILTON_DIR}/tools/closure-compiler/closure-compiler.jar
-                ${WILTON_DIR}/tools/convertion-scripts/bundle-stdlib-modules.js
-                -- ${WILTON_DIR}/js js minified
-        COMMAND cd js && zip -qr9 js.zip *
-        COMMAND ${CMAKE_COMMAND} -E rename
-                ${CMAKE_CURRENT_BINARY_DIR}/js/js.zip
-                ${CMAKE_CURRENT_BINARY_DIR}/std.min.wlib
-        WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-        DEPENDS std.wlib
-        COMMENT "Preparing JavaScript modules minified bundle ..." )
-
-add_custom_target( stdlib DEPENDS std.wlib std.min.wlib )
+add_custom_target( stdlib DEPENDS std.wlib )
 
 add_custom_target ( examples 
         COMMAND ${CMAKE_COMMAND} -E remove_directory examples
@@ -557,9 +541,6 @@ if ( STATICLIB_TOOLCHAIN MATCHES "android_.+" )
             COMMAND ${CMAKE_COMMAND} -E copy
                     std.wlib
                     ${WILTON_DIR}/android/app/src/main/assets/std.wlib
-            COMMAND ${CMAKE_COMMAND} -E copy
-                    std.min.wlib
-                    ${WILTON_DIR}/android/app/src/main/assets/std.min.wlib
             COMMAND cd ${WILTON_DIR}/android &&
                     ${${PROJECT_NAME}_LIBC_PRELOAD_CMD}
                     ANDROID_HOME=$ENV{WILTON_ANDROID_TOOLS}/sdk
@@ -791,9 +772,6 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "(windows|linux|macosx)_.+" )
             COMMAND ${CMAKE_COMMAND} -E copy
                     std.wlib
                     wilton_${WILTON_VERSION}/std.wlib
-            COMMAND ${CMAKE_COMMAND} -E copy
-                    std.min.wlib
-                    wilton_${WILTON_VERSION}/std.min.wlib
             COMMAND ${CMAKE_COMMAND} -E copy_directory
                     examples
                     wilton_${WILTON_VERSION}/examples
@@ -834,9 +812,8 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "(windows|linux|macosx)_.+" )
             COMMENT "Creaing unversioned distribution ..." )
 
     add_custom_target ( test_js
-            COMMAND bin/wilton ${WILTON_DIR}/js/wilton/test/index.js -m ${WILTON_DIR}/js -j quickjs
+            COMMAND bin/wilton ${WILTON_DIR}/js/wilton/test/index.js -m ${WILTON_DIR}/js
             COMMAND bin/wilton ${WILTON_DIR}/js/test-runners/runSanityTests.js
-            COMMAND bin/wilton ${WILTON_DIR}/js/test-runners/runSanityTests.js -m std.min.wlib
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION} 
             DEPENDS dist
             COMMENT "Running JavaScript tests ..." )
@@ -964,12 +941,12 @@ if ( STATICLIB_TOOLCHAIN MATCHES "windows_.+" )
             COMMAND ${CMAKE_COMMAND} -E remove wilton_${WILTON_VERSION}${WILTON_WIN_ARCH_POSTFIX}.wxs
             COMMAND $ENV{JAVA_HOME}/bin/java
                     -XX:+UseSerialGC -XX:+TieredCompilation -XX:TieredStopAtLevel=1
-                    -jar ${WILTON_DIR}/tools/windows/wixgen/wixgen.jar
+                    -jar ${WILTON_WINDOWS_BUILD_TOOLS_HOME}/wixgen/wixgen.jar
                     wilton_${WILTON_VERSION}
                     -c installer.json
                     -o wilton_${WILTON_VERSION}${WILTON_WIN_ARCH_POSTFIX}.wxs
-            COMMAND ${WILTON_DIR}/tools/windows/wix/bin/candle -v -nologo wilton_${WILTON_VERSION}${WILTON_WIN_ARCH_POSTFIX}.wxs
-            COMMAND ${WILTON_DIR}/tools/windows/wix/bin/light
+            COMMAND ${WILTON_WINDOWS_BUILD_TOOLS_HOME}/wix/bin/candle -v -nologo wilton_${WILTON_VERSION}${WILTON_WIN_ARCH_POSTFIX}.wxs
+            COMMAND ${WILTON_WINDOWS_BUILD_TOOLS_HOME}/wix/bin/light
                     -v -nologo -sw1076 -sval -ext WixUIExtension -ext WixUtilExtension
                     wilton_${WILTON_VERSION}${WILTON_WIN_ARCH_POSTFIX}.wixobj
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
@@ -1187,18 +1164,10 @@ if ( STATICLIB_TOOLCHAIN MATCHES "(linux|macosx)_.+" )
 
     add_custom_target ( valgrind
             COMMAND valgrind ${${PROJECT_NAME}_VGOPTS}
-                    ./bin/wilton ./examples/binaryModule.js -b ./examples/binmod.wlib -j quickjs
+                    ./bin/wilton ./examples/binaryModule.js -b ./examples/binmod.wlib
             COMMAND valgrind ${${PROJECT_NAME}_VGOPTS}
-                    ./bin/wilton ${WILTON_DIR}/js/wilton/test/index.js -m ../../js -j quickjs
+                    ./bin/wilton ${WILTON_DIR}/js/wilton/test/index.js -m ../../js
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION} 
             DEPENDS dist_debug
             COMMENT "Running valgrind ..." )
-endif ( )
-
-# benchmarks
-
-option ( WILTON_ENABLE_BENCHMARKS "Enable building the benchmarks" OFF )
-
-if ( WILTON_ENABLE_BENCHMARKS )
-    add_subdirectory ( bench )
 endif ( )

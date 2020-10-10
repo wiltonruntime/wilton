@@ -21,6 +21,7 @@ pushd jni && git checkout master && git pull --quiet && popd || exit /b 1
 rem engines
 pushd "engines/wilton_chakra" && git checkout master && git pull --quiet && popd || exit /b 1
 pushd "engines/wilton_duktape" && git checkout master && git pull --quiet && popd || exit /b 1
+pushd "engines/wilton_quickjs" && git checkout master && git pull --quiet && popd || exit /b 1
 pushd "engines/wilton_rhino" && git checkout master && git pull --quiet && popd || exit /b 1
 rem modules
 pushd "modules/wilton_channel" && git checkout master && git pull --quiet && popd || exit /b 1
