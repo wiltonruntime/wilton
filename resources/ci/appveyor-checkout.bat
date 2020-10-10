@@ -118,4 +118,4 @@ git submodule update --quiet --init modules/wilton_zip || exit /b 1
 rem tools
 git submodule update --quiet --init tools/maven || exit /b 1
 git submodule update --quiet --init tools/mvnrepo || exit /b 1
-git clone --quiet -recursive https://github.com/wilton-iot/windows_build_tools.git ../tools
+git clone --quiet --recursive https://github.com/wilton-iot/windows_build_tools.git ../tools
