@@ -133,6 +133,13 @@ elseif ( WILTON_BUILD_FLAVOUR MATCHES "el7" )
 elseif ( WILTON_BUILD_FLAVOUR MATCHES "raspbian_stretch" )
     configure_file ( ${WILTON_DIR}/resources/pkgconfig/asio.pc
             ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/pkgconfig/asio.pc )
+elseif ( WILTON_BUILD_FLAVOUR MATCHES "el8" )
+    configure_file ( ${WILTON_DIR}/resources/pkgconfig/asio.pc
+            ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/pkgconfig/asio.pc )
+    configure_file ( ${WILTON_DIR}/resources/pkgconfig/hpdf.pc
+            ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/pkgconfig/hpdf.pc )
+    configure_file ( ${WILTON_DIR}/resources/pkgconfig/soci.pc
+            ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/pkgconfig/soci.pc )
 endif ( )
 
 # core
