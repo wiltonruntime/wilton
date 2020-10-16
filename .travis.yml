@@ -39,7 +39,7 @@ before_install:
 
 install:
 #  - cd ..
-#  - git clone https://github.com/wilton-iot/wilton
+#  - git clone https://github.com/wiltonruntime/wilton
 #  - cd wilton
   - bash ./resources/ci/travis-checkout.sh
 
@@ -62,10 +62,10 @@ deploy:
   provider: releases
   skip_cleanup: true
   api_key:
-    secure: MMYQqqpaQtskcbWndVZ0gzHHMvPSfCNTYFxfYUk4VMnT0pBFzVgPULkiYAbpxcaj/ODW0nXeeYgq9/QjrJhiDLApsaAwz1TSWBjuYjD2XgjV/6xEgB7DyCmDX+Y2mMZyOvDTVqJDBLY/f2KDRGCDoNO38zrX0Vp5a6RFqrrVgIaMiqqVV+32VUfcTpE7icfBk9Z0+BB9WdNYKqi9y66X9rK6AGXCZeE59eNjtzx/5fne8jfv3tZ7m3B7kUNpZqxOQKCNeL3GwTQyKK2iBRuqm1N6opyaTH2ddcPDH2Pz9OV2jjdC1fe9u7A2m9QLEJHd83nJrEoqZtbwMNLG3xMondAMSYhsPoWg4whbF7FIF6LE5K7UQFEPN61TlU85i299QiKMqVX8DuQEUv1JpHrGHNHGn1bEZThVI2STSYLjWjQycie0eWUtb0Z9Cw8+lR/hJaj+aJj5jA9dI8ND87Xu+1MYIZQNhl5CSPuQ02YTcu+xZYD4ah/4dq7U9xcWahvpf2ft4NCNgEvCoFqDci6Mc2OhaK3FqhFj/5W+H/dRl/3cgKuTSpXQ5/MfZQEAJwfvipE3rVTFVzUMLVWASVfbGbT+hPJkDpNTq0B9Ww4kHnhlz4DZQkIhgKoQhG0KGSMoYAO8hwKQ30l1rEgd/KpSEgpyd5ZuQEHdt1O2Wn02m6w=
+    secure: todo
   file:
     - ${ARTIFACT_1_PATH}
     - ${ARTIFACT_2_PATH}
   on:
-    repo: wilton-iot/wilton
+    repo: wiltonruntime/wilton
     tags: true

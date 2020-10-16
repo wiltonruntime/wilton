@@ -75,121 +75,121 @@
 	url = https://github.com/staticlibs/staticlib_mustache.git
 [submodule "js/argparse"]
 	path = js/argparse
-	url = https://github.com/wilton-iot/argparse.git
+	url = https://github.com/wiltonruntime/argparse.git
 [submodule "js/assert"]
 	path = js/assert
-	url = https://github.com/wilton-iot/commonjs-assert.git
+	url = https://github.com/wiltonruntime/commonjs-assert.git
 [submodule "js/base64-js"]
 	path = js/base64-js
-	url = https://github.com/wilton-iot/base64-js.git
+	url = https://github.com/wiltonruntime/base64-js.git
 [submodule "js/bluebird"]
 	path = js/bluebird
-	url = https://github.com/wilton-iot/bluebird.git
+	url = https://github.com/wiltonruntime/bluebird.git
 [submodule "js/boolbase"]
 	path = js/boolbase
-	url = https://github.com/wilton-iot/boolbase.git
+	url = https://github.com/wiltonruntime/boolbase.git
 [submodule "js/buffer"]
 	path = js/buffer
-	url = https://github.com/wilton-iot/buffer.git
+	url = https://github.com/wiltonruntime/buffer.git
 [submodule "js/cheerio"]
 	path = js/cheerio
-	url = https://github.com/wilton-iot/cheerio.git
+	url = https://github.com/wiltonruntime/cheerio.git
 [submodule "js/css-select"]
 	path = js/css-select
-	url = https://github.com/wilton-iot/css-select.git
+	url = https://github.com/wiltonruntime/css-select.git
 [submodule "js/css-what"]
 	path = js/css-what
-	url = https://github.com/wilton-iot/css-what.git
+	url = https://github.com/wiltonruntime/css-what.git
 [submodule "js/dom-serializer"]
 	path = js/dom-serializer
-	url = https://github.com/wilton-iot/dom-serializer.git
+	url = https://github.com/wiltonruntime/dom-serializer.git
 [submodule "js/domelementtype"]
 	path = js/domelementtype
-	url = https://github.com/wilton-iot/domelementtype.git
+	url = https://github.com/wiltonruntime/domelementtype.git
 [submodule "js/domhandler"]
 	path = js/domhandler
-	url = https://github.com/wilton-iot/domhandler.git
+	url = https://github.com/wiltonruntime/domhandler.git
 [submodule "js/domutils"]
 	path = js/domutils
-	url = https://github.com/wilton-iot/domutils.git
+	url = https://github.com/wiltonruntime/domutils.git
 [submodule "js/entities"]
 	path = js/entities
-	url = https://github.com/wilton-iot/entities.git
+	url = https://github.com/wiltonruntime/entities.git
 [submodule "js/events"]
 	path = js/events
-	url = https://github.com/wilton-iot/events.git
+	url = https://github.com/wiltonruntime/events.git
 [submodule "js/htmlparser2"]
 	path = js/htmlparser2
-	url = https://github.com/wilton-iot/htmlparser2.git
+	url = https://github.com/wiltonruntime/htmlparser2.git
 [submodule "js/iconv-lite"]
 	path = js/iconv-lite
-	url = https://github.com/wilton-iot/iconv-lite.git
+	url = https://github.com/wiltonruntime/iconv-lite.git
 [submodule "js/ieee754"]
 	path = js/ieee754
-	url = https://github.com/wilton-iot/ieee754.git
+	url = https://github.com/wiltonruntime/ieee754.git
 [submodule "js/inherits"]
 	path = js/inherits
-	url = https://github.com/wilton-iot/inherits.git
+	url = https://github.com/wiltonruntime/inherits.git
 [submodule "js/json-stringify-safe"]
 	path = js/json-stringify-safe
-	url = https://github.com/wilton-iot/json-stringify-safe.git
+	url = https://github.com/wiltonruntime/json-stringify-safe.git
 [submodule "js/lodash"]
 	path = js/lodash
-	url = https://github.com/wilton-iot/lodash.git
+	url = https://github.com/wiltonruntime/lodash.git
 [submodule "js/moment"]
 	path = js/moment
-	url = https://github.com/wilton-iot/moment.git
+	url = https://github.com/wiltonruntime/moment.git
 [submodule "js/nth-check"]
 	path = js/nth-check
-	url = https://github.com/wilton-iot/nth-check.git
+	url = https://github.com/wiltonruntime/nth-check.git
 [submodule "js/punycode"]
 	path = js/punycode
-	url = https://github.com/wilton-iot/punycode.js.git
+	url = https://github.com/wiltonruntime/punycode.js.git
 [submodule "js/qs"]
 	path = js/qs
-	url = https://github.com/wilton-iot/qs.git
+	url = https://github.com/wiltonruntime/qs.git
 [submodule "js/readable-stream"]
 	path = js/readable-stream
-	url = https://github.com/wilton-iot/readable-stream.git
+	url = https://github.com/wiltonruntime/readable-stream.git
 [submodule "js/sprintf-js"]
 	path = js/sprintf-js
-	url = https://github.com/wilton-iot/sprintf.js.git
+	url = https://github.com/wiltonruntime/sprintf.js.git
 [submodule "js/string_decoder"]
 	path = js/string_decoder
-	url = https://github.com/wilton-iot/string_decoder.git
+	url = https://github.com/wiltonruntime/string_decoder.git
 [submodule "js/tape-compat"]
 	path = js/tape-compat
-	url = https://github.com/wilton-iot/tape-compat.git
+	url = https://github.com/wiltonruntime/tape-compat.git
 [submodule "js/underscore"]
 	path = js/underscore
-	url = https://github.com/wilton-iot/underscore.git
+	url = https://github.com/wiltonruntime/underscore.git
 [submodule "js/unicode-escape"]
 	path = js/unicode-escape
-	url = https://github.com/wilton-iot/unicode-escape.js.git
+	url = https://github.com/wiltonruntime/unicode-escape.js.git
 [submodule "js/util"]
 	path = js/util
-	url = https://github.com/wilton-iot/node-util.git
+	url = https://github.com/wiltonruntime/node-util.git
 [submodule "js/validator"]
 	path = js/validator
-	url = https://github.com/wilton-iot/validator.js.git
+	url = https://github.com/wiltonruntime/validator.js.git
 [submodule "js/wilton"]
 	path = js/wilton
-	url = https://github.com/wilton-iot/wilton.js.git
+	url = https://github.com/wiltonruntime/wilton.js.git
 [submodule "js/wilton-requirejs"]
 	path = js/wilton-requirejs
-	url = https://github.com/wilton-iot/wilton-requirejs.git
+	url = https://github.com/wiltonruntime/wilton-requirejs.git
 [submodule "core"]
 	path = core
-	url = https://github.com/wilton-iot/wilton_core.git
+	url = https://github.com/wiltonruntime/wilton_core.git
 [submodule "js/examples"]
 	path = js/examples
-	url = https://github.com/wilton-iot/examples.git
+	url = https://github.com/wiltonruntime/examples.git
 [submodule "modules/wilton_cli"]
 	path = modules/wilton_cli
-	url = https://github.com/wilton-iot/wilton_cli.git
+	url = https://github.com/wiltonruntime/wilton_cli.git
 [submodule "modules/wilton_db"]
 	path = modules/wilton_db
-	url = https://github.com/wilton-iot/wilton_db.git
+	url = https://github.com/wiltonruntime/wilton_db.git
 [submodule "deps/external_sqlite"]
 	path = deps/external_sqlite
 	url = https://github.com/staticlibs/external_sqlite.git
@@ -207,28 +207,28 @@
 	url = https://github.com/staticlibs/external_duktape.git
 [submodule "jni"]
 	path = jni
-	url = https://github.com/wilton-iot/wilton_jni.git
+	url = https://github.com/wiltonruntime/wilton_jni.git
 [submodule "tools/maven"]
 	path = tools/maven
-	url = https://github.com/wilton-iot/tools_maven.git
+	url = https://github.com/wiltonruntime/tools_maven.git
 [submodule "modules/wilton_serial"]
 	path = modules/wilton_serial
-	url = https://github.com/wilton-iot/wilton_serial.git
+	url = https://github.com/wiltonruntime/wilton_serial.git
 [submodule "js/utf8"]
 	path = js/utf8
-	url = https://github.com/wilton-iot/utf8.js.git
+	url = https://github.com/wiltonruntime/utf8.js.git
 [submodule "modules/wilton_cron"]
 	path = modules/wilton_cron
-	url = https://github.com/wilton-iot/wilton_cron.git
+	url = https://github.com/wiltonruntime/wilton_cron.git
 [submodule "modules/wilton_fs"]
 	path = modules/wilton_fs
-	url = https://github.com/wilton-iot/wilton_fs.git
+	url = https://github.com/wiltonruntime/wilton_fs.git
 [submodule "modules/wilton_thread"]
 	path = modules/wilton_thread
-	url = https://github.com/wilton-iot/wilton_thread.git
+	url = https://github.com/wiltonruntime/wilton_thread.git
 [submodule "modules/wilton_channel"]
 	path = modules/wilton_channel
-	url = https://github.com/wilton-iot/wilton_channel.git
+	url = https://github.com/wiltonruntime/wilton_channel.git
 [submodule "deps/external_libpng"]
 	path = deps/external_libpng
 	url = https://github.com/staticlibs/external_libpng.git
@@ -237,151 +237,151 @@
 	url = https://github.com/staticlibs/external_hpdf.git
 [submodule "modules/wilton_pdf"]
 	path = modules/wilton_pdf
-	url = https://github.com/wilton-iot/wilton_pdf.git
+	url = https://github.com/wiltonruntime/wilton_pdf.git
 [submodule "modules/wilton_net"]
 	path = modules/wilton_net
-	url = https://github.com/wilton-iot/wilton_net.git
+	url = https://github.com/wiltonruntime/wilton_net.git
 [submodule "modules/wilton_process"]
 	path = modules/wilton_process
-	url = https://github.com/wilton-iot/wilton_process.git
+	url = https://github.com/wiltonruntime/wilton_process.git
 [submodule "modules/wilton_signal"]
 	path = modules/wilton_signal
-	url = https://github.com/wilton-iot/wilton_signal.git
+	url = https://github.com/wiltonruntime/wilton_signal.git
 [submodule "modules/wilton_http"]
 	path = modules/wilton_http
-	url = https://github.com/wilton-iot/wilton_http.git
+	url = https://github.com/wiltonruntime/wilton_http.git
 [submodule "modules/wilton_logging"]
 	path = modules/wilton_logging
-	url = https://github.com/wilton-iot/wilton_logging.git
+	url = https://github.com/wiltonruntime/wilton_logging.git
 [submodule "modules/wilton_loader"]
 	path = modules/wilton_loader
-	url = https://github.com/wilton-iot/wilton_loader.git
+	url = https://github.com/wiltonruntime/wilton_loader.git
 [submodule "android"]
 	path = android
-	url = https://github.com/wilton-iot/wilton_android.git
+	url = https://github.com/wiltonruntime/wilton_android.git
 [submodule "js/filesize"]
 	path = js/filesize
-	url = https://github.com/wilton-iot/filesize.js.git
+	url = https://github.com/wiltonruntime/filesize.js.git
 [submodule "js/statuses"]
 	path = js/statuses
-	url = https://github.com/wilton-iot/statuses.git
+	url = https://github.com/wiltonruntime/statuses.git
 [submodule "js/sjcl"]
 	path = js/sjcl
-	url = https://github.com/wilton-iot/sjcl.git
+	url = https://github.com/wiltonruntime/sjcl.git
 [submodule "js/cuint"]
 	path = js/cuint
-	url = https://github.com/wilton-iot/js-cuint.git
+	url = https://github.com/wiltonruntime/js-cuint.git
 [submodule "js/weak-map"]
 	path = js/weak-map
-	url = https://github.com/wilton-iot/weak-map.git
+	url = https://github.com/wiltonruntime/weak-map.git
 [submodule "js/tinycolor"]
 	path = js/tinycolor
-	url = https://github.com/wilton-iot/TinyColor.git
+	url = https://github.com/wiltonruntime/TinyColor.git
 [submodule "js/ramda"]
 	path = js/ramda
-	url = https://github.com/wilton-iot/ramda.git
+	url = https://github.com/wiltonruntime/ramda.git
 [submodule "js/jsverify"]
 	path = js/jsverify
-	url = https://github.com/wilton-iot/jsverify.git
+	url = https://github.com/wiltonruntime/jsverify.git
 [submodule "js/lazy-seq"]
 	path = js/lazy-seq
-	url = https://github.com/wilton-iot/lazy-seq.git
+	url = https://github.com/wiltonruntime/lazy-seq.git
 [submodule "js/rc4"]
 	path = js/rc4
-	url = https://github.com/wilton-iot/rc4.git
+	url = https://github.com/wiltonruntime/rc4.git
 [submodule "js/typify-parser"]
 	path = js/typify-parser
-	url = https://github.com/wilton-iot/typify-parser.git
+	url = https://github.com/wiltonruntime/typify-parser.git
 [submodule "js/trampa"]
 	path = js/trampa
-	url = https://github.com/wilton-iot/trampa.git
+	url = https://github.com/wiltonruntime/trampa.git
 [submodule "js/sanctuary-type-identifiers"]
 	path = js/sanctuary-type-identifiers
-	url = https://github.com/wilton-iot/sanctuary-type-identifiers.git
+	url = https://github.com/wiltonruntime/sanctuary-type-identifiers.git
 [submodule "js/sanctuary-type-classes"]
 	path = js/sanctuary-type-classes
-	url = https://github.com/wilton-iot/sanctuary-type-classes.git
+	url = https://github.com/wiltonruntime/sanctuary-type-classes.git
 [submodule "js/sanctuary-def"]
 	path = js/sanctuary-def
-	url = https://github.com/wilton-iot/sanctuary-def.git
+	url = https://github.com/wiltonruntime/sanctuary-def.git
 [submodule "js/sanctuary"]
 	path = js/sanctuary
-	url = https://github.com/wilton-iot/sanctuary.git
+	url = https://github.com/wiltonruntime/sanctuary.git
 [submodule "js/fantasy-land"]
 	path = js/fantasy-land
-	url = https://github.com/wilton-iot/fantasy-land.git
+	url = https://github.com/wiltonruntime/fantasy-land.git
 [submodule "js/immutable"]
 	path = js/immutable
-	url = https://github.com/wilton-iot/immutable-js.git
+	url = https://github.com/wiltonruntime/immutable-js.git
 [submodule "js/xregexp"]
 	path = js/xregexp
-	url = https://github.com/wilton-iot/xregexp.git
+	url = https://github.com/wiltonruntime/xregexp.git
 [submodule "js/fromcodepoint"]
 	path = js/fromcodepoint
-	url = https://github.com/wilton-iot/String.fromCodePoint.git
+	url = https://github.com/wiltonruntime/String.fromCodePoint.git
 [submodule "js/querystring"]
 	path = js/querystring
-	url = https://github.com/wilton-iot/querystring.git
+	url = https://github.com/wiltonruntime/querystring.git
 [submodule "js/url"]
 	path = js/url
-	url = https://github.com/wilton-iot/node-url.git
+	url = https://github.com/wiltonruntime/node-url.git
 [submodule "js/ip"]
 	path = js/ip
-	url = https://github.com/wilton-iot/node-ip.git
+	url = https://github.com/wiltonruntime/node-ip.git
 [submodule "js/cookie"]
 	path = js/cookie
-	url = https://github.com/wilton-iot/cookie.git
+	url = https://github.com/wiltonruntime/cookie.git
 [submodule "js/sax"]
 	path = js/sax
-	url = https://github.com/wilton-iot/sax-js.git
+	url = https://github.com/wiltonruntime/sax-js.git
 [submodule "js/xml-writer"]
 	path = js/xml-writer
-	url = https://github.com/wilton-iot/node-xml-writer.git
+	url = https://github.com/wiltonruntime/node-xml-writer.git
 [submodule "js/random"]
 	path = js/random
-	url = https://github.com/wilton-iot/random-js.git
+	url = https://github.com/wiltonruntime/random-js.git
 [submodule "js/text"]
 	path = js/text
-	url = https://github.com/wilton-iot/text.git
+	url = https://github.com/wiltonruntime/text.git
 [submodule "js/json"]
 	path = js/json
-	url = https://github.com/wilton-iot/requirejs-json-plugin.git
+	url = https://github.com/wiltonruntime/requirejs-json-plugin.git
 [submodule "js/saxpath"]
 	path = js/saxpath
-	url = https://github.com/wilton-iot/saxpath.git
+	url = https://github.com/wiltonruntime/saxpath.git
 [submodule "js/string-to-stream"]
 	path = js/string-to-stream
-	url = https://github.com/wilton-iot/string-to-stream.git
+	url = https://github.com/wiltonruntime/string-to-stream.git
 [submodule "js/typedarray"]
 	path = js/typedarray
-	url = https://github.com/wilton-iot/typedarray.git
+	url = https://github.com/wiltonruntime/typedarray.git
 [submodule "js/concat-stream"]
 	path = js/concat-stream
-	url = https://github.com/wilton-iot/concat-stream.git
+	url = https://github.com/wiltonruntime/concat-stream.git
 [submodule "js/process-nextick-args"]
 	path = js/process-nextick-args
-	url = https://github.com/wilton-iot/process-nextick-args.git
+	url = https://github.com/wiltonruntime/process-nextick-args.git
 [submodule "js/is-in-browser"]
 	path = js/is-in-browser
-	url = https://github.com/wilton-iot/is-in-browser.git
+	url = https://github.com/wiltonruntime/is-in-browser.git
 [submodule "deps/staticlib_compress"]
 	path = deps/staticlib_compress
 	url = https://github.com/staticlibs/staticlib_compress.git
 [submodule "modules/wilton_crypto"]
 	path = modules/wilton_crypto
-	url = https://github.com/wilton-iot/wilton_crypto.git
+	url = https://github.com/wiltonruntime/wilton_crypto.git
 [submodule "modules/wilton_zip"]
 	path = modules/wilton_zip
-	url = https://github.com/wilton-iot/wilton_zip.git
+	url = https://github.com/wiltonruntime/wilton_zip.git
 [submodule "modules/wilton_server"]
 	path = modules/wilton_server
-	url = https://github.com/wilton-iot/wilton_server.git
+	url = https://github.com/wiltonruntime/wilton_server.git
 [submodule "js/spark-md5"]
 	path = js/spark-md5
-	url = https://github.com/wilton-iot/js-spark-md5.git
+	url = https://github.com/wiltonruntime/js-spark-md5.git
 [submodule "modules/wilton_examples"]
 	path = modules/wilton_examples
-	url = https://github.com/wilton-iot/wilton_examples.git
+	url = https://github.com/wiltonruntime/wilton_examples.git
 [submodule "deps/lookaside_openssl"]
 	path = deps/lookaside_openssl
 	url = https://github.com/staticlibs/lookaside_openssl.git
@@ -426,61 +426,61 @@
 	url = https://github.com/staticlibs/tinydir.git
 [submodule "js/pwdauth"]
 	path = js/pwdauth
-	url = https://github.com/wilton-iot/pwdauth.git
+	url = https://github.com/wiltonruntime/pwdauth.git
 [submodule "js/xml-js"]
 	path = js/xml-js
-	url = https://github.com/wilton-iot/xml-js.git
+	url = https://github.com/wiltonruntime/xml-js.git
 [submodule "js/uglify-js"]
 	path = js/uglify-js
-	url = https://github.com/wilton-iot/UglifyJS.git
+	url = https://github.com/wiltonruntime/UglifyJS.git
 [submodule "js/es6-shim"]
 	path = js/es6-shim
-	url = https://github.com/wilton-iot/es6-shim.git
+	url = https://github.com/wiltonruntime/es6-shim.git
 [submodule "modules/wilton_ghc"]
 	path = modules/wilton_ghc
-	url = https://github.com/wilton-iot/wilton_ghc.git
+	url = https://github.com/wiltonruntime/wilton_ghc.git
 [submodule "tools/mvnrepo"]
 	path = tools/mvnrepo
-	url = https://github.com/wilton-iot/tools_mvnrepo.git
+	url = https://github.com/wiltonruntime/tools_mvnrepo.git
 [submodule "modules/wilton_mustache"]
 	path = modules/wilton_mustache
-	url = https://github.com/wilton-iot/wilton_mustache.git
+	url = https://github.com/wiltonruntime/wilton_mustache.git
 [submodule "modules/wilton_kiosk"]
 	path = modules/wilton_kiosk
-	url = https://github.com/wilton-iot/wilton_kiosk.git
+	url = https://github.com/wiltonruntime/wilton_kiosk.git
 [submodule "js/vue"]
 	path = js/vue
-	url = https://github.com/wilton-iot/vue.git
+	url = https://github.com/wiltonruntime/vue.git
 [submodule "js/vuex"]
 	path = js/vuex
-	url = https://github.com/wilton-iot/vuex.git
+	url = https://github.com/wiltonruntime/vuex.git
 [submodule "js/vue-router"]
 	path = js/vue-router
-	url = https://github.com/wilton-iot/vue-router.git
+	url = https://github.com/wiltonruntime/vue-router.git
 [submodule "js/bootstrap4"]
 	path = js/bootstrap4
-	url = https://github.com/wilton-iot/bootstrap4.git
+	url = https://github.com/wiltonruntime/bootstrap4.git
 [submodule "js/arrays"]
 	path = js/arrays
-	url = https://github.com/wilton-iot/arrays.git
+	url = https://github.com/wiltonruntime/arrays.git
 [submodule "engines/wilton_chakra"]
 	path = engines/wilton_chakra
-	url = https://github.com/wilton-iot/wilton_chakra.git
+	url = https://github.com/wiltonruntime/wilton_chakra.git
 [submodule "engines/wilton_duktape"]
 	path = engines/wilton_duktape
-	url = https://github.com/wilton-iot/wilton_duktape.git
+	url = https://github.com/wiltonruntime/wilton_duktape.git
 [submodule "engines/wilton_jsc"]
 	path = engines/wilton_jsc
-	url = https://github.com/wilton-iot/wilton_jsc.git
+	url = https://github.com/wiltonruntime/wilton_jsc.git
 [submodule "engines/wilton_rhino"]
 	path = engines/wilton_rhino
-	url = https://github.com/wilton-iot/wilton_rhino.git
+	url = https://github.com/wiltonruntime/wilton_rhino.git
 [submodule "engines/wilton_chakracore"]
 	path = engines/wilton_chakracore
-	url = https://github.com/wilton-iot/wilton_chakracore.git
+	url = https://github.com/wiltonruntime/wilton_chakracore.git
 [submodule "engines/wilton_v8"]
 	path = engines/wilton_v8
-	url = https://github.com/wilton-iot/wilton_v8.git
+	url = https://github.com/wiltonruntime/wilton_v8.git
 [submodule "deps/lookaside_utf8cpp"]
 	path = deps/lookaside_utf8cpp
 	url = https://github.com/staticlibs/lookaside_utf8cpp.git
@@ -489,43 +489,43 @@
 	url = https://github.com/staticlibs/external_utf8cpp.git
 [submodule "engines/wilton_mozjs"]
 	path = engines/wilton_mozjs
-	url = https://github.com/wilton-iot/wilton_mozjs.git
+	url = https://github.com/wiltonruntime/wilton_mozjs.git
 [submodule "js/mathjs"]
 	path = js/mathjs
-	url = https://github.com/wilton-iot/mathjs.git
+	url = https://github.com/wiltonruntime/mathjs.git
 [submodule "js/typed-function"]
 	path = js/typed-function
-	url = https://github.com/wilton-iot/typed-function.git
+	url = https://github.com/wiltonruntime/typed-function.git
 [submodule "js/tiny-emitter"]
 	path = js/tiny-emitter
-	url = https://github.com/wilton-iot/tiny-emitter.git
+	url = https://github.com/wiltonruntime/tiny-emitter.git
 [submodule "js/seed-random"]
 	path = js/seed-random
-	url = https://github.com/wilton-iot/seed-random.git
+	url = https://github.com/wiltonruntime/seed-random.git
 [submodule "js/javascript-natural-sort"]
 	path = js/javascript-natural-sort
-	url = https://github.com/wilton-iot/javascript-natural-sort.git
+	url = https://github.com/wiltonruntime/javascript-natural-sort.git
 [submodule "js/fractionjs"]
 	path = js/fractionjs
-	url = https://github.com/wilton-iot/Fraction.js.git
+	url = https://github.com/wiltonruntime/Fraction.js.git
 [submodule "js/escape-latex"]
 	path = js/escape-latex
-	url = https://github.com/wilton-iot/escape-latex.git
+	url = https://github.com/wiltonruntime/escape-latex.git
 [submodule "js/decimaljs"]
 	path = js/decimaljs
-	url = https://github.com/wilton-iot/decimal.js.git
+	url = https://github.com/wiltonruntime/decimal.js.git
 [submodule "js/complexjs"]
 	path = js/complexjs
-	url = https://github.com/wilton-iot/Complex.js.git
+	url = https://github.com/wiltonruntime/Complex.js.git
 [submodule "js/test-runners"]
 	path = js/test-runners
-	url = https://github.com/wilton-iot/test-runners.git
+	url = https://github.com/wiltonruntime/test-runners.git
 [submodule "deps/staticlib_websocket"]
 	path = deps/staticlib_websocket
 	url = https://github.com/staticlibs/staticlib_websocket.git
 [submodule "modules/wilton_service"]
 	path = modules/wilton_service
-	url = https://github.com/wilton-iot/wilton_service.git
+	url = https://github.com/wiltonruntime/wilton_service.git
 [submodule "deps/lookaside_libssh2"]
 	path = deps/lookaside_libssh2
 	url = https://github.com/staticlibs/lookaside_libssh2.git
@@ -540,46 +540,46 @@
 	url = https://github.com/staticlibs/external_libgit2.git
 [submodule "modules/wilton_git"]
 	path = modules/wilton_git
-	url = https://github.com/wilton-iot/wilton_git.git
+	url = https://github.com/wiltonruntime/wilton_git.git
 [submodule "js/vue-require"]
 	path = js/vue-require
-	url = https://github.com/wilton-iot/vue-require.git
+	url = https://github.com/wiltonruntime/vue-require.git
 [submodule "js/android-launcher"]
 	path = js/android-launcher
-	url = https://github.com/wilton-iot/android-launcher.git
+	url = https://github.com/wiltonruntime/android-launcher.git
 [submodule "js/wilton-newproject"]
 	path = js/wilton-newproject
-	url = https://github.com/wilton-iot/wilton-newproject.git
+	url = https://github.com/wiltonruntime/wilton-newproject.git
 [submodule "modules/wilton_systemd"]
 	path = modules/wilton_systemd
-	url = https://github.com/wilton-iot/wilton_systemd.git
+	url = https://github.com/wiltonruntime/wilton_systemd.git
 [submodule "js/windows-1251"]
 	path = js/windows-1251
-	url = https://github.com/wilton-iot/windows-1251.git
+	url = https://github.com/wiltonruntime/windows-1251.git
 [submodule "js/windows-1252"]
 	path = js/windows-1252
-	url = https://github.com/wilton-iot/windows-1252.git
+	url = https://github.com/wiltonruntime/windows-1252.git
 [submodule "modules/wilton_kvstore"]
 	path = modules/wilton_kvstore
-	url = https://github.com/wilton-iot/wilton_kvstore.git
+	url = https://github.com/wiltonruntime/wilton_kvstore.git
 [submodule "js/stringmap"]
 	path = js/stringmap
-	url = https://github.com/wilton-iot/stringmap.git
+	url = https://github.com/wiltonruntime/stringmap.git
 [submodule "js/buckets"]
 	path = js/buckets
-	url = https://github.com/wilton-iot/buckets.git
+	url = https://github.com/wiltonruntime/buckets.git
 [submodule "modules/wilton_winscm"]
 	path = modules/wilton_winscm
-	url = https://github.com/wilton-iot/wilton_winscm.git
+	url = https://github.com/wiltonruntime/wilton_winscm.git
 [submodule "js/wilton-mobile"]
 	path = js/wilton-mobile
-	url = https://github.com/wilton-iot/wilton-mobile.git
+	url = https://github.com/wiltonruntime/wilton-mobile.git
 [submodule "deps/external_quickjs"]
 	path = deps/external_quickjs
 	url = https://github.com/staticlibs/external_quickjs.git
 [submodule "engines/wilton_quickjs"]
 	path = engines/wilton_quickjs
-	url = https://github.com/wilton-iot/wilton_quickjs.git
+	url = https://github.com/wiltonruntime/wilton_quickjs.git
 [submodule "deps/lookaside_libjpeg-turbo"]
 	path = deps/lookaside_libjpeg-turbo
 	url = https://github.com/staticlibs/lookaside_libjpeg-turbo.git

@@ -87,7 +87,7 @@ git submodule update --quiet --init deps/staticlib_websocket
 git submodule update --quiet --init jni
 # js
 rm -rf js
-git clone --quiet https://github.com/wilton-iot/js-libs-ci-monorepo.git js
+git clone --quiet https://github.com/wiltonruntime/js-libs-ci-monorepo.git js
 if [ "x" != "x${TRAVIS_TAG}" ] ;  then
     pushd js
     git checkout ${TRAVIS_TAG}
@@ -122,7 +122,6 @@ git submodule update --quiet --init modules/wilton_service
 git submodule update --quiet --init modules/wilton_signal
 git submodule update --quiet --init modules/wilton_systemd
 git submodule update --quiet --init modules/wilton_thread
-git submodule update --quiet --init modules/wilton_usb
 git submodule update --quiet --init modules/wilton_zip
 # tools
 git submodule update --quiet --init tools/maven

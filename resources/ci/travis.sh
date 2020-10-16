@@ -20,9 +20,9 @@ set -x
 if [ "xlinux" = "x${TRAVIS_OS_NAME}" ] ; then
 
     # tools
-    git clone --quiet https://github.com/wilton-iot/tools_linux_jdk8.git ../jdk8
-    git clone --quiet --recursive https://github.com/wilton-iot/android-tools-ci-repo.git ../android-tools
-    git clone --quiet https://github.com/wilton-iot/arm-rpi-4.9.3-linux-gnueabihf.git ../arm-rpi-4.9.3-linux-gnueabihf
+    git clone --quiet https://github.com/wiltonruntime/tools_linux_jdk8.git ../jdk8
+    git clone --quiet --recursive https://github.com/wiltonruntime/android-tools-ci-repo.git ../android-tools
+    git clone --quiet https://github.com/wiltonruntime/arm-rpi-4.9.3-linux-gnueabihf.git ../arm-rpi-4.9.3-linux-gnueabihf
 
     # env
     export JAVA_HOME=`pwd`/../jdk8
