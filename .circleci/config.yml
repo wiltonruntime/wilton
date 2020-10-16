@@ -17,7 +17,7 @@ version: 2.1
 jobs:
   wheezy:
     docker:
-      - image: wiltoniot/wheezy-amd64
+      - image: wiltonruntime/debian-wheezy-amd64
         environment:
           WILTON_BUILD_FLAVOUR: wheezy
     steps:
@@ -26,36 +26,36 @@ jobs:
           name: wheezy
           command: |
             # cd ..
-            # git clone --quiet https://github.com/wilton-iot/wilton
+            # git clone --quiet https://github.com/wiltonruntime/wilton
             # cd wilton
             bash ./resources/ci/circle-checkout.sh
             bash ./resources/ci/circle.sh
 
-  fedora:
+  centos8:
     docker:
-      - image: wiltoniot/fedora-amd64
+      - image: wiltonruntime/centos-8-amd64
         environment:
-          WILTON_BUILD_FLAVOUR: fedora
+          WILTON_BUILD_FLAVOUR: el8
     steps:
       - checkout
       - run:
           name: fedora
           command: |
             # cd ..
-            # git clone --quiet https://github.com/wilton-iot/wilton
+            # git clone --quiet https://github.com/wiltonruntime/wilton
             # cd wilton
             bash ./resources/ci/circle-checkout.sh
             bash ./resources/ci/circle.sh
 
 workflows:
   version: 2.1
-  wheezy_and_fedora:
+  wheezy_and_centos8:
     jobs:
       - wheezy:
           filters:
             tags:
               only: /.*/
-      - fedora:
+      - centos8:
           filters:
             tags:
               only: /.*/

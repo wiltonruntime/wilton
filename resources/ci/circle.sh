@@ -18,13 +18,12 @@ set -e
 set -x
 
 if [ "xwheezy" = "x${WILTON_BUILD_FLAVOUR}" ] ; then
-    git clone --quiet https://github.com/wilton-iot/tools_linux_jdk8.git ../jdk8
-    export JAVA_HOME=`pwd`/../jdk8
-    git clone --quiet https://github.com/wilton-iot/tools_linux_cmake.git ../cmake
+    export JAVA_HOME=/opt/jdk8
+    git clone --quiet https://github.com/wiltonruntime/tools_linux_cmake.git ../cmake
     export PATH=`pwd`/../cmake/bin:${PATH}
 fi
 
-if [ "xfedora" = "x${WILTON_BUILD_FLAVOUR}" ] ; then
+if [ "xel8" = "x${WILTON_BUILD_FLAVOUR}" ] ; then
     export JAVA_HOME=$(readlink -f /usr/bin/javac | sed "s:/bin/javac::")
 fi
 
@@ -48,7 +47,7 @@ echo quickjs
 ./wilton_dist/bin/wilton ../js/test-runners/runStdLibTests.js -m ../js > quickjs_stdlib.log
 
 echo jsc
-if [ "xfedora" = "x${WILTON_BUILD_FLAVOUR}" ] ; then
+if [ "xel8" = "x${WILTON_BUILD_FLAVOUR}" ] ; then
     ./wilton_dist/bin/wilton ../js/wilton/test/index.js -m ../js -j jsc
     ./wilton_dist/bin/wilton ../js/test-runners/runStdLibTests.js -m ../js -j jsc > jsc_stdlib.log
 fi
@@ -57,22 +56,6 @@ fi
 echo duktape
 ./wilton_dist/bin/wilton ../js/wilton/test/index.js -m ../js -j duktape
 ./wilton_dist/bin/wilton ../js/test-runners/runSanityTests.js -j duktape
-
-echo chakracore
-./wilton_dist/bin/wilton ../js/wilton/test/index.js -m ../js -j chakracore
-./wilton_dist/bin/wilton ../js/test-runners/runSanityTests.js -j chakracore
-./wilton_dist/bin/wilton ../js/test-runners/runStdLibTests.js -m ../js -j chakracore > chakracore_stdlib.log
-
-echo mozjs
-./wilton_dist/bin/wilton ../js/wilton/test/index.js -m ../js -j mozjs
-./wilton_dist/bin/wilton ../js/test-runners/runSanityTests.js -j mozjs
-# intermittent out of memory
-./wilton_dist/bin/wilton ../js/test-runners/runStdLibTests.js -m ../js -j mozjs > mozjs_stdlib.log || true
-
-echo v8
-./wilton_dist/bin/wilton ../js/wilton/test/index.js -m ../js -j v8
-./wilton_dist/bin/wilton ../js/test-runners/runSanityTests.js -j v8
-./wilton_dist/bin/wilton ../js/test-runners/runStdLibTests.js -m ../js -j v8 > v8_stdlib.log
 
 echo jvm
 pushd ../jni

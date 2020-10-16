@@ -17,13 +17,7 @@
 set -e
 set -x
 
-# update packages
-#if [ "xwheezy" = "x${WILTON_BUILD_FLAVOUR}" ] ; then
-#    apt-get update
-#    apt-get upgrade -y
-#fi
-
-if [ "xfedora" = "x${WILTON_BUILD_FLAVOUR}" ] ; then
+if [ "xel8" = "x${WILTON_BUILD_FLAVOUR}" ] ; then
     dnf update -y || true # Failed to synchronize cache for repo 'updates'
 fi
 
@@ -33,22 +27,18 @@ git submodule update --quiet --init core
 git submodule update --quiet --init deps/cmake
 git submodule update --quiet --init deps/external_asio
 git submodule update --quiet --init deps/lookaside_asio
-git submodule update --quiet --init deps/external_chakracore
 git submodule update --quiet --init deps/external_duktape
 git submodule update --quiet --init deps/external_hpdf
 git submodule update --quiet --init deps/lookaside_libharu
 git submodule update --quiet --init deps/external_libgit2
 git submodule update --quiet --init deps/lookaside_libgit2
-git submodule update --quiet --init deps/external_icu
 git submodule update --quiet --init deps/external_libpq
 git submodule update --quiet --init deps/lookaside_postgresql
 git submodule update --quiet --init deps/external_log4cplus
 git submodule update --quiet --init deps/lookaside_log4cplus
-git submodule update --quiet --init deps/external_mozjs
 git submodule update --quiet --init deps/external_quickjs
 git submodule update --quiet --init deps/external_soci
 git submodule update --quiet --init deps/lookaside_soci
-git submodule update --quiet --init deps/external_v8
 git submodule update --quiet --init deps/external_utf8cpp
 git submodule update --quiet --init deps/lookaside_utf8cpp
 git submodule update --quiet --init deps/staticlib_compress
@@ -78,20 +68,17 @@ git submodule update --quiet --init deps/staticlib_websocket
 git submodule update --quiet --init jni
 # js
 rm -rf js
-git clone --quiet https://github.com/wilton-iot/js-libs-ci-monorepo.git js
+git clone --quiet https://github.com/wiltonruntime/js-libs-ci-monorepo.git js
 if [ "x" != "x${CIRCLE_TAG}" ] ;  then
     pushd js
     git checkout ${CIRCLE_TAG}
     popd
 fi
 # engines
-git submodule update --quiet --init engines/wilton_chakracore
 git submodule update --quiet --init engines/wilton_duktape
 git submodule update --quiet --init engines/wilton_jsc
-git submodule update --quiet --init engines/wilton_mozjs
 git submodule update --quiet --init engines/wilton_quickjs
 git submodule update --quiet --init engines/wilton_rhino
-git submodule update --quiet --init engines/wilton_v8
 # modules
 git submodule update --quiet --init modules/wilton_channel
 git submodule update --quiet --init modules/wilton_cli
@@ -116,7 +103,6 @@ git submodule update --quiet --init modules/wilton_service
 git submodule update --quiet --init modules/wilton_signal
 git submodule update --quiet --init modules/wilton_systemd
 git submodule update --quiet --init modules/wilton_thread
-git submodule update --quiet --init modules/wilton_usb
 git submodule update --quiet --init modules/wilton_zip
 # tools
 git submodule update --quiet --init tools/maven
