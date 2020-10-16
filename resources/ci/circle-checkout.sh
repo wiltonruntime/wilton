@@ -18,7 +18,7 @@ set -e
 set -x
 
 if [ "xel8" = "x${WILTON_BUILD_FLAVOUR}" ] ; then
-    dnf update -y || true # Failed to synchronize cache for repo 'updates'
+    dnf update -y
 fi
 
 # core
