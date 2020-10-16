@@ -17,6 +17,10 @@
 set -e
 set -x
 
+if [ "xel7" = "x${WILTON_BUILD_FLAVOUR}" ] ; then
+    yum update -y
+fi
+
 if [ "xel8" = "x${WILTON_BUILD_FLAVOUR}" ] ; then
     dnf update -y
 fi
@@ -27,6 +31,8 @@ git submodule update --quiet --init core
 git submodule update --quiet --init deps/cmake
 git submodule update --quiet --init deps/external_asio
 git submodule update --quiet --init deps/lookaside_asio
+git submodule update --quiet --init deps/external_curl
+git submodule update --quiet --init deps/lookaside_curl
 git submodule update --quiet --init deps/external_duktape
 git submodule update --quiet --init deps/external_hpdf
 git submodule update --quiet --init deps/lookaside_libharu

@@ -65,7 +65,7 @@ jobs:
 
 workflows:
   version: 2.1
-  wheezy_and_centos8:
+  wheezy_and_centos:
     jobs:
       - wheezy:
           filters:
