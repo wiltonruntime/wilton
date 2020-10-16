@@ -23,7 +23,7 @@
 %global debug_package %{nil}
 
 Name:           wilton
-Version:        v202009291
+Version:        v202010101
 Release:        1%{?dist}
 Summary:        JavaScript runtime
 Group:          Development/Languages
@@ -156,8 +156,6 @@ git submodule update --init modules/wilton_thread
 git submodule update --init modules/wilton_usb
 git submodule update --init modules/wilton_zip
 # tools
-git submodule update --init tools/closure-compiler
-git submodule update --init tools/convertion-scripts
 git submodule update --init tools/maven
 git submodule update --init tools/mvnrepo
 

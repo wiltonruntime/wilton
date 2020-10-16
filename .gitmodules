@@ -217,9 +217,6 @@
 [submodule "js/utf8"]
 	path = js/utf8
 	url = https://github.com/wilton-iot/utf8.js.git
-[submodule "modules/wilton_usb"]
-	path = modules/wilton_usb
-	url = https://github.com/wilton-iot/wilton_usb.git
 [submodule "modules/wilton_cron"]
 	path = modules/wilton_cron
 	url = https://github.com/wilton-iot/wilton_cron.git
@@ -478,24 +475,12 @@
 [submodule "engines/wilton_rhino"]
 	path = engines/wilton_rhino
 	url = https://github.com/wilton-iot/wilton_rhino.git
-[submodule "deps/external_icu"]
-	path = deps/external_icu
-	url = https://github.com/staticlibs/external_icu.git
-[submodule "deps/external_chakracore"]
-	path = deps/external_chakracore
-	url = https://github.com/staticlibs/external_chakracore.git
-[submodule "deps/external_v8"]
-	path = deps/external_v8
-	url = https://github.com/staticlibs/external_v8.git
 [submodule "engines/wilton_chakracore"]
 	path = engines/wilton_chakracore
 	url = https://github.com/wilton-iot/wilton_chakracore.git
 [submodule "engines/wilton_v8"]
 	path = engines/wilton_v8
 	url = https://github.com/wilton-iot/wilton_v8.git
-[submodule "deps/external_mozjs"]
-	path = deps/external_mozjs
-	url = https://github.com/staticlibs/external_mozjs.git
 [submodule "deps/lookaside_utf8cpp"]
 	path = deps/lookaside_utf8cpp
 	url = https://github.com/staticlibs/lookaside_utf8cpp.git
