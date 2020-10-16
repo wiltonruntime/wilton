@@ -79,7 +79,7 @@ rem jni
 git submodule update --quiet --init jni || exit /b 1
 rem js
 rd /s /q js
-git clone --quiet https://github.com/wilton-iot/js-libs-ci-monorepo.git js || exit /b 1
+git clone --quiet https://github.com/wiltonruntime/js-libs-ci-monorepo.git js || exit /b 1
 if "x" NEQ "x%APPVEYOR_REPO_TAG_NAME%" (
     pushd js || exit /b 1
     git checkout %APPVEYOR_REPO_TAG_NAME% || exit /b 1
@@ -112,10 +112,9 @@ git submodule update --quiet --init modules/wilton_server || exit /b 1
 git submodule update --quiet --init modules/wilton_service || exit /b 1
 git submodule update --quiet --init modules/wilton_signal || exit /b 1
 git submodule update --quiet --init modules/wilton_thread || exit /b 1
-git submodule update --quiet --init modules/wilton_usb || exit /b 1
 git submodule update --quiet --init modules/wilton_winscm || exit /b 1
 git submodule update --quiet --init modules/wilton_zip || exit /b 1
 rem tools
 git submodule update --quiet --init tools/maven || exit /b 1
 git submodule update --quiet --init tools/mvnrepo || exit /b 1
-git clone --quiet --recursive https://github.com/wilton-iot/windows_build_tools.git ../tools
+git clone --quiet --recursive https://github.com/wiltonruntime/windows_build_tools.git ../tools

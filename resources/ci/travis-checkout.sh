@@ -25,13 +25,11 @@ git submodule update --quiet --init core
 git submodule update --quiet --init deps/cmake
 git submodule update --quiet --init deps/external_asio
 git submodule update --quiet --init deps/lookaside_asio
-git submodule update --quiet --init deps/external_chakracore
 git submodule update --quiet --init deps/external_curl
 git submodule update --quiet --init deps/lookaside_curl
 git submodule update --quiet --init deps/external_duktape
 git submodule update --quiet --init deps/external_hpdf
 git submodule update --quiet --init deps/lookaside_libharu
-git submodule update --quiet --init deps/external_icu
 git submodule update --quiet --init deps/external_jansson
 git submodule update --quiet --init deps/lookaside_jansson
 git submodule update --quiet --init deps/external_libgit2
@@ -46,7 +44,6 @@ git submodule update --quiet --init deps/external_libssh2
 git submodule update --quiet --init deps/lookaside_libssh2
 git submodule update --quiet --init deps/external_log4cplus
 git submodule update --quiet --init deps/lookaside_log4cplus
-git submodule update --quiet --init deps/external_mozjs
 git submodule update --quiet --init deps/external_openssl
 git submodule update --quiet --init deps/lookaside_openssl
 git submodule update --quiet --init deps/external_popt
@@ -55,7 +52,6 @@ git submodule update --quiet --init deps/external_quickjs
 git submodule update --quiet --init deps/external_soci
 git submodule update --quiet --init deps/lookaside_soci
 git submodule update --quiet --init deps/external_sqlite
-git submodule update --quiet --init deps/external_v8
 git submodule update --quiet --init deps/external_utf8cpp
 git submodule update --quiet --init deps/lookaside_utf8cpp
 git submodule update --quiet --init deps/external_zlib

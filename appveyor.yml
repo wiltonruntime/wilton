@@ -28,7 +28,7 @@ matrix:
 
 install:
 #  - cd ..
-#  - git clone https://github.com/wilton-iot/wilton
+#  - git clone https://github.com/wiltonruntime/wilton
 #  - cd wilton
   - cmd /c resources\ci\appveyor-checkout.bat
 
@@ -45,7 +45,7 @@ deploy:
   description: "%APPVEYOR_REPO_TAG_NAME%"
   provider: GitHub
   auth_token:
-    secure: VShPexae/Ct8Y4Rn0YvHmiX/Sih1Xs+qGHfU2JEmuAuXVb/KVsc8B72MlG7TCw0e
+    secure: todo
   artifact: wilton_%APPVEYOR_REPO_TAG_NAME%%WILTON_WIN_ARCH%msi
   draft: false
   prerelease: false
