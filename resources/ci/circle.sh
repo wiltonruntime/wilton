@@ -23,7 +23,7 @@ if [ "xwheezy" = "x${WILTON_BUILD_FLAVOUR}" ] ; then
     export PATH=`pwd`/../cmake/bin:${PATH}
 fi
 
-if [ "xel8" = "x${WILTON_BUILD_FLAVOUR}" ] ; then
+if [ "xel7" = "x${WILTON_BUILD_FLAVOUR}" ] || [ "xel8" = "x${WILTON_BUILD_FLAVOUR}" ] ; then
     export JAVA_HOME=$(readlink -f /usr/bin/javac | sed "s:/bin/javac::")
 fi
 
@@ -47,7 +47,7 @@ echo quickjs
 ./wilton_dist/bin/wilton ../js/test-runners/runStdLibTests.js -m ../js > quickjs_stdlib.log
 
 echo jsc
-if [ "xel8" = "x${WILTON_BUILD_FLAVOUR}" ] ; then
+if [ "xel7" = "x${WILTON_BUILD_FLAVOUR}" ] || [ "xel8" = "x${WILTON_BUILD_FLAVOUR}" ] ; then
     ./wilton_dist/bin/wilton ../js/wilton/test/index.js -m ../js -j jsc
     ./wilton_dist/bin/wilton ../js/test-runners/runStdLibTests.js -m ../js -j jsc > jsc_stdlib.log
 fi

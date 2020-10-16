@@ -31,6 +31,22 @@ jobs:
             bash ./resources/ci/circle-checkout.sh
             bash ./resources/ci/circle.sh
 
+  centos7:
+    docker:
+      - image: wiltonruntime/centos-7-amd64
+        environment:
+          WILTON_BUILD_FLAVOUR: el7
+    steps:
+      - checkout
+      - run:
+          name: centos7
+          command: |
+            # cd ..
+            # git clone --quiet https://github.com/wiltonruntime/wilton
+            # cd wilton
+            bash ./resources/ci/circle-checkout.sh
+            bash ./resources/ci/circle.sh
+
   centos8:
     docker:
       - image: wiltonruntime/centos-8-amd64
@@ -39,7 +55,7 @@ jobs:
     steps:
       - checkout
       - run:
-          name: fedora
+          name: centos8
           command: |
             # cd ..
             # git clone --quiet https://github.com/wiltonruntime/wilton
@@ -52,6 +68,10 @@ workflows:
   wheezy_and_centos8:
     jobs:
       - wheezy:
+          filters:
+            tags:
+              only: /.*/
+      - centos7:
           filters:
             tags:
               only: /.*/

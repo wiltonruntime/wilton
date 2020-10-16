@@ -85,9 +85,6 @@ if ( STATICLIB_TOOLCHAIN MATCHES "windows_.+" )
     if ( NOT DEFINED WILTON_MSVCR_DIR )
         set ( WILTON_MSVCR_DIR "C:/Program Files (x86)/Microsoft Visual Studio 12.0/VC/redist" CACHE STRING "" )
     endif ( )
-    if ( NOT DEFINED WILTON_WINDDK71_DIR )
-        set ( WILTON_WINDDK71_DIR "C:/WinDDK/7600.16385.1" CACHE STRING "" )
-    endif ( )
 endif ( )
 
 # doxygen file
