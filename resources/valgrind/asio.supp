@@ -40,6 +40,7 @@
     fun:malloc
     fun:allocate_dtv_entry
     fun:allocate_and_init
-    fun:tls_get_addr_tail
+    ...
+    fun:__tls_get_addr
     ...
 }

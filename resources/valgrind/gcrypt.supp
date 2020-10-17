@@ -40,4 +40,13 @@
     fun:libssh2_init
     ...
 }
+{
+    gcrypt_gcry_control
+    Memcheck:Leak
+    fun:malloc
+    ...
+    fun:gcry_control
+    fun:libssh2_init
+    ...
+}
 

@@ -97,29 +97,9 @@ if ( WILTON_BUILD_FLAVOUR MATCHES "wheezy" )
             ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/pkgconfig/log4cplus.pc )
     configure_file ( ${WILTON_DIR}/resources/pkgconfig/libjpeg.pc
             ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/pkgconfig/libjpeg.pc )
-elseif ( WILTON_BUILD_FLAVOUR MATCHES "fedora" )
-    configure_file ( ${WILTON_DIR}/resources/pkgconfig/hpdf.pc
-            ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/pkgconfig/hpdf.pc )
-    configure_file ( ${WILTON_DIR}/resources/pkgconfig/soci.pc
-            ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/pkgconfig/soci.pc )
+elseif ( WILTON_BUILD_FLAVOUR MATCHES "raspbian_stretch" )
     configure_file ( ${WILTON_DIR}/resources/pkgconfig/asio.pc
             ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/pkgconfig/asio.pc )
-elseif ( WILTON_BUILD_FLAVOUR MATCHES "stretch" )
-    configure_file ( ${WILTON_DIR}/resources/pkgconfig/asio.pc
-            ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/pkgconfig/asio.pc )
-    configure_file ( ${WILTON_DIR}/resources/pkgconfig/log4cplus.pc
-            ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/pkgconfig/log4cplus.pc )
-    configure_file ( ${WILTON_DIR}/resources/pkgconfig/soci.pc
-            ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/pkgconfig/soci.pc )
-elseif ( WILTON_BUILD_FLAVOUR MATCHES "bionic" )
-    configure_file ( ${WILTON_DIR}/resources/pkgconfig/asio.pc
-            ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/pkgconfig/asio.pc )
-    configure_file ( ${WILTON_DIR}/resources/pkgconfig/log4cplus.pc
-            ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/pkgconfig/log4cplus.pc )
-    configure_file ( ${WILTON_DIR}/resources/pkgconfig/soci.pc
-            ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/pkgconfig/soci.pc )
-    configure_file ( ${WILTON_DIR}/resources/pkgconfig/hpdf.pc
-            ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/pkgconfig/hpdf.pc )
 elseif ( WILTON_BUILD_FLAVOUR MATCHES "el7" )
     configure_file ( ${WILTON_DIR}/resources/pkgconfig/asio.pc
             ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/pkgconfig/asio.pc )
@@ -127,14 +107,27 @@ elseif ( WILTON_BUILD_FLAVOUR MATCHES "el7" )
             ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/pkgconfig/popt.pc )
     configure_file ( ${WILTON_DIR}/resources/pkgconfig/soci.pc
             ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/pkgconfig/soci.pc )
-elseif ( WILTON_BUILD_FLAVOUR MATCHES "raspbian_stretch" )
-    configure_file ( ${WILTON_DIR}/resources/pkgconfig/asio.pc
-            ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/pkgconfig/asio.pc )
 elseif ( WILTON_BUILD_FLAVOUR MATCHES "el8" )
     configure_file ( ${WILTON_DIR}/resources/pkgconfig/asio.pc
             ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/pkgconfig/asio.pc )
     configure_file ( ${WILTON_DIR}/resources/pkgconfig/hpdf.pc
             ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/pkgconfig/hpdf.pc )
+    configure_file ( ${WILTON_DIR}/resources/pkgconfig/soci.pc
+            ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/pkgconfig/soci.pc )
+elseif ( WILTON_BUILD_FLAVOUR MATCHES "fedora" )
+    configure_file ( ${WILTON_DIR}/resources/pkgconfig/hpdf.pc
+            ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/pkgconfig/hpdf.pc )
+    configure_file ( ${WILTON_DIR}/resources/pkgconfig/soci.pc
+            ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/pkgconfig/soci.pc )
+    configure_file ( ${WILTON_DIR}/resources/pkgconfig/asio.pc
+            ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/pkgconfig/asio.pc )
+elseif ( WILTON_BUILD_FLAVOUR MATCHES "ubuntu" )
+    configure_file ( ${WILTON_DIR}/resources/pkgconfig/asio.pc
+            ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/pkgconfig/asio.pc )
+    configure_file ( ${WILTON_DIR}/resources/pkgconfig/hpdf.pc
+            ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/pkgconfig/hpdf.pc )
+    configure_file ( ${WILTON_DIR}/resources/pkgconfig/log4cplus.pc
+            ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/pkgconfig/log4cplus.pc )
     configure_file ( ${WILTON_DIR}/resources/pkgconfig/soci.pc
             ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/pkgconfig/soci.pc )
 endif ( )
