@@ -60,7 +60,9 @@ set ( CMAKE_CXX_FLAGS_LIST
         # tinydir
         -Wno-deprecated-declarations
         # gtk-3.0
-        -Wno-parentheses )
+        -Wno-parentheses
+        # https://gcc.gnu.org/bugzilla/show_bug.cgi?id=77728
+        -Wno-psabi )
 string ( REPLACE ";" " " CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS_LIST}" )
 set ( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}" CACHE INTERNAL "" )
 
