@@ -86,6 +86,7 @@ if ( STATICLIB_TOOLCHAIN MATCHES "windows_.+" )
         set ( WILTON_MSVCR_DIR "C:/Program Files (x86)/Microsoft Visual Studio 12.0/VC/redist" CACHE STRING "" )
     endif ( )
 endif ( )
+set ( WILTON_ANDROID_PREBUILT_VENDOR_JAR "" CACHE STRING "Vendor JAR file to include into Android APK" )
 
 # doxygen file
 configure_file ( ${WILTON_DIR}/resources/doxygen/Doxyfile
@@ -499,7 +500,29 @@ if ( STATICLIB_TOOLCHAIN MATCHES "android_.+" )
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
             DEPENDS nativelibs
             COMMENT "Creating Android JAR ..." )
-    add_custom_target ( android_jar DEPENDS wilton-android.jar )
+    add_custom_target ( wilton_android_jar DEPENDS wilton-android.jar )
+
+    add_custom_command ( OUTPUT vendor.jar
+            COMMAND $ENV{JAVA_HOME}/bin/javac VendorEmpty.java
+            COMMAND $ENV{JAVA_HOME}/bin/jar cf vendor.jar VendorEmpty.class
+            WORKING_DIRECTORY ${WILTON_DIR}/android/vendor
+            COMMENT "Creating Empty Android Vendor JAR ..." )
+    add_custom_target ( android_vendor_jar DEPENDS vendor.jar )
+
+    add_custom_target ( android_prebuilt_vendor_jar
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    ${WILTON_ANDROID_PREBUILT_VENDOR_JAR}
+                    vendor.jar
+            WORKING_DIRECTORY ${WILTON_DIR}/android/vendor
+            COMMENT "Copying Android Vendor JAR ..." )
+
+    add_custom_target ( android_jars DEPENDS wilton_android_jar )
+
+    if ( WILTON_ANDROID_PREBUILT_VENDOR_JAR STREQUAL "" )
+        add_dependencies ( android_jars android_vendor_jar )
+    else ( )
+        add_dependencies ( android_jars android_prebuilt_vendor_jar )
+    endif ( )
 
     set ( ${PROJECT_NAME}_GRADLE_JVM_ARGS "-XX:MaxRAM=1024M -XX:+TieredCompilation -XX:TieredStopAtLevel=1 -XX:+UseSerialGC" CACHE INTERNAL "" )
 
@@ -525,7 +548,7 @@ if ( STATICLIB_TOOLCHAIN MATCHES "android_.+" )
                 ${WILTON_DIR}/android/app/build/outputs/apk/debug/app-debug.apk
                 wilton_${WILTON_VERSION}.apk
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-            DEPENDS stdlib android_jar examples
+            DEPENDS stdlib android_jars examples
             COMMENT "Creating Android APK ..." )
 
 elseif ( STATICLIB_TOOLCHAIN MATCHES "(windows|linux|macosx)_.+" )

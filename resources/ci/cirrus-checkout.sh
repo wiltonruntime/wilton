@@ -26,10 +26,6 @@ git submodule update --quiet --init core
 # deps
 git submodule update --quiet --init deps/cmake
 git submodule update --quiet --init deps/external_duktape
-git submodule update --quiet --init deps/external_hpdf
-git submodule update --quiet --init deps/lookaside_libharu
-git submodule update --quiet --init deps/external_libgit2
-git submodule update --quiet --init deps/lookaside_libgit2
 git submodule update --quiet --init deps/external_quickjs
 git submodule update --quiet --init deps/external_utf8cpp
 git submodule update --quiet --init deps/lookaside_utf8cpp
@@ -60,7 +56,7 @@ git submodule update --quiet --init deps/staticlib_websocket
 git submodule update --quiet --init jni
 # js
 rm -rf js
-git clone --quiet https://github.com/wilton-iot/js-libs-ci-monorepo.git js
+git clone --quiet https://github.com/wiltonruntime/js-libs-ci-monorepo.git js
 if [ "x" != "x${CIRRUS_TAG}" ] ;  then
     pushd js
     git checkout ${CIRRUS_TAG}
@@ -95,11 +91,10 @@ git submodule update --quiet --init modules/wilton_service
 git submodule update --quiet --init modules/wilton_signal
 git submodule update --quiet --init modules/wilton_systemd
 git submodule update --quiet --init modules/wilton_thread
-git submodule update --quiet --init modules/wilton_usb
 git submodule update --quiet --init modules/wilton_zip
 # tools
 git submodule update --quiet --init tools/maven
 git submodule update --quiet --init tools/mvnrepo
 
 # ghr
-git clone https://github.com/wilton-iot/tools_linux_ghr.git ../ghr
+git clone https://github.com/wiltonruntime/tools_linux_ghr.git ../ghr
