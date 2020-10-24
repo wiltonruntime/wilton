@@ -45,7 +45,7 @@ deploy:
   description: "%APPVEYOR_REPO_TAG_NAME%"
   provider: GitHub
   auth_token:
-    secure: todo
+    secure: buCEfuXIKqASLh/f4XY0gZ/OOsipoOJJkaC9sYnx6WRkrv7YBGYpsRzQevImXdGz
   artifact: wilton_%APPVEYOR_REPO_TAG_NAME%%WILTON_WIN_ARCH%msi
   draft: false
   prerelease: false
