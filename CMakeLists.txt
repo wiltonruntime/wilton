@@ -98,9 +98,6 @@ if ( WILTON_BUILD_FLAVOUR MATCHES "wheezy" )
             ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/pkgconfig/log4cplus.pc )
     configure_file ( ${WILTON_DIR}/resources/pkgconfig/libjpeg.pc
             ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/pkgconfig/libjpeg.pc )
-elseif ( WILTON_BUILD_FLAVOUR MATCHES "raspbian_stretch" )
-    configure_file ( ${WILTON_DIR}/resources/pkgconfig/asio.pc
-            ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/pkgconfig/asio.pc )
 elseif ( WILTON_BUILD_FLAVOUR MATCHES "el7" )
     configure_file ( ${WILTON_DIR}/resources/pkgconfig/asio.pc
             ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/pkgconfig/asio.pc )

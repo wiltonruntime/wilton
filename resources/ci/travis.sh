@@ -22,7 +22,10 @@ if [ "xlinux" = "x${TRAVIS_OS_NAME}" ] ; then
     # tools
     git clone --quiet https://github.com/wiltonruntime/tools_linux_jdk8.git ../jdk8
     git clone --quiet --recursive https://github.com/wiltonruntime/android-tools-ci-repo.git ../android-tools
-    git clone --quiet https://github.com/wiltonruntime/arm-rpi-4.9.3-linux-gnueabihf.git ../arm-rpi-4.9.3-linux-gnueabihf
+    # https://stackoverflow.com/a/58559140
+    wget https://github.com/Pro/raspi-toolchain/releases/latest/download/raspi-toolchain.tar.gz
+    sudo tar xfz raspi-toolchain.tar.gz --strip-components=1 -C /opt
+    git clone --quiet https://github.com/wiltonruntime/crosspi-buster-sysroot.git /cross-pi-gcc-sysroot
 
     # env
     export JAVA_HOME=`pwd`/../jdk8
@@ -50,9 +53,9 @@ if [ "xlinux" = "x${TRAVIS_OS_NAME}" ] ; then
     mkdir build
     pushd build
     if [ "x" = "x${TRAVIS_TAG}" ] ;  then
-        cmake .. -DRASPBIAN_TOOLCHAIN_DIR=${WILTON_RPI_TOOLCHAIN} -DSTATICLIB_TOOLCHAIN=linux_armhf_gcc -DWILTON_BUILD_FLAVOUR=raspbian_stretch
+        cmake .. -DRASPBIAN_TOOLCHAIN_DIR=${WILTON_RPI_TOOLCHAIN} -DSTATICLIB_TOOLCHAIN=linux_armhf_gcc -DWILTON_BUILD_FLAVOUR=crosspi
     else
-        cmake .. -DRASPBIAN_TOOLCHAIN_DIR=${WILTON_RPI_TOOLCHAIN} -DSTATICLIB_TOOLCHAIN=linux_armhf_gcc -DWILTON_BUILD_FLAVOUR=raspbian_stretch -DWILTON_RELEASE=${TRAVIS_TAG}
+        cmake .. -DRASPBIAN_TOOLCHAIN_DIR=${WILTON_RPI_TOOLCHAIN} -DSTATICLIB_TOOLCHAIN=linux_armhf_gcc -DWILTON_BUILD_FLAVOUR=crosspi -DWILTON_RELEASE=${TRAVIS_TAG}
     fi
     make -j 2
     make dist_debug > dist_debug.log
@@ -63,21 +66,23 @@ if [ "xlinux" = "x${TRAVIS_OS_NAME}" ] ; then
     fi
 
     # raspberry test runs
-    export LD_LIBRARY_PATH=${WILTON_RPI_TOOLCHAIN}/arm-linux-gnueabihf/sysroot/usr/lib/arm-linux-gnueabihf/
+    export LD_LIBRARY_PATH=/opt/cross-pi-gcc-sysroot/usr/lib/arm-linux-gnueabihf/
+    export QEMU_LD_PREFIX=/opt/cross-pi-gcc/arm-linux-gnueabihf/
     # quickjs
-    qemu-arm-static -L ${WILTON_RPI_TOOLCHAIN}/arm-linux-gnueabihf/sysroot/ ./wilton_dist/bin/wilton ../js/wilton/test/LoggerTest.js -m ../js -l
-    qemu-arm-static -L ${WILTON_RPI_TOOLCHAIN}/arm-linux-gnueabihf/sysroot/ ./wilton_dist/bin/wilton ../js/wilton/test/fsTest.js -m ../js -l
-    qemu-arm-static -L ${WILTON_RPI_TOOLCHAIN}/arm-linux-gnueabihf/sysroot/ ./wilton_dist/bin/wilton ../js/wilton/test/gitTest.js -m ../js -l
-    qemu-arm-static -L ${WILTON_RPI_TOOLCHAIN}/arm-linux-gnueabihf/sysroot/ ./wilton_dist/bin/wilton ../js/wilton/test/threadTest.js -m ../js -l
-    qemu-arm-static -L ${WILTON_RPI_TOOLCHAIN}/arm-linux-gnueabihf/sysroot/ ./wilton_dist/bin/wilton ../js/wilton/test/zipTest.js -m ../js -l
-    qemu-arm-static -L ${WILTON_RPI_TOOLCHAIN}/arm-linux-gnueabihf/sysroot/ ./wilton_dist/bin/wilton ../js/test-runners/runSanityTests.js 
+    qemu-arm-static ./wilton_dist/bin/wilton ../js/wilton/test/LoggerTest.js -m ../js -l
+    qemu-arm-static ./wilton_dist/bin/wilton ../js/wilton/test/fsTest.js -m ../js -l
+    qemu-arm-static ./wilton_dist/bin/wilton ../js/wilton/test/gitTest.js -m ../js -l
+    qemu-arm-static ./wilton_dist/bin/wilton ../js/wilton/test/threadTest.js -m ../js -l
+    qemu-arm-static ./wilton_dist/bin/wilton ../js/wilton/test/zipTest.js -m ../js -l
+    qemu-arm-static ./wilton_dist/bin/wilton ../js/test-runners/runSanityTests.js 
+    qemu-arm-static ./wilton_dist/bin/wilton ../js/wilton/test/index.js -m ../js
     # duktape
-    qemu-arm-static -L ${WILTON_RPI_TOOLCHAIN}/arm-linux-gnueabihf/sysroot/ ./wilton_dist/bin/wilton ../js/wilton/test/LoggerTest.js -m ../js -j duktape -l
-    qemu-arm-static -L ${WILTON_RPI_TOOLCHAIN}/arm-linux-gnueabihf/sysroot/ ./wilton_dist/bin/wilton ../js/wilton/test/fsTest.js -m ../js -j duktape -l
-    qemu-arm-static -L ${WILTON_RPI_TOOLCHAIN}/arm-linux-gnueabihf/sysroot/ ./wilton_dist/bin/wilton ../js/wilton/test/gitTest.js -m ../js -j duktape -l
-    qemu-arm-static -L ${WILTON_RPI_TOOLCHAIN}/arm-linux-gnueabihf/sysroot/ ./wilton_dist/bin/wilton ../js/wilton/test/threadTest.js -m ../js -j duktape -l
-    qemu-arm-static -L ${WILTON_RPI_TOOLCHAIN}/arm-linux-gnueabihf/sysroot/ ./wilton_dist/bin/wilton ../js/wilton/test/zipTest.js -m ../js -j duktape -l
-    qemu-arm-static -L ${WILTON_RPI_TOOLCHAIN}/arm-linux-gnueabihf/sysroot/ ./wilton_dist/bin/wilton ../js/test-runners/runSanityTests.js -j duktape
+    qemu-arm-static ./wilton_dist/bin/wilton ../js/wilton/test/LoggerTest.js -m ../js -j duktape -l
+    qemu-arm-static ./wilton_dist/bin/wilton ../js/wilton/test/fsTest.js -m ../js -j duktape -l
+    qemu-arm-static ./wilton_dist/bin/wilton ../js/wilton/test/gitTest.js -m ../js -j duktape -l
+    qemu-arm-static ./wilton_dist/bin/wilton ../js/wilton/test/threadTest.js -m ../js -j duktape -l
+    qemu-arm-static ./wilton_dist/bin/wilton ../js/wilton/test/zipTest.js -m ../js -j duktape -l
+    qemu-arm-static ./wilton_dist/bin/wilton ../js/test-runners/runSanityTests.js -j duktape
 fi
 
 if [ "xosx" = "x${TRAVIS_OS_NAME}"  ] ; then

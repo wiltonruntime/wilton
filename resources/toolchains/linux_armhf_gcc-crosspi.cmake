@@ -1,4 +1,4 @@
-# Copyright 2019, alex at staticlibs.net
+# Copyright 2020, alex at staticlibs.net
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,14 +16,13 @@ cmake_minimum_required ( VERSION 2.8.12 )
 
 set ( CMAKE_BUILD_TYPE "Release" CACHE STRING "Default build type" )
 
-set ( RASPBIAN_TOOLCHAIN_DIR SPECIFY_ME_I_AM_RASPBIAN_TOOLCHAIN_DIR CACHE STRING "" )
-set ( RASPBIAN_TOOLCHAIN_PREFIX ${RASPBIAN_TOOLCHAIN_DIR}/bin/arm-linux-gnueabihf CACHE INTERNAL "" )
+set ( RPI_TOOLCHAIN_PREFIX /opt/cross-pi-gcc/bin/arm-linux-gnueabihf CACHE INTERNAL "" )
 
 set ( CMAKE_SYSTEM_NAME Linux )
-set ( CMAKE_SYSROOT ${RASPBIAN_TOOLCHAIN_DIR}/arm-linux-gnueabihf/sysroot CACHE INTERNAL "" )
-set ( CMAKE_C_COMPILER ${RASPBIAN_TOOLCHAIN_PREFIX}-gcc )
-set ( CMAKE_CXX_COMPILER ${RASPBIAN_TOOLCHAIN_PREFIX}-g++ )
-set ( PKG_CONFIG_EXECUTABLE ${RASPBIAN_TOOLCHAIN_PREFIX}-pkg-config CACHE INTERNAL "" )
+set ( CMAKE_SYSROOT /opt/cross-pi-gcc-sysroot CACHE INTERNAL "" )
+set ( CMAKE_C_COMPILER ${RPI_TOOLCHAIN_PREFIX}-gcc )
+set ( CMAKE_CXX_COMPILER ${RPI_TOOLCHAIN_PREFIX}-g++ )
+set ( PKG_CONFIG_EXECUTABLE ${RPI_TOOLCHAIN_PREFIX}-pkg-config CACHE INTERNAL "" )
 
 # CMAKE_C_FLAGS
 set ( CMAKE_C_FLAGS_LIST
@@ -49,18 +48,23 @@ set ( CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS_RELEASE}" CACHE INTERNAL "" )
 
 # CMAKE_CXX_FLAGS
 set ( CMAKE_CXX_FLAGS_LIST
-        --std=c++11
+        --std=c++14
         -fPIC
         -Wall
         -Werror
         -Wextra
         -fno-strict-overflow
         -fno-strict-aliasing
-        -fstack-protector-all
-        -Wlogical-op 
+        # https://stackoverflow.com/a/1351737
+        #-fstack-protector-all
+        -Wlogical-op
+        # duktape
+        -Wno-implicit-fallthrough
+        -Wno-format-truncation
         # log4cplus
         -Wno-deprecated-declarations
-        --sysroot=${CMAKE_SYSROOT} )
+        # https://gcc.gnu.org/bugzilla/show_bug.cgi?id=77728
+        -Wno-psabi )
 string ( REPLACE ";" " " CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS_LIST}" )
 set ( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}" CACHE INTERNAL "" )
 
@@ -99,13 +103,13 @@ set ( CMAKE_SKIP_RPATH TRUE CACHE INTERNAL "" )
 # variables for packages that are present, but do not have pkg-config support
 set ( WILTON_PKGCONFIG_LIBDIR "-L${CMAKE_SYSROOT}/usr/lib/arm-linux-gnueabihf/" CACHE INTERNAL "" )
 set ( WILTON_PKGCONFIG_INCLUDEDIR "-I${CMAKE_SYSROOT}/usr/include/" CACHE INTERNAL "" )
-set ( asio_VERSION "1.10.6-3" CACHE INTERNAL "" )
+set ( asio_VERSION "1.12.2-1" CACHE INTERNAL "" )
 
-set ( CMAKE_AR ${RASPBIAN_TOOLCHAIN_PREFIX}-ar CACHE INTERNAL "" )
-set ( CMAKE_AS ${RASPBIAN_TOOLCHAIN_PREFIX}-as CACHE INTERNAL "" )
-set ( CMAKE_LD ${RASPBIAN_TOOLCHAIN_PREFIX}-ld CACHE INTERNAL "" )
-set ( CMAKE_NM ${RASPBIAN_TOOLCHAIN_PREFIX}-nm CACHE INTERNAL "" )
-set ( CMAKE_OBJCOPY ${RASPBIAN_TOOLCHAIN_PREFIX}-objcopy CACHE INTERNAL "" )
-set ( CMAKE_OBJDUMP ${RASPBIAN_TOOLCHAIN_PREFIX}-objdump CACHE INTERNAL "" )
-set ( CMAKE_RANLIB ${RASPBIAN_TOOLCHAIN_PREFIX}-ranlib CACHE INTERNAL "" )
-set ( CMAKE_STRIP ${RASPBIAN_TOOLCHAIN_PREFIX}-strip CACHE INTERNAL "" )
+set ( CMAKE_AR ${RPI_TOOLCHAIN_PREFIX}-ar CACHE INTERNAL "" )
+set ( CMAKE_AS ${RPI_TOOLCHAIN_PREFIX}-as CACHE INTERNAL "" )
+set ( CMAKE_LD ${RPI_TOOLCHAIN_PREFIX}-ld CACHE INTERNAL "" )
+set ( CMAKE_NM ${RPI_TOOLCHAIN_PREFIX}-nm CACHE INTERNAL "" )
+set ( CMAKE_OBJCOPY ${RPI_TOOLCHAIN_PREFIX}-objcopy CACHE INTERNAL "" )
+set ( CMAKE_OBJDUMP ${RPI_TOOLCHAIN_PREFIX}-objdump CACHE INTERNAL "" )
+set ( CMAKE_RANLIB ${RPI_TOOLCHAIN_PREFIX}-ranlib CACHE INTERNAL "" )
+set ( CMAKE_STRIP ${RPI_TOOLCHAIN_PREFIX}-strip CACHE INTERNAL "" )

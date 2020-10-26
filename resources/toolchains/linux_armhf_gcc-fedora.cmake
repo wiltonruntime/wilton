@@ -51,7 +51,7 @@ set ( CMAKE_CXX_FLAGS_LIST
         -fno-strict-overflow
         -fno-strict-aliasing
         -fstack-protector-all
-        -Wlogical-op 
+        -Wlogical-op
         -Wduplicated-cond
         # duktape
         -Wno-implicit-fallthrough
