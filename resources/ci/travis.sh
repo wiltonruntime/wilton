@@ -60,7 +60,7 @@ if [ "xosx" = "x${TRAVIS_OS_NAME}"  ] ; then
         cmake .. -DWILTON_RELEASE=${TRAVIS_TAG}
     fi
     make -j 2
-    make dist_debug > dist_debug.log
+    make dist > dist.log
 
     # test
     make dist_unversioned > dist_unversioned.log

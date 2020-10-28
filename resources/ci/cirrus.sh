@@ -28,7 +28,7 @@ else
     cmake .. -DSTATICLIB_TOOLCHAIN=linux_armhf_gcc -DWILTON_BUILD_FLAVOUR=crosspi -DWILTON_RELEASE=${CIRRUS_TAG}
 fi
 make #-j 2
-make dist_debug > dist_debug.log
+make dist > dist.log
 
 # test
 # broken on ext4, see: https://sourceware.org/bugzilla/show_bug.cgi?id=23960

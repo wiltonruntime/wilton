@@ -2,7 +2,7 @@ Wilton [work in progress]
 =========================
 
 [![travis](https://travis-ci.org/wiltonruntime/wilton.svg?branch=master)](https://travis-ci.org/wiltonruntime/wilton)
-[![appveyor](https://ci.appveyor.com/api/projects/status/github/wiltonruntime/wilton?svg=true)](https://ci.appveyor.com/project/wiltonruntime/wilton)
+[![appveyor](https://ci.appveyor.com/api/projects/status/github/wiltonruntime/wilton?svg=true)](https://ci.appveyor.com/project/staticlibs/wilton)
 [![circle](https://circleci.com/gh/wiltonruntime/wilton.svg?style=svg)](https://circleci.com/gh/wiltonruntime/wilton)
 [![cirrus](https://api.cirrus-ci.com/github/wiltonruntime/wilton.svg)](https://cirrus-ci.com/github/wiltonruntime/wilton)
 

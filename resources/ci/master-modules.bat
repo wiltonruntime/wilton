@@ -45,7 +45,6 @@ pushd "modules/wilton_server" && git checkout master && git pull --quiet && popd
 pushd "modules/wilton_service" && git checkout master && git pull --quiet && popd || exit /b 1
 pushd "modules/wilton_signal" && git checkout master && git pull --quiet && popd || exit /b 1
 pushd "modules/wilton_thread" && git checkout master && git pull --quiet && popd || exit /b 1
-pushd "modules/wilton_usb" && git checkout master && git pull --quiet && popd || exit /b 1
 pushd "modules/wilton_winscm" && git checkout master && git pull --quiet && popd || exit /b 1
 pushd "modules/wilton_zip" && git checkout master && git pull --quiet && popd || exit /b 1
 pushd jni && git checkout master && git pull --quiet && popd || exit /b 1

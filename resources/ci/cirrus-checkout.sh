@@ -18,9 +18,9 @@ set -e
 set -x
 
 # image setup: cannot be pulled from docker-hub by cirrus for some reason
-apt -qq update
-apt -qq upgrade -y
-apt -qq install -y \
+apt-get -qq update
+apt-get -qq upgrade -y
+apt-get -qq install -y \
         git \
         build-essential \
         cmake \

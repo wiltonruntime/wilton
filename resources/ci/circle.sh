@@ -40,7 +40,7 @@ else
     cmake .. -DWILTON_BUILD_FLAVOUR=${WILTON_BUILD_FLAVOUR} -DWILTON_RELEASE=${CIRCLE_TAG}
 fi
 make -j 2
-make dist_debug > dist_debug.log
+make dist > dist.log
 
 # test
 make dist_unversioned > dist_unversioned.log

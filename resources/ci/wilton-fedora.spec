@@ -1,4 +1,4 @@
-# Copyright 2018, alex at staticlibs.net
+# Copyright 2020, alex at staticlibs.net
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,12 +16,12 @@
 # https://copr.fedorainfracloud.org/coprs/wilton/wilton/
 
 Name:           wilton
-Version:        v202010281
+Version:        v202010101
 Release:        1%{?dist}
 Summary:        JavaScript runtime
 Group:          Development/Languages
 License:        ASL 2.0
-URL:            https://github.com/wiltonruntime/wilton
+URL:            https://github.com/wilton-iot/wilton
 
 BuildRequires:  gcc
 BuildRequires:  gcc-c++
@@ -32,7 +32,6 @@ BuildRequires:  cmake
 BuildRequires:  pkgconfig
 BuildRequires:  zip
 BuildRequires:  java-1.8.0-openjdk-devel
-BuildRequires:  valgrind
 
 BuildRequires:  zlib-devel
 BuildRequires:  jansson-devel
@@ -52,6 +51,8 @@ BuildRequires:  libusbx-devel
 BuildRequires:  webkitgtk4-jsc-devel
 BuildRequires:  libgit2-devel
 BuildRequires:  systemd-devel
+BuildRequires:  curl-devel
+BuildRequires:  libharu-devel
 # kiosk
 BuildRequires:  glib2-devel
 BuildRequires:  gtk3-devel
@@ -61,17 +62,13 @@ BuildRequires:  webkitgtk4-devel
 Multi-threaded JavaScript runtime environment with batteries included
 
 %prep
-git clone --branch %{version} https://github.com/wiltonruntime/wilton.git
+git clone --branch %{version} https://github.com/wilton-iot/wilton.git
 cd wilton
 # core
 git submodule update --init core
 # deps
 git submodule update --init deps/cmake
-git submodule update --init deps/external_curl
-git submodule update --init deps/lookaside_curl
 git submodule update --init deps/external_duktape
-git submodule update --init deps/external_hpdf
-git submodule update --init deps/lookaside_libharu
 git submodule update --init deps/external_quickjs
 git submodule update --init deps/external_utf8cpp
 git submodule update --init deps/lookaside_utf8cpp
@@ -100,7 +97,7 @@ git submodule update --init deps/staticlib_utils
 git submodule update --init deps/staticlib_websocket
 # js
 rm -rf js
-git clone --branch %{version} https://github.com/wiltonruntime/js-libs-ci-monorepo.git js
+git clone --branch %{version} https://github.com/wilton-iot/js-libs-ci-monorepo.git js
 # jni
 git submodule update --init jni
 # engines
@@ -142,14 +139,14 @@ export JAVA_HOME=$(readlink -f /usr/bin/javac | sed "s:/bin/javac::")
 cd wilton
 mkdir build
 cd build
-cmake .. -DWILTON_BUILD_FLAVOUR=el7 -DWILTON_RELEASE=%{version}
+cmake .. -DWILTON_BUILD_FLAVOUR=el8 -DWILTON_RELEASE=%{version}
 make -j 2
 make dist
 
 %check
 cd wilton
 cd build
-make test_js valgrind
+make test_js
 
 %install
 mkdir -p %{buildroot}/opt/wilton
