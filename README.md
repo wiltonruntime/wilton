@@ -1,39 +1,38 @@
 Wilton [work in progress]
 =========================
 
-[![travis](https://travis-ci.org/wilton-iot/wilton.svg?branch=master)](https://travis-ci.org/wilton-iot/wilton)
-[![appveyor](https://ci.appveyor.com/api/projects/status/github/wilton-iot/wilton?svg=true)](https://ci.appveyor.com/project/wilton-iot/wilton)
-[![circle](https://circleci.com/gh/wilton-iot/wilton.svg?style=svg)](https://circleci.com/gh/wilton-iot/wilton)
-[![cirrus](https://api.cirrus-ci.com/github/wilton-iot/wilton.svg)](https://cirrus-ci.com/github/wilton-iot/wilton)
+[![travis](https://travis-ci.org/wiltonruntime/wilton.svg?branch=master)](https://travis-ci.org/wiltonruntime/wilton)
+[![appveyor](https://ci.appveyor.com/api/projects/status/github/wiltonruntime/wilton?svg=true)](https://ci.appveyor.com/project/wiltonruntime/wilton)
+[![circle](https://circleci.com/gh/wiltonruntime/wilton.svg?style=svg)](https://circleci.com/gh/wiltonruntime/wilton)
+[![cirrus](https://api.cirrus-ci.com/github/wiltonruntime/wilton.svg)](https://cirrus-ci.com/github/wiltonruntime/wilton)
 
 TODO: description
 
-Link to the [JavaScript API documentation](https://wilton-iot.github.io/wilton/docs/html/namespaces.html).
+Link to the [JavaScript API documentation](https://wiltonruntime.github.io/wilton/docs/html/namespaces.html).
 
 How to build
 ------------
 
-_Note: see [releases](https://github.com/wilton-iot/wilton/releases) for pre-built binaries_
+_Note: see [releases](https://github.com/wiltonruntime/wilton/releases) for pre-built binaries_
 
-_Note: see [repo](https://copr.fedorainfracloud.org/coprs/wilton/wilton/) for CentOS 7 and Fedora RPM packages_
+_Note: see [repo](https://copr.fedorainfracloud.org/coprs/wilton/wilton/) for CentOS and Fedora RPM packages_
 
 Get sources and build tools:
 
-    git clone https://github.com/wilton-iot/wilton.git
+    git clone https://github.com/wiltonruntime/wilton.git
     cd wilton
     git submodule update --init
 
 Follow platform-specific instructions:
 
- - [Android](https://github.com/wilton-iot/wilton/wiki/BuildAndroid)
- - [Windows](https://github.com/wilton-iot/wilton/wiki/BuildWindows)
+ - [Android](https://github.com/wiltonruntime/wilton/wiki/BuildAndroid)
+ - [Windows](https://github.com/wiltonruntime/wilton/wiki/BuildWindows)
  - Linux:
-   - [CentOS](https://github.com/wilton-iot/wilton/wiki/BuildCentOS)
-   - [Debian](https://github.com/wilton-iot/wilton/wiki/BuildDebian)
-   - [Fedora](https://github.com/wilton-iot/wilton/wiki/BuildFedora)
-   - [Raspbian](https://github.com/wilton-iot/wilton/wiki/BuildRaspbian)
-   - [Ubuntu](https://github.com/wilton-iot/wilton/wiki/BuildUbuntu)
- - [MacOS](https://github.com/wilton-iot/wilton/wiki/BuildMacOS)
+   - [CentOS](https://github.com/wiltonruntime/wilton/wiki/BuildCentOS)
+   - [Fedora](https://github.com/wiltonruntime/wilton/wiki/BuildFedora)
+   - [Raspbian](https://github.com/wiltonruntime/wilton/wiki/BuildRaspbian)
+   - [Ubuntu](https://github.com/wiltonruntime/wilton/wiki/BuildUbuntu)
+ - [MacOS](https://github.com/wiltonruntime/wilton/wiki/BuildMacOS)
 
 License information
 -------------------
@@ -42,6 +41,26 @@ This project is released under the [Apache License 2.0](http://www.apache.org/li
 
 Changelog
 ---------
+
+**2020-10-28**
+
+ * `v202010281`
+ * moved to `wiltonruntime` account
+ * drop V8, MozJS and ChakraCore engines
+ * drop USB module
+ * Raspberry PI OS Buster support
+
+**2020-10-10**
+
+ * `v202010101`
+ * QuickJS engine addded and enabled by default on all platforms
+
+**2020-09-29**
+
+ * `v202009291`
+ * update `sjcl` and `pwdauth` libs
+ * JPEG support in `wilton/PDFDocument`
+ * support native builds on Fedora armhf
 
 **2020-05-05**
 
