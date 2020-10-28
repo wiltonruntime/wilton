@@ -27,7 +27,8 @@ set ( PKG_CONFIG_EXECUTABLE ${RPI_TOOLCHAIN_PREFIX}-pkg-config CACHE INTERNAL ""
 # CMAKE_C_FLAGS
 set ( CMAKE_C_FLAGS_LIST
         -fPIC
-        --sysroot=${CMAKE_SYSROOT} )
+        --sysroot=${CMAKE_SYSROOT}
+        -I/opt/cross-pi-gcc-sysroot/usr/include )
 string ( REPLACE ";" " " CMAKE_C_FLAGS "${CMAKE_C_FLAGS_LIST}" )
 set ( CMAKE_C_FLAGS "${CMAKE_C_FLAGS}" CACHE INTERNAL "" )
 
@@ -64,7 +65,8 @@ set ( CMAKE_CXX_FLAGS_LIST
         # log4cplus
         -Wno-deprecated-declarations
         # https://gcc.gnu.org/bugzilla/show_bug.cgi?id=77728
-        -Wno-psabi )
+        -Wno-psabi
+        -I/opt/cross-pi-gcc-sysroot/usr/include )
 string ( REPLACE ";" " " CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS_LIST}" )
 set ( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}" CACHE INTERNAL "" )
 

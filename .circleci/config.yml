@@ -63,19 +63,47 @@ jobs:
             bash ./resources/ci/circle-checkout.sh
             bash ./resources/ci/circle.sh
 
+  ubuntu:
+    docker:
+      - image: wiltonruntime/ubuntu-focal-amd64
+        environment:
+          WILTON_BUILD_FLAVOUR: ubuntu
+    steps:
+      - checkout
+      - run:
+          name: ubuntu
+          command: |
+            # cd ..
+            # git clone --quiet https://github.com/wiltonruntime/wilton
+            # cd wilton
+            bash ./resources/ci/circle-checkout.sh
+            bash ./resources/ci/circle.sh
+
 workflows:
   version: 2.1
-  wheezy_and_centos:
+  wheezy_centos_ubuntu:
     jobs:
       - wheezy:
           filters:
+            branches:
+              only: master
             tags:
-              only: /.*/
+              only: disable
       - centos7:
           filters:
+            branches:
+              only: master
             tags:
-              only: /.*/
+              only: disable
       - centos8:
           filters:
+            branches:
+              only: master
             tags:
-              only: /.*/
+              only: disable
+      - ubuntu:
+          filters:
+            branches:
+              only: master
+            tags:
+              only: disable

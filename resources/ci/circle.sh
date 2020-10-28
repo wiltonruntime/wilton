@@ -23,8 +23,12 @@ if [ "xwheezy" = "x${WILTON_BUILD_FLAVOUR}" ] ; then
     export PATH=`pwd`/../cmake/bin:${PATH}
 fi
 
-if [ "xel7" = "x${WILTON_BUILD_FLAVOUR}" ] || [ "xel8" = "x${WILTON_BUILD_FLAVOUR}" ] ; then
+if ! [[ "xwheezy" = "x${WILTON_BUILD_FLAVOUR}" ]] ; then
     export JAVA_HOME=$(readlink -f /usr/bin/javac | sed "s:/bin/javac::")
+fi
+
+if [ "xubuntu" = "x${WILTON_BUILD_FLAVOUR}" ] ; then
+    export OPENSSL_CONF=/opt/openssl.cnf
 fi
 
 # build
@@ -47,7 +51,7 @@ echo quickjs
 ./wilton_dist/bin/wilton ../js/test-runners/runStdLibTests.js -m ../js > quickjs_stdlib.log
 
 echo jsc
-if [ "xel7" = "x${WILTON_BUILD_FLAVOUR}" ] || [ "xel8" = "x${WILTON_BUILD_FLAVOUR}" ] ; then
+if ! [[ "xwheezy" = "x${WILTON_BUILD_FLAVOUR}" ]] ; then
     ./wilton_dist/bin/wilton ../js/wilton/test/index.js -m ../js -j jsc
     ./wilton_dist/bin/wilton ../js/test-runners/runStdLibTests.js -m ../js -j jsc > jsc_stdlib.log
 fi

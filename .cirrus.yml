@@ -17,17 +17,7 @@ task:
   matrix:
 
     container:
-      image: wiltoniot/xenial-armhf
-      cpu: 1
-      memory: 1G
-
-    container:
-      image: wiltoniot/stretch-aarch64
-      cpu: 1
-      memory: 1G
-
-    container:
-      image: wiltoniot/bionic-amd64
+      image: debian:buster
       cpu: 1
       memory: 1G
 

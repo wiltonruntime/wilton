@@ -30,6 +30,7 @@ addons:
       - pkg-config
       - zip
       - qemu-user-static
+      - openjdk-8-jdk-headless
 
 before_install:
   - export CC=
@@ -48,11 +49,9 @@ script:
   - bash ./resources/ci/travis.sh
   - if [ "x" != "x${TRAVIS_TAG}" ] ; then
       if [ "xlinux" = "x${TRAVIS_OS_NAME}" ] ; then
-          export ARTIFACT_1_PATH=`pwd`/wilton_${TRAVIS_TAG}.apk ;
-          export ARTIFACT_2_PATH=`pwd`/build/wilton_${TRAVIS_TAG}_rpi.zip ;
+          export ARTIFACT_PATH=`pwd`/wilton_${TRAVIS_TAG}.apk ;
       else
-          export ARTIFACT_1_PATH=`pwd`/build/wilton_${TRAVIS_TAG}_macos.zip ;
-          export ARTIFACT_2_PATH=`pwd`/build/wilton_${TRAVIS_TAG}_macos.zip ;
+          export ARTIFACT_PATH=`pwd`/build/wilton_${TRAVIS_TAG}_macos.zip ;
       fi ;
     fi
 
@@ -62,8 +61,7 @@ deploy:
   api_key:
     secure: E8R0tnZi1IwL9aQ4S/4GCk9XryU+3fDDHuvcMcz9vjtZWGitQxEL9Ys/g2NAjUG7+r5CYtPUa01gjf1LHV9W4yHMptVm8N5wL/RmIw+dPX2+wdbGlziuO9GzOyWt1E3lPfx3h9bIJqdkuf8uM65OZSQYsRTf4U/LdS/1W5of1RUKBNNyNOWN4OZtNxC67NyJ5gOkWQVIs6HVZeVpDRP3svbT8SfpnfR/5dlh8cIJcR/c4iqCLRHd4CmxDoMsEBm9dXFxlCl/XY+dbNubkyE1MWDaGu9M0AlQqAlYpd+oSDqKtfF9RSaKZYjdB8eivI5KofDGQ+mSwrNhu74/qp94sMDGa6mNQ7UiTQQ8jfmgxlC+XRD+W2xHmkdbhSgcNbu0PuWlkKwfexsatXiV19nsjA7Nmf+NDCCqydIJPKTKLkSa6NHB49y2k9sLRHgxwy5O66/FiD2CN8qw/jk0o+a4jchv6NF37seUPREolGBe9nCcmFGCfhEzmTe+vcXYa+ko6YnAElKc7oJBNDZHg3x6V5WC9x11SmEXyZVIx6tMe5ZfKXaa6J61YktT2cBA4kYS8xPyM6AO/ZOO34eKwT2vbOEW69PNgJO9PTff7BgL7jSjltxhxBkMxrhWh81/nG/Bd7CeuURDq+Uc6psXUuxhEhPkCcQ1V5vJVBCjhRDepcY=
   file:
-    - ${ARTIFACT_1_PATH}
-    - ${ARTIFACT_2_PATH}
+    - ${ARTIFACT_PATH}
   on:
     repo: wiltonruntime/wilton
     tags: true

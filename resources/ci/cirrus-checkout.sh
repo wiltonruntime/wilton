@@ -17,9 +17,22 @@
 set -e
 set -x
 
-# update packages
-apt-get update
-apt-get upgrade -y
+# image setup: cannot be pulled from docker-hub by cirrus for some reason
+apt -qq update
+apt -qq upgrade -y
+apt -qq install -y \
+        git \
+        build-essential \
+        cmake \
+        zip \
+        wget \
+        pkg-config
+wget -q https://github.com/Pro/raspi-toolchain/releases/download/v1.0.1/raspi-toolchain.tar.gz
+tar xfz raspi-toolchain.tar.gz --strip-components=1 -C /opt
+rm raspi-toolchain.tar.gz
+git clone --quiet https://github.com/wiltonruntime/crosspi-buster-sysroot.git /opt/cross-pi-gcc-sysroot
+ln -s /opt/cross-pi-gcc-sysroot/usr/bin/arm-linux-gnueabihf-pkg-config /opt/cross-pi-gcc/bin/arm-linux-gnueabihf-pkg-config
+git clone --quiet https://github.com/wiltonruntime/tools_linux_jdk8.git /opt/jdk8
 
 # core
 git submodule update --quiet --init core
