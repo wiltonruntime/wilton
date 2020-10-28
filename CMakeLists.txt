@@ -33,6 +33,28 @@ set ( WILTON_VERSION v${WILTON_VERSION_YEAR}${WILTON_VERSION_MONTH}${WILTON_VERS
 set ( WILTON_VERSION_WIN ${WILTON_VERSION_YEAR_SHORT}.${WILTON_VERSION_MONTH}.${WILTON_VERSION_DAY}.${WILTON_VERSION_BUILD} CACHE STRING "" )
 set ( WILTON_VERSION_EXE ${WILTON_VERSION_YEAR_SHORT},${WILTON_VERSION_MONTH},${WILTON_VERSION_DAY},${WILTON_VERSION_BUILD} CACHE STRING "" )
 
+# only generate docs
+option ( WILTON_DOCS "Generate documentation for JavaScript API" OFF )
+if ( WILTON_DOCS )
+    # doxygen file
+    configure_file ( ${CMAKE_CURRENT_LIST_DIR}/resources/doxygen/Doxyfile
+            ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile )
+    add_custom_target ( docs
+            COMMAND ${CMAKE_COMMAND} -E remove_directory doxy
+            COMMAND ${CMAKE_COMMAND} -E remove_directory docs
+            COMMAND ${CMAKE_COMMAND} -E make_directory docs
+            COMMAND $ENV{JAVA_HOME}/bin/jjs
+                    -J-XX:+UseSerialGC -J-XX:+TieredCompilation -J-XX:TieredStopAtLevel=1
+                    ${CMAKE_CURRENT_LIST_DIR}/resources/doxygen/generate-doxy.js
+                    ${CMAKE_CURRENT_LIST_DIR}/js/wilton doxy
+            COMMAND doxygen
+            # poor man's WARN_AS_ERROR
+            COMMAND [ ! -s doxygen_warnings.txt ]
+            WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+            COMMENT "Generating documentation at [${CMAKE_CURRENT_BINARY_DIR}/docs] ..." )
+    return ( )
+endif ( )
+
 # toolchain setup
 if ( NOT DEFINED STATICLIB_TOOLCHAIN )
     if ( WIN32 )
@@ -87,10 +109,6 @@ if ( STATICLIB_TOOLCHAIN MATCHES "windows_.+" )
     endif ( )
 endif ( )
 set ( WILTON_ANDROID_PREBUILT_VENDOR_JAR "" CACHE STRING "Vendor JAR file to include into Android APK" )
-
-# doxygen file
-configure_file ( ${WILTON_DIR}/resources/doxygen/Doxyfile
-        ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile )
 
 # supply missed pkg-config descriptors
 if ( WILTON_BUILD_FLAVOUR MATCHES "wheezy" )
@@ -796,7 +814,7 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "(windows|linux|macosx)_.+" )
                     wilton_${WILTON_VERSION}
                     wilton_dist
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-            DEPENDS dist_debug
+            DEPENDS dist
             COMMENT "Creaing unversioned distribution ..." )
 
     add_custom_target ( test_js
@@ -1008,20 +1026,6 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "linux_.+" )
     if ( NOT WILTON_BUILD_FLAVOUR MATCHES "wheezy" )
         add_dependencies ( dist dist_linux_systemd )
     endif ( )
-
-    add_custom_target ( docs
-            COMMAND ${CMAKE_COMMAND} -E remove_directory doxy
-            COMMAND ${CMAKE_COMMAND} -E remove_directory docs
-            COMMAND ${CMAKE_COMMAND} -E make_directory docs
-            COMMAND $ENV{JAVA_HOME}/bin/jjs
-                    -J-XX:+UseSerialGC -J-XX:+TieredCompilation -J-XX:TieredStopAtLevel=1
-                    ${WILTON_DIR}/resources/doxygen/generate-doxy.js
-                    ${WILTON_DIR}/js/wilton doxy
-            COMMAND doxygen
-            # poor man's WARN_AS_ERROR
-            COMMAND [ ! -s doxygen_warnings.txt ]
-            WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-            COMMENT "Generating documentation at [${CMAKE_CURRENT_BINARY_DIR}/docs] ..." )
 
 elseif ( STATICLIB_TOOLCHAIN MATCHES "macosx_.+" )
 
