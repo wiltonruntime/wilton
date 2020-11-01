@@ -1002,7 +1002,7 @@ if ( STATICLIB_TOOLCHAIN MATCHES "windows_.+" )
                     -v -nologo -sw1076 -sval -ext WixUIExtension -ext WixUtilExtension
                     wilton_${WILTON_VERSION}${WILTON_WIN_ARCH_POSTFIX}.wixobj
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-            DEPENDS dist_debug
+            DEPENDS dist
             COMMENT "Creating MSI at [${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION}${WILTON_WIN_ARCH_POSTFIX}.msi] ..." )
 
 elseif ( STATICLIB_TOOLCHAIN MATCHES "linux_.+" )
