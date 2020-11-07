@@ -16,7 +16,7 @@
 # https://copr.fedorainfracloud.org/coprs/wilton/wilton/
 
 Name:           wilton
-Version:        v202010281
+Version:        v202011011
 Release:        1%{?dist}
 Summary:        JavaScript runtime
 Group:          Development/Languages
@@ -154,8 +154,6 @@ make test_js valgrind
 %install
 mkdir -p %{buildroot}/opt/wilton
 cp -a wilton/build/wilton_%{version}/* %{buildroot}/opt/wilton/
-mkdir -p %{buildroot}/opt/wilton/devel/debuginfo
-cp -a wilton/build/wilton_%{version}_debuginfo/* %{buildroot}/opt/wilton/devel/debuginfo/
 mkdir -p %{buildroot}/usr/bin
 ln -s /opt/wilton/bin/wilton %{buildroot}/usr/bin/wilton
 
