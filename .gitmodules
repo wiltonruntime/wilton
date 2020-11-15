@@ -295,33 +295,15 @@
 [submodule "js/trampa"]
 	path = js/trampa
 	url = https://github.com/wiltonruntime/trampa.git
-[submodule "js/sanctuary-type-identifiers"]
-	path = js/sanctuary-type-identifiers
-	url = https://github.com/wiltonruntime/sanctuary-type-identifiers.git
-[submodule "js/sanctuary-type-classes"]
-	path = js/sanctuary-type-classes
-	url = https://github.com/wiltonruntime/sanctuary-type-classes.git
-[submodule "js/sanctuary-def"]
-	path = js/sanctuary-def
-	url = https://github.com/wiltonruntime/sanctuary-def.git
-[submodule "js/sanctuary"]
-	path = js/sanctuary
-	url = https://github.com/wiltonruntime/sanctuary.git
 [submodule "js/fantasy-land"]
 	path = js/fantasy-land
 	url = https://github.com/wiltonruntime/fantasy-land.git
 [submodule "js/immutable"]
 	path = js/immutable
 	url = https://github.com/wiltonruntime/immutable-js.git
-[submodule "js/xregexp"]
-	path = js/xregexp
-	url = https://github.com/wiltonruntime/xregexp.git
 [submodule "js/fromcodepoint"]
 	path = js/fromcodepoint
 	url = https://github.com/wiltonruntime/String.fromCodePoint.git
-[submodule "js/querystring"]
-	path = js/querystring
-	url = https://github.com/wiltonruntime/querystring.git
 [submodule "js/url"]
 	path = js/url
 	url = https://github.com/wiltonruntime/node-url.git
@@ -430,12 +412,6 @@
 [submodule "js/xml-js"]
 	path = js/xml-js
 	url = https://github.com/wiltonruntime/xml-js.git
-[submodule "js/uglify-js"]
-	path = js/uglify-js
-	url = https://github.com/wiltonruntime/UglifyJS.git
-[submodule "js/es6-shim"]
-	path = js/es6-shim
-	url = https://github.com/wiltonruntime/es6-shim.git
 [submodule "modules/wilton_ghc"]
 	path = modules/wilton_ghc
 	url = https://github.com/wiltonruntime/wilton_ghc.git
@@ -586,3 +562,12 @@
 [submodule "deps/external_libjpeg-turbo"]
 	path = deps/external_libjpeg-turbo
 	url = https://github.com/staticlibs/external_libjpeg-turbo.git
+[submodule "js/path"]
+	path = js/path
+	url = https://github.com/wiltonruntime/path.git
+[submodule "js/buffer-from"]
+	path = js/buffer-from
+	url = https://github.com/wiltonruntime/buffer-from.git
+[submodule "js/sanctuary"]
+	path = js/sanctuary
+	url = https://github.com/wiltonruntime/sanctuary.git

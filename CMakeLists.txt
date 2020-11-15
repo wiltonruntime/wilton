@@ -43,9 +43,8 @@ if ( WILTON_DOCS )
             COMMAND ${CMAKE_COMMAND} -E remove_directory doxy
             COMMAND ${CMAKE_COMMAND} -E remove_directory docs
             COMMAND ${CMAKE_COMMAND} -E make_directory docs
-            COMMAND $ENV{JAVA_HOME}/bin/jjs
-                    -J-XX:+UseSerialGC -J-XX:+TieredCompilation -J-XX:TieredStopAtLevel=1
-                    ${CMAKE_CURRENT_LIST_DIR}/resources/doxygen/generate-doxy.js
+            COMMAND ${CMAKE_CURRENT_LIST_DIR}/resources/builder/builder
+                    generate-doxy
                     ${CMAKE_CURRENT_LIST_DIR}/js/wilton doxy
             COMMAND doxygen
             # poor man's WARN_AS_ERROR
@@ -267,9 +266,8 @@ add_custom_target ( nativelibs DEPENDS
 
 add_custom_command ( OUTPUT std.wlib
         COMMAND ${CMAKE_COMMAND} -E remove_directory js
-        COMMAND $ENV{JAVA_HOME}/bin/jjs
-                -J-XX:+UseSerialGC -J-XX:+TieredCompilation -J-XX:TieredStopAtLevel=1
-                ${WILTON_DIR}/resources/scripts/bundle-stdlib-modules.js
+        COMMAND ${CMAKE_CURRENT_LIST_DIR}/resources/builder/builder
+                bundle-stdlib-modules
                 ${WILTON_DIR}/js js
         COMMAND cd js && zip -qr9 js.zip *
         COMMAND ${CMAKE_COMMAND} -E rename
@@ -615,6 +613,7 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "(windows|linux|macosx)_.+" )
             COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}
             COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}/bin
             COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}/devel
+            COMMAND ${CMAKE_COMMAND} -E make_directory wilton_${WILTON_VERSION}/lib
 
             # core
             COMMAND ${CMAKE_COMMAND} -E copy
@@ -801,6 +800,9 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "(windows|linux|macosx)_.+" )
             COMMAND ${CMAKE_COMMAND} -E copy
                     ${WILTON_DIR}/resources/toolchains/${STATICLIB_TOOLCHAIN}-${WILTON_BUILD_FLAVOUR}.cmake
                     wilton_${WILTON_VERSION}/devel/toolchain.cmake
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    ${WILTON_DIR}/resources/buildres/readme_lib.txt
+                    wilton_${WILTON_VERSION}/lib/readme_lib.txt
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
             DEPENDS debuginfo stdlib examples wilton_rhino_jar
             COMMENT "Creating distribution at [${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION}] ..." )
@@ -824,6 +826,7 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "(windows|linux|macosx)_.+" )
 
     add_custom_target ( test_js
             COMMAND bin/wilton ${WILTON_DIR}/js/wilton/test/index.js -m ${WILTON_DIR}/js
+            COMMAND bin/wilton ${WILTON_DIR}/js/wilton/test/esm/index.js -m ${WILTON_DIR}/js
             COMMAND bin/wilton ${WILTON_DIR}/js/test-runners/runSanityTests.js
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION} 
             DEPENDS dist
@@ -1134,6 +1137,8 @@ if ( STATICLIB_TOOLCHAIN MATCHES "(linux|macosx)_.+" )
                     ./bin/wilton ./examples/binaryModule.js -b ./examples/binmod.wlib
             COMMAND valgrind ${${PROJECT_NAME}_VGOPTS}
                     ./bin/wilton ${WILTON_DIR}/js/wilton/test/index.js -m ../../js
+            COMMAND valgrind ${${PROJECT_NAME}_VGOPTS}
+                    ./bin/wilton ${WILTON_DIR}/js/wilton/test/esm/index.js -m ../../js
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION} 
             DEPENDS dist_debug
             COMMENT "Running valgrind ..." )
