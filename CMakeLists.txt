@@ -266,7 +266,7 @@ add_custom_target ( nativelibs DEPENDS
 
 add_custom_command ( OUTPUT std.wlib
         COMMAND ${CMAKE_COMMAND} -E remove_directory js
-        COMMAND ${CMAKE_CURRENT_LIST_DIR}/resources/builder/builder
+        COMMAND cmd /c ${CMAKE_CURRENT_LIST_DIR}/resources/builder/builder
                 bundle-stdlib-modules
                 ${WILTON_DIR}/js js
         COMMAND cd js && zip -qr9 js.zip *

@@ -15,7 +15,7 @@ rem limitations under the License.
 
 set BAD_SLASH_APP_DIR=%~dp0
 set BUILDER_DIR=%BAD_SLASH_APP_DIR:\=/%
-export WILTON_DIR=$BUILDER_DIR../../
+set WILTON_DIR=%BUILDER_DIR%../../
 
 if "x" == "x%JAVA_HOME%" (
     echo "'JAVA_HOME' environment variable must be defined"
@@ -23,7 +23,7 @@ if "x" == "x%JAVA_HOME%" (
 )
 
 if "x" == "x%1" (
-    echo "USAGE: bin\builder <task> [args]"
+    echo "USAGE: builder <task> [args]"
     exit /b 1
 )
 
@@ -32,7 +32,7 @@ if "x" == "x%1" (
         -XX:+UseSerialGC ^
         -XX:+TieredCompilation ^
         -XX:TieredStopAtLevel=1 ^
-        -cp "%WILTON_DIR%"tools/mvnrepo/org/mozilla/rhino/1.7.7.1/rhino-1.7.7.1.jar \
+        -cp "%WILTON_DIR%"tools/mvnrepo/org/mozilla/rhino/1.7.7.1/rhino-1.7.7.1.jar ^
         org.mozilla.javascript.tools.shell.Main ^
         -O -1 ^
         "%BUILDER_DIR%"init/runTask.js ^
