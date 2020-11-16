@@ -47,7 +47,9 @@ make dist_unversioned > dist_unversioned.log
 
 echo quickjs
 ./wilton_dist/bin/wilton ../js/wilton/test/index.js -m ../js
+./wilton_dist/bin/wilton ../js/wilton/test/esm/index.js -m ../js
 ./wilton_dist/bin/wilton ../js/test-runners/runSanityTests.js
+./wilton_dist/bin/wilton ../js/test-runners/runEsSanityTests.js
 ./wilton_dist/bin/wilton ../js/test-runners/runStdLibTests.js -m ../js > quickjs_stdlib.log
 
 echo jsc

@@ -49,7 +49,9 @@ cmake --build . --config Release --target dist_unversioned > dist_unversioned.lo
 
 echo quickjs
 wilton_dist\bin\wilton.exe ../js/wilton/test/index.js -m ../js || exit /b 1
+wilton_dist\bin\wilton.exe ../js/wilton/test/esm/index.js -m ../js || exit /b 1
 wilton_dist\bin\wilton.exe ../js/test-runners/runSanityTests.js || exit /b 1
+wilton_dist\bin\wilton.exe ../js/test-runners/runEsSanityTests.js || exit /b 1
 wilton_dist\bin\wilton.exe ../js/test-runners/runStdLibTests.js -m ../js > quickjs_stdlib.log
 if errorlevel 1 (
     echo error: quickjs_stdlib
