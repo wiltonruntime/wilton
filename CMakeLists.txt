@@ -264,17 +264,24 @@ add_custom_target ( nativelibs DEPENDS
         wilton_winscm
         wilton_zip )
 
-add_custom_command ( OUTPUT std.wlib
-        COMMAND ${CMAKE_COMMAND} -E remove_directory js
-        COMMAND cmd /c ${CMAKE_CURRENT_LIST_DIR}/resources/builder/builder
+add_custom_command ( OUTPUT std_wlib
+        COMMAND ${CMAKE_COMMAND} -E remove_directory std_wlib
+        COMMAND ${CMAKE_CURRENT_LIST_DIR}/resources/builder/builder
                 bundle-stdlib-modules
-                ${WILTON_DIR}/js js
-        COMMAND cd js && zip -qr9 js.zip *
-        COMMAND ${CMAKE_COMMAND} -E rename
-                ${CMAKE_CURRENT_BINARY_DIR}/js/js.zip
-                ${CMAKE_CURRENT_BINARY_DIR}/std.wlib
+                ${WILTON_DIR}/js std_wlib
         WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
         DEPENDS nativelibs # just to preserve ordering
+        COMMENT "Copying JavaScript modules ..." )
+
+add_custom_target( std_wlib_dir DEPENDS std_wlib )
+
+add_custom_command ( OUTPUT std.wlib
+        COMMAND cd std_wlib && zip -qr9 js.zip *
+        COMMAND ${CMAKE_COMMAND} -E rename
+                ${CMAKE_CURRENT_BINARY_DIR}/std_wlib/js.zip
+                ${CMAKE_CURRENT_BINARY_DIR}/std.wlib
+        WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+        DEPENDS std_wlib_dir
         COMMENT "Preparing JavaScript modules bundle ..." )
 
 add_custom_target( stdlib DEPENDS std.wlib )
