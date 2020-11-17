@@ -61,16 +61,19 @@ Multi-threaded JavaScript runtime environment with batteries included
 
 %package devel
 Summary:        Development files
+Requires:       wilton
 %description devel
 Wilton development files
 
 %package jsc
 Summary:        JavaScriptCore JIT engine
+Requires:       wilton
 %description jsc
 JavaScriptCore JIT engine for Wilton runtime
 
 %package webview
 Summary:        WebView based on WebKitGTK
+Requires:       wilton
 %description webview
 WebView based on WebKitGTK for Wilton runtime
 
