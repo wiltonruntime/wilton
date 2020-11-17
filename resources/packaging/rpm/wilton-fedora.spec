@@ -52,7 +52,6 @@ BuildRequires:  libgit2-devel
 BuildRequires:  systemd-devel
 BuildRequires:  curl-devel
 BuildRequires:  libharu-devel
-# kiosk
 BuildRequires:  glib2-devel
 BuildRequires:  gtk3-devel
 BuildRequires:  webkitgtk4-devel
@@ -62,21 +61,24 @@ Multi-threaded JavaScript runtime environment with batteries included
 
 %package devel
 Summary:        Development files
+Requires: 	wilton
 %description devel
 Wilton development files
 
 %package jsc
 Summary:        JavaScriptCore JIT engine
+Requires: 	wilton
 %description jsc
 JavaScriptCore JIT engine for Wilton runtime
 
 %package webview
 Summary:        WebView based on WebKitGTK
+Requires: 	wilton
 %description webview
 WebView based on WebKitGTK for Wilton runtime
 
 %prep
-git clone --branch %{version} https://github.com/witlonruntime/wilton.git
+git clone --branch %{version} https://github.com/wiltonruntime/wilton.git
 cd wilton
 # core
 git submodule update --init core
@@ -111,7 +113,7 @@ git submodule update --init deps/staticlib_utils
 git submodule update --init deps/staticlib_websocket
 # js
 rm -rf js
-git clone --branch %{version} https://github.com/wilton-iot/js-libs-ci-monorepo.git js
+git clone --branch %{version} https://github.com/wiltonruntime/js-libs-ci-monorepo.git js
 # jni
 git submodule update --init jni
 # engines
@@ -160,6 +162,16 @@ make dist_unversioned
 %check
 cd wilton
 cd build
+cat <<EOF >> openssl.conf
+openssl_conf = openssl_init
+[openssl_init]
+ssl_conf = ssl_sect
+[ssl_sect]
+system_default = system_default_sect
+[system_default_sect]
+CipherString = DEFAULT@SECLEVEL=1
+EOF
+export OPENSSL_CONF=`pwd`/openssl.conf
 make test_js
 
 %install
