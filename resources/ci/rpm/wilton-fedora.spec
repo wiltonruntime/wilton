@@ -1,4 +1,4 @@
-# Copyright 2018, alex at staticlibs.net
+# Copyright 2020, alex at staticlibs.net
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,7 +16,7 @@
 # https://copr.fedorainfracloud.org/coprs/wilton/wilton/
 
 Name:           wilton
-Version:        v202011011
+Version:        master
 Release:        1%{?dist}
 Summary:        JavaScript runtime
 Group:          Development/Languages
@@ -32,7 +32,6 @@ BuildRequires:  cmake
 BuildRequires:  pkgconfig
 BuildRequires:  zip
 BuildRequires:  java-1.8.0-openjdk-devel
-BuildRequires:  valgrind
 
 BuildRequires:  zlib-devel
 BuildRequires:  jansson-devel
@@ -48,10 +47,11 @@ BuildRequires:  soci-postgresql-devel
 BuildRequires:  libjpeg-turbo-devel
 BuildRequires:  libpng-devel
 BuildRequires:  systemd-devel
-BuildRequires:  libusbx-devel
 BuildRequires:  webkitgtk4-jsc-devel
 BuildRequires:  libgit2-devel
 BuildRequires:  systemd-devel
+BuildRequires:  curl-devel
+BuildRequires:  libharu-devel
 # kiosk
 BuildRequires:  glib2-devel
 BuildRequires:  gtk3-devel
@@ -60,18 +60,29 @@ BuildRequires:  webkitgtk4-devel
 %description
 Multi-threaded JavaScript runtime environment with batteries included
 
+%package devel
+Summary:        Development files
+%description devel
+Wilton development files
+
+%package jsc
+Summary:        JavaScriptCore JIT engine
+%description jsc
+JavaScriptCore JIT engine for Wilton runtime
+
+%package webview
+Summary:        WebView based on WebKitGTK
+%description webview
+WebView based on WebKitGTK for Wilton runtime
+
 %prep
-git clone --branch %{version} https://github.com/wiltonruntime/wilton.git
+git clone --branch %{version} https://github.com/witlonruntime/wilton.git
 cd wilton
 # core
 git submodule update --init core
 # deps
 git submodule update --init deps/cmake
-git submodule update --init deps/external_curl
-git submodule update --init deps/lookaside_curl
 git submodule update --init deps/external_duktape
-git submodule update --init deps/external_hpdf
-git submodule update --init deps/lookaside_libharu
 git submodule update --init deps/external_quickjs
 git submodule update --init deps/external_utf8cpp
 git submodule update --init deps/lookaside_utf8cpp
@@ -100,7 +111,7 @@ git submodule update --init deps/staticlib_utils
 git submodule update --init deps/staticlib_websocket
 # js
 rm -rf js
-git clone --branch %{version} https://github.com/wiltonruntime/js-libs-ci-monorepo.git js
+git clone --branch %{version} https://github.com/wilton-iot/js-libs-ci-monorepo.git js
 # jni
 git submodule update --init jni
 # engines
@@ -142,21 +153,60 @@ export JAVA_HOME=$(readlink -f /usr/bin/javac | sed "s:/bin/javac::")
 cd wilton
 mkdir build
 cd build
-cmake .. -DWILTON_BUILD_FLAVOUR=el7 -DWILTON_RELEASE=%{version}
-make -j 2
-make dist
+cmake .. -DWILTON_BUILD_FLAVOUR=fedora -DWILTON_RELEASE=%{version}
+make -j 7
+make dist_unversioned
 
 %check
 cd wilton
 cd build
-make test_js valgrind
+make test_js
 
 %install
 mkdir -p %{buildroot}/opt/wilton
-cp -a wilton/build/wilton_%{version}/* %{buildroot}/opt/wilton/
+cp -a wilton/build/wilton_dist/* %{buildroot}/opt/wilton/
 mkdir -p %{buildroot}/usr/bin
 ln -s /opt/wilton/bin/wilton %{buildroot}/usr/bin/wilton
 
 %files
-/opt/wilton/*
+/opt/wilton/bin/libwilton_channel.so
+/opt/wilton/bin/libwilton_core.so
+/opt/wilton/bin/libwilton_cron.so
+/opt/wilton/bin/libwilton_crypto.so
+/opt/wilton/bin/libwilton_db.so
+/opt/wilton/bin/libwilton_duktape.so
+/opt/wilton/bin/libwilton_fs.so
+/opt/wilton/bin/libwilton_ghc.so
+/opt/wilton/bin/libwilton_git.so
+/opt/wilton/bin/libwilton_http.so
+/opt/wilton/bin/libwilton_kvstore.so
+/opt/wilton/bin/libwilton_loader.so
+/opt/wilton/bin/libwilton_logging.so
+/opt/wilton/bin/libwilton_mustache.so
+/opt/wilton/bin/libwilton_net.so
+/opt/wilton/bin/libwilton_pdf.so
+/opt/wilton/bin/libwilton_process.so
+/opt/wilton/bin/libwilton_quickjs.so
+/opt/wilton/bin/libwilton_rhino.so
+/opt/wilton/bin/libwilton_serial.so
+/opt/wilton/bin/libwilton_server.so
+/opt/wilton/bin/libwilton_service.so
+/opt/wilton/bin/libwilton_signal.so
+/opt/wilton/bin/libwilton_systemd.so
+/opt/wilton/bin/libwilton_thread.so
+/opt/wilton/bin/libwilton_zip.so
+/opt/wilton/bin/wilton_rhino.jar
+/opt/wilton/bin/wilton
+/opt/wilton/lib/*
+/opt/wilton/std.wlib
 /usr/bin/wilton
+
+%files devel
+/opt/wilton/devel/*
+/opt/wilton/examples/*
+
+%files jsc
+/opt/wilton/bin/libwilton_jsc.so
+
+%files webview
+/opt/wilton/bin/libwilton_kiosk.so

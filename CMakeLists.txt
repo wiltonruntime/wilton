@@ -15,7 +15,7 @@
 cmake_minimum_required ( VERSION 2.8.12 )
 
 # versioning
-if ( DEFINED WILTON_RELEASE )
+if ( DEFINED WILTON_RELEASE AND NOT (WILTON_RELEASE STREQUAL "master") )
     # git describe --exact-match --tags HEAD : vYYYYMMDDB
     string ( SUBSTRING ${WILTON_RELEASE} 1 4 WILTON_VERSION_YEAR )
     string ( SUBSTRING ${WILTON_RELEASE} 1 2 WILTON_VERSION_YEAR_SHORT )
