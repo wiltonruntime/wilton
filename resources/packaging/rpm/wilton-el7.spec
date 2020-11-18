@@ -160,7 +160,7 @@ cd wilton
 mkdir build
 cd build
 cmake .. -DWILTON_BUILD_FLAVOUR=el7 -DWILTON_RELEASE=%{version}
-make -j 7
+make -j 4
 make dist_unversioned
 
 %check

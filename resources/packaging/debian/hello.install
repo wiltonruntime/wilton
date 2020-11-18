@@ -1,0 +1,5 @@
+wilton_dist/bin /opt/wilton
+wilton_dist/devel /opt/wilton
+wilton_dist/examples /opt/wilton
+wilton_dist/lib /opt/wilton
+std.wlib /opt/wilton

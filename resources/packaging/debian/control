@@ -1,0 +1,38 @@
+Source: wilton
+Section: devel
+Priority: optional
+Maintainer: Wilton Runtime <alex.staticlibs+wilton@gmail.com>
+Build-Depends: debhelper-compat (= 12)
+Build-Depends: cmake
+Build-Depends: pkg-config
+Build-Depends: zip
+Build-Depends: openjdk-8-jdk-headless
+Build-Depends: zlib1g-dev
+Build-Depends: libjansson-dev
+Build-Depends: liblog4cplus-dev
+Build-Depends: libssl-dev
+Build-Depends: libcurl4-openssl-dev
+Build-Depends: libasio-dev
+Build-Depends: libpopt-dev
+Build-Depends: libsqlite3-dev
+Build-Depends: libpq-dev 
+Build-Depends: libsoci-dv
+Build-Depends: libpng-dev
+Build-Depends: libhpdf-dev
+Build-Depends: libglib2.0-dev
+Build-Depends: libjavascriptcoregtk-4.0-dev
+Build-Depends: libgtk-3-dev
+Build-Depends: libwebkit2gtk-4.0-dev
+Build-Depends: libssh2-1-dev
+Build-Depends: libgit2-dev
+Build-Depends: libsystemd-dev
+Build-Depends: libjpeg-turbo8-dev &&
+
+Standards-Version: 4.4.1
+Homepage: https://github.com/wiltonruntime
+
+Package: wilton
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Multi-threaded JavaScript runtime
+	Multi-threaded JavaScript runtime environment with batteries included
