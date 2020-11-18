@@ -4,15 +4,10 @@
 %:
 	dh $@
 
-#override_dh_auto_configure:
-#	dh_auto_configure -- #	-DCMAKE_LIBRARY_PATH=$(DEB_HOST_MULTIARCH)
+override_dh_auto_configure:
+	mkdir build
+	cd build && JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64 cmake .. -DWILTON_BUILD_FLAVOUR=ubuntu
 
 override_dh_auto_build:
-	dexport JAVA_HOME=$(readlink -f /usr/bin/javac | sed "s:/bin/javac::")
-	cd wilton
-	mkdir build
-	cd build
-	cmake .. -DWILTON_BUILD_FLAVOUR=focal
-	make -j 7
-	make dist_unversioned
-	mv wilton_dist ../..
+	cd build && make -j 7
+	cd build && JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64 make dist_unversioned

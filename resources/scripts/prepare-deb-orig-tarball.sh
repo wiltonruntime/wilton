@@ -16,7 +16,7 @@
 
 set -e
 
-if [ ! -d "$1" ] ; then
+if [ -z "$1" ] ; then
     echo "Version number not specified"
     exit 1
 fi
@@ -59,11 +59,6 @@ git submodule update --quiet --init deps/staticlib_utils
 git submodule update --quiet --init deps/staticlib_websocket
 # jni
 git submodule update --quiet --init jni
-# js
-rm -rf js
-git clone --quiet --branch $VERSION https://github.com/wiltonruntime/js-libs-ci-monorepo.git js_mono
-./resources/builder/builder bundle-stdlib-modules js_mono js
-rm -rf js_mono
 # engines
 git submodule update --quiet --init engines/wilton_duktape
 git submodule update --quiet --init engines/wilton_jsc
@@ -97,6 +92,15 @@ git submodule update --quiet --init modules/wilton_zip
 # tools
 git submodule update --quiet --init tools/maven
 git submodule update --quiet --init tools/mvnrepo
+
+# js
+git submodule update --quiet --init js/wilton-requirejs
+git clone --quiet --branch $VERSION https://github.com/wiltonruntime/js-libs-ci-monorepo.git js_mono
+./resources/builder/builder bundle-stdlib-modules js_mono js_filter
+cp -a js_mono/examples js_filter/
+rm -rf js_mono
+rm -rf js
+mv js_filter js
 
 # cleanup
 rm -rf .git
