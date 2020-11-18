@@ -3,7 +3,7 @@ Section: devel
 Priority: optional
 Maintainer: Wilton Runtime <alex.staticlibs+wilton@gmail.com>
 Build-Depends:
- debhelper-compat (= 12),
+ debhelper-compat (= 11),
  cmake,
  pkg-config,
  zip,
