@@ -6,8 +6,8 @@
 
 override_dh_auto_configure:
 	mkdir build
-	cd build && JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64 cmake .. -DWILTON_BUILD_FLAVOUR=ubuntu
+	cd build && JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64 cmake .. -DWILTON_BUILD_FLAVOUR=ubuntu -DWILTON_RELEASE=v202011181
 
 override_dh_auto_build:
-	cd build && make -j 7
+	cd build && make -j 4
 	cd build && JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64 make dist_unversioned

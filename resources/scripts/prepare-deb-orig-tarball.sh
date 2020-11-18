@@ -104,11 +104,7 @@ mv js_filter js
 
 # cleanup
 rm -rf .git
+cd ..
 
 # orig tarball
-cd ..
-tar cJf wilton_$VERSION.orig.tar.xz wilton-$VERSION
-
-# deb scripts
-cd wilton-$VERSION
-cp -a ./resources/packages/debian .
+echo tar cJf wilton_$VERSION.orig.tar.xz wilton-$VERSION
