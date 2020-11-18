@@ -23,7 +23,7 @@ fi
 
 VERSION=$1
 
-git clone https://github.com/wiltonruntime/wilton.git wilton-$VERSION
+git clone --branch v$VERSION https://github.com/wiltonruntime/wilton.git wilton-$VERSION
 cd wilton-$VERSION
 
 # core
@@ -95,7 +95,7 @@ git submodule update --quiet --init tools/mvnrepo
 
 # js
 git submodule update --quiet --init js/wilton-requirejs
-git clone --quiet --branch $VERSION https://github.com/wiltonruntime/js-libs-ci-monorepo.git js_mono
+git clone --quiet --branch v$VERSION https://github.com/wiltonruntime/js-libs-ci-monorepo.git js_mono
 ./resources/builder/builder bundle-stdlib-modules js_mono js_filter
 cp -a js_mono/examples js_filter/
 rm -rf js_mono
@@ -108,3 +108,7 @@ rm -rf .git
 # orig tarball
 cd ..
 tar cJf wilton_$VERSION.orig.tar.xz wilton-$VERSION
+
+# deb scripts
+cd wilton-$VERSION
+cp -a ./resources/packages/debian .
