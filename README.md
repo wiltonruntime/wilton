@@ -42,6 +42,13 @@ This project is released under the [Apache License 2.0](http://www.apache.org/li
 Changelog
 ---------
 
+**2020-11-18**
+
+ * `v202011182`
+ * JS libs refresh
+ * ES modules support for all bundled libs
+ * CentOS 8 and Ubuntu packaging
+
 **2020-10-28**
 
  * `v202010281`
