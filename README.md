@@ -6,16 +6,40 @@ Wilton [work in progress]
 [![circle](https://circleci.com/gh/wiltonruntime/wilton.svg?style=svg)](https://circleci.com/gh/wiltonruntime/wilton)
 [![cirrus](https://api.cirrus-ci.com/github/wiltonruntime/wilton.svg)](https://cirrus-ci.com/github/wiltonruntime/wilton)
 
-TODO: description
+Multi-threaded JavaScript runtime environment with batteries included.
 
 Link to the [JavaScript API documentation](https://wiltonruntime.github.io/wilton/docs/html/namespaces.html).
 
+Install
+-------
+
+Pre-built binaries for Windows, macOS, Android and Raspberry Pi:
+
+https://github.com/wiltonruntime/wilton/releases
+
+COPR repository for CentOS 8, CentOS 7 and Fedora:
+
+    sudo yum update
+    sudo yum install dnf-plugins-core # on CentOS 8
+    sudo yum install yum-plugin-copr # on CentOS 7
+    sudo yum copr enable wilton/wilton
+    sudo yum install epel-release
+    sudo yum update
+    sudo yum install wilton
+    wilton -v
+
+Ubuntu PPA repository for 20.04 Focal Fossa and 18.04 Bionic Beaver:
+
+    sudo apt update
+    sudo apt upgrade
+    sudo apt install software-properties-common
+    sudo add-apt-repository ppa:wiltonruntime/wilton
+    sudo apt update
+    sudo apt install wilton
+    wilton -v
+
 How to build
 ------------
-
-_Note: see [releases](https://github.com/wiltonruntime/wilton/releases) for pre-built binaries_
-
-_Note: see [repo](https://copr.fedorainfracloud.org/coprs/wilton/wilton/) for CentOS and Fedora RPM packages_
 
 Get sources and build tools:
 

@@ -23,58 +23,57 @@ Group:          Development/Languages
 License:        ASL 2.0
 URL:            https://github.com/wiltonruntime/wilton
 
+BuildRequires:  cmake
 BuildRequires:  gcc
 BuildRequires:  gcc-c++
-
 BuildRequires:  git
-BuildRequires:  make
-BuildRequires:  cmake
-BuildRequires:  pkgconfig
-BuildRequires:  zip
 BuildRequires:  java-1.8.0-openjdk-devel
+BuildRequires:  make
+BuildRequires:  pkgconfig
 BuildRequires:  valgrind
+BuildRequires:  zip
 
-BuildRequires:  zlib-devel
-BuildRequires:  jansson-devel
-BuildRequires:  log4cplus-devel
-BuildRequires:  openssl-devel
 BuildRequires:  asio-devel
-BuildRequires:  popt-devel
-BuildRequires:  sqlite-devel
-BuildRequires:  postgresql-devel
-BuildRequires:  soci-devel
-BuildRequires:  soci-sqlite3-devel
-BuildRequires:  soci-postgresql-devel
-BuildRequires:  libjpeg-turbo-devel
-BuildRequires:  libpng-devel
-BuildRequires:  systemd-devel
-BuildRequires:  webkitgtk4-jsc-devel
-BuildRequires:  libgit2-devel
-BuildRequires:  systemd-devel
 BuildRequires:  curl-devel
-BuildRequires:  libharu-devel
 BuildRequires:  glib2-devel
 BuildRequires:  gtk3-devel
+BuildRequires:  jansson-devel
+BuildRequires:  libgit2-devel
+BuildRequires:  libharu-devel
+BuildRequires:  libjpeg-turbo-devel
+BuildRequires:  libpng-devel
+BuildRequires:  log4cplus-devel
+BuildRequires:  openssl-devel
+BuildRequires:  popt-devel
+BuildRequires:  postgresql-devel
+BuildRequires:  soci-devel
+BuildRequires:  soci-postgresql-devel
+BuildRequires:  soci-sqlite3-devel
+BuildRequires:  sqlite-devel
+BuildRequires:  systemd-devel
+BuildRequires:  systemd-devel
 BuildRequires:  webkitgtk4-devel
+BuildRequires:  webkitgtk4-jsc-devel
+BuildRequires:  zlib-devel
 
 %description
 Multi-threaded JavaScript runtime environment with batteries included
 
 %package devel
 Summary:        Development files
-Requires:	wilton
+Requires:       wilton
 %description devel
 Wilton development files
 
 %package jsc
 Summary:        JavaScriptCore JIT engine
-Requires:	wilton
+Requires:       wilton
 %description jsc
 JavaScriptCore JIT engine for Wilton runtime
 
 %package webview
 Summary:        WebView based on WebKitGTK
-Requires:	wilton
+Requires:       wilton
 %description webview
 WebView based on WebKitGTK for Wilton runtime
 
