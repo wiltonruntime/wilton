@@ -13,7 +13,7 @@ Link to the [JavaScript API documentation](https://wiltonruntime.github.io/wilto
 Install
 -------
 
-Pre-built binaries for Windows, macOS, Android and Raspberry Pi - [downloads](https://github.com/wiltonruntime/wilton/releases).
+[Pre-built binaries](https://github.com/wiltonruntime/wilton/releases) for Windows, macOS, Android and Raspberry Pi.
 
 COPR repository for CentOS 8, CentOS 7 and Fedora:
 
