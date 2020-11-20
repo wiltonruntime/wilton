@@ -2,8 +2,9 @@ Source: wilton
 Section: devel
 Priority: optional
 Maintainer: Wilton Runtime <alex.staticlibs+wilton@gmail.com>
+# libcurl4-openssl-dev,
 Build-Depends:
- debhelper-compat (= 11),
+ debhelper,
  cmake,
  pkg-config,
  zip,
@@ -12,7 +13,6 @@ Build-Depends:
  libjansson-dev,
  liblog4cplus-dev,
  libssl-dev,
- libcurl4-openssl-dev,
  libasio-dev,
  libpopt-dev,
  libsqlite3-dev,
