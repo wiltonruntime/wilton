@@ -571,3 +571,6 @@
 [submodule "js/sanctuary"]
 	path = js/sanctuary
 	url = https://github.com/wiltonruntime/sanctuary.git
+[submodule "modules/wilton_embed"]
+	path = modules/wilton_embed
+	url = https://github.com/wiltonruntime/wilton_embed.git

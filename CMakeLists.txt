@@ -180,6 +180,7 @@ if ( STATICLIB_TOOLCHAIN MATCHES "android_.+" )
     add_custom_target ( wilton_jsc )
     # modules
     add_custom_target ( wilton_cli )
+    add_custom_target ( wilton_embed )
     add_custom_target ( wilton_kiosk )
     add_custom_target ( wilton_process )
     add_custom_target ( wilton_serial )
@@ -189,6 +190,7 @@ if ( STATICLIB_TOOLCHAIN MATCHES "android_.+" )
 endif ( )
 if ( STATICLIB_TOOLCHAIN MATCHES "(windows|linux|macosx)_.+" )
     staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_cli )
+    staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_embed )
     staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_process )
     staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_signal )
 endif ( )
@@ -239,6 +241,7 @@ add_custom_target ( nativelibs DEPENDS
         wilton_rhino
         # modules
         wilton_db
+        wilton_embed
         wilton_channel
         wilton_cli
         wilton_cron
@@ -338,6 +341,10 @@ add_custom_target ( debuginfo
         # db
         COMMAND ${CMAKE_COMMAND} -E copy
                 ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_db${STATICLIB_DEBUGINFO_SHARED_SUFFIX}
+                debuginfo/
+        # embed 
+        COMMAND ${CMAKE_COMMAND} -E copy
+                ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_embed${STATICLIB_DEBUGINFO_SHARED_SUFFIX}
                 debuginfo/
         # fs
         COMMAND ${CMAKE_COMMAND} -E copy
@@ -672,6 +679,13 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "(windows|linux|macosx)_.+" )
             COMMAND ${CMAKE_COMMAND} -E copy
                     ${WILTON_DIR}/modules/wilton_db/include/wilton/wilton_db.h
                     wilton_${WILTON_VERSION}/devel/include/wilton/wilton_db.h
+            # embed
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_embed${CMAKE_SHARED_LIBRARY_SUFFIX}
+                    wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_embed${CMAKE_SHARED_LIBRARY_SUFFIX}
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    ${WILTON_DIR}/modules/wilton_embed/include/wilton/wilton_embed.h
+                    wilton_${WILTON_VERSION}/devel/include/wilton/wilton_embed.h
             # fs
             COMMAND ${CMAKE_COMMAND} -E copy
                     ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_fs${CMAKE_SHARED_LIBRARY_SUFFIX}
