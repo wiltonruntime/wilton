@@ -48,3 +48,12 @@
     fun:_dl_init
     ...
 }
+
+{
+    wilton_dyload_fixup
+    Memcheck:Leak
+    fun:malloc
+    ...
+    fun:_dl_fixup
+    ...
+}
