@@ -182,6 +182,7 @@ if ( STATICLIB_TOOLCHAIN MATCHES "android_.+" )
     add_custom_target ( wilton_cli )
     add_custom_target ( wilton_embed )
     add_custom_target ( wilton_kiosk )
+    add_custom_target ( wilton_nginx )
     add_custom_target ( wilton_process )
     add_custom_target ( wilton_serial )
     add_custom_target ( wilton_signal )
@@ -191,6 +192,7 @@ endif ( )
 if ( STATICLIB_TOOLCHAIN MATCHES "(windows|linux|macosx)_.+" )
     staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_cli )
     staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_embed )
+    staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_nginx )
     staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_process )
     staticlib_add_subdirectory ( ${WILTON_DIR}/modules/wilton_signal )
 endif ( )
@@ -255,6 +257,7 @@ add_custom_target ( nativelibs DEPENDS
         wilton_loader
         wilton_logging
         wilton_net
+        wilton_nginx
         wilton_mustache
         wilton_pdf
         wilton_process
@@ -589,6 +592,10 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "(windows|linux|macosx)_.+" )
             COMMAND ${CMAKE_COMMAND} -E copy
                     ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${CMAKE_EXECUTABLE_PREFIX}wilton_cli${STATICLIB_DEBUGINFO_EXE_SUFFIX}
                     debuginfo/
+            # nginx
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_nginx${STATICLIB_DEBUGINFO_SHARED_SUFFIX}
+                    debuginfo/
             # process
             COMMAND ${CMAKE_COMMAND} -E copy
                     ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_process${STATICLIB_DEBUGINFO_SHARED_SUFFIX}
@@ -598,7 +605,7 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "(windows|linux|macosx)_.+" )
                     ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_signal${STATICLIB_DEBUGINFO_SHARED_SUFFIX}
                     debuginfo/
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-            DEPENDS wilton_cli wilton_process wilton_signal )
+            DEPENDS wilton_cli wilton_nginx wilton_process wilton_signal )
     add_dependencies ( debuginfo debuginfo_launcher )
 
     add_custom_command ( OUTPUT ${WILTON_DIR}/jni/target/wilton-android.jar
@@ -749,6 +756,10 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "(windows|linux|macosx)_.+" )
             COMMAND ${CMAKE_COMMAND} -E copy
                     ${WILTON_DIR}/modules/wilton_net/include/wilton/wilton_net.h
                     wilton_${WILTON_VERSION}/devel/include/wilton/wilton_net.h
+            # nginx
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_nginx${CMAKE_SHARED_LIBRARY_SUFFIX}
+                    wilton_${WILTON_VERSION}/bin/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_nginx${CMAKE_SHARED_LIBRARY_SUFFIX}
             # pdf
             COMMAND ${CMAKE_COMMAND} -E copy
                     ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${CMAKE_SHARED_LIBRARY_PREFIX}wilton_pdf${CMAKE_SHARED_LIBRARY_SUFFIX}
@@ -952,6 +963,10 @@ if ( STATICLIB_TOOLCHAIN MATCHES "windows_.+" )
             COMMAND ${CMAKE_COMMAND} -E copy
                     ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/wilton_net${CMAKE_STATIC_LIBRARY_SUFFIX}
                     wilton_${WILTON_VERSION}/devel/import/wilton_net${CMAKE_STATIC_LIBRARY_SUFFIX}
+            # nginx
+            COMMAND ${CMAKE_COMMAND} -E copy
+                    ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/wilton_nginx${CMAKE_STATIC_LIBRARY_SUFFIX}
+                    wilton_${WILTON_VERSION}/devel/import/wilton_nginx${CMAKE_STATIC_LIBRARY_SUFFIX}
             # serial
             COMMAND ${CMAKE_COMMAND} -E copy
                     ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/wilton_serial${CMAKE_STATIC_LIBRARY_SUFFIX}
