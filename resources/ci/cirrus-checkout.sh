@@ -87,6 +87,7 @@ git submodule update --quiet --init modules/wilton_cron
 git submodule update --quiet --init modules/wilton_crypto
 git submodule update --quiet --init modules/wilton_db
 git submodule update --quiet --init modules/wilton_fs
+git submodule update --quiet --init modules/wilton_embed
 git submodule update --quiet --init modules/wilton_ghc
 git submodule update --quiet --init modules/wilton_git
 git submodule update --quiet --init modules/wilton_http
@@ -96,6 +97,7 @@ git submodule update --quiet --init modules/wilton_loader
 git submodule update --quiet --init modules/wilton_logging
 git submodule update --quiet --init modules/wilton_mustache
 git submodule update --quiet --init modules/wilton_net
+git submodule update --quiet --init modules/wilton_nginx
 git submodule update --quiet --init modules/wilton_pdf
 git submodule update --quiet --init modules/wilton_process
 git submodule update --quiet --init modules/wilton_serial

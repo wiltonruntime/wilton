@@ -96,6 +96,7 @@ git submodule update --quiet --init modules/wilton_cli || exit /b 1
 git submodule update --quiet --init modules/wilton_cron || exit /b 1
 git submodule update --quiet --init modules/wilton_crypto || exit /b 1
 git submodule update --quiet --init modules/wilton_db || exit /b 1
+git submodule update --quiet --init modules/wilton_embed || exit /b 1
 git submodule update --quiet --init modules/wilton_fs || exit /b 1
 git submodule update --quiet --init modules/wilton_ghc || exit /b 1
 git submodule update --quiet --init modules/wilton_git || exit /b 1
@@ -105,6 +106,7 @@ git submodule update --quiet --init modules/wilton_loader || exit /b 1
 git submodule update --quiet --init modules/wilton_logging || exit /b 1
 git submodule update --quiet --init modules/wilton_mustache || exit /b 1
 git submodule update --quiet --init modules/wilton_net || exit /b 1
+git submodule update --quiet --init modules/wilton_nginx || exit /b 1
 git submodule update --quiet --init modules/wilton_pdf || exit /b 1
 git submodule update --quiet --init modules/wilton_process || exit /b 1
 git submodule update --quiet --init modules/wilton_serial || exit /b 1
