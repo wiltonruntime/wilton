@@ -17,14 +17,6 @@
 set -e
 set -x
 
-if [ "xel7" = "x${WILTON_BUILD_FLAVOUR}" ] ; then
-    yum update -y
-fi
-
-if [ "xel8" = "x${WILTON_BUILD_FLAVOUR}" ] ; then
-    dnf update -y
-fi
-
 # core
 git submodule update --quiet --init core
 # deps
