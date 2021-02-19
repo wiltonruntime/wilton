@@ -577,3 +577,6 @@
 [submodule "modules/wilton_nginx"]
 	path = modules/wilton_nginx
 	url = https://github.com/wiltonruntime/wilton_nginx.git
+[submodule "js/json-schema"]
+	path = js/json-schema
+	url = https://github.com/wiltonruntime/json-schema
