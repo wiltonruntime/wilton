@@ -16,13 +16,14 @@ Multiple JavaScript engines are supported (depending on OS), including [QuickJS]
 and [Rhino](https://github.com/mozilla/rhino).
 
 Besides the runtime JS API (`wilton` package), a number of
-[popular JS libraries](https://github.com/wiltonruntime/wilton/tree/master/js) are also included
-with distribution in `std.wlib` bundle. All these libraries are tested on all JS engines on all platforms.
+[popular JS libraries](https://github.com/wiltonruntime/wilton/tree/master/js) is also included
+with distribution inside `std.wlib` bundle. All these libraries are tested on all JS engines on all platforms.
 
-[RequireJS](https://requirejs.org/) module loader is used as a module system on all JS engines. [ES modules]
+[RequireJS](https://requirejs.org/) module loader is used as a module system on all JS engines.
+[ES modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules)
 also can be used on JS engines, that support modules (currently only on QuickJS).
 
-Multiple threads can be used with each thread running its own JS engine instance. Golang-like
+Multiple threads can be used, with each thread running its own JS engine instance. Golang-like
 Channels are used for inter-thread communication.
 
 Link to the [JavaScript API documentation](https://wiltonruntime.github.io/wilton/docs/html/namespaces.html).
