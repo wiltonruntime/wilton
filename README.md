@@ -1,4 +1,4 @@
-Wilton [work in progress]
+Wilton JavaScript runtime
 =========================
 
 [![travis](https://travis-ci.org/wiltonruntime/wilton.svg?branch=master)](https://travis-ci.org/wiltonruntime/wilton)
@@ -6,7 +6,24 @@ Wilton [work in progress]
 [![circle](https://circleci.com/gh/wiltonruntime/wilton.svg?style=svg)](https://circleci.com/gh/wiltonruntime/wilton)
 [![cirrus](https://api.cirrus-ci.com/github/wiltonruntime/wilton.svg)](https://cirrus-ci.com/github/wiltonruntime/wilton)
 
+_Note: ideas behind this project are similar to the [Deno project](https://github.com/denoland),
+that may be a better choice as a general use JS runtime_
+
 Multi-threaded JavaScript runtime environment with batteries included.
+
+Multiple JavaScript engines are supported (depending on OS), including [QuickJS](https://bellard.org/quickjs/),
+[JavaScriptCore](https://trac.webkit.org/wiki/JavaScriptCore), [Duktape](https://duktape.org/)
+and [Rhino](https://github.com/mozilla/rhino).
+
+Besides the runtime JS API (`wilton` package), a number of
+[popular JS libraries](https://github.com/wiltonruntime/wilton/tree/master/js) are also included
+with distribution in `std.wlib` bundle. All these libraries are tested on all JS engines on all platforms.
+
+[RequireJS](https://requirejs.org/) module loader is used as a module system on all JS engines. [ES modules]
+also can be used on JS engines, that support modules (currently only on QuickJS).
+
+Multiple threads can be used with each thread running its own JS engine instance. Golang-like
+Channels are used for inter-thread communication.
 
 Link to the [JavaScript API documentation](https://wiltonruntime.github.io/wilton/docs/html/namespaces.html).
 
@@ -60,6 +77,15 @@ This project is released under the [Apache License 2.0](http://www.apache.org/li
 
 Changelog
 ---------
+
+**2021-02-26**
+
+ * `v202102261`
+ * `wilton_embed` module for embedding runtime into other apps
+ * Nginx integration
+ * HTTP requests queue API
+ * OS signals handling rework
+ * `json-schema` JS module added
 
 **2020-11-18**
 

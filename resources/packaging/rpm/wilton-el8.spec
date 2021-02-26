@@ -16,7 +16,7 @@
 # https://copr.fedorainfracloud.org/coprs/wilton/wilton/
 
 Name:           wilton
-Version:        v202011181
+Version:        v202102261
 Release:        1%{?dist}
 Summary:        JavaScript runtime
 Group:          Development/Languages
