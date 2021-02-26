@@ -5,6 +5,7 @@ var searchData=
   ['persist',['persist',['../namespaceKVStore.html#a3d1999ddd46c81c09a6cacd0cc307eab',1,'KVStore']]],
   ['pgconnection',['PGConnection',['../namespacePGConnection.html',1,'PGConnection'],['../namespacePGConnection.html#a31a1aacbc4e55f2199e1a9adfefaf917',1,'PGConnection::PGConnection()']]],
   ['poll',['poll',['../namespaceChannel.html#af3f31c5cce070639fe7b59e3597869bd',1,'Channel']]],
+  ['pollqueue',['pollQueue',['../namespacehttpClient.html#a5d0ebe8a2a7e2f6163e167bea3b396ea',1,'httpClient']]],
   ['prettify',['prettify',['../namespacehex.html#a1b200de92bf51458771ca63daa72c2be',1,'hex']]],
   ['process',['process',['../namespaceprocess.html',1,'']]],
   ['promisifyall',['promisifyAll',['../namespaceutils.html#a82a197e20f9fa0686b84e4f443996729',1,'utils']]],

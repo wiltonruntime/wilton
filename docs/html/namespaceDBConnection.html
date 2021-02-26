@@ -23,7 +23,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">wilton.js
-   &#160;<span id="projectnumber">v202011182</span>
+   &#160;<span id="projectnumber">v202102261</span>
    </div>
   </td>
  </tr>
@@ -427,7 +427,7 @@ Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 <p>Parses a file with SQL queries as <code>query_name: sql</code> object.</p>
-<p>Each query must start with <code>/** myQuery STAR/</code> header.</p>
+<p>Each query must start with <code>/(STAR)(STAR) myQuery (STAR)/</code> header.</p>
 <p>Lines with comments are preserved, empty lines are ignored.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -472,7 +472,7 @@ Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 <p>Parses a module with SQL queries as <code>query_name: sql</code> object.</p>
-<p>Each query must start with <code>/** myQuery STAR/</code> header.</p>
+<p>Each query must start with <code>/(STAR)(STAR) myQuery (STAR)/</code> header.</p>
 <p>Lines with comments are preserved, empty lines are ignored.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -557,7 +557,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Executes <code>select</code> query and returns its result as an object.</p>
-<p>Query must return exactly one row, otherwise <code>Error</code> will be thrown.</p>
+<p>Query must return no more than one row, <code>Error</code> will be thrown, if more rows returned.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">sql</td><td><code>String</code> SQL query </td></tr>
@@ -566,14 +566,14 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd><code>Object</code> object converted from the single row returned </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd><code>Object</code> object converted from the single row returned, or <code>null</code> if no rows returned </dd></dl>
 
 </div>
 </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Nov 20 2020 22:01:05 for wilton.js by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Feb 26 2021 20:52:44 for wilton.js by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>

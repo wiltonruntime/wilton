@@ -23,7 +23,7 @@
   <td id="projectlogo"><img alt="Logo" src="logo.png"/></td>
   <td style="padding-left: 0.5em;">
    <div id="projectname">wilton.js
-   &#160;<span id="projectnumber">v202011182</span>
+   &#160;<span id="projectnumber">v202102261</span>
    </div>
   </td>
  </tr>
@@ -92,6 +92,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2><a name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:a849f18b22573d488baaaec10a897d8a3"><td class="memItemLeft" align="right" valign="top">Undefined&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehttpClient.html#a849f18b22573d488baaaec10a897d8a3">closeQueue</a> (Function|Undefined callback)</td></tr>
+<tr class="memdesc:a849f18b22573d488baaaec10a897d8a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Close requests queue for this thread.  <a href="#a849f18b22573d488baaaec10a897d8a3"></a><br/></td></tr>
+<tr class="memitem:afd70422ed64cac4ab089c46ce99fd364"><td class="memItemLeft" align="right" valign="top">Object&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehttpClient.html#afd70422ed64cac4ab089c46ce99fd364">enqueueRequest</a> (String url, Object options, Function|Undefined callback)</td></tr>
+<tr class="memdesc:afd70422ed64cac4ab089c46ce99fd364"><td class="mdescLeft">&#160;</td><td class="mdescRight">Submit request to queue.  <a href="#afd70422ed64cac4ab089c46ce99fd364"></a><br/></td></tr>
+<tr class="memitem:af6928d4ebee81d81d27e3a20b106acd6"><td class="memItemLeft" align="right" valign="top">Undefined&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehttpClient.html#af6928d4ebee81d81d27e3a20b106acd6">initQueue</a> (Object options, Function|Undefined callback)</td></tr>
+<tr class="memdesc:af6928d4ebee81d81d27e3a20b106acd6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize requests queue for this thread.  <a href="#af6928d4ebee81d81d27e3a20b106acd6"></a><br/></td></tr>
+<tr class="memitem:a5d0ebe8a2a7e2f6163e167bea3b396ea"><td class="memItemLeft" align="right" valign="top">Array&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehttpClient.html#a5d0ebe8a2a7e2f6163e167bea3b396ea">pollQueue</a> (Object options, Function|Undefined callback)</td></tr>
+<tr class="memdesc:a5d0ebe8a2a7e2f6163e167bea3b396ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Poll requests queue.  <a href="#a5d0ebe8a2a7e2f6163e167bea3b396ea"></a><br/></td></tr>
 <tr class="memitem:a5f77a8a2e7d12423cc8a789184a37413"><td class="memItemLeft" align="right" valign="top">Object&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehttpClient.html#a5f77a8a2e7d12423cc8a789184a37413">sendFile</a> (String url, Object options, Function|Undefined callback)</td></tr>
 <tr class="memdesc:a5f77a8a2e7d12423cc8a789184a37413"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send specified file to server.  <a href="#a5f77a8a2e7d12423cc8a789184a37413"></a><br/></td></tr>
 <tr class="memitem:ac82f88752875ab16dfc95db6d26c6122"><td class="memItemLeft" align="right" valign="top">Object&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacehttpClient.html#ac82f88752875ab16dfc95db6d26c6122">sendFileByParts</a> (String url, Object options, Function|Undefined callback)</td></tr>
@@ -121,6 +129,151 @@ Functions</h2></td></tr>
 <div class="line">    filePath: <span class="stringliteral">&quot;path/to/file.txt&quot;</span></div>
 <div class="line">});</div>
 </div><!-- fragment --> </div><h2>Function Documentation</h2>
+<a class="anchor" id="a849f18b22573d488baaaec10a897d8a3"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Undefined httpClient::closeQueue </td>
+          <td>(</td>
+          <td class="paramtype">Function|Undefined&#160;</td>
+          <td class="paramname"><em>callback</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Closes requests queue and de-allocates system resources used. If not called - resources cleanup will be done automatically on shutdown.</p>
+<p>Must be called from the same thread queue was initialized from.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">callback</td><td><code>Function|Undefined</code> callback to receive result or error </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><code>Undefined</code> </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="afd70422ed64cac4ab089c46ce99fd364"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Object httpClient::enqueueRequest </td>
+          <td>(</td>
+          <td class="paramtype">String&#160;</td>
+          <td class="paramname"><em>url</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Object&#160;</td>
+          <td class="paramname"><em>options</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Function|Undefined&#160;</td>
+          <td class="paramname"><em>callback</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Submits specified request to the queue for execution. <code>initQueue</code> must be called in the same thread before using this function.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">url</td><td><code>String</code> URL of the HTTP server </td></tr>
+    <tr><td class="paramname">options</td><td><code>Object</code> configuration object, see supported options in <code><a class="el" href="namespacehttpClient.html#a33cb20df4470da7e266e580d082064e8" title="Send HTTP request to server.">sendRequest()</a></code> function doc </td></tr>
+    <tr><td class="paramname">callback</td><td><code>Function|Undefined</code> callback to receive result or error </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><code>Object</code> enqueued request, <code>requestId</code> is unique for the given queue </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="af6928d4ebee81d81d27e3a20b106acd6"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Undefined httpClient::initQueue </td>
+          <td>(</td>
+          <td class="paramtype">Object&#160;</td>
+          <td class="paramname"><em>options</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Function|Undefined&#160;</td>
+          <td class="paramname"><em>callback</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Initializes HTTP requests queue allowing to use <code>enqueueRequest</code> and <code>pollQueue</code> operations. Queue is bound to the thread it is initialized from and can be used only from it.</p>
+<p><code>closeQueue</code> must be called from the same thread to de-allocate resources, alternatively resources cleanup will be done automatically on shutdown.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">options</td><td><code>Object</code> configuration object, see possible options below. </td></tr>
+    <tr><td class="paramname">callback</td><td><code>Function|Undefined</code> callback to receive result or error </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><code>Undefined</code></dd></dl>
+<p><b>options</b></p>
+<ul>
+<li><b>fdsetTimeoutMillis</b> <code>Number</code> max allowed number of milliseconds to wait for activity on one of running requests, default value: <code>100</code></li>
+<li><b>maxHostConnections</b> <code>Number</code> max number of connections to a single host, default value: <code>0 (unlimited)</code></li>
+<li><b>maxTotalConnections</b> <code>Number</code> max number of simultaneously open connections, default value: <code>0 (unlimited)</code></li>
+<li><b>maxconnects</b> <code>Number</code> max number of simultaneously open connections may be kept in connection cache after completed use, default value: 4 times the number of simultaneously run requests </li>
+</ul>
+
+</div>
+</div>
+<a class="anchor" id="a5d0ebe8a2a7e2f6163e167bea3b396ea"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Array httpClient::pollQueue </td>
+          <td>(</td>
+          <td class="paramtype">Object&#160;</td>
+          <td class="paramname"><em>options</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Function|Undefined&#160;</td>
+          <td class="paramname"><em>callback</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Polls requests queue allowing enqued requests to perform the work. <code>initQueue</code> must be called in the same thread before using this function.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">options</td><td><code>Object</code> currently not supported </td></tr>
+    <tr><td class="paramname">callback</td><td><code>Function|Undefined</code> callback to receive result or error </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><code>Array</code> list of the responses for requests, that finished execution, see details on the structure of each response in <code><a class="el" href="namespacehttpClient.html#a33cb20df4470da7e266e580d082064e8" title="Send HTTP request to server.">sendRequest()</a></code> function </dd></dl>
+
+</div>
+</div>
 <a class="anchor" id="a5f77a8a2e7d12423cc8a789184a37413"></a>
 <div class="memitem">
 <div class="memproto">
@@ -155,12 +308,17 @@ Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">url</td><td><code>String</code> URL of the HTTP server </td></tr>
-    <tr><td class="paramname">options</td><td><code>Object</code> configuration object, see details in <code><a class="el" href="namespacehttpClient.html#a33cb20df4470da7e266e580d082064e8" title="Send HTTP request to server.">sendRequest()</a></code> function </td></tr>
+    <tr><td class="paramname">options</td><td><code>Object</code> configuration object, see file-specific options below; see other supported options in <code><a class="el" href="namespacehttpClient.html#a33cb20df4470da7e266e580d082064e8" title="Send HTTP request to server.">sendRequest()</a></code> function doc </td></tr>
     <tr><td class="paramname">callback</td><td><code>Function|Undefined</code> callback to receive result or error </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd><code>Object</code> response object, see details in <code><a class="el" href="namespacehttpClient.html#a33cb20df4470da7e266e580d082064e8" title="Send HTTP request to server.">sendRequest()</a></code> function </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd><code>Object</code> response object, see details in <code><a class="el" href="namespacehttpClient.html#a33cb20df4470da7e266e580d082064e8" title="Send HTTP request to server.">sendRequest()</a></code> function</dd></dl>
+<p><b>Options</b></p>
+<ul>
+<li><b>filePath</b> <code>String</code> path to file to send</li>
+<li><b>remove</b> <code>Boolean|Undefined</code> whether to delete the file after sending, default value: <code>false</code> </li>
+</ul>
 
 </div>
 </div>
@@ -258,7 +416,6 @@ Functions</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd><code>Object</code> response object with the following fields:</dd></dl>
 <ul>
 <li><b>connectionSuccess</b> <code>Boolean</code> <code>true</code> if the connection to server was successful, <code>false</code> otherwise</li>
-<li><b>dataHex</b> <code>String</code> response data in hexadecimal encoding, use <code>wilton/hex</code>to decode it; response may contain code sequences that are not valid for <code>UTF-8</code> encoding</li>
 <li><b>data</b> <code>String</code> data decoded as a <code>String</code> with invalid <code>UTF-8</code> code sequences replaced with <code>0xFFFD</code></li>
 <li><b>json</b> <code>Function</code> parses the contents of <code>data</code> field as a JSON, resulting JSON object is cached for this response instance - the same object is returned for the following <code>json()</code> invocations</li>
 <li><b>headers</b> <code>Object</code> response headers in <code>"Header-Name": "value"</code> format</li>
@@ -292,6 +449,7 @@ Functions</h2></td></tr>
 <li><b>abortOnResponseError</b> <code>Boolean|Undefined</code> whether to throw an <code>Error</code>, if response status code <code>&gt;=400</code> is returned, default value: <code>true</code></li>
 <li><b>maxNumberOfResponseHeaders</b> <code>Number|Undefined</code> maximum number of response headers to receive, subsequent headers will be ignored, default value: <code>128</code></li>
 <li><b>consumerThreadWakeupTimeoutMillis</b> <code>Number|Undefined</code> consumer threads wakeup timeout, in milliseconds, default value: <code>100</code></li>
+<li><b>requestDataFilePath</b> <code>String|Undefined</code> path to file to send, only supported with <code>enqueueRequest</code></li>
 <li><b>responseDataFilePath</b> <code>String|Undefined</code> path to file where to write the response body</li>
 <li><b>forceHttp10</b> <code>Boolean|Undefined</code> whether to use HTTP <code>1.0</code> protocol closing the connection after the request, default value: <code>false</code></li>
 <li><b>noprogress</b> <code>Boolean|Undefined</code> whether to swith off the progress meter, default value <code>true</code></li>
@@ -322,9 +480,10 @@ Functions</h2></td></tr>
 <li><b>sslVerifystatus</b> <code>Boolean|Undefined</code> whether to verify the peer certificate's status, default value: <code>false</code></li>
 <li><b>cainfoFilename</b> <code>String|Undefined</code> path to Certificate Authority (CA) bundle</li>
 <li><b>crlfileFilename</b> <code>String|Undefined</code> path to CRL file</li>
-<li><b>sslCipherList</b> <code>String|Undefined</code> ciphers to use for TLS </li>
+<li><b>sslCipherList</b> <code>String|Undefined</code> ciphers to use for TLS</li>
 </ul>
 </li>
+<li>- <b>responseDataHex</b> <code>Boolean|Undefined</code> whether to encode response data into hexadecimal format </li>
 </ul>
 
 </div>
@@ -332,7 +491,7 @@ Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Nov 20 2020 22:01:05 for wilton.js by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Feb 26 2021 20:52:44 for wilton.js by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>
