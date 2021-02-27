@@ -127,6 +127,7 @@ git submodule update --init modules/wilton_cli
 git submodule update --init modules/wilton_cron
 git submodule update --init modules/wilton_crypto
 git submodule update --init modules/wilton_db
+git submodule update --init modules/wilton_embed
 git submodule update --init modules/wilton_fs
 git submodule update --init modules/wilton_ghc
 git submodule update --init modules/wilton_git
@@ -137,6 +138,7 @@ git submodule update --init modules/wilton_loader
 git submodule update --init modules/wilton_logging
 git submodule update --init modules/wilton_mustache
 git submodule update --init modules/wilton_net
+git submodule update --init modules/wilton_nginx
 git submodule update --init modules/wilton_pdf
 git submodule update --init modules/wilton_process
 git submodule update --init modules/wilton_serial
@@ -177,6 +179,7 @@ ln -s /opt/wilton/bin/wilton %{buildroot}/usr/bin/wilton
 /opt/wilton/bin/libwilton_crypto.so
 /opt/wilton/bin/libwilton_db.so
 /opt/wilton/bin/libwilton_duktape.so
+/opt/wilton/bin/libwilton_embed.so
 /opt/wilton/bin/libwilton_fs.so
 /opt/wilton/bin/libwilton_ghc.so
 /opt/wilton/bin/libwilton_git.so
@@ -186,6 +189,7 @@ ln -s /opt/wilton/bin/wilton %{buildroot}/usr/bin/wilton
 /opt/wilton/bin/libwilton_logging.so
 /opt/wilton/bin/libwilton_mustache.so
 /opt/wilton/bin/libwilton_net.so
+/opt/wilton/bin/libwilton_nginx.so
 /opt/wilton/bin/libwilton_pdf.so
 /opt/wilton/bin/libwilton_process.so
 /opt/wilton/bin/libwilton_quickjs.so
