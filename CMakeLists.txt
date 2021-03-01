@@ -857,7 +857,9 @@ elseif ( STATICLIB_TOOLCHAIN MATCHES "(windows|linux|macosx)_.+" )
             COMMENT "Creaing unversioned distribution ..." )
 
     add_custom_target ( test_js
-            COMMAND bin/wilton ${WILTON_DIR}/js/wilton/test/index.js -m ${WILTON_DIR}/js
+            COMMAND bin/wilton ${WILTON_DIR}/js/wilton/test/index.js
+                    -m ${WILTON_DIR}/js
+                    -r OPENSSL_CONF=${WILTON_DIR}/resources/testing/openssl.cnf
             COMMAND bin/wilton ${WILTON_DIR}/js/wilton/test/esm/index.js -m ${WILTON_DIR}/js
             COMMAND bin/wilton ${WILTON_DIR}/js/test-runners/runSanityTests.js
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION} 
@@ -1172,7 +1174,9 @@ if ( STATICLIB_TOOLCHAIN MATCHES "(linux|macosx)_.+" )
             COMMAND valgrind ${${PROJECT_NAME}_VGOPTS}
                     ./bin/wilton ./examples/binaryModule.js -b ./examples/binmod.wlib
             COMMAND valgrind ${${PROJECT_NAME}_VGOPTS}
-                    ./bin/wilton ${WILTON_DIR}/js/wilton/test/index.js -m ../../js
+                    ./bin/wilton ${WILTON_DIR}/js/wilton/test/index.js
+                    -m ../../js
+                    -r OPENSSL_CONF=${WILTON_DIR}/resources/testing/openssl.cnf
             COMMAND valgrind ${${PROJECT_NAME}_VGOPTS}
                     ./bin/wilton ${WILTON_DIR}/js/wilton/test/esm/index.js -m ../../js
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/wilton_${WILTON_VERSION} 

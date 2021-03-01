@@ -57,3 +57,20 @@
     fun:_dl_fixup
     ...
 }
+
+{
+    wilton_dyload_doit
+    Memcheck:Addr16
+    fun:strncmp
+    ...
+    fun:dl_open_worker
+    ...
+}
+
+{
+    wilton_dyload_doit
+    Memcheck:Addr16
+    fun:strncmp
+    ...
+    fun:_dl_open
+}
