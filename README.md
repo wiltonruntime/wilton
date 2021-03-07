@@ -79,6 +79,11 @@ This project is released under the [Apache License 2.0](http://www.apache.org/li
 Changelog
 ---------
 
+**2021-03-07**
+
+ * `v202103071`
+ * HTTP queue fixes
+
 **2021-02-26**
 
  * `v202102261`
