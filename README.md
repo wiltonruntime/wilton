@@ -31,7 +31,7 @@ Link to the [JavaScript API documentation](https://wiltonruntime.github.io/wilto
 Install
 -------
 
-[Pre-built binaries](https://github.com/wiltonruntime/wilton/releases) for Windows, macOS, Android and Raspberry Pi.
+[Download pre-built binaries](https://github.com/wiltonruntime/wilton/releases) for Windows, macOS, Android and Raspberry Pi.
 
 COPR repository for CentOS 8, CentOS 7 and Fedora:
 
@@ -78,6 +78,12 @@ This project is released under the [Apache License 2.0](http://www.apache.org/li
 
 Changelog
 ---------
+
+**2021-03-14**
+
+ * `v202103141`
+ * `wilton/Channel` enchancements
+ * graceful shutdown support in Nginx environment
 
 **2021-03-07**
 
