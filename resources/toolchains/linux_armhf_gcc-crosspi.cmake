@@ -94,7 +94,9 @@ set ( CMAKE_EXE_LINKER_FLAGS_LIST
         -Wl,origin
         -Wl,-L${CMAKE_SYSROOT}/usr/lib/arm-linux-gnueabihf/
         -Wl,-rpath-link
-        -Wl,${CMAKE_SYSROOT}/usr/lib/arm-linux-gnueabihf/ )
+        -Wl,${CMAKE_SYSROOT}/usr/lib/arm-linux-gnueabihf/
+        # https://gitlab.kitware.com/cmake/cmake/-/issues/21174
+        -latomic )
 string ( REPLACE ";" " " CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS_LIST}" )
 set ( CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS}" CACHE INTERNAL "" )
 # http://cmake.3232098.n2.nabble.com/CMAKE-EXE-LINKER-FLAGS-for-shared-libraries-td7087564.html
