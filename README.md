@@ -79,6 +79,13 @@ This project is released under the [Apache License 2.0](http://www.apache.org/li
 Changelog
 ---------
 
+**2021-05-24**
+
+ * `v202105241`
+ * Raspberry cross-build fix
+ * Audio support in Android WebView
+ * `openssl` and `curl` updates
+
 **2021-03-14**
 
  * `v202103141`
